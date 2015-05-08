@@ -25,13 +25,7 @@ body {
   font-size: 15px;
 }
 
-nav {
-  background-color:#b0c4de;
-  padding: 5px;
-  margin-top: 1px;
-  font-size: 12px;
-   color: black;
-}
+
 
 li a {
   color: black;
@@ -80,3 +74,34 @@ footer {
   padding: 5px 20px;
   
 }
+
+nav {
+  background-color:white;
+  padding: 5px;
+  margin-top: 1px;
+  font-size: 12px;
+  color: white;
+}
+
+ul#menu {
+    padding: 0;
+    margin-bottom: 11px;
+}
+
+ul#menu li {
+    display: inline;
+    margin-right: 3px;
+}
+
+ul#menu li a {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #696969;
+    border-radius: 4px 4px 0 0;
+}
+
+ul#menu li a:hover {
+    color: white;
+    background-color: black;
+} 
