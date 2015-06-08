@@ -6,9 +6,8 @@ article, aside, footer, header, main, nav, section {
 
 html, body, h1, h2, h3, ul, li, a, p, 
 article, aside, footer, header, main, nav, section {
-  padding: auto;
-   margin-left: auto;
-  margin-right: auto;
+  padding: 0;
+  margin: 0;
 }
 
 .banner {
@@ -106,5 +105,3 @@ ul#menu li a:hover {
     color: white;
     background-color: black;
 } 
-
-
