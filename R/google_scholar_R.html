@@ -36,11 +36,8 @@
     </nav>
 
     <main>
-
-<head>
-
 <meta charset="utf-8" />
-<title>RMySQL</title>
+<title>google_scholar_R</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -209,64 +206,12 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Working-with-MySQL-in-R">Working with MySQL in R<a class="anchor-link" href="#Working-with-MySQL-in-R">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>MySQL is among the free and widely used open source database softwares out there. It is widely used in internet based applications. You can read more about MySQL from <a href="http://en.wikipedia.org/wiki/MySQL"  style="text-decoration:none"> Wikipedia</a> and from the <a href="http://www.mysql.com/"  style="text-decoration:none">MySQL website</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's load the RMYSQL package and connect to a database at genome-mysql.cse.ucsc.edu</p>
-
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[103]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kn">library</span><span class="p">(</span>RMySQL<span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Create a connection to the database</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>ucscDb <span class="o">&lt;-</span> dbConnect<span class="p">(</span>MySQL<span class="p">(),</span>user<span class="o">=</span><span class="s">&quot;genome&quot;</span><span class="p">,</span> host<span class="o">=</span><span class="s">&quot;genome-mysql.cse.ucsc.edu&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span class="kp">options</span><span class="p">(</span>jupyter.plot_mimetypes <span class="o">=</span> <span class="s">&#39;image/png&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -276,10 +221,10 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[104]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>result <span class="o">&lt;-</span> dbGetQuery<span class="p">(</span>ucscDb<span class="p">,</span><span class="s">&quot;show databases;&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span class="kn">library</span><span class="p">(</span>XML<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -287,22 +232,53 @@ div#notebook {
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[105]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's disable the connection</p>
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>url <span class="o">&lt;-</span> <span class="s">&quot;http://scholar.google.com/citations?user=sTR9SIQAAAAJ&amp;hl=en&amp;oi=ao&quot;</span>
+html <span class="o">&lt;-</span> htmlTreeParse<span class="p">(</span><span class="kp">url</span><span class="p">,</span> useInternalNodes<span class="o">=</span><span class="bp">T</span><span class="p">)</span>
+</pre></div>
 
 </div>
 </div>
 </div>
+
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[106]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>dbDisconnect<span class="p">(</span>ucscDb<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span class="c1">#xpathSApply(html, &quot;//title&quot;, xmlValue)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[107]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>citations<span class="o">&lt;-</span>xpathSApply<span class="p">(</span>html<span class="p">,</span> <span class="s">&quot;//td[@class=&#39;gsc_a_c&#39;]&quot;</span><span class="p">,</span> xmlValue<span class="p">)</span>
+citations<span class="o">&lt;-</span><span class="kp">as.numeric</span><span class="p">(</span>citations<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[108]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>citations
 </pre></div>
 
 </div>
@@ -313,386 +289,30 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-TRUE
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Then, let's see the databases</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>result
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<table>
-<thead><tr><th></th><th scope=col>Database</th></tr></thead>
-<tbody>
-	<tr><th scope=row>1</th><td>information_schema</td></tr>
-	<tr><th scope=row>2</th><td>ailMel1</td></tr>
-	<tr><th scope=row>3</th><td>allMis1</td></tr>
-	<tr><th scope=row>4</th><td>anoCar1</td></tr>
-	<tr><th scope=row>5</th><td>anoCar2</td></tr>
-	<tr><th scope=row>6</th><td>anoGam1</td></tr>
-	<tr><th scope=row>7</th><td>apiMel1</td></tr>
-	<tr><th scope=row>8</th><td>apiMel2</td></tr>
-	<tr><th scope=row>9</th><td>aplCal1</td></tr>
-	<tr><th scope=row>10</th><td>balAcu1</td></tr>
-	<tr><th scope=row>11</th><td>bosTau2</td></tr>
-	<tr><th scope=row>12</th><td>bosTau3</td></tr>
-	<tr><th scope=row>13</th><td>bosTau4</td></tr>
-	<tr><th scope=row>14</th><td>bosTau5</td></tr>
-	<tr><th scope=row>15</th><td>bosTau6</td></tr>
-	<tr><th scope=row>16</th><td>bosTau7</td></tr>
-	<tr><th scope=row>17</th><td>bosTau8</td></tr>
-	<tr><th scope=row>18</th><td>bosTauMd3</td></tr>
-	<tr><th scope=row>19</th><td>braFlo1</td></tr>
-	<tr><th scope=row>20</th><td>caeJap1</td></tr>
-	<tr><th scope=row>21</th><td>caePb1</td></tr>
-	<tr><th scope=row>22</th><td>caePb2</td></tr>
-	<tr><th scope=row>23</th><td>caeRem2</td></tr>
-	<tr><th scope=row>24</th><td>caeRem3</td></tr>
-	<tr><th scope=row>25</th><td>calJac1</td></tr>
-	<tr><th scope=row>26</th><td>calJac3</td></tr>
-	<tr><th scope=row>27</th><td>calMil1</td></tr>
-	<tr><th scope=row>28</th><td>canFam1</td></tr>
-	<tr><th scope=row>29</th><td>canFam2</td></tr>
-	<tr><th scope=row>30</th><td>canFam3</td></tr>
-	<tr><th scope=row>31</th><td>cavPor3</td></tr>
-	<tr><th scope=row>32</th><td>cb1</td></tr>
-	<tr><th scope=row>33</th><td>cb3</td></tr>
-	<tr><th scope=row>34</th><td>ce10</td></tr>
-	<tr><th scope=row>35</th><td>ce2</td></tr>
-	<tr><th scope=row>36</th><td>ce4</td></tr>
-	<tr><th scope=row>37</th><td>ce6</td></tr>
-	<tr><th scope=row>38</th><td>cerSim1</td></tr>
-	<tr><th scope=row>39</th><td>choHof1</td></tr>
-	<tr><th scope=row>40</th><td>chrPic1</td></tr>
-	<tr><th scope=row>41</th><td>ci1</td></tr>
-	<tr><th scope=row>42</th><td>ci2</td></tr>
-	<tr><th scope=row>43</th><td>criGri1</td></tr>
-	<tr><th scope=row>44</th><td>danRer1</td></tr>
-	<tr><th scope=row>45</th><td>danRer10</td></tr>
-	<tr><th scope=row>46</th><td>danRer2</td></tr>
-	<tr><th scope=row>47</th><td>danRer3</td></tr>
-	<tr><th scope=row>48</th><td>danRer4</td></tr>
-	<tr><th scope=row>49</th><td>danRer5</td></tr>
-	<tr><th scope=row>50</th><td>danRer6</td></tr>
-	<tr><th scope=row>51</th><td>danRer7</td></tr>
-	<tr><th scope=row>52</th><td>dasNov3</td></tr>
-	<tr><th scope=row>53</th><td>dipOrd1</td></tr>
-	<tr><th scope=row>54</th><td>dm1</td></tr>
-	<tr><th scope=row>55</th><td>dm2</td></tr>
-	<tr><th scope=row>56</th><td>dm3</td></tr>
-	<tr><th scope=row>57</th><td>dm6</td></tr>
-	<tr><th scope=row>58</th><td>dp2</td></tr>
-	<tr><th scope=row>59</th><td>dp3</td></tr>
-	<tr><th scope=row>60</th><td>droAna1</td></tr>
-	<tr><th scope=row>61</th><td>droAna2</td></tr>
-	<tr><th scope=row>62</th><td>droEre1</td></tr>
-	<tr><th scope=row>63</th><td>droGri1</td></tr>
-	<tr><th scope=row>64</th><td>droMoj1</td></tr>
-	<tr><th scope=row>65</th><td>droMoj2</td></tr>
-	<tr><th scope=row>66</th><td>droPer1</td></tr>
-	<tr><th scope=row>67</th><td>droSec1</td></tr>
-	<tr><th scope=row>68</th><td>droSim1</td></tr>
-	<tr><th scope=row>69</th><td>droVir1</td></tr>
-	<tr><th scope=row>70</th><td>droVir2</td></tr>
-	<tr><th scope=row>71</th><td>droYak1</td></tr>
-	<tr><th scope=row>72</th><td>droYak2</td></tr>
-	<tr><th scope=row>73</th><td>eboVir3</td></tr>
-	<tr><th scope=row>74</th><td>echTel1</td></tr>
-	<tr><th scope=row>75</th><td>echTel2</td></tr>
-	<tr><th scope=row>76</th><td>equCab1</td></tr>
-	<tr><th scope=row>77</th><td>equCab2</td></tr>
-	<tr><th scope=row>78</th><td>eriEur1</td></tr>
-	<tr><th scope=row>79</th><td>eriEur2</td></tr>
-	<tr><th scope=row>80</th><td>felCat3</td></tr>
-	<tr><th scope=row>81</th><td>felCat4</td></tr>
-	<tr><th scope=row>82</th><td>felCat5</td></tr>
-	<tr><th scope=row>83</th><td>fr1</td></tr>
-	<tr><th scope=row>84</th><td>fr2</td></tr>
-	<tr><th scope=row>85</th><td>fr3</td></tr>
-	<tr><th scope=row>86</th><td>gadMor1</td></tr>
-	<tr><th scope=row>87</th><td>galGal2</td></tr>
-	<tr><th scope=row>88</th><td>galGal3</td></tr>
-	<tr><th scope=row>89</th><td>galGal4</td></tr>
-	<tr><th scope=row>90</th><td>gasAcu1</td></tr>
-	<tr><th scope=row>91</th><td>geoFor1</td></tr>
-	<tr><th scope=row>92</th><td>go</td></tr>
-	<tr><th scope=row>93</th><td>go080130</td></tr>
-	<tr><th scope=row>94</th><td>go140213</td></tr>
-	<tr><th scope=row>95</th><td>go150121</td></tr>
-	<tr><th scope=row>96</th><td>gorGor3</td></tr>
-	<tr><th scope=row>97</th><td>hetGla1</td></tr>
-	<tr><th scope=row>98</th><td>hetGla2</td></tr>
-	<tr><th scope=row>99</th><td>hg16</td></tr>
-	<tr><th scope=row>100</th><td>hg17</td></tr>
-	<tr><th scope=row>101</th><td>hg18</td></tr>
-	<tr><th scope=row>102</th><td>hg19</td></tr>
-	<tr><th scope=row>103</th><td>hg19Patch10</td></tr>
-	<tr><th scope=row>104</th><td>hg19Patch2</td></tr>
-	<tr><th scope=row>105</th><td>hg19Patch5</td></tr>
-	<tr><th scope=row>106</th><td>hg19Patch9</td></tr>
-	<tr><th scope=row>107</th><td>hg38</td></tr>
-	<tr><th scope=row>108</th><td>hg38Patch2</td></tr>
-	<tr><th scope=row>109</th><td>hg38Patch3</td></tr>
-	<tr><th scope=row>110</th><td>hgFixed</td></tr>
-	<tr><th scope=row>111</th><td>hgTemp</td></tr>
-	<tr><th scope=row>112</th><td>hgcentral</td></tr>
-	<tr><th scope=row>113</th><td>latCha1</td></tr>
-	<tr><th scope=row>114</th><td>loxAfr3</td></tr>
-	<tr><th scope=row>115</th><td>macEug1</td></tr>
-	<tr><th scope=row>116</th><td>macEug2</td></tr>
-	<tr><th scope=row>117</th><td>melGal1</td></tr>
-	<tr><th scope=row>118</th><td>melUnd1</td></tr>
-	<tr><th scope=row>119</th><td>micMur1</td></tr>
-	<tr><th scope=row>120</th><td>mm10</td></tr>
-	<tr><th scope=row>121</th><td>mm10Patch1</td></tr>
-	<tr><th scope=row>122</th><td>mm5</td></tr>
-	<tr><th scope=row>123</th><td>mm6</td></tr>
-	<tr><th scope=row>124</th><td>mm7</td></tr>
-	<tr><th scope=row>125</th><td>mm8</td></tr>
-	<tr><th scope=row>126</th><td>mm9</td></tr>
-	<tr><th scope=row>127</th><td>monDom1</td></tr>
-	<tr><th scope=row>128</th><td>monDom4</td></tr>
-	<tr><th scope=row>129</th><td>monDom5</td></tr>
-	<tr><th scope=row>130</th><td>musFur1</td></tr>
-	<tr><th scope=row>131</th><td>myoLuc2</td></tr>
-	<tr><th scope=row>132</th><td>nomLeu1</td></tr>
-	<tr><th scope=row>133</th><td>nomLeu2</td></tr>
-	<tr><th scope=row>134</th><td>nomLeu3</td></tr>
-	<tr><th scope=row>135</th><td>ochPri2</td></tr>
-	<tr><th scope=row>136</th><td>ochPri3</td></tr>
-	<tr><th scope=row>137</th><td>oreNil1</td></tr>
-	<tr><th scope=row>138</th><td>oreNil2</td></tr>
-	<tr><th scope=row>139</th><td>ornAna1</td></tr>
-	<tr><th scope=row>140</th><td>oryCun2</td></tr>
-	<tr><th scope=row>141</th><td>oryLat2</td></tr>
-	<tr><th scope=row>142</th><td>otoGar3</td></tr>
-	<tr><th scope=row>143</th><td>oviAri1</td></tr>
-	<tr><th scope=row>144</th><td>oviAri3</td></tr>
-	<tr><th scope=row>145</th><td>panTro1</td></tr>
-	<tr><th scope=row>146</th><td>panTro2</td></tr>
-	<tr><th scope=row>147</th><td>panTro3</td></tr>
-	<tr><th scope=row>148</th><td>panTro4</td></tr>
-	<tr><th scope=row>149</th><td>papAnu2</td></tr>
-	<tr><th scope=row>150</th><td>papHam1</td></tr>
-	<tr><th scope=row>151</th><td>performance_schema</td></tr>
-	<tr><th scope=row>152</th><td>petMar1</td></tr>
-	<tr><th scope=row>153</th><td>petMar2</td></tr>
-	<tr><th scope=row>154</th><td>ponAbe2</td></tr>
-	<tr><th scope=row>155</th><td>priPac1</td></tr>
-	<tr><th scope=row>156</th><td>proCap1</td></tr>
-	<tr><th scope=row>157</th><td>proteins120806</td></tr>
-	<tr><th scope=row>158</th><td>proteins121210</td></tr>
-	<tr><th scope=row>159</th><td>proteins140122</td></tr>
-	<tr><th scope=row>160</th><td>proteins150225</td></tr>
-	<tr><th scope=row>161</th><td>proteome</td></tr>
-	<tr><th scope=row>162</th><td>pteVam1</td></tr>
-	<tr><th scope=row>163</th><td>rheMac1</td></tr>
-	<tr><th scope=row>164</th><td>rheMac2</td></tr>
-	<tr><th scope=row>165</th><td>rheMac3</td></tr>
-	<tr><th scope=row>166</th><td>rn3</td></tr>
-	<tr><th scope=row>167</th><td>rn4</td></tr>
-	<tr><th scope=row>168</th><td>rn5</td></tr>
-	<tr><th scope=row>169</th><td>rn6</td></tr>
-	<tr><th scope=row>170</th><td>sacCer1</td></tr>
-	<tr><th scope=row>171</th><td>sacCer2</td></tr>
-	<tr><th scope=row>172</th><td>sacCer3</td></tr>
-	<tr><th scope=row>173</th><td>saiBol1</td></tr>
-	<tr><th scope=row>174</th><td>sarHar1</td></tr>
-	<tr><th scope=row>175</th><td>sorAra1</td></tr>
-	<tr><th scope=row>176</th><td>sorAra2</td></tr>
-	<tr><th scope=row>177</th><td>sp120323</td></tr>
-	<tr><th scope=row>178</th><td>sp121210</td></tr>
-	<tr><th scope=row>179</th><td>sp140122</td></tr>
-	<tr><th scope=row>180</th><td>sp150225</td></tr>
-	<tr><th scope=row>181</th><td>speTri2</td></tr>
-	<tr><th scope=row>182</th><td>strPur1</td></tr>
-	<tr><th scope=row>183</th><td>strPur2</td></tr>
-	<tr><th scope=row>184</th><td>susScr2</td></tr>
-	<tr><th scope=row>185</th><td>susScr3</td></tr>
-	<tr><th scope=row>186</th><td>taeGut1</td></tr>
-	<tr><th scope=row>187</th><td>taeGut2</td></tr>
-	<tr><th scope=row>188</th><td>tarSyr1</td></tr>
-	<tr><th scope=row>189</th><td>tarSyr2</td></tr>
-	<tr><th scope=row>190</th><td>test</td></tr>
-	<tr><th scope=row>191</th><td>tetNig1</td></tr>
-	<tr><th scope=row>192</th><td>tetNig2</td></tr>
-	<tr><th scope=row>193</th><td>triMan1</td></tr>
-	<tr><th scope=row>194</th><td>tupBel1</td></tr>
-	<tr><th scope=row>195</th><td>turTru2</td></tr>
-	<tr><th scope=row>196</th><td>uniProt</td></tr>
-	<tr><th scope=row>197</th><td>vicPac1</td></tr>
-	<tr><th scope=row>198</th><td>vicPac2</td></tr>
-	<tr><th scope=row>199</th><td>visiGene</td></tr>
-	<tr><th scope=row>200</th><td>xenTro1</td></tr>
-	<tr><th scope=row>201</th><td>xenTro2</td></tr>
-	<tr><th scope=row>202</th><td>xenTro3</td></tr>
-</tbody>
-</table>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can work with the 'h19' database</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>hg19 <span class="o">&lt;-</span> dbConnect<span class="p">(</span>MySQL<span class="p">(),</span>user<span class="o">=</span><span class="s">&quot;genome&quot;</span><span class="p">,</span> db<span class="o">=</span><span class="s">&quot;hg19&quot;</span><span class="p">,</span>
-                  host<span class="o">=</span><span class="s">&quot;genome-mysql.cse.ucsc.edu&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's see the total number of tables in h19</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>allTables <span class="o">&lt;-</span> dbListTables<span class="p">(</span>hg19<span class="p">)</span>
-<span class="kp">length</span><span class="p">(</span>allTables<span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[13]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-11012
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Since there are many tables, le's access the first 30 tables</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>allTables<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">30</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[16]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[108]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <ol class=list-inline>
-	<li>"HInv"</li>
-	<li>"HInvGeneMrna"</li>
-	<li>"acembly"</li>
-	<li>"acemblyClass"</li>
-	<li>"acemblyPep"</li>
-	<li>"affyCytoScan"</li>
-	<li>"affyExonProbeAmbiguous"</li>
-	<li>"affyExonProbeCore"</li>
-	<li>"affyExonProbeExtended"</li>
-	<li>"affyExonProbeFree"</li>
-	<li>"affyExonProbeFull"</li>
-	<li>"affyExonProbesetAmbiguous"</li>
-	<li>"affyExonProbesetCore"</li>
-	<li>"affyExonProbesetExtended"</li>
-	<li>"affyExonProbesetFree"</li>
-	<li>"affyExonProbesetFull"</li>
-	<li>"affyGnf1h"</li>
-	<li>"affyU133"</li>
-	<li>"affyU133Plus2"</li>
-	<li>"affyU95"</li>
-	<li>"agilentCgh1x1m"</li>
-	<li>"agilentCgh1x244k"</li>
-	<li>"agilentCgh2x105k"</li>
-	<li>"agilentCgh2x400k"</li>
-	<li>"agilentCgh4x180k"</li>
-	<li>"agilentCgh4x44k"</li>
-	<li>"agilentCgh8x60k"</li>
-	<li>"agilentCghSnp2x400k"</li>
-	<li>"agilentCghSnp4x180k"</li>
-	<li>"agilentCghSnpCancer4x180k"</li>
+	<li>134</li>
+	<li>88</li>
+	<li>77</li>
+	<li>59</li>
+	<li>52</li>
+	<li>45</li>
+	<li>45</li>
+	<li>45</li>
+	<li>44</li>
+	<li>41</li>
+	<li>32</li>
+	<li>30</li>
+	<li>27</li>
+	<li>27</li>
+	<li>26</li>
+	<li>26</li>
+	<li>24</li>
+	<li>23</li>
+	<li>22</li>
+	<li>15</li>
 </ol>
 
 </div>
@@ -703,22 +323,13 @@ TRUE
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's list the fields in affyU133Plus2</p>
-
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[109]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>dbListFields<span class="p">(</span>hg19<span class="p">,</span><span class="s">&quot;affyU133Plus2&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre>citations<span class="o">&lt;-</span>citations<span class="p">[</span><span class="o">!</span><span class="kp">is.na</span><span class="p">(</span>citations<span class="p">)]</span>
+citations
 </pre></div>
 
 </div>
@@ -729,32 +340,30 @@ TRUE
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[17]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[109]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <ol class=list-inline>
-	<li>"bin"</li>
-	<li>"matches"</li>
-	<li>"misMatches"</li>
-	<li>"repMatches"</li>
-	<li>"nCount"</li>
-	<li>"qNumInsert"</li>
-	<li>"qBaseInsert"</li>
-	<li>"tNumInsert"</li>
-	<li>"tBaseInsert"</li>
-	<li>"strand"</li>
-	<li>"qName"</li>
-	<li>"qSize"</li>
-	<li>"qStart"</li>
-	<li>"qEnd"</li>
-	<li>"tName"</li>
-	<li>"tSize"</li>
-	<li>"tStart"</li>
-	<li>"tEnd"</li>
-	<li>"blockCount"</li>
-	<li>"blockSizes"</li>
-	<li>"qStarts"</li>
-	<li>"tStarts"</li>
+	<li>134</li>
+	<li>88</li>
+	<li>77</li>
+	<li>59</li>
+	<li>52</li>
+	<li>45</li>
+	<li>45</li>
+	<li>45</li>
+	<li>44</li>
+	<li>41</li>
+	<li>32</li>
+	<li>30</li>
+	<li>27</li>
+	<li>27</li>
+	<li>26</li>
+	<li>26</li>
+	<li>24</li>
+	<li>23</li>
+	<li>22</li>
+	<li>15</li>
 </ol>
 
 </div>
@@ -765,22 +374,12 @@ TRUE
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's see how many rows it has</p>
-
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[113]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>dbGetQuery<span class="p">(</span>hg19<span class="p">,</span> <span class="s">&quot;select count(*)as rows from affyU133Plus2&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre>hist<span class="p">(</span>citations<span class="p">,</span>col<span class="o">=</span><span class="s">&#39;skyblue&#39;</span><span class="p">,</span>main<span class="o">=</span><span class="s">&#39;Histogram of Citations&#39;</span><span class="p">,</span>ylab<span class="o">=</span><span class="s">&#39;Number of paper&#39;</span><span class="p">,</span>xlab <span class="o">=</span><span class="s">&#39;Number of citations&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -791,16 +390,12 @@ TRUE
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[19]:</div>
+<div class="output_area"><div class="prompt"></div>
 
-<div class="output_html rendered_html output_subarea output_execute_result">
-<table>
-<thead><tr><th></th><th scope=col>rows</th></tr></thead>
-<tbody>
-	<tr><th scope=row>1</th><td>58463</td></tr>
-</tbody>
-</table>
 
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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"
+>
 </div>
 
 </div>
@@ -812,11 +407,10 @@ TRUE
     </div>
   </div>
   
-  
         <nav>
        <ul>
-           <li><a href="google_scholar_R.html">Next post</a></li>
-           <li><a href="reading_from_web.html">Previous post</a></li>
+           <li><a href="..">Next post</a></li>
+           <li><a href="RMySQL.html">Previous post</a></li>
            <li><a href="../index.html">Home</a></li>
        </ul>
       </nav>
