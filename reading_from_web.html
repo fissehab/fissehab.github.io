@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8">
     <title>Fisseha Berhane</title>
-    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-  
  <nav id="nav01"></nav>
     <header class="banner">
       <h1 style="text-align:left;color:rgb(30%,50%,70%)">Fisseha Berhane </h1>
@@ -15,32 +14,32 @@
           
 	  <p> 3400 N. Charles Street, Baltimore, MD 21218, USA • Office: 325 Olin Hall </p>
 	    
-	 <p><img src="../figures/mobile.jpg" height="35" width="25"/> <font size="2">443-970-2353</font>  <span style="width:50px;display:inline-block"></span>
-	 <img src="../figures/emailimage.png" height="20" width="35"/> <font size="2"> fisseha@jhu.edu</font> <span style="width:50px;display:inline-block"></span>
-	<a style="color:#0000CC; text-decoration:none" href ="../CV.pdf">CV<span style="width:330px;display:inline-block"></span> <a href="https://www.linkedin.com/profile/view?id=59587395&trk=nav_responsive_tab_profile"> <img src="../figures/linkedinimage.png" width="30" height="30" alt="Linkedin"/></a> <span style="width:10px;display:inline-block"></span> <a href="https://github.com/fissehab?tab=repositories"> <img src="../figures/GitHubimage.jpg" width="60" height="36" alt="GitHub"/></a> 
-	<span style="width:10px;display:inline-block"></span> <a href="https://twitter.com/FishBerhane"> <img src="../figures/twitterimage.jpg" width="30" height="30" alt="twitter"/></a>
+	 <p> &#x0260E (443)970-2353  <span style="width:50px;display:inline-block"></span>
+	 Email: fisseha@jhu.edu <span style="width:50px;display:inline-block"></span>
+	<a style="color:#0000CC; text-decoration:none" href ="CV.pdf">CV<span style="width:330px;display:inline-block"></span> <a href="https://www.linkedin.com/profile/view?id=59587395&trk=nav_responsive_tab_profile"> <img src="figure/linkedinimage.png" width="30" height="30" alt="Linkedin"/></a> <span style="width:10px;display:inline-block"></span> <a href="https://github.com/fissehab?tab=repositories"> <img src="figure/GitHubimage.jpg" width="60" height="36" alt="GitHub"/></a> 
+	<span style="width:10px;display:inline-block"></span> <a href="https://twitter.com/FishBerhane"> <img src="figure/twitterimage.jpg" width="30" height="30" alt="twitter"/></a>
 	</p>
     </header>
+ 
     <nav>
       <ul>
-        <li><a style="text-decoration:none" href="../index.html">Home</a></li>
-        <li><a style="text-decoration:none" href="../education.html">Education</a></li>
-		  <li><a style="text-decoration:none" href="../projects.html">Projects</a></li>
-		  <li><a style="text-decoration:none" href="../publications.html">Publications</a></li>
-        <li><a style="text-decoration:none" href="../presentations.html">Presentations</a></li>
-		   <li><a style="text-decoration:none"   href="../Python/pythonindex.html">Python</a></li>
-		  <li><a style="text-decoration:none" href="Rindex.html">R</a></li>
-		  <li><a style="text-decoration:none" href="../certificates.html">Certificates</a></li>
+        <li><a style="text-decoration:none" href="index.html">Home</a></li>
+        <li><a style="text-decoration:none" href="education.html">Education</a></li>
+		  <li><a style="text-decoration:none" href="projects.html">Projects</a></li>
+		  <li><a style="text-decoration:none" href="publications.html">Publications</a></li>
+        <li><a style="text-decoration:none" href="presentations.html">Presentations</a></li>
+		   <li><a style="text-decoration:none"   href="python.html">Python</a></li>
+		  <li><a style="text-decoration:none" href="R.html">R</a></li>
+		  <li><a style="text-decoration:none" href="certificates.html">Certificates</a></li>
 		   
       </ul>
     </nav>
 
-    <main>
 
 <head>
 
 <meta charset="utf-8" />
-<title>RMySQL</title>
+<title>reading_from_web</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -214,36 +213,17 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Working-with-MySQL-in-R">Working with MySQL in R<a class="anchor-link" href="#Working-with-MySQL-in-R">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>MySQL is among the free and widely used open source database softwares out there. It is widely used in internet based applications. You can read more about MySQL from <a href="http://en.wikipedia.org/wiki/MySQL"  style="text-decoration:none"> Wikipedia</a> and from the <a href="http://www.mysql.com/"  style="text-decoration:none">MySQL website</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's load the RMYSQL package and connect to a database at genome-mysql.cse.ucsc.edu</p>
+<p>Since I am using Ipython notebook (Jupyter), I am setting the option below so as to make my figures inline.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kn">library</span><span class="p">(</span>RMySQL<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span class="kp">options</span><span class="p">(</span>jupyter.plot_mimetypes <span class="o">=</span> <span class="s">&#39;image/png&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -256,30 +236,59 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Create a connection to the database</p>
+<p><br/></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are different ways that we can download and read data into R. Some examples are shown below.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Example-1">Example 1<a class="anchor-link" href="#Example-1">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The American Community Survey distributes downloadable data about United States communities. Let's download the 2006 microdata survey about housing for the state of Idaho using download.file() from here:</p>
+<p><a href="https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06hid.csv">https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06hid.csv</a></p>
+<p>and load the data into R. The code book, describing the variable names is here:</p>
+<p><a href="https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FPUMSDataDict06.pdf">https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FPUMSDataDict06.pdf</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Setting the working directory</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>ucscDb <span class="o">&lt;-</span> dbConnect<span class="p">(</span>MySQL<span class="p">(),</span>user<span class="o">=</span><span class="s">&quot;genome&quot;</span><span class="p">,</span> host<span class="o">=</span><span class="s">&quot;genome-mysql.cse.ucsc.edu&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>result <span class="o">&lt;-</span> dbGetQuery<span class="p">(</span>ucscDb<span class="p">,</span><span class="s">&quot;show databases;&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span class="kp">setwd</span><span class="p">(</span><span class="s">&quot;C:/Fish/classes/summer_2015/getting_cleaning_data/quizes&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -292,17 +301,72 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's disable the connection</p>
+<p>The code below checks if the data is already downloaded, if not it downloads it.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>dbDisconnect<span class="p">(</span>ucscDb<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span class="kr">if</span><span class="p">(</span><span class="o">!</span><span class="kp">file.exists</span><span class="p">(</span><span class="s">&#39;q1.csv&#39;</span><span class="p">)){</span>
+    <span class="kp">url</span><span class="o">&lt;-</span><span class="s">&quot;https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06hid.csv&quot;</span>
+
+    download.file<span class="p">(</span><span class="kp">url</span><span class="p">,</span>destfile <span class="o">=</span> <span class="s">&quot;q1.csv&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then let's read the data into R</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>data<span class="o">&lt;-</span>read.csv<span class="p">(</span><span class="s">&quot;q1.csv&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can perform calculations on the using the data. For example, let's calculate how many properties are worth $1,000,000 or more.
+<br/>
+<br/>
+From the code book, we can see that the variable 'VAL' is property value and 24 represents properies that worth 1000000+. So let's use the table command to see how many properties are worth what.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>x<span class="o">&lt;-</span>data<span class="o">$</span>VAL
+<span class="kp">table</span><span class="p">(</span>x<span class="p">)</span> 
+hist<span class="p">(</span>x<span class="p">,</span>breaks<span class="o">=</span><span class="m">24</span><span class="p">,</span>xlab<span class="o">=</span><span class="s">&#39;class&#39;</span><span class="p">,</span>main<span class="o">=</span><span class="s">&#39;Histogram of property value&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -313,255 +377,195 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[65]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>x
+  1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20 
+ 75  42  33  30  26  29  23  70  99 119 152 199 233 495 483 486 357 502 232 312 
+ 21  22  23  24 
+164 159  47  53 </pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So, we can see from column 24 that there are 53 properties worth 1000000+ or more</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr/>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Example-2">Example 2<a class="anchor-link" href="#Example-2">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now let's see how to read extensible markup language(XML) data which is frequently used to store structured data, and widely used in internet apps. It is known that extracting XML is basis for most of web scraping
+<br/>
+<br/>
+Let's read the XML data on Baltimore restaurants from here: <a href="https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Frestaurants.xml">https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Frestaurants.xml</a>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then let's see how many restaurants have zipcode 21218, where my office is located.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Check if XML package is present, else download it.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="kr">if</span><span class="p">(</span><span class="o">!</span><span class="kn">require</span><span class="p">(</span>XML<span class="p">)){</span>
+    install.packages<span class="p">(</span><span class="s">&#39;XML&#39;</span><span class="p">)}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Load XML package and download data. I have replaced https by httP to make it downloadable.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="kn">library</span><span class="p">(</span>XML<span class="p">)</span>
+
+fileURL<span class="o">&lt;-</span><span class="s">&quot;https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Frestaurants.xml&quot;</span>
+
+fileURL2 <span class="o">&lt;-</span> <span class="kp">sub</span><span class="p">(</span><span class="s">&#39;https&#39;</span><span class="p">,</span> <span class="s">&#39;http&#39;</span><span class="p">,</span> fileURL<span class="p">)</span>
+doc <span class="o">&lt;-</span> xmlTreeParse<span class="p">(</span>fileURL2<span class="p">,</span> useInternal <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, let's get the rootnode and explore it.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>rootNode<span class="o">&lt;-</span>xmlRoot<span class="p">(</span>doc<span class="p">)</span>
+xmlName<span class="p">(</span>rootNode<span class="p">)</span>
+
+<span class="kp">names</span><span class="p">(</span>rootNode<span class="p">)</span>
+
+rootNode<span class="p">[[</span><span class="m">1</span><span class="p">]][[</span><span class="m">1</span><span class="p">]];</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[68]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
-TRUE
+"response"
 </div>
 
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Then, let's see the databases</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>result
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[68]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
-<table>
-<thead><tr><th></th><th scope=col>Database</th></tr></thead>
-<tbody>
-	<tr><th scope=row>1</th><td>information_schema</td></tr>
-	<tr><th scope=row>2</th><td>ailMel1</td></tr>
-	<tr><th scope=row>3</th><td>allMis1</td></tr>
-	<tr><th scope=row>4</th><td>anoCar1</td></tr>
-	<tr><th scope=row>5</th><td>anoCar2</td></tr>
-	<tr><th scope=row>6</th><td>anoGam1</td></tr>
-	<tr><th scope=row>7</th><td>apiMel1</td></tr>
-	<tr><th scope=row>8</th><td>apiMel2</td></tr>
-	<tr><th scope=row>9</th><td>aplCal1</td></tr>
-	<tr><th scope=row>10</th><td>balAcu1</td></tr>
-	<tr><th scope=row>11</th><td>bosTau2</td></tr>
-	<tr><th scope=row>12</th><td>bosTau3</td></tr>
-	<tr><th scope=row>13</th><td>bosTau4</td></tr>
-	<tr><th scope=row>14</th><td>bosTau5</td></tr>
-	<tr><th scope=row>15</th><td>bosTau6</td></tr>
-	<tr><th scope=row>16</th><td>bosTau7</td></tr>
-	<tr><th scope=row>17</th><td>bosTau8</td></tr>
-	<tr><th scope=row>18</th><td>bosTauMd3</td></tr>
-	<tr><th scope=row>19</th><td>braFlo1</td></tr>
-	<tr><th scope=row>20</th><td>caeJap1</td></tr>
-	<tr><th scope=row>21</th><td>caePb1</td></tr>
-	<tr><th scope=row>22</th><td>caePb2</td></tr>
-	<tr><th scope=row>23</th><td>caeRem2</td></tr>
-	<tr><th scope=row>24</th><td>caeRem3</td></tr>
-	<tr><th scope=row>25</th><td>calJac1</td></tr>
-	<tr><th scope=row>26</th><td>calJac3</td></tr>
-	<tr><th scope=row>27</th><td>calMil1</td></tr>
-	<tr><th scope=row>28</th><td>canFam1</td></tr>
-	<tr><th scope=row>29</th><td>canFam2</td></tr>
-	<tr><th scope=row>30</th><td>canFam3</td></tr>
-	<tr><th scope=row>31</th><td>cavPor3</td></tr>
-	<tr><th scope=row>32</th><td>cb1</td></tr>
-	<tr><th scope=row>33</th><td>cb3</td></tr>
-	<tr><th scope=row>34</th><td>ce10</td></tr>
-	<tr><th scope=row>35</th><td>ce2</td></tr>
-	<tr><th scope=row>36</th><td>ce4</td></tr>
-	<tr><th scope=row>37</th><td>ce6</td></tr>
-	<tr><th scope=row>38</th><td>cerSim1</td></tr>
-	<tr><th scope=row>39</th><td>choHof1</td></tr>
-	<tr><th scope=row>40</th><td>chrPic1</td></tr>
-	<tr><th scope=row>41</th><td>ci1</td></tr>
-	<tr><th scope=row>42</th><td>ci2</td></tr>
-	<tr><th scope=row>43</th><td>criGri1</td></tr>
-	<tr><th scope=row>44</th><td>danRer1</td></tr>
-	<tr><th scope=row>45</th><td>danRer10</td></tr>
-	<tr><th scope=row>46</th><td>danRer2</td></tr>
-	<tr><th scope=row>47</th><td>danRer3</td></tr>
-	<tr><th scope=row>48</th><td>danRer4</td></tr>
-	<tr><th scope=row>49</th><td>danRer5</td></tr>
-	<tr><th scope=row>50</th><td>danRer6</td></tr>
-	<tr><th scope=row>51</th><td>danRer7</td></tr>
-	<tr><th scope=row>52</th><td>dasNov3</td></tr>
-	<tr><th scope=row>53</th><td>dipOrd1</td></tr>
-	<tr><th scope=row>54</th><td>dm1</td></tr>
-	<tr><th scope=row>55</th><td>dm2</td></tr>
-	<tr><th scope=row>56</th><td>dm3</td></tr>
-	<tr><th scope=row>57</th><td>dm6</td></tr>
-	<tr><th scope=row>58</th><td>dp2</td></tr>
-	<tr><th scope=row>59</th><td>dp3</td></tr>
-	<tr><th scope=row>60</th><td>droAna1</td></tr>
-	<tr><th scope=row>61</th><td>droAna2</td></tr>
-	<tr><th scope=row>62</th><td>droEre1</td></tr>
-	<tr><th scope=row>63</th><td>droGri1</td></tr>
-	<tr><th scope=row>64</th><td>droMoj1</td></tr>
-	<tr><th scope=row>65</th><td>droMoj2</td></tr>
-	<tr><th scope=row>66</th><td>droPer1</td></tr>
-	<tr><th scope=row>67</th><td>droSec1</td></tr>
-	<tr><th scope=row>68</th><td>droSim1</td></tr>
-	<tr><th scope=row>69</th><td>droVir1</td></tr>
-	<tr><th scope=row>70</th><td>droVir2</td></tr>
-	<tr><th scope=row>71</th><td>droYak1</td></tr>
-	<tr><th scope=row>72</th><td>droYak2</td></tr>
-	<tr><th scope=row>73</th><td>eboVir3</td></tr>
-	<tr><th scope=row>74</th><td>echTel1</td></tr>
-	<tr><th scope=row>75</th><td>echTel2</td></tr>
-	<tr><th scope=row>76</th><td>equCab1</td></tr>
-	<tr><th scope=row>77</th><td>equCab2</td></tr>
-	<tr><th scope=row>78</th><td>eriEur1</td></tr>
-	<tr><th scope=row>79</th><td>eriEur2</td></tr>
-	<tr><th scope=row>80</th><td>felCat3</td></tr>
-	<tr><th scope=row>81</th><td>felCat4</td></tr>
-	<tr><th scope=row>82</th><td>felCat5</td></tr>
-	<tr><th scope=row>83</th><td>fr1</td></tr>
-	<tr><th scope=row>84</th><td>fr2</td></tr>
-	<tr><th scope=row>85</th><td>fr3</td></tr>
-	<tr><th scope=row>86</th><td>gadMor1</td></tr>
-	<tr><th scope=row>87</th><td>galGal2</td></tr>
-	<tr><th scope=row>88</th><td>galGal3</td></tr>
-	<tr><th scope=row>89</th><td>galGal4</td></tr>
-	<tr><th scope=row>90</th><td>gasAcu1</td></tr>
-	<tr><th scope=row>91</th><td>geoFor1</td></tr>
-	<tr><th scope=row>92</th><td>go</td></tr>
-	<tr><th scope=row>93</th><td>go080130</td></tr>
-	<tr><th scope=row>94</th><td>go140213</td></tr>
-	<tr><th scope=row>95</th><td>go150121</td></tr>
-	<tr><th scope=row>96</th><td>gorGor3</td></tr>
-	<tr><th scope=row>97</th><td>hetGla1</td></tr>
-	<tr><th scope=row>98</th><td>hetGla2</td></tr>
-	<tr><th scope=row>99</th><td>hg16</td></tr>
-	<tr><th scope=row>100</th><td>hg17</td></tr>
-	<tr><th scope=row>101</th><td>hg18</td></tr>
-	<tr><th scope=row>102</th><td>hg19</td></tr>
-	<tr><th scope=row>103</th><td>hg19Patch10</td></tr>
-	<tr><th scope=row>104</th><td>hg19Patch2</td></tr>
-	<tr><th scope=row>105</th><td>hg19Patch5</td></tr>
-	<tr><th scope=row>106</th><td>hg19Patch9</td></tr>
-	<tr><th scope=row>107</th><td>hg38</td></tr>
-	<tr><th scope=row>108</th><td>hg38Patch2</td></tr>
-	<tr><th scope=row>109</th><td>hg38Patch3</td></tr>
-	<tr><th scope=row>110</th><td>hgFixed</td></tr>
-	<tr><th scope=row>111</th><td>hgTemp</td></tr>
-	<tr><th scope=row>112</th><td>hgcentral</td></tr>
-	<tr><th scope=row>113</th><td>latCha1</td></tr>
-	<tr><th scope=row>114</th><td>loxAfr3</td></tr>
-	<tr><th scope=row>115</th><td>macEug1</td></tr>
-	<tr><th scope=row>116</th><td>macEug2</td></tr>
-	<tr><th scope=row>117</th><td>melGal1</td></tr>
-	<tr><th scope=row>118</th><td>melUnd1</td></tr>
-	<tr><th scope=row>119</th><td>micMur1</td></tr>
-	<tr><th scope=row>120</th><td>mm10</td></tr>
-	<tr><th scope=row>121</th><td>mm10Patch1</td></tr>
-	<tr><th scope=row>122</th><td>mm5</td></tr>
-	<tr><th scope=row>123</th><td>mm6</td></tr>
-	<tr><th scope=row>124</th><td>mm7</td></tr>
-	<tr><th scope=row>125</th><td>mm8</td></tr>
-	<tr><th scope=row>126</th><td>mm9</td></tr>
-	<tr><th scope=row>127</th><td>monDom1</td></tr>
-	<tr><th scope=row>128</th><td>monDom4</td></tr>
-	<tr><th scope=row>129</th><td>monDom5</td></tr>
-	<tr><th scope=row>130</th><td>musFur1</td></tr>
-	<tr><th scope=row>131</th><td>myoLuc2</td></tr>
-	<tr><th scope=row>132</th><td>nomLeu1</td></tr>
-	<tr><th scope=row>133</th><td>nomLeu2</td></tr>
-	<tr><th scope=row>134</th><td>nomLeu3</td></tr>
-	<tr><th scope=row>135</th><td>ochPri2</td></tr>
-	<tr><th scope=row>136</th><td>ochPri3</td></tr>
-	<tr><th scope=row>137</th><td>oreNil1</td></tr>
-	<tr><th scope=row>138</th><td>oreNil2</td></tr>
-	<tr><th scope=row>139</th><td>ornAna1</td></tr>
-	<tr><th scope=row>140</th><td>oryCun2</td></tr>
-	<tr><th scope=row>141</th><td>oryLat2</td></tr>
-	<tr><th scope=row>142</th><td>otoGar3</td></tr>
-	<tr><th scope=row>143</th><td>oviAri1</td></tr>
-	<tr><th scope=row>144</th><td>oviAri3</td></tr>
-	<tr><th scope=row>145</th><td>panTro1</td></tr>
-	<tr><th scope=row>146</th><td>panTro2</td></tr>
-	<tr><th scope=row>147</th><td>panTro3</td></tr>
-	<tr><th scope=row>148</th><td>panTro4</td></tr>
-	<tr><th scope=row>149</th><td>papAnu2</td></tr>
-	<tr><th scope=row>150</th><td>papHam1</td></tr>
-	<tr><th scope=row>151</th><td>performance_schema</td></tr>
-	<tr><th scope=row>152</th><td>petMar1</td></tr>
-	<tr><th scope=row>153</th><td>petMar2</td></tr>
-	<tr><th scope=row>154</th><td>ponAbe2</td></tr>
-	<tr><th scope=row>155</th><td>priPac1</td></tr>
-	<tr><th scope=row>156</th><td>proCap1</td></tr>
-	<tr><th scope=row>157</th><td>proteins120806</td></tr>
-	<tr><th scope=row>158</th><td>proteins121210</td></tr>
-	<tr><th scope=row>159</th><td>proteins140122</td></tr>
-	<tr><th scope=row>160</th><td>proteins150225</td></tr>
-	<tr><th scope=row>161</th><td>proteome</td></tr>
-	<tr><th scope=row>162</th><td>pteVam1</td></tr>
-	<tr><th scope=row>163</th><td>rheMac1</td></tr>
-	<tr><th scope=row>164</th><td>rheMac2</td></tr>
-	<tr><th scope=row>165</th><td>rheMac3</td></tr>
-	<tr><th scope=row>166</th><td>rn3</td></tr>
-	<tr><th scope=row>167</th><td>rn4</td></tr>
-	<tr><th scope=row>168</th><td>rn5</td></tr>
-	<tr><th scope=row>169</th><td>rn6</td></tr>
-	<tr><th scope=row>170</th><td>sacCer1</td></tr>
-	<tr><th scope=row>171</th><td>sacCer2</td></tr>
-	<tr><th scope=row>172</th><td>sacCer3</td></tr>
-	<tr><th scope=row>173</th><td>saiBol1</td></tr>
-	<tr><th scope=row>174</th><td>sarHar1</td></tr>
-	<tr><th scope=row>175</th><td>sorAra1</td></tr>
-	<tr><th scope=row>176</th><td>sorAra2</td></tr>
-	<tr><th scope=row>177</th><td>sp120323</td></tr>
-	<tr><th scope=row>178</th><td>sp121210</td></tr>
-	<tr><th scope=row>179</th><td>sp140122</td></tr>
-	<tr><th scope=row>180</th><td>sp150225</td></tr>
-	<tr><th scope=row>181</th><td>speTri2</td></tr>
-	<tr><th scope=row>182</th><td>strPur1</td></tr>
-	<tr><th scope=row>183</th><td>strPur2</td></tr>
-	<tr><th scope=row>184</th><td>susScr2</td></tr>
-	<tr><th scope=row>185</th><td>susScr3</td></tr>
-	<tr><th scope=row>186</th><td>taeGut1</td></tr>
-	<tr><th scope=row>187</th><td>taeGut2</td></tr>
-	<tr><th scope=row>188</th><td>tarSyr1</td></tr>
-	<tr><th scope=row>189</th><td>tarSyr2</td></tr>
-	<tr><th scope=row>190</th><td>test</td></tr>
-	<tr><th scope=row>191</th><td>tetNig1</td></tr>
-	<tr><th scope=row>192</th><td>tetNig2</td></tr>
-	<tr><th scope=row>193</th><td>triMan1</td></tr>
-	<tr><th scope=row>194</th><td>tupBel1</td></tr>
-	<tr><th scope=row>195</th><td>turTru2</td></tr>
-	<tr><th scope=row>196</th><td>uniProt</td></tr>
-	<tr><th scope=row>197</th><td>vicPac1</td></tr>
-	<tr><th scope=row>198</th><td>vicPac2</td></tr>
-	<tr><th scope=row>199</th><td>visiGene</td></tr>
-	<tr><th scope=row>200</th><td>xenTro1</td></tr>
-	<tr><th scope=row>201</th><td>xenTro2</td></tr>
-	<tr><th scope=row>202</th><td>xenTro3</td></tr>
-</tbody>
-</table>
+<strong>row:</strong> "row"
+</div>
 
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[68]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;row _id=&quot;1&quot; _uuid=&quot;93CACF6F-C8C2-4B87-95A8-8177806D5A6F&quot; _position=&quot;1&quot; _address=&quot;http://data.baltimorecity.gov/resource/k5ry-ef3g/1&quot;&gt;
+  &lt;name&gt;410&lt;/name&gt;
+  &lt;zipcode&gt;21206&lt;/zipcode&gt;
+  &lt;neighborhood&gt;Frankford&lt;/neighborhood&gt;
+  &lt;councildistrict&gt;2&lt;/councildistrict&gt;
+  &lt;policedistrict&gt;NORTHEASTERN&lt;/policedistrict&gt;
+  &lt;location_1 human_address=&quot;{&amp;quot;address&amp;quot;:&amp;quot;4509 BELAIR ROAD&amp;quot;,&amp;quot;city&amp;quot;:&amp;quot;Baltimore&amp;quot;,&amp;quot;state&amp;quot;:&amp;quot;MD&amp;quot;,&amp;quot;zip&amp;quot;:&amp;quot;&amp;quot;}&quot; needs_recoding=&quot;true&quot;/&gt;
+&lt;/row&gt; </pre>
 </div>
 
 </div>
@@ -575,42 +579,19 @@ TRUE
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can work with the 'h19' database</p>
+<p>Now, let's see the number of restaurants with zipcode 21218</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[69]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>hg19 <span class="o">&lt;-</span> dbConnect<span class="p">(</span>MySQL<span class="p">(),</span>user<span class="o">=</span><span class="s">&quot;genome&quot;</span><span class="p">,</span> db<span class="o">=</span><span class="s">&quot;hg19&quot;</span><span class="p">,</span>
-                  host<span class="o">=</span><span class="s">&quot;genome-mysql.cse.ucsc.edu&quot;</span><span class="p">)</span>
-</pre></div>
+<div class=" highlight hl-r"><pre>zipcode<span class="o">&lt;-</span>xpathSApply<span class="p">(</span>rootNode<span class="p">,</span><span class="s">&quot;//zipcode&quot;</span><span class="p">,</span>xmlValue<span class="p">)</span>
 
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's see the total number of tables in h19</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>allTables <span class="o">&lt;-</span> dbListTables<span class="p">(</span>hg19<span class="p">)</span>
-<span class="kp">length</span><span class="p">(</span>allTables<span class="p">)</span>
+<span class="kp">sum</span><span class="p">(</span>zipcode<span class="o">==</span><span class="s">&#39;21218&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -621,10 +602,10 @@ TRUE
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[13]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[69]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
-11012
+69
 </div>
 
 </div>
@@ -638,17 +619,39 @@ TRUE
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Since there are many tables, le's access the first 30 tables</p>
+<p>So, there are 69 restaurants with zipcode 21218.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><br/></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can also see histogram of restaurants by zipcode.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[70]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>allTables<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">30</span><span class="p">]</span>
+<div class=" highlight hl-r"><pre>zipcode<span class="o">&lt;-</span><span class="kp">as.numeric</span><span class="p">(</span>zipcode<span class="p">)</span>
+
+<span class="kp">unique</span><span class="p">(</span>zipcode<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -659,40 +662,42 @@ TRUE
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[16]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[70]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <ol class=list-inline>
-	<li>"HInv"</li>
-	<li>"HInvGeneMrna"</li>
-	<li>"acembly"</li>
-	<li>"acemblyClass"</li>
-	<li>"acemblyPep"</li>
-	<li>"affyCytoScan"</li>
-	<li>"affyExonProbeAmbiguous"</li>
-	<li>"affyExonProbeCore"</li>
-	<li>"affyExonProbeExtended"</li>
-	<li>"affyExonProbeFree"</li>
-	<li>"affyExonProbeFull"</li>
-	<li>"affyExonProbesetAmbiguous"</li>
-	<li>"affyExonProbesetCore"</li>
-	<li>"affyExonProbesetExtended"</li>
-	<li>"affyExonProbesetFree"</li>
-	<li>"affyExonProbesetFull"</li>
-	<li>"affyGnf1h"</li>
-	<li>"affyU133"</li>
-	<li>"affyU133Plus2"</li>
-	<li>"affyU95"</li>
-	<li>"agilentCgh1x1m"</li>
-	<li>"agilentCgh1x244k"</li>
-	<li>"agilentCgh2x105k"</li>
-	<li>"agilentCgh2x400k"</li>
-	<li>"agilentCgh4x180k"</li>
-	<li>"agilentCgh4x44k"</li>
-	<li>"agilentCgh8x60k"</li>
-	<li>"agilentCghSnp2x400k"</li>
-	<li>"agilentCghSnp4x180k"</li>
-	<li>"agilentCghSnpCancer4x180k"</li>
+	<li>21206</li>
+	<li>21231</li>
+	<li>21224</li>
+	<li>21211</li>
+	<li>21223</li>
+	<li>21218</li>
+	<li>21205</li>
+	<li>21226</li>
+	<li>21215</li>
+	<li>21202</li>
+	<li>21201</li>
+	<li>21230</li>
+	<li>21222</li>
+	<li>21212</li>
+	<li>21210</li>
+	<li>21213</li>
+	<li>21214</li>
+	<li>21225</li>
+	<li>21217</li>
+	<li>21234</li>
+	<li>21209</li>
+	<li>21227</li>
+	<li>21239</li>
+	<li>21216</li>
+	<li>21208</li>
+	<li>21207</li>
+	<li>21229</li>
+	<li>21251</li>
+	<li>21220</li>
+	<li>21287</li>
+	<li>-21226</li>
+	<li>21237</li>
 </ol>
 
 </div>
@@ -708,17 +713,41 @@ TRUE
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's list the fields in affyU133Plus2</p>
+<p>Let's remove the negative value.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[71]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>dbListFields<span class="p">(</span>hg19<span class="p">,</span><span class="s">&quot;affyU133Plus2&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre>zipcode<span class="o">&lt;-</span>zipcode<span class="p">[</span>zipcode<span class="o">&gt;</span><span class="m">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's see a histogram of restaurants by zipcode</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>hist<span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>zipcode<span class="p">),</span>breaks<span class="o">=</span><span class="m">32</span><span class="p">,</span>xlab<span class="o">=</span><span class="s">&#39;zipcode&#39;</span><span class="p">,</span>
+     ylab<span class="o">=</span><span class="s">&#39;Number of restautants&#39;</span><span class="p">,</span>main<span class="o">=</span><span class="s">&#39;Histogram of number of restaurants in Baltimore, MD, USA&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -729,34 +758,12 @@ TRUE
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[17]:</div>
+<div class="output_area"><div class="prompt"></div>
 
-<div class="output_html rendered_html output_subarea output_execute_result">
-<ol class=list-inline>
-	<li>"bin"</li>
-	<li>"matches"</li>
-	<li>"misMatches"</li>
-	<li>"repMatches"</li>
-	<li>"nCount"</li>
-	<li>"qNumInsert"</li>
-	<li>"qBaseInsert"</li>
-	<li>"tNumInsert"</li>
-	<li>"tBaseInsert"</li>
-	<li>"strand"</li>
-	<li>"qName"</li>
-	<li>"qSize"</li>
-	<li>"qStart"</li>
-	<li>"qEnd"</li>
-	<li>"tName"</li>
-	<li>"tSize"</li>
-	<li>"tStart"</li>
-	<li>"tEnd"</li>
-	<li>"blockCount"</li>
-	<li>"blockSizes"</li>
-	<li>"qStarts"</li>
-	<li>"tStarts"</li>
-</ol>
 
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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"
+>
 </div>
 
 </div>
@@ -770,17 +777,123 @@ TRUE
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's see how many rows it has</p>
+<hr/>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Example-3">Example 3<a class="anchor-link" href="#Example-3">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Downloading-rows-and-columns-of-our-choice.">Downloading rows and columns of our choice.<a class="anchor-link" href="#Downloading-rows-and-columns-of-our-choice.">&#182;</a></h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's download xlsx  binary data by setting the download mode to binary.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The Excel spreadsheet for this example is from Natural Gas Aquisition Program which can be downloaded from <a href="https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FDATA.gov_NGAP.xlsx">https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FDATA.gov_NGAP.xlsx</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Check if the data is already downloaded, else download it.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[73]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>dbGetQuery<span class="p">(</span>hg19<span class="p">,</span> <span class="s">&quot;select count(*)as rows from affyU133Plus2&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span class="kr">if</span><span class="p">(</span><span class="o">!</span><span class="kp">file.exists</span><span class="p">(</span><span class="s">&#39;q3.xlsx&#39;</span><span class="p">)){</span>
+    <span class="kp">url</span><span class="o">&lt;-</span><span class="s">&quot;https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FDATA.gov_NGAP.xlsx &quot;</span>
+    
+    download.file<span class="p">(</span><span class="kp">url</span><span class="p">,</span>destfile <span class="o">=</span> <span class="s">&quot;q3.xlsx&quot;</span><span class="p">,</span> mode<span class="o">=</span><span class="s">&#39;wb&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Check if the package xlsx is installed, else install it. Then, load xlsx package.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="kr">if</span><span class="p">(</span><span class="o">!</span><span class="kn">require</span><span class="p">(</span>xlsx<span class="p">)){</span>
+    install.packages<span class="p">(</span><span class="s">&#39;xlsx&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kn">library</span><span class="p">(</span>xlsx<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can downloaded column and row numbers of our interest and do any calculations as shown below.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>rowIndex<span class="o">&lt;-</span><span class="m">18</span><span class="o">:</span><span class="m">23</span>
+colIndex<span class="o">&lt;-</span> <span class="m">7</span><span class="o">:</span><span class="m">15</span>
+
+dat<span class="o">&lt;-</span>read.xlsx<span class="p">(</span><span class="s">&#39;q3.xlsx&#39;</span><span class="p">,</span>sheetIndex<span class="o">=</span><span class="m">1</span><span class="p">,</span>rowIndex <span class="o">=</span> rowIndex<span class="p">,</span>colIndex <span class="o">=</span> colIndex<span class="p">)</span>
+
+<span class="kp">sum</span><span class="p">(</span>dat<span class="o">$</span>Zip<span class="o">*</span>dat<span class="o">$</span>Ext<span class="p">,</span>na.rm<span class="o">=</span><span class="bp">T</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -791,16 +904,10 @@ TRUE
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[19]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[75]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
-<table>
-<thead><tr><th></th><th scope=col>rows</th></tr></thead>
-<tbody>
-	<tr><th scope=row>1</th><td>58463</td></tr>
-</tbody>
-</table>
-
+36534720
 </div>
 
 </div>
@@ -811,15 +918,5 @@ TRUE
 </div>
     </div>
   </div>
-  
-  
-        <nav>
-       <ul>
-           <li><a href="google_scholar_R.html">Next post</a></li>
-           <li><a href="reading_from_web.html">Previous post</a></li>
-           <li><a href="../index.html">Home</a></li>
-       </ul>
-      </nav>
-	</main>  
 </body>
 </html>
