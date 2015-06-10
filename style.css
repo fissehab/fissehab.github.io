@@ -60,11 +60,13 @@ main {
 }
 
 aside {
-  background-color: #bbbbbb;
+  background-color: #FFFFFF;
   width: 270px;
   float: right;
   padding: 10px;
   margin-top: 10px;
+  text-align:center-left
+  
 }
 
 footer {
@@ -105,3 +107,5 @@ ul#menu li a:hover {
     color: white;
     background-color: black;
 } 
+
+
