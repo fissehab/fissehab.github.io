@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Using  Shinny App to Get Rainfall and Temperature Climatology and Trend Over a Region Selected by the User</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Using  Shinny App to Get Rainfall and Temperature Climatology and Trend Over a Region Selected by the User">
+  <meta name="author" content="Fisseha Berhane">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/default.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1 style="font-size:48px">Using  Shinny App to Get Rainfall and Temperature Climatology and Trend Over a Region Selected by the User</h1>
+    
+    <p style="font-size:28px">Fisseha Berhane<br/>PhD Candidate at Johns Hopkins University</p>
+    <br/>
+    <br/>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <article data-timings="">
+  
+   <br/>
+   <br/>
+    <br/>
+	<br/>
+    <p><h1 style="font-size:25px">Application Summary </h1></p>
+	
+
+<p style="font-size:18px" class=''>This application uses rainfall and temperature data from the Climate Research Unit (<a href="http://www.cru.uea.ac.uk/">http://www.cru.uea.ac.uk/</a>) and calculates monthly climatology and trend of rainfall or temperature over a rectangular region selected by the user. </p>
+
+<ul class = "build incremental">
+<li style="font-size:18px">The region to be selected is made rectangular for simplicity for the user as clicking any two opposite corners is enough to create a rectangular region. </li>
+<li><p style="font-size:18px">The App also helps to quickly check how climate is changing over a given region or country.</p></li>
+<li><p style="font-size:18px">Shiny Appliaction available here: <a href="https://fisseha.shinyapps.io/version1">Shiny App</a></p>
+
+<br/>
+<h1>To use the App </h1> </li>
+<li><p style="font-size:18px">Choose temperature or rainfall from the &#39;choose a dataset&#39; input control on the top left of the sidebar of the app. </p></li>
+<li><p style="font-size:18px">Click two coordinate points on the map of the climatology shown. The rectangular region must be on the landmass (the data is for land areas only).</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <article data-timings="">
+   <br/>
+   <br/>
+     <br/>
+     <br/>
+    <p style="font-size:18px" class=''>One can see the results for the region selected by clicking the tabPanels at the bottom in the app. 
+	The data can also be downloaded from the sidebar of the app by choosing a format of interest.</p>
+
+<p><h1>Algorihtm Summary </h1> </p>
+
+<p style="font-size:18px">First, the app produces map of average precipitation as a default (however, the user can select 
+temperature dataset as well). The code produces the map of long term mean shown below. 
+The code is hidden to save space.</p>
+
+<img  width="350" height="260" src="assets/fig/unnamed-chunk-1-1.png" alt="plot of chunk unnamed-chunk-1"> 
+<p style="font-size:15px">Fig. 1</p>
+
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <article data-timings="">
+  
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+    <p style="font-size:18px">observeEvent() is used to handle clicks on the plot of the climatology map shown after selecting a dataset of interest.
+reactiveValues() is used for storing the lat and lon of the selected regions.</p>
+
+<pre style="font-size:14px" ><code>v &lt;- reactiveValues(click1 = NULL,  # Represents the first mouse click, if any
+    range = NULL # After two clicks,stores the lat and lon of the selected region)
+  # Handle clicks on the plot
+  observeEvent(input$plot_click, {
+    if (is.null(v$click1)) { # We don&#39;t have a first click, so this is the first click
+      v$click1 &lt;- input$plot_click
+    } else { # We already had a first click, so this is the second click.
+  # Make a range (lon1 lat1: lon2 lat2) from the previous click and this one.
+  v$range &lt;- c(v$click1$x,v$click1$y, input$plot_click$x,input$plot_click$y)#x,y:lon,lat 
+  # And clear the first click so the next click starts a new range.
+   v$click1 &lt;- NULL }});observeEvent(input$reset, {# Reset both the range and the first click, if any.
+   v$range &lt;- NULL; v$click1 &lt;- NULL})
+</code></pre>
+
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+  <br/>
+  <br/>
+
+  <br/>
+  <br/>
+    <h1 style="font-size:24px">Demonstration </h1>
+  </hgroup>
+  <article data-timings="">
+     
+<p style="font-size:18px">If we select a rectangular region that covers the Ethiopian highlands for example (see Fig. 1), 
+we get the precipitation climatology and trend shown below (code hidden to save space)<span> 
+
+<img style="margin:0px auto;display:block" height="400" width="600" src="assets/fig/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2"> </p>
+</span>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title=''>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title=''>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title=''>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Example Display '>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
