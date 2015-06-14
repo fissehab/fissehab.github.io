@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-  
+<html>
+<head>
 
 <meta charset="utf-8" />
-<title>RMySQL</title>
+<title>random_forest</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -166,7 +166,6 @@ div#notebook {
     });
     </script>
     <!-- End of mathjax configuration -->
-	<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -174,17 +173,18 @@ div#notebook {
     <link rel="stylesheet" type="text/css" href="../style.css">
   </head>
   <body>
+  
  <nav id="nav01"></nav>
-    <header class="banner">
+     <header class="banner">
       <h1 style="text-align:left;color:rgb(30%,50%,70%)">Fisseha Berhane </h1>
    	  <p>PhD Candidate, <a style="color:#D65C33;text-decoration:none" href="http://eps.jhu.edu/"> Department of Earth and Planetary Sciences,</a>
  <a style="color:#D65C33;text-decoration:none" href="http://jhu.edu">Johns Hopkins University</a> </p>
-             
+           
 	  <p> 3400 N. Charles Street, Baltimore, MD 21218, USA • Office: 325 Olin Hall </p>
 	    
-	 <p><img src="../figures/mobile.jpg" height="35" width="25"/> <font size="2">443-970-2353</font>  <span style="width:50px;display:inline-block"></span>
-	 <img src="../figures/emailimage.png" height="20" width="35"/> <font size="2"> fisseha@jhu.edu</font> <span style="width:50px;display:inline-block"></span>
-	<a style="color:#0000CC; text-decoration:none" href ="../CV.pdf">CV<span style="width:300px;display:inline-block"></span> <a href="https://www.linkedin.com/profile/view?id=59587395&trk=nav_responsive_tab_profile"> <img src="../figures/linkedinimage.png" width="30" height="30" alt="Linkedin"/></a> <span style="width:10px;display:inline-block"></span> <a href="https://github.com/fissehab?tab=repositories"> <img src="../figures/GitHubimage.jpg" width="60" height="36" alt="GitHub"/></a> 
+	 <p><img src="../figures/mobile.jpg" height="35" width="25"/> <sup><font size="3">443-970-2353</font> </sup> <span style="width:50px;display:inline-block"></span>
+	 <img src="../figures/emailimage.png" height="20" width="35"/> <sup><font size="3"> fisseha@jhu.edu</font></sup> <span style="width:50px;display:inline-block"></span>
+	<a style="color:#0000CC; text-decoration:none" href ="../CV.pdf"><sup><font size='3'>CV</sup><span style="width:300px;display:inline-block"></span> <a href="https://www.linkedin.com/profile/view?id=59587395&trk=nav_responsive_tab_profile"> <img src="../figures/linkedinimage.png" width="30" height="30" alt="Linkedin"/></a> <span style="width:10px;display:inline-block"></span> <a href="https://github.com/fissehab?tab=repositories"> <img src="../figures/GitHubimage.jpg" width="60" height="36" alt="GitHub"/></a> 
 	<span style="width:10px;display:inline-block"></span> <a href="https://twitter.com/FishBerhane"> <img src="../figures/twitterimage.jpg" width="30" height="30" alt="twitter"/></a>
 	</p>
     </header>
@@ -195,14 +195,13 @@ div#notebook {
         <li><a style="text-decoration:none" href="../education.html">Education</a></li>
 		  <li><a style="text-decoration:none" href="../projects.html">Projects</a></li>
 		  <li><a style="text-decoration:none" href="../publications.html">Publications & Presentations</a></li>
-        <!--<li><a style="text-decoration:none" href="../presentations.html">Presentations</a></li> -->
+        <!--<li><a style="text-decoration:none" href="../presentations.html">Presentations</a></li>-->
 		   <li><a style="text-decoration:none"   href="../Python/pythonindex.html">Python & Spark</a></li>
 		  <li><a style="text-decoration:none" href="Rindex.html">R</a></li>
-		  <li><a style="text-decoration:none" href="../certificates.html">Certificates & Skills</a></li>
-		    
+	  <li><a style="text-decoration:none" href="../certificates.html">Certificates & Skills</a></li>
+		   
       </ul>
     </nav>
-
 </head>
 <body>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
@@ -213,7 +212,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Working-with-MySQL-in-R">Working with MySQL with R<a class="anchor-link" href="#Working-with-MySQL-in-R">&#182;</a></h3>
+<h3 id="Random-forest-with-R">Random forest with R<a class="anchor-link" href="#Random-forest-with-R">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -222,7 +221,16 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>MySQL is among the free and widely used open source database softwares out there. It is widely used in internet based applications. You can read more about MySQL from <a href="http://en.wikipedia.org/wiki/MySQL"  style="text-decoration:none"> Wikipedia</a> and from the <a href="http://www.mysql.com/"  style="text-decoration:none">MySQL website</a></p>
+<h4 id="Summary">Summary<a class="anchor-link" href="#Summary">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this project, a predictive model that determines the manner an exercise is done is built. Data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants, who were asked to perform barbell lifts correctly and incorrectly in 5 different ways, is employed to predict whether a particular exercise is performed correctly or not.</p>
 
 </div>
 </div>
@@ -232,17 +240,50 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's load the RMYSQL package and connect to a database at genome-mysql.cse.ucsc.edu</p>
+<h4 id="Data-retrieval-and-exploration">Data retrieval and exploration<a class="anchor-link" href="#Data-retrieval-and-exploration">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The dataset used for building a random forest model can be downloaded from
+ <a href ="http://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"> here</a>. First, let's download the dataset from the provided link and divide it into two subsets: one for training and building the model and the second subset to evaluate out of sample error by cross-validation.</p>
+<p>According to the rules of thumb for prediction study design, I partitioned the data into 60% training and 40% testing.  Then, I put aside the testing data and finished the model selection process using the training data. Before building the model, I made exploration on the training data. I also tried to understand the covariates (features) and their associations. The paper by Velloso et al. (2013) explains the covariates. The data for this project come from this source: <a href="http://groupware.les.inf.puc-rio.br/har">http://groupware.les.inf.puc-rio.br/har</a>.</p>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Downloading-data">Downloading data<a class="anchor-link" href="#Downloading-data">&#182;</a></h4>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kn">library</span><span class="p">(</span>RMySQL<span class="p">)</span>
+<div class=" highlight hl-r"><pre>data1<span class="o">&lt;-</span>read.csv<span class="p">(</span><span class="s">&quot;http://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv&quot;</span><span class="p">,</span>na.strings<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;NA&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="kn">library</span><span class="p">(</span>caret<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -255,7 +296,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Create a connection to the database</p>
+<p>Now, let's see the dimensions of the dataset and the variables.</p>
 
 </div>
 </div>
@@ -265,43 +306,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>ucscDb <span class="o">&lt;-</span> dbConnect<span class="p">(</span>MySQL<span class="p">(),</span>user<span class="o">=</span><span class="s">&quot;genome&quot;</span><span class="p">,</span> host<span class="o">=</span><span class="s">&quot;genome-mysql.cse.ucsc.edu&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>result <span class="o">&lt;-</span> dbGetQuery<span class="p">(</span>ucscDb<span class="p">,</span><span class="s">&quot;show databases;&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's disable the connection</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>dbDisconnect<span class="p">(</span>ucscDb<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span class="kp">dim</span><span class="p">(</span>data1<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -312,386 +317,12 @@ div#notebook {
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-TRUE
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Then, let's see the databases</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>result
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<table>
-<thead><tr><th></th><th scope=col>Database</th></tr></thead>
-<tbody>
-	<tr><th scope=row>1</th><td>information_schema</td></tr>
-	<tr><th scope=row>2</th><td>ailMel1</td></tr>
-	<tr><th scope=row>3</th><td>allMis1</td></tr>
-	<tr><th scope=row>4</th><td>anoCar1</td></tr>
-	<tr><th scope=row>5</th><td>anoCar2</td></tr>
-	<tr><th scope=row>6</th><td>anoGam1</td></tr>
-	<tr><th scope=row>7</th><td>apiMel1</td></tr>
-	<tr><th scope=row>8</th><td>apiMel2</td></tr>
-	<tr><th scope=row>9</th><td>aplCal1</td></tr>
-	<tr><th scope=row>10</th><td>balAcu1</td></tr>
-	<tr><th scope=row>11</th><td>bosTau2</td></tr>
-	<tr><th scope=row>12</th><td>bosTau3</td></tr>
-	<tr><th scope=row>13</th><td>bosTau4</td></tr>
-	<tr><th scope=row>14</th><td>bosTau5</td></tr>
-	<tr><th scope=row>15</th><td>bosTau6</td></tr>
-	<tr><th scope=row>16</th><td>bosTau7</td></tr>
-	<tr><th scope=row>17</th><td>bosTau8</td></tr>
-	<tr><th scope=row>18</th><td>bosTauMd3</td></tr>
-	<tr><th scope=row>19</th><td>braFlo1</td></tr>
-	<tr><th scope=row>20</th><td>caeJap1</td></tr>
-	<tr><th scope=row>21</th><td>caePb1</td></tr>
-	<tr><th scope=row>22</th><td>caePb2</td></tr>
-	<tr><th scope=row>23</th><td>caeRem2</td></tr>
-	<tr><th scope=row>24</th><td>caeRem3</td></tr>
-	<tr><th scope=row>25</th><td>calJac1</td></tr>
-	<tr><th scope=row>26</th><td>calJac3</td></tr>
-	<tr><th scope=row>27</th><td>calMil1</td></tr>
-	<tr><th scope=row>28</th><td>canFam1</td></tr>
-	<tr><th scope=row>29</th><td>canFam2</td></tr>
-	<tr><th scope=row>30</th><td>canFam3</td></tr>
-	<tr><th scope=row>31</th><td>cavPor3</td></tr>
-	<tr><th scope=row>32</th><td>cb1</td></tr>
-	<tr><th scope=row>33</th><td>cb3</td></tr>
-	<tr><th scope=row>34</th><td>ce10</td></tr>
-	<tr><th scope=row>35</th><td>ce2</td></tr>
-	<tr><th scope=row>36</th><td>ce4</td></tr>
-	<tr><th scope=row>37</th><td>ce6</td></tr>
-	<tr><th scope=row>38</th><td>cerSim1</td></tr>
-	<tr><th scope=row>39</th><td>choHof1</td></tr>
-	<tr><th scope=row>40</th><td>chrPic1</td></tr>
-	<tr><th scope=row>41</th><td>ci1</td></tr>
-	<tr><th scope=row>42</th><td>ci2</td></tr>
-	<tr><th scope=row>43</th><td>criGri1</td></tr>
-	<tr><th scope=row>44</th><td>danRer1</td></tr>
-	<tr><th scope=row>45</th><td>danRer10</td></tr>
-	<tr><th scope=row>46</th><td>danRer2</td></tr>
-	<tr><th scope=row>47</th><td>danRer3</td></tr>
-	<tr><th scope=row>48</th><td>danRer4</td></tr>
-	<tr><th scope=row>49</th><td>danRer5</td></tr>
-	<tr><th scope=row>50</th><td>danRer6</td></tr>
-	<tr><th scope=row>51</th><td>danRer7</td></tr>
-	<tr><th scope=row>52</th><td>dasNov3</td></tr>
-	<tr><th scope=row>53</th><td>dipOrd1</td></tr>
-	<tr><th scope=row>54</th><td>dm1</td></tr>
-	<tr><th scope=row>55</th><td>dm2</td></tr>
-	<tr><th scope=row>56</th><td>dm3</td></tr>
-	<tr><th scope=row>57</th><td>dm6</td></tr>
-	<tr><th scope=row>58</th><td>dp2</td></tr>
-	<tr><th scope=row>59</th><td>dp3</td></tr>
-	<tr><th scope=row>60</th><td>droAna1</td></tr>
-	<tr><th scope=row>61</th><td>droAna2</td></tr>
-	<tr><th scope=row>62</th><td>droEre1</td></tr>
-	<tr><th scope=row>63</th><td>droGri1</td></tr>
-	<tr><th scope=row>64</th><td>droMoj1</td></tr>
-	<tr><th scope=row>65</th><td>droMoj2</td></tr>
-	<tr><th scope=row>66</th><td>droPer1</td></tr>
-	<tr><th scope=row>67</th><td>droSec1</td></tr>
-	<tr><th scope=row>68</th><td>droSim1</td></tr>
-	<tr><th scope=row>69</th><td>droVir1</td></tr>
-	<tr><th scope=row>70</th><td>droVir2</td></tr>
-	<tr><th scope=row>71</th><td>droYak1</td></tr>
-	<tr><th scope=row>72</th><td>droYak2</td></tr>
-	<tr><th scope=row>73</th><td>eboVir3</td></tr>
-	<tr><th scope=row>74</th><td>echTel1</td></tr>
-	<tr><th scope=row>75</th><td>echTel2</td></tr>
-	<tr><th scope=row>76</th><td>equCab1</td></tr>
-	<tr><th scope=row>77</th><td>equCab2</td></tr>
-	<tr><th scope=row>78</th><td>eriEur1</td></tr>
-	<tr><th scope=row>79</th><td>eriEur2</td></tr>
-	<tr><th scope=row>80</th><td>felCat3</td></tr>
-	<tr><th scope=row>81</th><td>felCat4</td></tr>
-	<tr><th scope=row>82</th><td>felCat5</td></tr>
-	<tr><th scope=row>83</th><td>fr1</td></tr>
-	<tr><th scope=row>84</th><td>fr2</td></tr>
-	<tr><th scope=row>85</th><td>fr3</td></tr>
-	<tr><th scope=row>86</th><td>gadMor1</td></tr>
-	<tr><th scope=row>87</th><td>galGal2</td></tr>
-	<tr><th scope=row>88</th><td>galGal3</td></tr>
-	<tr><th scope=row>89</th><td>galGal4</td></tr>
-	<tr><th scope=row>90</th><td>gasAcu1</td></tr>
-	<tr><th scope=row>91</th><td>geoFor1</td></tr>
-	<tr><th scope=row>92</th><td>go</td></tr>
-	<tr><th scope=row>93</th><td>go080130</td></tr>
-	<tr><th scope=row>94</th><td>go140213</td></tr>
-	<tr><th scope=row>95</th><td>go150121</td></tr>
-	<tr><th scope=row>96</th><td>gorGor3</td></tr>
-	<tr><th scope=row>97</th><td>hetGla1</td></tr>
-	<tr><th scope=row>98</th><td>hetGla2</td></tr>
-	<tr><th scope=row>99</th><td>hg16</td></tr>
-	<tr><th scope=row>100</th><td>hg17</td></tr>
-	<tr><th scope=row>101</th><td>hg18</td></tr>
-	<tr><th scope=row>102</th><td>hg19</td></tr>
-	<tr><th scope=row>103</th><td>hg19Patch10</td></tr>
-	<tr><th scope=row>104</th><td>hg19Patch2</td></tr>
-	<tr><th scope=row>105</th><td>hg19Patch5</td></tr>
-	<tr><th scope=row>106</th><td>hg19Patch9</td></tr>
-	<tr><th scope=row>107</th><td>hg38</td></tr>
-	<tr><th scope=row>108</th><td>hg38Patch2</td></tr>
-	<tr><th scope=row>109</th><td>hg38Patch3</td></tr>
-	<tr><th scope=row>110</th><td>hgFixed</td></tr>
-	<tr><th scope=row>111</th><td>hgTemp</td></tr>
-	<tr><th scope=row>112</th><td>hgcentral</td></tr>
-	<tr><th scope=row>113</th><td>latCha1</td></tr>
-	<tr><th scope=row>114</th><td>loxAfr3</td></tr>
-	<tr><th scope=row>115</th><td>macEug1</td></tr>
-	<tr><th scope=row>116</th><td>macEug2</td></tr>
-	<tr><th scope=row>117</th><td>melGal1</td></tr>
-	<tr><th scope=row>118</th><td>melUnd1</td></tr>
-	<tr><th scope=row>119</th><td>micMur1</td></tr>
-	<tr><th scope=row>120</th><td>mm10</td></tr>
-	<tr><th scope=row>121</th><td>mm10Patch1</td></tr>
-	<tr><th scope=row>122</th><td>mm5</td></tr>
-	<tr><th scope=row>123</th><td>mm6</td></tr>
-	<tr><th scope=row>124</th><td>mm7</td></tr>
-	<tr><th scope=row>125</th><td>mm8</td></tr>
-	<tr><th scope=row>126</th><td>mm9</td></tr>
-	<tr><th scope=row>127</th><td>monDom1</td></tr>
-	<tr><th scope=row>128</th><td>monDom4</td></tr>
-	<tr><th scope=row>129</th><td>monDom5</td></tr>
-	<tr><th scope=row>130</th><td>musFur1</td></tr>
-	<tr><th scope=row>131</th><td>myoLuc2</td></tr>
-	<tr><th scope=row>132</th><td>nomLeu1</td></tr>
-	<tr><th scope=row>133</th><td>nomLeu2</td></tr>
-	<tr><th scope=row>134</th><td>nomLeu3</td></tr>
-	<tr><th scope=row>135</th><td>ochPri2</td></tr>
-	<tr><th scope=row>136</th><td>ochPri3</td></tr>
-	<tr><th scope=row>137</th><td>oreNil1</td></tr>
-	<tr><th scope=row>138</th><td>oreNil2</td></tr>
-	<tr><th scope=row>139</th><td>ornAna1</td></tr>
-	<tr><th scope=row>140</th><td>oryCun2</td></tr>
-	<tr><th scope=row>141</th><td>oryLat2</td></tr>
-	<tr><th scope=row>142</th><td>otoGar3</td></tr>
-	<tr><th scope=row>143</th><td>oviAri1</td></tr>
-	<tr><th scope=row>144</th><td>oviAri3</td></tr>
-	<tr><th scope=row>145</th><td>panTro1</td></tr>
-	<tr><th scope=row>146</th><td>panTro2</td></tr>
-	<tr><th scope=row>147</th><td>panTro3</td></tr>
-	<tr><th scope=row>148</th><td>panTro4</td></tr>
-	<tr><th scope=row>149</th><td>papAnu2</td></tr>
-	<tr><th scope=row>150</th><td>papHam1</td></tr>
-	<tr><th scope=row>151</th><td>performance_schema</td></tr>
-	<tr><th scope=row>152</th><td>petMar1</td></tr>
-	<tr><th scope=row>153</th><td>petMar2</td></tr>
-	<tr><th scope=row>154</th><td>ponAbe2</td></tr>
-	<tr><th scope=row>155</th><td>priPac1</td></tr>
-	<tr><th scope=row>156</th><td>proCap1</td></tr>
-	<tr><th scope=row>157</th><td>proteins120806</td></tr>
-	<tr><th scope=row>158</th><td>proteins121210</td></tr>
-	<tr><th scope=row>159</th><td>proteins140122</td></tr>
-	<tr><th scope=row>160</th><td>proteins150225</td></tr>
-	<tr><th scope=row>161</th><td>proteome</td></tr>
-	<tr><th scope=row>162</th><td>pteVam1</td></tr>
-	<tr><th scope=row>163</th><td>rheMac1</td></tr>
-	<tr><th scope=row>164</th><td>rheMac2</td></tr>
-	<tr><th scope=row>165</th><td>rheMac3</td></tr>
-	<tr><th scope=row>166</th><td>rn3</td></tr>
-	<tr><th scope=row>167</th><td>rn4</td></tr>
-	<tr><th scope=row>168</th><td>rn5</td></tr>
-	<tr><th scope=row>169</th><td>rn6</td></tr>
-	<tr><th scope=row>170</th><td>sacCer1</td></tr>
-	<tr><th scope=row>171</th><td>sacCer2</td></tr>
-	<tr><th scope=row>172</th><td>sacCer3</td></tr>
-	<tr><th scope=row>173</th><td>saiBol1</td></tr>
-	<tr><th scope=row>174</th><td>sarHar1</td></tr>
-	<tr><th scope=row>175</th><td>sorAra1</td></tr>
-	<tr><th scope=row>176</th><td>sorAra2</td></tr>
-	<tr><th scope=row>177</th><td>sp120323</td></tr>
-	<tr><th scope=row>178</th><td>sp121210</td></tr>
-	<tr><th scope=row>179</th><td>sp140122</td></tr>
-	<tr><th scope=row>180</th><td>sp150225</td></tr>
-	<tr><th scope=row>181</th><td>speTri2</td></tr>
-	<tr><th scope=row>182</th><td>strPur1</td></tr>
-	<tr><th scope=row>183</th><td>strPur2</td></tr>
-	<tr><th scope=row>184</th><td>susScr2</td></tr>
-	<tr><th scope=row>185</th><td>susScr3</td></tr>
-	<tr><th scope=row>186</th><td>taeGut1</td></tr>
-	<tr><th scope=row>187</th><td>taeGut2</td></tr>
-	<tr><th scope=row>188</th><td>tarSyr1</td></tr>
-	<tr><th scope=row>189</th><td>tarSyr2</td></tr>
-	<tr><th scope=row>190</th><td>test</td></tr>
-	<tr><th scope=row>191</th><td>tetNig1</td></tr>
-	<tr><th scope=row>192</th><td>tetNig2</td></tr>
-	<tr><th scope=row>193</th><td>triMan1</td></tr>
-	<tr><th scope=row>194</th><td>tupBel1</td></tr>
-	<tr><th scope=row>195</th><td>turTru2</td></tr>
-	<tr><th scope=row>196</th><td>uniProt</td></tr>
-	<tr><th scope=row>197</th><td>vicPac1</td></tr>
-	<tr><th scope=row>198</th><td>vicPac2</td></tr>
-	<tr><th scope=row>199</th><td>visiGene</td></tr>
-	<tr><th scope=row>200</th><td>xenTro1</td></tr>
-	<tr><th scope=row>201</th><td>xenTro2</td></tr>
-	<tr><th scope=row>202</th><td>xenTro3</td></tr>
-</tbody>
-</table>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can work with the 'h19' database</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>hg19 <span class="o">&lt;-</span> dbConnect<span class="p">(</span>MySQL<span class="p">(),</span>user<span class="o">=</span><span class="s">&quot;genome&quot;</span><span class="p">,</span> db<span class="o">=</span><span class="s">&quot;hg19&quot;</span><span class="p">,</span>
-                  host<span class="o">=</span><span class="s">&quot;genome-mysql.cse.ucsc.edu&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's see the total number of tables in h19</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>allTables <span class="o">&lt;-</span> dbListTables<span class="p">(</span>hg19<span class="p">)</span>
-<span class="kp">length</span><span class="p">(</span>allTables<span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[13]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-11012
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Since there are many tables, le's access the first 30 tables</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>allTables<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">30</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[16]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <ol class=list-inline>
-	<li>"HInv"</li>
-	<li>"HInvGeneMrna"</li>
-	<li>"acembly"</li>
-	<li>"acemblyClass"</li>
-	<li>"acemblyPep"</li>
-	<li>"affyCytoScan"</li>
-	<li>"affyExonProbeAmbiguous"</li>
-	<li>"affyExonProbeCore"</li>
-	<li>"affyExonProbeExtended"</li>
-	<li>"affyExonProbeFree"</li>
-	<li>"affyExonProbeFull"</li>
-	<li>"affyExonProbesetAmbiguous"</li>
-	<li>"affyExonProbesetCore"</li>
-	<li>"affyExonProbesetExtended"</li>
-	<li>"affyExonProbesetFree"</li>
-	<li>"affyExonProbesetFull"</li>
-	<li>"affyGnf1h"</li>
-	<li>"affyU133"</li>
-	<li>"affyU133Plus2"</li>
-	<li>"affyU95"</li>
-	<li>"agilentCgh1x1m"</li>
-	<li>"agilentCgh1x244k"</li>
-	<li>"agilentCgh2x105k"</li>
-	<li>"agilentCgh2x400k"</li>
-	<li>"agilentCgh4x180k"</li>
-	<li>"agilentCgh4x44k"</li>
-	<li>"agilentCgh8x60k"</li>
-	<li>"agilentCghSnp2x400k"</li>
-	<li>"agilentCghSnp4x180k"</li>
-	<li>"agilentCghSnpCancer4x180k"</li>
+	<li>19622</li>
+	<li>160</li>
 </ol>
 
 </div>
@@ -707,59 +338,28 @@ TRUE
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's list the fields in affyU133Plus2</p>
+<p>Then, I divided the dataset into training and testing subsets.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>dbListFields<span class="p">(</span>hg19<span class="p">,</span><span class="s">&quot;affyU133Plus2&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre>for_training<span class="o">&lt;-</span>createDataPartition<span class="p">(</span>y<span class="o">=</span>data1<span class="o">$</span>classe<span class="p">,</span>p<span class="o">=</span><span class="m">0.6</span><span class="p">,</span><span class="kt">list</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+
+ 
+
+training <span class="o">&lt;-</span>data1<span class="p">[</span>for_training<span class="p">,]</span>
+
+ 
+
+testing <span class="o">&lt;-</span>data1<span class="p">[</span><span class="o">-</span>for_training<span class="p">,]</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[17]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<ol class=list-inline>
-	<li>"bin"</li>
-	<li>"matches"</li>
-	<li>"misMatches"</li>
-	<li>"repMatches"</li>
-	<li>"nCount"</li>
-	<li>"qNumInsert"</li>
-	<li>"qBaseInsert"</li>
-	<li>"tNumInsert"</li>
-	<li>"tBaseInsert"</li>
-	<li>"strand"</li>
-	<li>"qName"</li>
-	<li>"qSize"</li>
-	<li>"qStart"</li>
-	<li>"qEnd"</li>
-	<li>"tName"</li>
-	<li>"tSize"</li>
-	<li>"tStart"</li>
-	<li>"tEnd"</li>
-	<li>"blockCount"</li>
-	<li>"blockSizes"</li>
-	<li>"qStarts"</li>
-	<li>"tStarts"</li>
-</ol>
-
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -769,57 +369,619 @@ TRUE
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's see how many rows it has</p>
-
+<h4 id="Explore-the-training-data">Explore the training data<a class="anchor-link" href="#Explore-the-training-data">&#182;</a></h4>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>dbGetQuery<span class="p">(</span>hg19<span class="p">,</span> <span class="s">&quot;select count(*)as rows from affyU133Plus2&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span class="kp">dim</span><span class="p">(</span>training<span class="p">)</span>
+
+<span class="kp">names</span><span class="p">(</span>training<span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[19]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<table>
-<thead><tr><th></th><th scope=col>rows</th></tr></thead>
-<tbody>
-	<tr><th scope=row>1</th><td>58463</td></tr>
-</tbody>
-</table>
-
-
 </div>
-
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The training data has 160 columns (variables) and 11776 rows (observations). The predictand (dependent) variable is “classe”, which is the right most column.</p>
+<p>Then, I removed the covariates which are not important for the machine learning algorithm development. These are the row number(X), user_name, raw_timestamp_part1, raw_timestamp_part2, cvtd_timestamp, new_window and num_window.</p>
+<p>It is vital to keep in mind that the testing data is not used in any way for model development. The model building is done entirely based on the training data.</p>
+<p>Remove data not important for model development</p>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>training<span class="o">&lt;-</span>training<span class="p">[,</span><span class="m">8</span><span class="o">:</span><span class="m">160</span><span class="p">]</span>
+</pre></div>
 
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Many of the covariates have lots of missing data. Those with missing data are removed.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>non_missing_training<span class="o">&lt;-</span><span class="kp">apply</span><span class="p">(</span><span class="o">!</span><span class="kp">is.na</span><span class="p">(</span>training<span class="p">),</span><span class="m">2</span><span class="p">,</span><span class="kp">sum</span><span class="p">)</span><span class="o">&gt;=</span><span class="kp">dim</span><span class="p">(</span>training<span class="p">)[</span><span class="m">1</span><span class="p">]</span>
+
+training<span class="o">&lt;-</span>training<span class="p">[,</span>non_missing_training<span class="p">]</span>
+
+ 
+
+<span class="kp">dim</span><span class="p">(</span>training<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>After removing the variables with missing data, I am left with 52 features and the dependent variable (53 columns in total).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Predictive-model-building">Predictive model building<a class="anchor-link" href="#Predictive-model-building">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Random forest, along with Boosting, is one of the most accurate classifiers. On many problems, the performance of random forests is very similar to boosting (Hastie et al., 2005). I started with Random Forest and since the performance of random Forest is found to be very good, as I will show below, I did not proceed to Boosting. Random Forest is suitable for this project dataset because:
+(a) It handles non-linearity
+(b) It handles large inputs whose interactions is not understood,
+(c) It handles unscaled inputs and categorical data,
+(d) It helps to visually examine how the predictors are contributing into the final model by extracting the model output trees.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="kp">set.seed</span><span class="p">(</span><span class="m">3333</span><span class="p">)</span>     <span class="c1"># this is set to ensure the reproducibility of the results</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Build-a-Random-Forest-model:">Build a Random Forest model:<a class="anchor-link" href="#Build-a-Random-Forest-model:">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>rf_fit<span class="o">&lt;-</span>train<span class="p">(</span>classe<span class="o">~</span><span class="m">.</span><span class="p">,</span>data<span class="o">=</span>training<span class="p">,</span>method<span class="o">=</span><span class="s">&quot;rf&quot;</span><span class="p">,</span> allowParallel<span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span>prox<span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> trControl<span class="o">=</span>trainControl<span class="p">(</span>method<span class="o">=</span><span class="s">&quot;cv&quot;</span><span class="p">,</span>number<span class="o">=</span><span class="m">10</span><span class="p">))</span>
+
+ 
+
+<span class="kp">save</span><span class="p">(</span>rf_fit<span class="p">,</span> file<span class="o">=</span><span class="s">&quot;randomForest_model.RData_cv10&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I used random forest with 10 fold cross validation</p>
+<p>The model run was performed in a high performance computer cluster and took hours.</p>
+<p>Let us see the importance of the covariates.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>importance <span class="o">&lt;-</span> varImp<span class="p">(</span>rf_fit<span class="p">)</span>
+
+ 
+
+ plot<span class="p">(</span>importance<span class="p">,</span> main <span class="o">=</span> <span class="s">&quot;Variable Importance of features&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>or we can have a look at the top important features:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>importance
+
+ 
+
+  only <span class="m">20</span> most important variables shown <span class="p">(</span>out of <span class="m">52</span><span class="p">)</span>
+
+ 
+
+                     Overall
+
+roll_belt              <span class="m">100.0</span>
+
+pitch_forearm           <span class="m">57.3</span>
+
+yaw_belt                <span class="m">56.4</span>
+
+pitch_belt              <span class="m">45.4</span>
+
+magnet_dumbbell_z       <span class="m">43.8</span>
+
+roll_forearm            <span class="m">43.6</span>
+
+magnet_dumbbell_y       <span class="m">43.5</span>
+
+accel_dumbbell_y        <span class="m">21.4</span>
+
+accel_forearm_x         <span class="m">17.6</span>
+
+roll_dumbbell           <span class="m">17.5</span>
+
+magnet_dumbbell_x       <span class="m">17.5</span>
+
+accel_dumbbell_z        <span class="m">14.6</span>
+
+magnet_belt_z           <span class="m">14.3</span>
+
+accel_belt_z            <span class="m">14.2</span>
+
+magnet_forearm_z        <span class="m">14.0</span>
+
+total_accel_dumbbell    <span class="m">13.0</span>
+
+gyros_belt_z            <span class="m">11.7</span>
+
+magnet_belt_y           <span class="m">11.3</span>
+
+yaw_arm                 <span class="m">11.3</span>
+
+magnet_belt_x           <span class="m">10.2</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then let us see the confusion matrix to understand how the model performs:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="kp">options</span><span class="p">(</span>digits<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+
+ 
+
+rf_fit<span class="o">$</span>finalModel<span class="o">$</span>confusion
+
+   A    B    C    D    E class.error
+
+A <span class="m">3344</span>  <span class="m">3</span>    <span class="m">1</span>    <span class="m">0</span>    <span class="m">0</span>     <span class="m">0.00119</span>
+
+B   <span class="m">19</span> <span class="m">2248</span>  <span class="m">10</span>   <span class="m">2</span>    <span class="m">0</span>     <span class="m">0.01360</span>
+
+C    <span class="m">0</span>  <span class="m">15</span> <span class="m">2030</span>   <span class="m">9</span>    <span class="m">0</span>     <span class="m">0.01168</span>
+
+D    <span class="m">0</span>   <span class="m">1</span>  <span class="m">32</span>   <span class="m">1894</span>  <span class="m">3</span>     <span class="m">0.01865</span>
+
+E    <span class="m">0</span>   <span class="m">1</span>  <span class="m">3</span>     <span class="m">5</span>   <span class="m">2156</span>   <span class="m">0.00416</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>The confusion <span class="kt">matrix</span> shows that the model is doing a good job <span class="kr">in</span> fitting the training data set.
+
+ 
+
+The summary of the model is below<span class="o">:</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>rf_fit
+
+Random Forest
+
+ 
+
+<span class="m">11776</span> samples
+
+   <span class="m">52</span> predictors
+
+    <span class="m">5</span> classes<span class="o">:</span> <span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="s">&#39;D&#39;</span><span class="p">,</span> <span class="s">&#39;E&#39;</span>
+
+ 
+
+No pre<span class="o">-</span>processing
+
+Resampling<span class="o">:</span> Cross<span class="o">-</span>Validated <span class="p">(</span><span class="m">10</span> fold<span class="p">)</span>
+
+ 
+
+Summary of sample sizes<span class="o">:</span> <span class="m">10598</span><span class="p">,</span> <span class="m">10600</span><span class="p">,</span> <span class="m">10598</span><span class="p">,</span> <span class="m">10600</span><span class="p">,</span> <span class="m">10598</span><span class="p">,</span> <span class="m">10598</span><span class="p">,</span> <span class="kc">...</span>
+
+ 
+
+Resampling results across tuning parameters<span class="o">:</span>
+
+ 
+
+  mtry  Accuracy  Kappa  Accuracy SD  Kappa SD
+
+   <span class="m">2</span>    <span class="m">0.989</span>     <span class="m">0.987</span>  <span class="m">0.00231</span>      <span class="m">0.00292</span>
+
+  <span class="m">27</span>    <span class="m">0.990</span>     <span class="m">0.987</span>  <span class="m">0.00325</span>      <span class="m">0.00412</span>
+
+  <span class="m">52</span>    <span class="m">0.977</span>     <span class="m">0.971</span>  <span class="m">0.00487</span>      <span class="m">0.00617</span>
+
+ 
+
+Accuracy was used to select the optimal model using  the largest value.
+
+The final value used <span class="kr">for</span> the model was mtry <span class="o">=</span> <span class="m">27.</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Cross-validation">Cross-validation<a class="anchor-link" href="#Cross-validation">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Similar to what was done to the training data, the first eight columns and those with missing covariates are removed from the testing data and the rest covariates are used for prediction.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>testing <span class="o">&lt;-</span>testing<span class="p">[,</span><span class="m">8</span><span class="o">:</span><span class="m">160</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Similar to what was done in the training data, remove covariates with NAs</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>non_missing_testing<span class="o">&lt;-</span><span class="kp">apply</span><span class="p">(</span><span class="o">!</span><span class="kp">is.na</span><span class="p">(</span>testing<span class="p">),</span><span class="m">2</span><span class="p">,</span><span class="kp">sum</span><span class="p">)</span><span class="o">==</span><span class="kp">dim</span><span class="p">(</span>testing<span class="p">)[</span><span class="m">1</span><span class="p">]</span>
+
+ 
+
+testing<span class="o">&lt;-</span>testing<span class="p">[,</span>non_missing_testing<span class="p">]</span>
+
+ 
+
+<span class="kp">dim</span><span class="p">(</span>testing<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>predict using the model built in with the training data</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>prediction<span class="o">&lt;-</span>predict<span class="p">(</span>rf_fit<span class="p">,</span>testing<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="kp">save</span><span class="p">(</span>prediction<span class="p">,</span> file<span class="o">=</span><span class="s">&quot;randomForest_model_cv10_p60_testing.RData&quot;</span><span class="p">)</span>
+
+ 
+
+ 
+
+accuracy <span class="o">=</span> <span class="kp">sum</span><span class="p">(</span>prediction<span class="o">==</span>testing<span class="o">$</span>classe<span class="p">)</span><span class="o">/</span><span class="kp">length</span><span class="p">(</span>testing<span class="o">$</span>classe<span class="p">)</span>
+
+ 
+
+ 
+
+accuracy
+
+ 
+
+  <span class="m">0.9945195</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>we see that the accuracy of the testing dataset is very good, with error of only 0.55%</p>
+<p>which shows that Random Forest is a good model for the project and hence I did not need to try other models.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Predicting-with-the-model">Predicting with the model<a class="anchor-link" href="#Predicting-with-the-model">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, let's download  <a href ="http://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"> this dataset</a> and make predictions using the model built above.</p>
+<p>Remove the first seven columns which are not covariates for the model and also remove covariates with missing values</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>test_given<span class="o">&lt;-</span>read.csv<span class="p">(</span><span class="s">&quot;http://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv&quot;</span><span class="p">,</span>na.strings<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;NA&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">))</span>
+
+ 
+
+test_given<span class="o">&lt;-</span>test_given<span class="p">[,</span><span class="m">8</span><span class="o">:</span><span class="m">160</span><span class="p">]</span>
+
+ 
+
+non_missing_test<span class="o">&lt;-</span><span class="kp">apply</span><span class="p">(</span><span class="o">!</span><span class="kp">is.na</span><span class="p">(</span>test<span class="p">),</span><span class="m">2</span><span class="p">,</span><span class="kp">sum</span><span class="p">)</span><span class="o">&gt;=</span><span class="kp">dim</span><span class="p">(</span>test<span class="p">)[</span><span class="m">1</span><span class="p">]</span>
+
+ 
+
+test_given<span class="o">&lt;-</span>test_given<span class="p">[,</span>non_missing_test<span class="p">]</span>
+
+ 
+
+ predict <span class="kr">for</span> the test data and save the results
+
+ 
+
+prediction <span class="o">=</span> predict<span class="p">(</span>rf_fit<span class="p">,</span>test_given<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>saving prediction results</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>pml_write_files <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">){</span>
+
+  n <span class="o">=</span> <span class="kp">length</span><span class="p">(</span>x<span class="p">)</span>
+
+  <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>n<span class="p">){</span>
+
+    filename <span class="o">=</span> <span class="kp">paste0</span><span class="p">(</span><span class="s">&quot;problem_id_&quot;</span><span class="p">,</span>i<span class="p">,</span><span class="s">&quot;.txt&quot;</span><span class="p">)</span>
+
+    write.table<span class="p">(</span>x<span class="p">[</span>i<span class="p">],</span>file<span class="o">=</span>filename<span class="p">,</span>quote<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>row.names<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>col.names<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+
+  <span class="p">}</span>
+
+<span class="p">}</span>
+
+ 
+
+pml_write_files<span class="p">(</span>prediction<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The model predicts the test data 100% accurate.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h6 id="References">References<a class="anchor-link" href="#References">&#182;</a></h6>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Hastie, T., R. Tibshirani, J. Friedman, and J. Franklin, 2005: The elements of statistical learning: data mining, inference and prediction. The Mathematical Intelligencer, 27, 83-85.</p>
+<p>Velloso, E., A. Bulling, H. Gellersen, W. Ugulino, and H. Fuks, 2013: Qualitative activity recognition of weight lifting exercises. Proceedings of the 4th Augmented Human International Conference, ACM, 116-123.</p>
+
+
+  	  <span style="width:400px;display:inline-block"></span><span> 
+  <a href="../index.html"><img src="../figures/home.png" height="40" width="40"/></a>
+  <a href="R_netcdf_correlation.html"><img src="../figures/next.png" height="40" width="40"/></a>
+  </span>
+</div>
+</div>
 </div>
     </div>
   </div>
   
- <span style="width:400px;display:inline-block"></span><span> 
-  <a href="reading_from_web.html"><img src="../figures/previous.png" height="40" width="40"/></a>
-  <a href="../index.html"><img src="../figures/home.png" height="40" width="40"/></a>
-  <a href="google_scholar_R.html"><img src="../figures/next.png" height="40" width="40"/></a>
-  </span>
-  
+
   <br/>
     <br/>
-	
 </body>
 </html>
