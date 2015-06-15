@@ -218,8 +218,8 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Though correlation is good to capture linear relationships, 
-since it does not handle non-linear relationships composite analysis is widely used instead to understand 
+<p>Though correlation is able to capture linear relationships, 
+since it does not handle non-linear relationships, composite analysis is widely used instead to understand 
 physical mechanisms and develop statistical rainfall prediction models. 
 Here, I show how to use R to generate composites of rainfall based on sea surface temperature (SST).</p>
 <p>NetCDF (Network Common Data Form) data is a self-describing, portable, scalable and appendable machine-independent 
@@ -1145,10 +1145,6 @@ cold_pre_ave<span class="o">&lt;-</span><span class="kp">apply</span><span class
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
-
-<span class="c1">#mypalette&lt;-c(&quot;#67000d&quot;,&quot;#a50f15&quot;,&quot;#cb181d&quot;,&quot;#ef3b2c&quot;,&quot;#fb6a4a&quot;,&quot;#fc9272&quot;,</span>
-           <span class="c1"># &quot;#fcbba1&quot;,&quot;#fee0d2&quot;,&quot;#fff5f0&quot;)</span>
-
 
 mypalette<span class="o">&lt;-</span>brewer.pal<span class="p">(</span><span class="m">9</span><span class="p">,</span><span class="s">&quot;BuGn&quot;</span><span class="p">)</span>
 
