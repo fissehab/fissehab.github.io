@@ -1,0 +1,259 @@
+ 
+## Most Harmful Storms and Weather Events In The United States
+
+
+
+### Synopsis
+
+This report seeks to investigate storms and other weather events that cause the highest number of fatalities and injuries. Moreover, it shows which events have the greatest economic consequences. Understanding the impacts of different weather events on public health and the economy of the nation is essential to take necessary preparations and to mobilize resources in the right time. The data used for the analysis is drawn from the U.S. National Oceanic and Atmospheric Administration's [(NOAA)][1] storm database. The data for the analysis covers the period from 1950 to November 2011.
+<br/>
+The Analysis shows that Tornadoes are the most severe weather events interms of problems to public health. Moreover, the analysis reveals that while floods result in the most harmful property damages, droughts cause the the most severe crop failures.
+
+
+###Data Processing
+   
+First and foremost, let's clear the workspace and load required libraries.
+      
+```{r, echo=TRUE,size=14}
+  
+    rm(list=ls())    # clear workspace
+    
+   library(plyr)
+   
+   library(ggplot2)
+   library(gridExtra)
+  
+```
+   
+<br/>
+      
+      
+Then, let's load the dataset and understand its contents. The data used for the analysis is drawn from the U.S. National Oceanic and Atmospheric Administration's [(NOAA)][1] storm database. The data for the analysis covers the period from 1950 to November 2011. The data can be downloaded from this [link][2].
+   
+```{r,echo=TRUE,cache=TRUE}
+  
+storm <- tempfile()
+
+download.file("http://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2", storm)
+
+data <-read.csv(storm)
+
+unlink(storm)
+
+ names(data)   # To see the different variables of the dataset
+
+```      
+     
+<br/>
+      
+So, from the list of variables, for our analysis we need event type, fatalities, property and crop damage, and property and crop damage exponent. Let's extract the variables of interest for further analysis.
+   
+```{r,echo=TRUE}
+   
+   data2<-data[,c("EVTYPE", "FATALITIES", "INJURIES",
+            "PROPDMG","PROPDMGEXP","CROPDMG","CROPDMGEXP")]
+
+   summary(data2)
+   
+   str(data2)
+```
+      
+<br/>
+      
+We see that there is no missing value, so no need of imputting missing values.      
+Next, let's calculate deaths and injuries by event type to determine which storms and other weather events are most harmful to public health in the nation.
+   
+```{r,echo=TRUE,cache=TRUE}
+   
+   fatalities<-aggregate(FATALITIES~EVTYPE,data2,sum)
+   injuries<-aggregate(INJURIES~EVTYPE,data2,sum)
+   
+```
+     
+     
+<br/>
+      
+Let's look at the top 7 storms with the highest number of injuries and fatalities.
+   
+```{r, echo=TRUE}
+   top_7_fatality<-arrange(fatalities, desc(fatalities$FATALITIES))[1:7,]
+   top_7_injury<-arrange(injuries, desc(injuries$INJURIES))[1:7,]
+   
+```
+   
+<br/>
+   
+Next, let's similarly extract the seven storms and weather events that cause the most severe propery and crop damage. First, however, let's see the exponents of property damage(PROPDMGEXP) and crop damage(CROPDMGEXP) in the dataset so as to convert the given property and crop damage values to thier exact values by multiplying them by the exponent variable.
+ 
+ 
+```{r,echo=TRUE}
+
+unique(data2$PROPDMGEXP)
+
+unique(data2$CROPDMGEXP)
+```
+
+<br/>
+   
+We can assume the letters show exponents and take the numbers as they are. Therefore, we will convert the letters to thier respective exponents. We can take k and 3 as 10^3, M, m and 6 as 10^6, h, H, and 2 as 10^2,'B' as 10^9, 0, ?, and + as 10^0, 1 as 10^1, 5 as 10^5, 7 as 10^7, and 8 as 10^8. Hence, let's multiply the propery and crop damage values by thier respective exponents. As a side note, it is important to mention here that since the datset covers a long time period (from 1950-2011), there are some inconsistencies in the exponents of crop and property damage such as m, M and h, H. For the purpose of this analysis, upper and lower letter exponents will be considered the same.
+ 
+ 
+```{r,echo=TRUE,cache=TRUE}
+
+for (i in 1:length(data2$CROPDMGEXP)){
+       
+       if (data2$PROPDMGEXP[i]=='k' | data2$PROPDMGEXP[i]=="K")
+       {data2$PROPDMG[i]=data2$PROPDMG[i]*10^3}
+       
+       if (data2$PROPDMGEXP[i]=='B')
+       {data2$PROPDMG[i]=data2$PROPDMG[i]*10^9}
+       
+       if (data2$PROPDMGEXP[i]=='m' |data2$PROPDMGEXP[i]=='M')
+       {data2$PROPDMG[i]=data2$PROPDMG[i]*10^6}
+       
+       if (data2$PROPDMGEXP[i]=='h' | data2$PROPDMGEXP[i]=='H')
+       {data2$PROPDMG[i]=data2$PROPDMG[i]*10^2}
+       
+       if (is.numeric(data2$PROPDMGEXP[i]))
+       {data2$PROPDMG[i]=data2$PROPDMG[i]*10^data2$PROPDMGEXP[i]}
+       
+       
+       if (data2$CROPDMGEXP[i]=='k' | data2$CROPDMGEXP[i]=="K")
+       {data2$CROPDMG[i]=data2$CROPDMG[i]*10^3}
+       
+       if (data2$CROPDMGEXP[i]=='B')
+       {data2$CROPDMG[i]=data2$CROPDMG[i]*10^9}
+       
+       if (data2$CROPDMGEXP[i]=='m' |data2$CROPDMGEXP[i]=='M')
+       {data2$CROPDMG[i]=data2$CROPDMG[i]*10^6}
+       
+       if (data2$CROPDMGEXP[i]=='h' | data2$CROPDMGEXP[i]=='H')
+       {data2$CROPDMG[i]=data2$CROPDMG[i]*10^2}
+       
+       if (is.numeric(data2$CROPDMGEXP[i]))
+       {data2$CROPDMG[i]=data2$CROPDMG[i]*10^data2$CROPDMGEXP[i]}
+
+       
+   }
+```
+
+
+<br/>
+    
+ Now, let's calculate property damage and crop damage by event type.
+
+```{r,echo=TRUE,echo=TRUE}
+   
+   prop_damage<-aggregate(PROPDMG~EVTYPE,data2,sum)
+   crop_damage<-aggregate(CROPDMG~EVTYPE,data2,sum)
+   
+```
+     
+  
+<br/>
+  
+  
+Next, let's see the top seven most severe stroms with the highest property and crop damage values.
+   
+```{r, echo=TRUE}
+   top_7_property<-arrange(prop_damage, desc(prop_damage$PROPDMG))[1:7,]
+   top_7_crop<-arrange(crop_damage, desc(crop_damage$CROPDMG))[1:7,]
+   
+```
+  
+   
+###Results
+      
+Now, let's see barplots of fatalities and enjuries, by event type, of the top seven stroms with the highest number of fatalities and injuries.
+
+```{r,echo=TRUE,fig.height=4}
+
+#  Fatalities
+
+colnames(top_7_fatality)<-c('EVTYPE', 'Fatalities')
+colnames(top_7_injury)<-c('EVTYPE', 'Injuries')
+
+f1<-  ggplot(top_7_fatality, aes(x=reorder(EVTYPE, Fatalities), 
+                             y=Fatalities,fill=Fatalities))+ 
+       geom_bar(stat='identity',colour='white')+
+       ggtitle('Top 7 Storm Events by Fatality')+
+       xlab('Type of Event')+
+       coord_flip()+
+       ylab('Total number of Deaths')
+
+
+#  Injuries
+
+ f2<-  ggplot(top_7_injury, aes(x=reorder(EVTYPE, Injuries), 
+                            y=Injuries,fill=Injuries))+ 
+       geom_bar(stat='identity',colour='white')+
+       ggtitle('Top 7 Storm Events by Injuries')+
+       xlab('Type of Event')+
+       coord_flip()+
+       ylab('Total number of Injuries')
+
+grid.arrange(f1, f2, main="Figure 1. Storm events which have most severe consequences to public health (1950-2011)")
+
+```
+
+   
+Similarly, let's see barplots of the seven most severe storms with the highest propery and crop damage values.
+
+<br />
+      
+```{r,echo=TRUE,fig.height=4}
+
+#  Propery Damage
+
+names(top_7_property)<-c('EVTYPE', 'PropDamage')
+ f1<- ggplot(top_7_property, aes(x=reorder(EVTYPE, PropDamage), 
+                             y=PropDamage,fill=PropDamage))+ 
+       geom_bar(stat='identity',colour='white')+
+       ggtitle('Top 7 Storm Events by property damage')+
+       xlab('Type of Event')+
+      coord_flip()+
+       ylab('Total Property Damage Cost(USD)')
+
+
+#  Crop Damage
+
+names(top_7_crop)<-c('EVTYPE', 'CropDamage')
+ f2<-  ggplot(top_7_crop, aes(x=reorder(EVTYPE, CropDamage), 
+                            y=CropDamage,fill=CropDamage))+ 
+       geom_bar(stat='identity',colour='white')+
+       ggtitle('Top 7 Storm Events by crop damage')+
+       xlab('Type of Event')+
+        coord_flip()+
+       ylab('Total CROP Damage Cost(USD)')
+
+grid.arrange(f1, f2, main="Figure 2. Storm events which have most severe consequences to the economy (1950-2011)")
+
+```
+
+
+<br/>
+   
+   
+We see from the barplots that Tornadoes cause the highest problem to public health. While floods are associated with highest property damage, droughts result in the most severe crop failures. 
+ 
+### Summary
+ 
+This short analysis is a project done for the Reproducible Research [course][3] offered by The Johns Hopkins Bloomberg School of Public Health, Department of [Biostatistics][4], on [Coursera][5]. The Analysis shows that Tornadoes are the most severe weather events interms of problems to public health. Moreover, the analysis reveals that while floods result in the most harmful property damages, droughts cause the the most severe crop failures.
+<br/>
+
+[1]: http://www.noaa.gov/ "(NOAA)"
+[2]: https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2 "link"
+[3]: https://class.coursera.org/repdata-014   "course"
+[4]: http://www.jhsph.edu/departments/biostatistics/  "Biostatistics" 
+[5]: https://www.coursera.org/  "Coursera"
+
+
+
+
+
+
+
+
+
+
+
