@@ -1,0 +1,106 @@
+---
+title: "<strong><em><mark> Car Fuel Efficiency and Transmission Type</mark></em></strong>"
+output: pdf_document
+---
+<br/>
+<h3><strong>Executive Summary</strong></h3>
+
+In this analysis, the relationship between a set of variables and miles per gallon (MPG) is explored using the <mark>mtcars</mark> dataset. Particularly, the MPG difference between automatic and manual transmissions is evaluated and quantified.The final selected multivariable linear regression model shows that manual transmission cars have about 1.81 MPG more than automatic transmission cars, keeping other variables constant. However, caution should be practiced in interpreting this assocation:(1) the dataset is relatively old and may not reflect present conditions, (2) the sample size is small as compared to the number of features and conclusions derived from models employing small sample size could be biased, (3) the association between transmission type and MPG is particularly clear with four cylinder cars which are light weight as compared to six and eight cylinder cars,(4) Automatic transmission cars weight more than manual transmission cars. Therefore, the difference in weight could be the main reason for the association found between MPG and transmission type.
+
+<h3><strong>Exploratory Data Analysis</strong></h3>
+
+```{r,results='hide'}
+data(mtcars)  #loading dataset
+str(mtcars)   # understand the covariates
+names(mtcars)
+```
+
+From the above set of commands and using help(mtcars), I have noticed that all variables are loaded as numeric even if some of them are factor viarables. Before, starting our analysis, let's first change the factor vaiables and make the most frequent event as a reference.
+
+```{r}
+mtcars$cyl<-relevel(as.factor(mtcars$cyl), ref='8')
+mtcars$vs<-relevel(as.factor(mtcars$vs), ref='0')
+mtcars$am<-relevel(as.factor(mtcars$am), ref='0',labels=c('Automatic','Manual'))
+mtcars$gear<-relevel(as.factor(mtcars$gear), ref='3')
+mtcars$carb<-relevel(as.factor(mtcars$carb), ref='2')
+```
+
+Using pairs(mtcars), we get that fuel consumption increases as the number of cylinders (cyl), displacement (disp), horsepower (hp), and weight (wt) increase. We also observe that manual tranmsiiion cars (am=1) have higher MPG than automatic transmission cars (am=0) as can be observed in Fig. 1.
+
+Let's use t test and see if the difference in the mean MPG of automatic and maual transmisssion cars is significantly different from zero.
+
+```{r}
+
+t.test(mtcars$mpg[mtcars$am==0],mtcars$mp[mtcars$am==1])
+
+```
+
+We see from the test results that the p-value is very small and hence we reject the null hypothesis and accept the alternative hypothesis that the true mean difference of MPG of cars with automatic and manual transmissions is not zero. We see that manual transmission cars have more MPG than automatic transmission cars. However, we also see from Fig. 2 that manual transmission cars weigh less than automatic transmission cars. Hence, weight could be the cause for the observed difference in MPG as heavy cars use more power.
+
+<br/>
+
+From the conditional plot shown in the appendix (Fig. 3), one can say that clear difference in MPG between automatic and manual transmissions is observed with in those that have four cylinders. Neverthless, it is important to note that we have very small sample size of cars with six and eight cylinders that have manual transmission and this may bias our conclusions.
+
+<h3><strong>Multivariate Linear Regression Models</strong></h3>
+I started fitting MPG as a fucntion of am only but the variance explained is small and we need to consider multiple features.
+Now, let's fit a multivariate regression model taking MPG as outcome. First, let's consider all features and see the model's performance.
+```{r,results='hide'}
+modelA<-lm(mpg~., data=mtcars)
+```
+
+In modelA all features are not significant. Moreover, from the adjusted R-square, the model has included variables that are not important. Now, let's use atomatic model selection using all covariates and the step function which finds a good compromise of model simplicity and R-square. 
+```{r,results='hide'}
+modelB<-step(modelA,direction ="both")
+```
+
+Now, let's see the variables selected by the step function.
+
+```{r}
+modelB$coefficients
+```
+
+So from modelB, we see that the step function selected variables 
+wt (weight), hp (horse power), cyl (number of cylinders) and am (transmission type) as features. From the coeffiencets, we see that manual transmission cars have 1.81 MPG more as compared to automatic transmission cars, keeping other factors constant. Moreover, the model says that MPG deacrease by about 2.5 as weight increases by 1000lb, keeping other factors constant. On the other hand, we see that four cylinder cars have about 2.2 more MPG than eight cylinder cars, keeping other variables constant. The adjusted R-squared of the final model is 0.8401 and only wt and hp are signifcant. The 95% confidence interval for manual transmission, keeping other factors constant is 1.81+c(1,-1)Xqt(0.975,df=26)X1.39630=(4.68,-1.06); this confirms the model result that the coeffiecient of manual transmission (am1) is not significant as the confidence interval includes zero as well.
+
+<h3><strong>Model Diagnostics</strong></h3>
+
+From Fig. 4, we see that the residuals vs fitted plot is not completely random. Further, the normal Q-Q plot has points that deviate from the normal line. These points suggest that the model is far from perfect.
+
+<h3><strong>Conclusions</strong></h3>
+
+In this analysis, it is found that manual transmission cars have 1.81 MPG more than automatic transmission cars. However, we have to  note that the datset is old and it may not be representative of the current conditions. Further, as shown in Fig.3., the association between transmission and MPG is clear for four cylinder cars. The other important point worth mentioning is the fact that the data has small sample size and deriving strong conclusions based on the dataset may not be warranted. Last but not least, manual transmission cars weigh less than automatic transmission cars (Fig. 2) and this could be the reason for the observed association between MPG and transmission type. 
+
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<h3><strong>Appendix</strong></h3>
+
+```{r, fig.width=5,fig.height=3}
+boxplot(mpg~am, data=mtcars, main ='Fig. 1. Fuel Efficiency',
+        ylab='Miles per gallon',names=c("Automatic","Manual"),notch=FALSE, col=(c("gold","skyblue")))
+```
+
+
+
+```{r}
+coplot(wt ~ am |cyl, data = mtcars,
+       panel = panel.smooth, rows = 1, main ="Fig. 2")
+```
+
+```{r, fig.width=6,fig.height=4}
+coplot(mpg ~ am | cyl, data = mtcars,    # cyl is the number of cylinders
+       panel = panel.smooth, rows = 1, main="Fig. 3")   # am is transmision type (0=automatic, 1=manual)
+```
+
+```{r,fig.width=8,fig.height=10}
+par(mfrow=c(2,2))
+plot(modelB, main="Fig. 4")
+```
+
+
+
