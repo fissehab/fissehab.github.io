@@ -138,9 +138,12 @@ mtcars$carb&lt;-relevel(as.factor(mtcars$carb), ref='2')</code></pre>
 <h4>
 <strong>Multivariate Linear Regression Models</strong>
 </h4>
-<p>I started fitting MPG as a fucntion of am only but the variance explained is small and we need to consider multiple features. Now, let’s fit a multivariate regression model taking MPG as outcome. First, let’s consider all features and see the model’s performance.</p>
+<p>I started fitting MPG as a function of am only but the variance explained is small. Therefore, we need to consider multiple features. Now, let’s fit a multivariate regression model taking MPG as outcome. First, let’s consider all features and see the model’s performance.</p>
 <pre class="r"><code>modelA&lt;-lm(mpg~., data=mtcars)</code></pre>
-<p>In modelA all features are not significant. Moreover, from the adjusted R-square, the model has included variables that are not important. Now, let’s use atomatic model selection using all covariates and the step function which finds a good compromise of model simplicity and R-square.</p>
+<p>In modelA, all features are not significant. Moreover, from the adjusted R-square, 
+the model has included variables that are not important. Now, let’s use atomatic model selection 
+using all covariates and the step function which finds a good compromise of model simplicity and R-square.
+This trade-off is formalized by the Akaike information criterion (AIC)</p>
 <pre class="r"><code>modelB&lt;-step(modelA,direction =&quot;both&quot;)</code></pre>
 <p>Now, let’s see the variables selected by the step function.</p>
 <pre class="r"><code>modelB$coefficients</code></pre>
