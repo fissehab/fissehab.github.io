@@ -143,7 +143,7 @@ mtcars$carb&lt;-relevel(as.factor(mtcars$carb), ref='2')</code></pre>
 <p>In modelA, all features are not significant. Moreover, from the adjusted R-square, 
 the model has included variables that are not important. Now, let’s use atomatic model selection 
 using all covariates and the step function which finds a good compromise of model simplicity and R-square.
-This trade-off is formalized by the Akaike information criterion (AIC)</p>
+This trade-off is formalized by the Akaike information criterion (AIC).</p>
 <pre class="r"><code>modelB&lt;-step(modelA,direction =&quot;both&quot;)</code></pre>
 <p>Now, let’s see the variables selected by the step function.</p>
 <pre class="r"><code>modelB$coefficients</code></pre>
