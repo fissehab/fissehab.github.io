@@ -1,0 +1,116 @@
+@charset "UTF-8";
+
+article, aside, footer, header, main, nav, section {
+  display: block;
+}
+
+html, body, h1, h2, h3, ul, li, a, p, 
+article, aside, footer, header, main, nav, section {
+  padding: 0;
+  margin: 0;
+}
+
+.banner {
+  background-color: #EBEB99;
+  color: black;
+  padding: 10px 20px;
+}
+
+body {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #f0f0f0;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+}
+
+
+
+li a {
+  color: black;
+   font-size: 16px;
+}
+
+p {
+  color: black;
+   font-size: 17px;
+}
+
+li {
+  display: inline;
+  margin-left: 15px;
+  margin-right: 15px;
+  font-size: 15px;
+  font-variant: small-caps;
+  font-weight: bold;
+}
+
+section {
+  background-color: #ffffff;
+  margin-top: 10px;
+  padding: 5px;
+}
+
+article {
+  background-color: white;
+  margin-top: 5px;
+  padding: 10px 15px;
+}
+
+main {
+  width: 640px;
+  float: left;
+  margin-bottom: 10px;
+}
+
+aside {
+  background-color: #FFFFFF;
+  width: 300px;
+  float: right;
+  padding: 10px;
+  margin-top: 10px;
+  text-align:center-left
+  
+}
+
+footer {
+  clear: both;
+  background-color: #F5E0FF;
+ 
+  padding: 5px 20px;
+  
+}
+
+nav {
+  background-color:white;
+  padding: 5px;
+  margin-top: 1px;
+  font-size: 12px;
+  color: white;
+}
+
+ul#menu {
+    padding: 0;
+    margin-bottom: 11px;
+}
+
+ul#menu li {
+    display: inline;
+    margin-right: 3px;
+}
+
+ul#menu li a {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #696969;
+    border-radius: 4px 4px 0 0;
+}
+
+ul#menu li a:hover {
+    color: white;
+    background-color: black;
+} 
+
+
