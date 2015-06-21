@@ -12,18 +12,11 @@ article, aside, footer, header, main, nav, section {
 
 .banner {
   background-color: #EBEB99;
+ 
   color: black;
   padding: 10px 20px;
 }
 
-body {
-  width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #f0f0f0;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 13px;
-}
 
 
 
@@ -65,13 +58,22 @@ main {
 }
 
 aside {
-  background-color: #FFFFFF;
+  background-color:#D6EBE0;
   width: 300px;
   float: right;
   padding: 10px;
   margin-top: 40px;
   text-align:center-left
   
+}
+
+body {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color:#FFFFFF ;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
 }
 
 footer {
@@ -85,9 +87,10 @@ footer {
 nav {
   background-color:white;
   padding: 5px;
-  margin-top: 1px;
+  margin-top: 0px;
   font-size: 12px;
   color: white;
+  background-color:#F0F5E6;
 }
 
 ul#menu {
