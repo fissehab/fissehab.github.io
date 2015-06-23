@@ -233,7 +233,12 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this project, I built a predictive model that determines the manner an exercise is done. Data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants, who were asked to perform barbell lifts correctly and incorrectly in 5 different ways, is employed to predict whether a particular exercise is performed correctly or not.</p>
+<p>In this project, I built a predictive model that determines the manner an exercise is done.
+ Data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants,
+ who were asked to perform barbell lifts correctly and incorrectly in 5 different ways, 
+ is employed to predict whether a particular exercise is performed correctly or not.</p>
+
+
 
 </div>
 </div>
@@ -470,7 +475,13 @@ training<span class="o">&lt;-</span>training<span class="p">[,</span>non_missing
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Random forest, along with Boosting, is one of the most accurate classifiers. On many problems, the performance of random forests is very similar to boosting (Hastie et al., 2005). I started with Random Forest and since the performance of random Forest is found to be very good, as I will show below, I did not proceed to Boosting. Random Forest is suitable for this project dataset because:
+<p>Random forest, along with Boosting, is one of the most accurate classifiers.
+Random Forest is designed to improve prediction accuracy of CART. It works by building a large number of CART trees.
+To make a prediction for a new observation, each tree “votes” on the outcome, and we pick the 
+outcome that receives the majority of the votes. More information can be found on 
+<a style="text-decoration:none" href="https://en.wikipedia.org/wiki/Random_forest">Wikipedia</a>.
+ On many problems,the performance of random forests is very similar to boosting (Hastie et al., 2005).
+ I started with Random Forest and since the performance of random Forest is found to be very good, as I will show below, I did not proceed to Boosting. Random Forest is suitable for this project dataset because:
 (a) It handles non-linearity
 (b) It handles large inputs whose interactions is not understood,
 (c) It handles unscaled inputs and categorical data,
