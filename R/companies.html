@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>re_tidy_data</title>
+<title>companies</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -166,7 +166,6 @@ div#notebook {
     });
     </script>
     <!-- End of mathjax configuration -->
-
 	
 	
 	<title>Fisseha Berhane</title>
@@ -214,7 +213,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="The-Role-of-Regular-Expressions-in-Creating-a-Tidy-Data">The Role of Regular Expressions in Creating a Tidy Data<a class="anchor-link" href="#The-Role-of-Regular-Expressions-in-Creating-a-Tidy-Data">&#182;</a></h3>
+<h3 id="Visualizing-World's-Biggest-Companies">Visualizing World's Biggest Companies<a class="anchor-link" href="#Visualizing-World's-Biggest-Companies">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -223,215 +222,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this analysis, let's prepare a tidy data that can be used for later analysis employing regular expressions in R and demonstrate the strength of regular expressions.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's check if the package 'downloader' is installed in our computer. If it is not installed, install it.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kr">if</span><span class="p">(</span><span class="o">!</span><span class="kn">require</span><span class="p">(</span>downloader<span class="p">)){</span>
-    install.packages<span class="p">(</span><span class="s">&#39;downloader&#39;</span><span class="p">,</span> repos<span class="o">=</span><span class="s">&#39;http://cran.us.r-project.org&#39;</span><span class="p">)</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kn">library</span><span class="p">(</span>downloader<span class="p">)</span>         <span class="c1"># load the package for use</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Load other  required packages.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[71]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kn">require</span><span class="p">(</span>downloader<span class="p">)</span>
-<span class="kn">library</span><span class="p">(</span>plyr<span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>One of the most exciting areas in all of data science right now is wearable computing - see for example <a href ="http://www.insideactivitytracking.com/data-science-activity-tracking-and-the-battle-for-the-worlds-top-sports-brand/">this article</a> . Companies like Fitbit, Nike, and Jawbone Up are racing to develop the most advanced algorithms to attract new users.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The data we will use in this analysis is collected from accelerometers from the Samsung Galaxy S smartphone. A full description is available <a href="http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones">here</a>.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">setwd</span><span class="p">(</span><span class="s">&quot;C:/Fish/Ranalysis/Re&quot;</span><span class="p">)</span>  <span class="c1"># set working directory</span>
-<span class="kp">rm</span><span class="p">(</span><span class="kt">list</span><span class="o">=</span><span class="kp">ls</span><span class="p">())</span>  <span class="c1"># clear workspace</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Download the data as Dataset.zip from <a href="https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"> here</a> and unzip it.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">url</span><span class="o">&lt;-</span><span class="s">&quot;https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip&quot;</span>
-
-download<span class="p">(</span><span class="kp">url</span><span class="p">,</span> dest<span class="o">=</span><span class="s">&quot;dataset.zip&quot;</span><span class="p">)</span> 
-
-unzip <span class="p">(</span><span class="s">&quot;dataset.zip&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's see the list of files and folders</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">dir</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[50]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<ol class=list-inline>
-	<li>"dataset.zip"</li>
-	<li>"UCI HAR Dataset"</li>
-</ol>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>"UCI HAR Dataset" is the directory created after unzipping Dataset.zip</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Change directory to the unzipped folder, which is "UCI HAR Dataset"</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[74]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">setwd</span><span class="p">(</span><span class="s">&quot;C:/Fish/Ranalysis/Re/UCI HAR Dataset&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's see the list of files and folders in the "UCI HAR Dataset" folder.</p>
+<p>Let's visualize the world's biggest companies using the Forbes2000 data from HSAUR2 package. First, we need to check if the package is installed else install it.</p>
 
 </div>
 </div>
@@ -441,36 +232,11 @@ unzip <span class="p">(</span><span class="s">&quot;dataset.zip&quot;</span><spa
 <div class="prompt input_prompt">In&nbsp;[75]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">dir</span><span class="p">()</span>
+<div class=" highlight hl-r"><pre><span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kn">require</span><span class="p">(</span>HSAUR2<span class="p">)){</span>
+    install.packages<span class="p">(</span><span class="s">&#39;HSAUR2&#39;</span><span class="p">,</span> repos<span class="o">=</span><span class="s">&#39;http://cran.us.r-project.org&#39;</span><span class="p">)}</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[75]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<ol class=list-inline>
-	<li>"activity_labels.txt"</li>
-	<li>"features.txt"</li>
-	<li>"features_info.txt"</li>
-	<li>"merged_and_cleaned_data.txt"</li>
-	<li>"merged_and_cleaned_data2.txt"</li>
-	<li>"README.txt"</li>
-	<li>"test"</li>
-	<li>"tidydata2.txt"</li>
-	<li>"train"</li>
-</ol>
-
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -480,7 +246,7 @@ unzip <span class="p">(</span><span class="s">&quot;dataset.zip&quot;</span><spa
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's see the contents of the folders test and train.</p>
+<p>Then, let's load the package.</p>
 
 </div>
 </div>
@@ -490,108 +256,44 @@ unzip <span class="p">(</span><span class="s">&quot;dataset.zip&quot;</span><spa
 <div class="prompt input_prompt">In&nbsp;[76]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">list.files</span><span class="p">(</span><span class="s">&quot;./train&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span class="kn">library</span><span class="p">(</span>HSAUR2<span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[76]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<ol class=list-inline>
-	<li>"Inertial Signals"</li>
-	<li>"subject_train.txt"</li>
-	<li>"X_train.txt"</li>
-	<li>"y_train.txt"</li>
-</ol>
-
 </div>
-
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then, we need to attach the Forbes2000 data.</p>
 
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[77]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">list.files</span><span class="p">(</span><span class="s">&quot;./test&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre>data<span class="p">(</span>Forbes2000<span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[77]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<ol class=list-inline>
-	<li>"Inertial Signals"</li>
-	<li>"subject_test.txt"</li>
-	<li>"X_test.txt"</li>
-	<li>"y_test.txt"</li>
-</ol>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>"README.txt" contains detailed information about the different data sets.</p>
-<p>The files to be used in this analysis are shown in the figure below. Files in the Inertial Signals folders 
- are not being used here. From the figure, we see that we will use Activity,
-Subject and Features as part of descriptive variable names for the final data frame we will create.</p>
-<br/>
-<img style="margin:0px auto;display:block" src="../figures/re_tidy.png", height="400" width="560"/>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Merge-the-training-and-the-test-sets-to-create-one-data-set">Merge the training and the test sets to create one data set<a class="anchor-link" href="#Merge-the-training-and-the-test-sets-to-create-one-data-set">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>As a first step in creating a tidy data, let's merge the training and test sets.</p>
+<p>We can read the details of the data by using ?Forbes2000.</p>
+<p>Let's see the variables using the names command.</p>
 
 </div>
 </div>
@@ -601,21 +303,7 @@ Subject and Features as part of descriptive variable names for the final data fr
 <div class="prompt input_prompt">In&nbsp;[78]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>X_train <span class="o">&lt;-</span> read.table<span class="p">(</span><span class="s">&quot;train/X_train.txt&quot;</span><span class="p">)</span>
-X_test <span class="o">&lt;-</span> read.table<span class="p">(</span><span class="s">&quot;test/X_test.txt&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[79]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">dim</span><span class="p">(</span>X_train<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span class="kp">names</span><span class="p">(</span>Forbes2000<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -626,12 +314,18 @@ X_test <span class="o">&lt;-</span> read.table<span class="p">(</span><span clas
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[79]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[78]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <ol class=list-inline>
-	<li>7352</li>
-	<li>561</li>
+	<li>"rank"</li>
+	<li>"name"</li>
+	<li>"country"</li>
+	<li>"category"</li>
+	<li>"sales"</li>
+	<li>"profits"</li>
+	<li>"assets"</li>
+	<li>"marketvalue"</li>
 </ol>
 
 </div>
@@ -642,103 +336,22 @@ X_test <span class="o">&lt;-</span> read.table<span class="p">(</span><span clas
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">dim</span><span class="p">(</span>X_test<span class="p">)</span>
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>How many observations do we have?</p>
 
 </div>
 </div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[80]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<ol class=list-inline>
-	<li>2947</li>
-	<li>561</li>
-</ol>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[83]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>X <span class="o">&lt;-</span> <span class="kp">rbind</span><span class="p">(</span>X_train<span class="p">,</span> X_test<span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[84]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">dim</span><span class="p">(</span>X<span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[84]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<ol class=list-inline>
-	<li>10299</li>
-	<li>561</li>
-</ol>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[85]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>y_train <span class="o">&lt;-</span> read.table<span class="p">(</span><span class="s">&quot;train/y_train.txt&quot;</span><span class="p">)</span>
-y_test <span class="o">&lt;-</span> read.table<span class="p">(</span><span class="s">&quot;test/y_test.txt&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[86]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">dim</span><span class="p">(</span>y_train<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span class="kp">dim</span><span class="p">(</span>Forbes2000<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -749,12 +362,13 @@ y_test <span class="o">&lt;-</span> read.table<span class="p">(</span><span clas
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[86]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[85]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <ol class=list-inline>
-	<li>7352</li>
-	<li>1</li>
+	<li>2000</li>
+	<li>8</li>
+	<br/>
 </ol>
 
 </div>
@@ -764,45 +378,36 @@ y_test <span class="o">&lt;-</span> read.table<span class="p">(</span><span clas
 </div>
 </div>
 
+<h3 style="text-align:center">Most profitable companies</a>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's plot sales against assets for the 50 most profitable
+companies in the Forbes2000 data set.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To label each point with the appropriate country name in our plot, we will abbrevaite country names so that the plot will not be messy. To put country labels in our plot, we will install the "calibrate" package if it is not already installed.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">dim</span><span class="p">(</span>y_test<span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[87]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<ol class=list-inline>
-	<li>2947</li>
-	<li>1</li>
-</ol>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[88]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>Y <span class="o">&lt;-</span> <span class="kp">rbind</span><span class="p">(</span>y_train<span class="p">,</span> y_test<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kn">require</span><span class="p">(</span>calibrate<span class="p">)){</span>
+    install.packages<span class="p">(</span><span class="s">&#39;calibrate&#39;</span><span class="p">,</span> repos<span class="o">=</span><span class="s">&#39;http://cran.us.r-project.org&#39;</span><span class="p">)}</span>
 </pre></div>
 
 </div>
@@ -810,45 +415,22 @@ y_test <span class="o">&lt;-</span> read.table<span class="p">(</span><span clas
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[89]:</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">dim</span><span class="p">(</span>Y<span class="p">)</span>
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then, load the package</p>
 
 </div>
 </div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[89]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<ol class=list-inline>
-	<li>10299</li>
-	<li>1</li>
-</ol>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[90]:</div>
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>subject_train <span class="o">&lt;-</span> read.table<span class="p">(</span><span class="s">&quot;train/subject_train.txt&quot;</span><span class="p">)</span>
-subject_test <span class="o">&lt;-</span> read.table<span class="p">(</span><span class="s">&quot;test/subject_test.txt&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span class="kn">library</span><span class="p">(</span>calibrate<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -858,32 +440,14 @@ subject_test <span class="o">&lt;-</span> read.table<span class="p">(</span><spa
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="prompt input_prompt">In&nbsp;[81]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">dim</span><span class="p">(</span>subject_train<span class="p">)</span>
+<div class=" highlight hl-r"><pre><span class="kp">options</span><span class="p">(</span>jupyter.plot_mimetypes <span class="o">=</span> <span class="s">&#39;image/png&#39;</span><span class="p">)</span> <span class="c1"># I am using Jupyter and this command makes</span>
+                                              <span class="c1"># my plots inline</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[91]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<ol class=list-inline>
-	<li>7352</li>
-	<li>1</li>
-</ol>
-
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -893,7 +457,20 @@ subject_test <span class="o">&lt;-</span> read.table<span class="p">(</span><spa
 <div class="prompt input_prompt">In&nbsp;[92]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">dim</span><span class="p">(</span>subject_test<span class="p">)</span>
+<div class=" highlight hl-r"><pre>profits_all <span class="o">=</span> na.omit<span class="p">(</span>Forbes2000<span class="o">$</span>profits<span class="p">)</span>  <span class="c1"># all_profts without No data</span>
+
+order_profits <span class="o">=</span> <span class="kp">order</span><span class="p">(</span>profits_all<span class="p">)</span>     <span class="c1"># index of the profitable companies in decreasing order</span>
+
+top_50 <span class="o">=</span> <span class="kp">rev</span><span class="p">(</span>order_profits<span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">50</span><span class="p">]</span>      <span class="c1"># top 50 profitable companies</span>
+
+
+sales <span class="o">=</span> Forbes2000<span class="o">$</span>sales<span class="p">[</span>top_50<span class="p">]</span>       <span class="c1"># sales of the 50 top profitable companies</span>
+assets <span class="o">=</span> Forbes2000<span class="o">$</span>assets<span class="p">[</span>top_50<span class="p">]</span>     <span class="c1"># assets of the 50 top profitable companies</span>
+countries <span class="o">=</span> Forbes2000<span class="o">$</span>country<span class="p">[</span>top_50<span class="p">]</span> <span class="c1"># countries where the 50 top profitable companies are found</span>
+
+plot<span class="p">(</span>assets<span class="p">,</span>sales<span class="p">,</span>pch <span class="o">=</span><span class="m">1</span><span class="p">)</span>
+textxy<span class="p">(</span>assets<span class="p">,</span>sales<span class="p">,</span> <span class="kp">abbreviate</span><span class="p">(</span>countries<span class="p">,</span><span class="m">2</span><span class="p">),</span>col <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span>cex<span class="o">=</span><span class="m">0.5</span><span class="p">)</span>  <span class="c1"># used to put the countries where the companies are found</span>
+title<span class="p">(</span>main <span class="o">=</span> <span class="s">&quot;Sales and Assets in billion USD \n of the 50 most profitable companies &quot;</span><span class="p">,</span> col.main <span class="o">=</span> <span class="s">&quot;gray&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -904,93 +481,12 @@ subject_test <span class="o">&lt;-</span> read.table<span class="p">(</span><spa
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[92]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<ol class=list-inline>
-	<li>2947</li>
-	<li>1</li>
-</ol>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[93]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>Subject <span class="o">&lt;-</span> <span class="kp">rbind</span><span class="p">(</span>subject_train<span class="p">,</span> subject_test<span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[94]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">dim</span><span class="p">(</span>Subject<span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
+<div class="output_area"><div class="prompt"></div>
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[94]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<ol class=list-inline>
-	<li>10299</li>
-	<li>1</li>
-</ol>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[95]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>Features <span class="o">&lt;-</span> read.table<span class="p">(</span><span class="s">&quot;features.txt&quot;</span><span class="p">)</span>
-
-<span class="kp">dim</span><span class="p">(</span>Features<span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[95]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<ol class=list-inline>
-	<li>561</li>
-	<li>2</li>
-</ol>
-
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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"
+>
 </div>
 
 </div>
@@ -1004,18 +500,36 @@ subject_test <span class="o">&lt;-</span> read.table<span class="p">(</span><spa
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Let's-set-names-to-the-variables">Let's set names to the variables<a class="anchor-link" href="#Let's-set-names-to-the-variables">&#182;</a></h4>
+<h3 id="Sales-by-countries">Sales by countries<a class="anchor-link" href="#Sales-by-countries">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's calculate the average value of sales in billion USD  for the companies in each country in the Forbes data set.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can use the handy command tapply and calculate the mean easily by passing single line of command.</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[96]:</div>
+<div class="prompt input_prompt">In&nbsp;[83]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">names</span><span class="p">(</span>Subject<span class="p">)</span><span class="o">&lt;-</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;subject&quot;</span><span class="p">)</span>
-<span class="kp">names</span><span class="p">(</span>Y<span class="p">)</span><span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;activity&quot;</span><span class="p">)</span>
-<span class="kp">names</span><span class="p">(</span>X<span class="p">)</span><span class="o">&lt;-</span> Features<span class="p">[</span> <span class="p">,</span><span class="m">2</span><span class="p">]</span>
+<div class=" highlight hl-r"><pre>meansales <span class="o">=</span> <span class="kp">tapply</span><span class="p">(</span>Forbes2000<span class="o">$</span>sales<span class="p">,</span> Forbes2000<span class="o">$</span>country<span class="p">,</span> <span class="kp">mean</span><span class="p">,</span> na.rm <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1028,16 +542,9 @@ subject_test <span class="o">&lt;-</span> read.table<span class="p">(</span><spa
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Regular-expressions">Regular expressions<a class="anchor-link" href="#Regular-expressions">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, let's extract only the measurements on the mean  and standard deviation for each measurement using regular expression functions.</p>
+<p>In the code above, for each level of the factor country, tapply determines the corresponding
+elements of the numeric vector sales and supply them to the
+mean function with additional argument na.rm = TRUE.</p>
 
 </div>
 </div>
@@ -1047,7 +554,7 @@ subject_test <span class="o">&lt;-</span> read.table<span class="p">(</span><spa
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>help(grep) shows us the functions we can use for regular expressions in R.</p>
+<h3 id="Most-profitable-companies-by-country">Most profitable companies by country<a class="anchor-link" href="#Most-profitable-companies-by-country">&#182;</a></h3>
 
 </div>
 </div>
@@ -1057,58 +564,35 @@ subject_test <span class="o">&lt;-</span> read.table<span class="p">(</span><spa
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's search the indices of the names that contain-mean() and -std(). \\ is escape character.</p>
-<p>We are using the function grep to search indices that contain mean() and std() in the Features variable.</p>
+<p>Let's calculate the number of companies in each country with profits above 5 billion US dollars to see thier distributions.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To find the number of companies in each country with profit greater than 5 billion Us dollars, the indices of the profit data which are more than 5 billion US dollars are obtained and the countries of these indices are obtained. Then, finally a summary of the number of companies with profit greater than 5 billion US dollars in each country is tabulated.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[97]:</div>
+<div class="prompt input_prompt">In&nbsp;[98]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>indices <span class="o">&lt;-</span> <span class="kp">grep</span><span class="p">(</span><span class="s">&quot;-mean\\(\\)|-std\\(\\)&quot;</span><span class="p">,</span> Features<span class="p">[,</span> <span class="m">2</span><span class="p">])</span>
-extracted <span class="o">&lt;-</span> X<span class="p">[,</span> indices<span class="p">]</span>
-</pre></div>
+<div class=" highlight hl-r"><pre>profitgt5 <span class="o">=</span> <span class="kp">which</span><span class="p">(</span>Forbes2000<span class="o">$</span>profits <span class="o">&gt;</span><span class="m">5</span><span class="p">)</span>     <span class="c1"># Get the indices of the companies with profit greater than 5 billion US dollars</span>
+countries <span class="o">=</span> Forbes2000<span class="o">$</span>country               <span class="c1">#  Get country names from the Forbes2000 data set</span>
+country_gt_5_profit <span class="o">=</span> countries<span class="p">[</span>profitgt5<span class="p">]</span>   <span class="c1"># Get the countries of the companies which have profit greater than 5 billion US dollars</span>
+in_each_country <span class="o">=</span> <span class="kp">table</span><span class="p">(</span>country_gt_5_profit<span class="p">)</span> <span class="c1"># Get the number of companies with greater than 5 billion US dollars in each country</span>
 
-</div>
-</div>
-</div>
+x <span class="o">=</span> <span class="kp">which</span><span class="p">(</span>in_each_country<span class="o">&gt;</span><span class="m">0</span><span class="p">)</span>                 <span class="c1"># To search the indices with non-zero values</span>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's give name to extracted from Feature.</p>
-<p>Let's remove "()" using the regular expression function gsub and change the characters to lower case for readability.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[99]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">names</span><span class="p">(</span>extracted<span class="p">)</span> <span class="o">&lt;-</span> Features<span class="p">[</span>indices<span class="p">,</span> <span class="m">2</span><span class="p">]</span>
-<span class="kp">names</span><span class="p">(</span>extracted<span class="p">)</span> <span class="o">&lt;-</span> <span class="kp">gsub</span><span class="p">(</span><span class="s">&quot;\\(|\\)&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="kp">names</span><span class="p">(</span>extracted<span class="p">))</span>
-<span class="kp">names</span><span class="p">(</span>extracted<span class="p">)</span> <span class="o">&lt;-</span> <span class="kp">tolower</span><span class="p">(</span><span class="kp">names</span><span class="p">(</span>extracted<span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[107]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">dim</span><span class="p">(</span>extracted<span class="p">)</span>
+profitables <span class="o">=</span> in_each_country<span class="p">[</span>x<span class="p">]</span>             <span class="c1"># Gives the number of companies in each country with profit greater than 5 billion US dollars                    </span>
+profitables
 </pre></div>
 
 </div>
@@ -1119,13 +603,29 @@ extracted <span class="o">&lt;-</span> X<span class="p">[,</span> indices<span c
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[107]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[98]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
-<ol class=list-inline>
-	<li>10299</li>
-	<li>66</li>
-</ol>
+<dl class=dl-horizontal>
+	<dt>China</dt>
+		<dd>1</dd>
+	<dt>France</dt>
+		<dd>1</dd>
+	<dt>Germany</dt>
+		<dd>1</dd>
+	<dt>Japan</dt>
+		<dd>1</dd>
+	<dt>Netherlands/ United Kingdom</dt>
+		<dd>1</dd>
+	<dt>South Korea</dt>
+		<dd>1</dd>
+	<dt>Switzerland</dt>
+		<dd>3</dd>
+	<dt>United Kingdom</dt>
+		<dd>3</dd>
+	<dt>United States</dt>
+		<dd>20</dd>
+</dl>
 
 </div>
 
@@ -1140,302 +640,23 @@ extracted <span class="o">&lt;-</span> X<span class="p">[,</span> indices<span c
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Descriptive-activity-names">Descriptive activity names<a class="anchor-link" href="#Descriptive-activity-names">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, let's use descriptive activity names to name the activities in the data set.</p>
+<p>As expected more than 60% of them are from the USA.</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[100]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>activities <span class="o">&lt;-</span> read.table<span class="p">(</span><span class="s">&quot;activity_labels.txt&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's see activities</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[101]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>activities
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[101]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<table>
-<thead><tr><th></th><th scope=col>V1</th><th scope=col>V2</th></tr></thead>
-<tbody>
-	<tr><th scope=row>1</th><td>1</td><td>WALKING</td></tr>
-	<tr><th scope=row>2</th><td>2</td><td>WALKING_UPSTAIRS</td></tr>
-	<tr><th scope=row>3</th><td>3</td><td>WALKING_DOWNSTAIRS</td></tr>
-	<tr><th scope=row>4</th><td>4</td><td>SITTING</td></tr>
-	<tr><th scope=row>5</th><td>5</td><td>STANDING</td></tr>
-	<tr><th scope=row>6</th><td>6</td><td>LAYING</td></tr>
-</tbody>
-</table>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's remove "_" using the regular expression function gsub and change the characters to lower case for readability.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[102]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>activities<span class="p">[,</span> <span class="m">2</span><span class="p">]</span> <span class="o">=</span> <span class="kp">gsub</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="kp">tolower</span><span class="p">(</span><span class="kp">as.character</span><span class="p">(</span>activities<span class="p">[,</span> <span class="m">2</span><span class="p">])))</span>
-Y<span class="p">[,</span><span class="m">1</span><span class="p">]</span> <span class="o">=</span> activities<span class="p">[</span>Y<span class="p">[,</span><span class="m">1</span><span class="p">],</span> <span class="m">2</span><span class="p">]</span>
-<span class="kp">names</span><span class="p">(</span>Y<span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;activity&quot;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[109]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>Y<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="m">1</span><span class="p">]</span>   <span class="c1"># Just checking that it has been appropriately renamed</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[109]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<ol class=list-inline>
-	<li>"standing"</li>
-	<li>"standing"</li>
-	<li>"standing"</li>
-	<li>"standing"</li>
-	<li>"standing"</li>
-	<li>"standing"</li>
-	<li>"standing"</li>
-	<li>"standing"</li>
-	<li>"standing"</li>
-	<li>"standing"</li>
-</ol>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Label-the-data-set-with-descriptive-activity-names">Label the data set with descriptive activity names<a class="anchor-link" href="#Label-the-data-set-with-descriptive-activity-names">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, let's appropriately label the data set with descriptive activity names.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[103]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">names</span><span class="p">(</span>Subject<span class="p">)</span> <span class="o">&lt;-</span> <span class="s">&quot;subject&quot;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Now,-let's-create-a-data-frame-and-save-it-as-merged-_and-cleaned_data.txt">Now, let's create a data frame and save it as merged _and cleaned_data.txt<a class="anchor-link" href="#Now,-let's-create-a-data-frame-and-save-it-as-merged-_and-cleaned_data.txt">&#182;</a></h5>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[111]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>clean <span class="o">&lt;-</span> <span class="kp">cbind</span><span class="p">(</span>Subject<span class="p">,</span>Y<span class="p">,</span>extracted<span class="p">)</span>
-
-write.table<span class="p">(</span>clean<span class="p">,</span> <span class="s">&quot;merged_and_cleaned_data.txt&quot;</span><span class="p">)</span>
-
-<span class="kp">dim</span><span class="p">(</span>clean<span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[111]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<ol class=list-inline>
-	<li>10299</li>
-	<li>68</li>
-</ol>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="From-the-clean-data-set,-let's-create-a-second,-independent-tidy-data-set-with-the-average-of-each-variable-for-each-activity-and-each-subject.">From the clean data set, let's create a second, independent tidy data set with the average of each variable for each activity and each subject.<a class="anchor-link" href="#From-the-clean-data-set,-let's-create-a-second,-independent-tidy-data-set-with-the-average-of-each-variable-for-each-activity-and-each-subject.">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can use the handy function aggregate for this purpose.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[112]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>clean2<span class="o">&lt;-</span>aggregate<span class="p">(</span><span class="m">.</span> <span class="o">~</span>subject <span class="o">+</span> activity<span class="p">,</span> clean<span class="p">,</span> <span class="kp">mean</span><span class="p">)</span>
-clean2<span class="o">&lt;-</span>clean2<span class="p">[</span><span class="kp">order</span><span class="p">(</span>clean2<span class="o">$</span>subject<span class="p">,</span>clean2<span class="o">$</span>activity<span class="p">),]</span>
-write.table<span class="p">(</span>clean2<span class="p">,</span> file <span class="o">=</span> <span class="s">&quot;merged_and_cleaned_data2.txt&quot;</span><span class="p">,</span>row.name<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
-
-<span class="kp">dim</span><span class="p">(</span>clean2<span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[112]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<ol class=list-inline>
-	<li>180</li>
-	<li>68</li>
-</ol>
-
-</div>
-
-</div>
-
- 
-   <br/>
+ <br/>
     <br/>
-<p style="text-align:justify; color:blue;background-color:#FFCCFF"> This is a quick overview of the application of regular expressions in R to create a tidy data that can be used for later 
-  analysis.</p>
-  
-</div>
-</div>
-
- 
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-  <span style="width:400px;display:inline-block"></span><span> 
-  <a href="fuel_efficiency.html"><img src="../figures/previous.png" height="40" width="40"/></a>
+	  <span style="width:400px;display:inline-block"></span><span> 
+  <a href="re_tidy_data.html"><img src="../figures/previous.png" height="40" width="40"/></a>
   <a href="../index.html"><img src="../figures/home.png" height="40" width="40"/></a>
   <a href="companies.html"><img src="../figures/next.png" height="40" width="40"/></a>
   </span>
+ 
+	</main>
   
 </div>
-</div>
-</div>
     </div>
+
   </div>
 </body>
 </html>
