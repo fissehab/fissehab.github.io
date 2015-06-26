@@ -232,6 +232,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3><mark style="background-color:yellow"> Part 1. Quick overview</mark></h3>
 <p>Spark is up to 100 times faster than Hadoop for certain applications and it is well suited to machine learning algorithms. One can read about Spark from <a herf="https://spark.apache.org/">spark website</a>.  <a style="text-decoration:none" href ="http://en.wikipedia.org/wiki/Apache_Spark">Wikipedia</a> also has general information about it.</p>
 
 </div>
@@ -576,6 +577,1640 @@ abstraction and parallel runtime</p>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>50005000
 </pre>
+
+
+<div class="text_cell_render border-box-sizing rendered_html">
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Spark-Context"><h3><mark style="background-color:yellow">Part 2: Spark Context</mark></h3><a class="anchor-link" href="#Spark-Context">&#182;</a></h4><h4 id="In-Spark,-communication-occurs-between-a-driver-and-executors.--The-driver-has-Spark-jobs-that-it-needs-to-run-and-these-jobs-are-split-into-tasks-that-are-submitted-to-the-executors-for-completion.--The-results-from-these-tasks-are-delivered-back-to-the-driver.">In Spark, communication occurs between a driver and executors.  The driver has Spark jobs that it needs to run and these jobs are split into tasks that are submitted to the executors for completion.  The results from these tasks are delivered back to the driver.<a class="anchor-link" href="#In-Spark,-communication-occurs-between-a-driver-and-executors.--The-driver-has-Spark-jobs-that-it-needs-to-run-and-these-jobs-are-split-into-tasks-that-are-submitted-to-the-executors-for-completion.--The-results-from-these-tasks-are-delivered-back-to-the-driver.">&#182;</a></h4><h4 id="In-part-1,-we-saw-that-normal-python-code-can-be-executed-via-cells.-When-using-Databricks-Cloud-this-code-gets-executed-in-the-Spark-driver's-Java-Virtual-Machine-(JVM)-and-not-in-an-executor's-JVM,-and-when-using-an-IPython-notebook-it-is-executed-within-the-kernel-associated-with-the-notebook.-Since-no-Spark-functionality-is-actually-being-used,-no-tasks-are-launched-on-the-executors.">In part 1, we saw that normal python code can be executed via cells. When using Databricks Cloud this code gets executed in the Spark driver's Java Virtual Machine (JVM) and not in an executor's JVM, and when using an IPython notebook it is executed within the kernel associated with the notebook. Since no Spark functionality is actually being used, no tasks are launched on the executors.<a class="anchor-link" href="#In-part-1,-we-saw-that-normal-python-code-can-be-executed-via-cells.-When-using-Databricks-Cloud-this-code-gets-executed-in-the-Spark-driver's-Java-Virtual-Machine-(JVM)-and-not-in-an-executor's-JVM,-and-when-using-an-IPython-notebook-it-is-executed-within-the-kernel-associated-with-the-notebook.-Since-no-Spark-functionality-is-actually-being-used,-no-tasks-are-launched-on-the-executors.">&#182;</a></h4><h4 id="In-order-to-use-Spark-and-its-API-we-will-need-to-use-a-SparkContext.--When-running-Spark,-you-start-a-new-Spark-application-by-creating-a-SparkContext.--When-the-SparkContext-is-created,-it-asks-the-master-for-some-cores-to-use-to-do-work.--The-master-sets-these-cores-aside-just-for-you;-they-won't-be-used-for-other-applications.-When-using-Databricks-Cloud-or-the-virtual-machine-provisioned-for-this-class,-the-SparkContext-is-created-for-you-automatically-as-sc.">In order to use Spark and its API we will need to use a <code>SparkContext</code>.  When running Spark, you start a new Spark application by creating a <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.SparkContext">SparkContext</a>.  When the <code>SparkContext</code> is created, it asks the master for some cores to use to do work.  The master sets these cores aside just for you; they won't be used for other applications. When using Databricks Cloud or the virtual machine provisioned for this class, the <code>SparkContext</code> is created for you automatically as <code>sc</code>.<a class="anchor-link" href="#In-order-to-use-Spark-and-its-API-we-will-need-to-use-a-SparkContext.--When-running-Spark,-you-start-a-new-Spark-application-by-creating-a-SparkContext.--When-the-SparkContext-is-created,-it-asks-the-master-for-some-cores-to-use-to-do-work.--The-master-sets-these-cores-aside-just-for-you;-they-won't-be-used-for-other-applications.-When-using-Databricks-Cloud-or-the-virtual-machine-provisioned-for-this-class,-the-SparkContext-is-created-for-you-automatically-as-sc.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="(2a)-Example-Cluster"><strong>(2a) Example Cluster</strong><a class="anchor-link" href="#(2a)-Example-Cluster">&#182;</a></h4><h4 id="The-diagram-below-shows-an-example-cluster,-where-the-cores-allocated-for-an-application-are-outlined-in-purple.">The diagram below shows an example cluster, where the cores allocated for an application are outlined in purple.<a class="anchor-link" href="#The-diagram-below-shows-an-example-cluster,-where-the-cores-allocated-for-an-application-are-outlined-in-purple.">&#182;</a></h4><p><img src="http://spark-mooc.github.io/web-assets/images/executors.png" alt="executors"></p>
+<h4 id="You-can-view-the-details-of-your-Spark-application-in-the-Spark-web-UI.--The-web-UI-is-accessible-in-Databricks-cloud-by-going-to-&quot;Clusters&quot;-and-then-clicking-on-the-&quot;View-Spark-UI&quot;-link-for-your-cluster.--When-running-locally-you'll-find-it-at-localhost:4040.--In-the-web-UI,-under-the-&quot;Jobs&quot;-tab,-you-can-see-a-list-of-jobs-that-have-been-scheduled-or-run.--It's-likely-there-isn't-any-thing-interesting-here-yet-because-we-haven't-run-any-jobs,-but-we'll-return-to-this-page-later.">You can view the details of your Spark application in the Spark web UI.  The web UI is accessible in Databricks cloud by going to "Clusters" and then clicking on the "View Spark UI" link for your cluster.  When running locally you'll find it at <a href="http://localhost:4040">localhost:4040</a>.  In the web UI, under the "Jobs" tab, you can see a list of jobs that have been scheduled or run.  It's likely there isn't any thing interesting here yet because we haven't run any jobs, but we'll return to this page later.<a class="anchor-link" href="#You-can-view-the-details-of-your-Spark-application-in-the-Spark-web-UI.--The-web-UI-is-accessible-in-Databricks-cloud-by-going-to-&quot;Clusters&quot;-and-then-clicking-on-the-&quot;View-Spark-UI&quot;-link-for-your-cluster.--When-running-locally-you'll-find-it-at-localhost:4040.--In-the-web-UI,-under-the-&quot;Jobs&quot;-tab,-you-can-see-a-list-of-jobs-that-have-been-scheduled-or-run.--It's-likely-there-isn't-any-thing-interesting-here-yet-because-we-haven't-run-any-jobs,-but-we'll-return-to-this-page-later.">&#182;</a></h4><h4 id="At-a-high-level,-every-Spark-application-consists-of-a-driver-program-that-launches-various-parallel-operations-on-executor-Java-Virtual-Machines-(JVMs)-running-either-in-a-cluster-or-locally-on-the-same-machine.-In-Databricks-Cloud,-&quot;Databricks-Shell&quot;-is-the-driver-program.--When-running-locally,-&quot;PySparkShell&quot;-is-the-driver-program.-In-all-cases,-this-driver-program-contains-the-main-loop-for-the-program-and-creates-distributed-datasets-on-the-cluster,-then-applies-operations-(transformations-&amp;-actions)-to-those-datasets.">At a high level, every Spark application consists of a driver program that launches various parallel operations on executor Java Virtual Machines (JVMs) running either in a cluster or locally on the same machine. In Databricks Cloud, "Databricks Shell" is the driver program.  When running locally, "PySparkShell" is the driver program. In all cases, this driver program contains the main loop for the program and creates distributed datasets on the cluster, then applies operations (transformations &amp; actions) to those datasets.<a class="anchor-link" href="#At-a-high-level,-every-Spark-application-consists-of-a-driver-program-that-launches-various-parallel-operations-on-executor-Java-Virtual-Machines-(JVMs)-running-either-in-a-cluster-or-locally-on-the-same-machine.-In-Databricks-Cloud,-&quot;Databricks-Shell&quot;-is-the-driver-program.--When-running-locally,-&quot;PySparkShell&quot;-is-the-driver-program.-In-all-cases,-this-driver-program-contains-the-main-loop-for-the-program-and-creates-distributed-datasets-on-the-cluster,-then-applies-operations-(transformations-&amp;-actions)-to-those-datasets.">&#182;</a></h4><h4 id="Driver-programs-access-Spark-through-a-SparkContext-object,-which-represents-a-connection-to-a-computing-cluster.-A-Spark-context-object-(sc)-is-the-main-entry-point-for-Spark-functionality.-A-Spark-context-can-be-used-to-create-Resilient-Distributed-Datasets-(RDDs)-on-a-cluster.">Driver programs access Spark through a SparkContext object, which represents a connection to a computing cluster. A Spark context object (<code>sc</code>) is the main entry point for Spark functionality. A Spark context can be used to create Resilient Distributed Datasets (RDDs) on a cluster.<a class="anchor-link" href="#Driver-programs-access-Spark-through-a-SparkContext-object,-which-represents-a-connection-to-a-computing-cluster.-A-Spark-context-object-(sc)-is-the-main-entry-point-for-Spark-functionality.-A-Spark-context-can-be-used-to-create-Resilient-Distributed-Datasets-(RDDs)-on-a-cluster.">&#182;</a></h4><h4 id="Try-printing-out-sc-to-see-its-type.">Try printing out <code>sc</code> to see its type.<a class="anchor-link" href="#Try-printing-out-sc-to-see-its-type.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Display the type of the Spark Context sc</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[56]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>pyspark.context.SparkContext</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="(2b)-SparkContext-attributes"><strong>(2b) <code>SparkContext</code> attributes</strong><a class="anchor-link" href="#(2b)-SparkContext-attributes">&#182;</a></h4><h4 id="You-can-use-Python's-dir()-function-to-get-a-list-of-all-the-attributes-(including-methods)-accessible-through-the-sc-object.">You can use Python's <a href="https://docs.python.org/2/library/functions.html?highlight=dir#dir">dir()</a> function to get a list of all the attributes (including methods) accessible through the <code>sc</code> object.<a class="anchor-link" href="#You-can-use-Python's-dir()-function-to-get-a-list-of-all-the-attributes-(including-methods)-accessible-through-the-sc-object.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># List sc&#39;s attributes</span>
+<span class="nb">dir</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="(2c)-Getting-help"><strong>(2c) Getting help</strong><a class="anchor-link" href="#(2c)-Getting-help">&#182;</a></h4><h4 id="Alternatively,-you-can-use-Python's-help()-function-to-get-an-easier-to-read-list-of-all-the-attributes,-including-examples,-that-the-sc-object-has.">Alternatively, you can use Python's <a href="https://docs.python.org/2/library/functions.html?highlight=help#help">help()</a> function to get an easier to read list of all the attributes, including examples, that the <code>sc</code> object has.<a class="anchor-link" href="#Alternatively,-you-can-use-Python's-help()-function-to-get-an-easier-to-read-list-of-all-the-attributes,-including-examples,-that-the-sc-object-has.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Use help to obtain more detailed information</span>
+<span class="n">help</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># After reading the help we&#39;ve decided we want to use sc.version to see what version of Spark we are running</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">version</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[59]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>u&apos;1.3.1&apos;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Help can be used on any Python object</span>
+<span class="n">help</span><span class="p">(</span><span class="nb">map</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Help on built-in function map in module __builtin__:
+
+map(...)
+    map(function, sequence[, sequence, ...]) -&gt; list
+    
+    Return a list of the results of applying the function to the items of
+    the argument sequence(s).  If more than one sequence is given, the
+    function is called with an argument list consisting of the corresponding
+    item of each sequence, substituting None for missing values when not all
+    sequences have the same length.  If the function is None, return a list of
+    the items of the sequence (or a list of tuples if more than one sequence).
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Part-3:-Using-RDDs-and-chaining-together-transformations-and-actions"><strong><mark style="background-color:yellow">
+Part 3: Using RDDs and chaining together transformations and actions</mark></strong><a class="anchor-link" href="#Part-3:-Using-RDDs-and-chaining-together-transformations-and-actions">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Working-with-your-first-RDD"><strong>Working with your first RDD</strong><a class="anchor-link" href="#Working-with-your-first-RDD">&#182;</a></h4><h4 id="In-Spark,-we-first-create-a-base-Resilient-Distributed-Dataset-(RDD).-We-can-then-apply-one-or-more-transformations-to-that-base-RDD.-An-RDD-is-immutable,-so-once-it-is-created,-it-cannot-be-changed.-As-a-result,-each-transformation-creates-a-new-RDD.-Finally,-we-can-apply-one-or-more-actions-to-the-RDDs.--Note-that-Spark-uses-lazy-evaluation,-so-transformations-are-not-actually-executed-until-an-action-occurs.">In Spark, we first create a base <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD">Resilient Distributed Dataset</a> (RDD). We can then apply one or more transformations to that base RDD. <em>An RDD is immutable, so once it is created, it cannot be changed.</em> As a result, each transformation creates a new RDD. Finally, we can apply one or more actions to the RDDs.  Note that Spark uses lazy evaluation, so transformations are not actually executed until an action occurs.<a class="anchor-link" href="#In-Spark,-we-first-create-a-base-Resilient-Distributed-Dataset-(RDD).-We-can-then-apply-one-or-more-transformations-to-that-base-RDD.-An-RDD-is-immutable,-so-once-it-is-created,-it-cannot-be-changed.-As-a-result,-each-transformation-creates-a-new-RDD.-Finally,-we-can-apply-one-or-more-actions-to-the-RDDs.--Note-that-Spark-uses-lazy-evaluation,-so-transformations-are-not-actually-executed-until-an-action-occurs.">&#182;</a></h4><h4 id="We-will-perform-several-exercises-to-obtain-a-better-understanding-of-RDDs:">We will perform several exercises to obtain a better understanding of RDDs:<a class="anchor-link" href="#We-will-perform-several-exercises-to-obtain-a-better-understanding-of-RDDs:">&#182;</a></h4><ul>
+<li>##### Create a Python collection of 10,000 integers</li>
+<li>##### Create a Spark base RDD from that collection</li>
+<li>##### Subtract one from each value using <code>map</code></li>
+<li>##### Perform action <code>collect</code> to view results</li>
+<li>##### Perform action <code>count</code> to view counts</li>
+<li>##### Apply transformation <code>filter</code> and view results with <code>collect</code></li>
+<li>##### Learn about lambda functions</li>
+<li>##### Explore how lazy evaluation works and the debugging challenges that it introduces</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="(3a)-Create-a-Python-collection-of-integers-in-the-range-of-1-..-10000"><strong>(3a) Create a Python collection of integers in the range of 1 .. 10000</strong><a class="anchor-link" href="#(3a)-Create-a-Python-collection-of-integers-in-the-range-of-1-..-10000">&#182;</a></h4><h4 id="We-will-use-the-xrange()-function-to-create-a-list()-of-integers.--xrange()-only-generates-values-as-they-are-needed.--This-is-different-from-the-behavior-of-range()-which-generates-the-complete-list-upon-execution.--Because-of-this-xrange()-is-more-memory-efficient-than-range(),-especially-for-large-ranges.">We will use the <a href="https://docs.python.org/2/library/functions.html?highlight=xrange#xrange">xrange()</a> function to create a <a href="https://docs.python.org/2/library/functions.html?highlight=list#list">list()</a> of integers.  <code>xrange()</code> only generates values as they are needed.  This is different from the behavior of <a href="https://docs.python.org/2/library/functions.html?highlight=range#range">range()</a> which generates the complete list upon execution.  Because of this <code>xrange()</code> is more memory efficient than <code>range()</code>, especially for large ranges.<a class="anchor-link" href="#We-will-use-the-xrange()-function-to-create-a-list()-of-integers.--xrange()-only-generates-values-as-they-are-needed.--This-is-different-from-the-behavior-of-range()-which-generates-the-complete-list-upon-execution.--Because-of-this-xrange()-is-more-memory-efficient-than-range(),-especially-for-large-ranges.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">data</span> <span class="o">=</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10001</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[62]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>xrange</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Data is just a normal Python list</span>
+<span class="c"># Obtain data&#39;s first element</span>
+<span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[63]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>1</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">data</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[64]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>101</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># We can check the size of the list using the len() function</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[65]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>10000</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="(3b)-Distributed-data-and-using-a-collection-to-create-an-RDD"><strong>(3b) Distributed data and using a collection to create an RDD</strong><a class="anchor-link" href="#(3b)-Distributed-data-and-using-a-collection-to-create-an-RDD">&#182;</a></h4><h4 id="In-Spark,-datasets-are-represented-as-a-list-of-entries,-where-the-list-is-broken-up-into-many-different-partitions-that-are-each-stored-on-a-different-machine.--Each-partition-holds-a-unique-subset-of-the-entries-in-the-list.--Spark-calls-datasets-that-it-stores-&quot;Resilient-Distributed-Datasets&quot;-(RDDs).">In Spark, datasets are represented as a list of entries, where the list is broken up into many different partitions that are each stored on a different machine.  Each partition holds a unique subset of the entries in the list.  Spark calls datasets that it stores "Resilient Distributed Datasets" (RDDs).<a class="anchor-link" href="#In-Spark,-datasets-are-represented-as-a-list-of-entries,-where-the-list-is-broken-up-into-many-different-partitions-that-are-each-stored-on-a-different-machine.--Each-partition-holds-a-unique-subset-of-the-entries-in-the-list.--Spark-calls-datasets-that-it-stores-&quot;Resilient-Distributed-Datasets&quot;-(RDDs).">&#182;</a></h4><h4 id="One-of-the-defining-features-of-Spark,-compared-to-other-data-analytics-frameworks-(e.g.,-Hadoop),-is-that-it-stores-data-in-memory-rather-than-on-disk.--This-allows-Spark-applications-to-run-much-more-quickly,-because-they-are-not-slowed-down-by-needing-to-read-data-from-disk.">One of the defining features of Spark, compared to other data analytics frameworks (e.g., Hadoop), is that it stores data in memory rather than on disk.  This allows Spark applications to run much more quickly, because they are not slowed down by needing to read data from disk.<a class="anchor-link" href="#One-of-the-defining-features-of-Spark,-compared-to-other-data-analytics-frameworks-(e.g.,-Hadoop),-is-that-it-stores-data-in-memory-rather-than-on-disk.--This-allows-Spark-applications-to-run-much-more-quickly,-because-they-are-not-slowed-down-by-needing-to-read-data-from-disk.">&#182;</a></h4><h4 id="The-figure-below-illustrates-how-Spark-breaks-a-list-of-data-entries-into-partitions-that-are-each-stored-in-memory-on-a-worker.">The figure below illustrates how Spark breaks a list of data entries into partitions that are each stored in memory on a worker.<a class="anchor-link" href="#The-figure-below-illustrates-how-Spark-breaks-a-list-of-data-entries-into-partitions-that-are-each-stored-in-memory-on-a-worker.">&#182;</a></h4><p><img src="http://spark-mooc.github.io/web-assets/images/partitions.png" alt="partitions"></p>
+<h4 id="To-create-the-RDD,-we-use-sc.parallelize(),-which-tells-Spark-to-create-a-new-set-of-input-data-based-on-data-that-is-passed-in.--In-this-example,-we-will-provide-an-xrange.--The-second-argument-to-the-sc.parallelize()-method-tells-Spark-how-many-partitions-to-break-the-data-into-when-it-stores-the-data-in-memory-(we'll-talk-more-about-this-later-in-this-tutorial).-Note-that-for-better-performance-when-using-parallelize,-xrange()-is-recommended-if-the-input-represents-a-range.-This-is-the-reason-why-we-used-xrange()-in-3a.">To create the RDD, we use <code>sc.parallelize()</code>, which tells Spark to create a new set of input data based on data that is passed in.  In this example, we will provide an <code>xrange</code>.  The second argument to the <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.SparkContext.parallelize">sc.parallelize()</a> method tells Spark how many partitions to break the data into when it stores the data in memory (we'll talk more about this later in this tutorial). Note that for better performance when using <code>parallelize</code>, <code>xrange()</code> is recommended if the input represents a range. This is the reason why we used <code>xrange()</code> in 3a.<a class="anchor-link" href="#To-create-the-RDD,-we-use-sc.parallelize(),-which-tells-Spark-to-create-a-new-set-of-input-data-based-on-data-that-is-passed-in.--In-this-example,-we-will-provide-an-xrange.--The-second-argument-to-the-sc.parallelize()-method-tells-Spark-how-many-partitions-to-break-the-data-into-when-it-stores-the-data-in-memory-(we'll-talk-more-about-this-later-in-this-tutorial).-Note-that-for-better-performance-when-using-parallelize,-xrange()-is-recommended-if-the-input-represents-a-range.-This-is-the-reason-why-we-used-xrange()-in-3a.">&#182;</a></h4><h4 id="There-are-many-different-types-of-RDDs.--The-base-class-for-RDDs-is-pyspark.RDD-and-other-RDDs-subclass-pyspark.RDD.--Since-the-other-RDD-types-inherit-from-pyspark.RDD-they-have-the-same-APIs-and-are-functionally-identical.--We'll-see-that-sc.parallelize()-generates-a-pyspark.rdd.PipelinedRDD-when-its-input-is-an-xrange,-and-a-pyspark.RDD-when-its-input-is-a-range.">There are many different types of RDDs.  The base class for RDDs is <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD">pyspark.RDD</a> and other RDDs subclass <code>pyspark.RDD</code>.  Since the other RDD types inherit from <code>pyspark.RDD</code> they have the same APIs and are functionally identical.  We'll see that <code>sc.parallelize()</code> generates a <code>pyspark.rdd.PipelinedRDD</code> when its input is an <code>xrange</code>, and a <code>pyspark.RDD</code> when its input is a <code>range</code>.<a class="anchor-link" href="#There-are-many-different-types-of-RDDs.--The-base-class-for-RDDs-is-pyspark.RDD-and-other-RDDs-subclass-pyspark.RDD.--Since-the-other-RDD-types-inherit-from-pyspark.RDD-they-have-the-same-APIs-and-are-functionally-identical.--We'll-see-that-sc.parallelize()-generates-a-pyspark.rdd.PipelinedRDD-when-its-input-is-an-xrange,-and-a-pyspark.RDD-when-its-input-is-a-range.">&#182;</a></h4><h4 id="After-we-generate-RDDs,-we-can-view-them-in-the-&quot;Storage&quot;-tab-of-the-web-UI.--You'll-notice-that-new-datasets-are-not-listed-until-Spark-needs-to-return-a-result-due-to-an-action-being-executed.--This-feature-of-Spark-is-called-&quot;lazy-evaluation&quot;.--This-allows-Spark-to-avoid-performing-unnecessary-calculations.">After we generate RDDs, we can view them in the "Storage" tab of the web UI.  You'll notice that new datasets are not listed until Spark needs to return a result due to an action being executed.  This feature of Spark is called "lazy evaluation".  This allows Spark to avoid performing unnecessary calculations.<a class="anchor-link" href="#After-we-generate-RDDs,-we-can-view-them-in-the-&quot;Storage&quot;-tab-of-the-web-UI.--You'll-notice-that-new-datasets-are-not-listed-until-Spark-needs-to-return-a-result-due-to-an-action-being-executed.--This-feature-of-Spark-is-called-&quot;lazy-evaluation&quot;.--This-allows-Spark-to-avoid-performing-unnecessary-calculations.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Parallelize data using 8 partitions</span>
+<span class="c"># This operation is a transformation of data into an RDD</span>
+<span class="c"># Spark uses lazy evaluation, so no Spark jobs are run at this point</span>
+<span class="n">xrangeRDD</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Let&#39;s view help on parallelize</span>
+<span class="n">help</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Help on method parallelize in module pyspark.context:
+
+parallelize(self, c, numSlices=None) method of pyspark.context.SparkContext instance
+    Distribute a local Python collection to form an RDD. Using xrange
+    is recommended if the input represents a range for performance.
+    
+    &gt;&gt;&gt; sc.parallelize([0, 2, 3, 4, 6], 5).glom().collect()
+    [[0], [2], [3], [4], [6]]
+    &gt;&gt;&gt; sc.parallelize(xrange(0, 6, 2), 5).glom().collect()
+    [[], [0], [], [2], [4]]
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Let&#39;s see what type sc.parallelize() returned</span>
+<span class="k">print</span> <span class="s">&#39;type of xrangeRDD: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">xrangeRDD</span><span class="p">))</span>
+
+<span class="c"># How about if we use a range</span>
+<span class="n">dataRange</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10001</span><span class="p">)</span>
+<span class="n">rangeRDD</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="p">(</span><span class="n">dataRange</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;type of dataRangeRDD: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">rangeRDD</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>type of xrangeRDD: &lt;class &apos;pyspark.rdd.PipelinedRDD&apos;&gt;
+type of dataRangeRDD: &lt;class &apos;pyspark.rdd.RDD&apos;&gt;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Each RDD gets a unique ID</span>
+<span class="k">print</span> <span class="s">&#39;xrangeRDD id: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">xrangeRDD</span><span class="o">.</span><span class="n">id</span><span class="p">())</span>
+<span class="k">print</span> <span class="s">&#39;rangeRDD id: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rangeRDD</span><span class="o">.</span><span class="n">id</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>xrangeRDD id: 76
+rangeRDD id: 75
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># We can name each newly created RDD using the setName() method</span>
+<span class="n">xrangeRDD</span><span class="o">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&#39;My first RDD&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[70]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>My first RDD PythonRDD[76] at RDD at PythonRDD.scala:43</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Let&#39;s view the lineage (the set of transformations) of the RDD using toDebugString()</span>
+<span class="k">print</span> <span class="n">xrangeRDD</span><span class="o">.</span><span class="n">toDebugString</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(8) My first RDD PythonRDD[76] at RDD at PythonRDD.scala:43 []
+ |  ParallelCollectionRDD[74] at parallelize at PythonRDD.scala:392 []
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Let&#39;s use help to see what methods we can call on this RDD</span>
+<span class="n">help</span><span class="p">(</span><span class="n">xrangeRDD</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Let&#39;s see how many partitions the RDD will be split into by using the getNumPartitions()</span>
+<span class="n">xrangeRDD</span><span class="o">.</span><span class="n">getNumPartitions</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[73]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>8</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="(3c):-Subtract-one-from-each-value-using-map"><strong>(3c): Subtract one from each value using <code>map</code></strong><a class="anchor-link" href="#(3c):-Subtract-one-from-each-value-using-map">&#182;</a></h4><h4 id="So-far,-we've-created-a-distributed-dataset-that-is-split-into-many-partitions,-where-each-partition-is-stored-on-a-single-machine-in-our-cluster.--Let's-look-at-what-happens-when-we-do-a-basic-operation-on-the-dataset.--Many-useful-data-analysis-operations-can-be-specified-as-&quot;do-something-to-each-item-in-the-dataset&quot;.--These-data-parallel-operations-are-convenient-because-each-item-in-the-dataset-can-be-processed-individually:-the-operation-on-one-entry-doesn't-effect-the-operations-on-any-of-the-other-entries.--Therefore,-Spark-can-parallelize-the-operation.">So far, we've created a distributed dataset that is split into many partitions, where each partition is stored on a single machine in our cluster.  Let's look at what happens when we do a basic operation on the dataset.  Many useful data analysis operations can be specified as "do something to each item in the dataset".  These data-parallel operations are convenient because each item in the dataset can be processed individually: the operation on one entry doesn't effect the operations on any of the other entries.  Therefore, Spark can parallelize the operation.<a class="anchor-link" href="#So-far,-we've-created-a-distributed-dataset-that-is-split-into-many-partitions,-where-each-partition-is-stored-on-a-single-machine-in-our-cluster.--Let's-look-at-what-happens-when-we-do-a-basic-operation-on-the-dataset.--Many-useful-data-analysis-operations-can-be-specified-as-&quot;do-something-to-each-item-in-the-dataset&quot;.--These-data-parallel-operations-are-convenient-because-each-item-in-the-dataset-can-be-processed-individually:-the-operation-on-one-entry-doesn't-effect-the-operations-on-any-of-the-other-entries.--Therefore,-Spark-can-parallelize-the-operation.">&#182;</a></h4><h4 id="map(f),-the-most-common-Spark-transformation,-is-one-such-example:-it-applies-a-function-f-to-each-item-in-the-dataset,-and-outputs-the-resulting-dataset.--When-you-run-map()-on-a-dataset,-a-single-stage-of-tasks-is-launched.--A-stage-is-a-group-of-tasks-that-all-perform-the-same-computation,-but-on-different-input-data.--One-task-is-launched-for-each-partitition,-as-shown-in-the-example-below.--A-task-is-a-unit-of-execution-that-runs-on-a-single-machine.-When-we-run-map(f)-within-a-partition,-a-new-task-applies-f-to-all-of-the-entries-in-a-particular-partition,-and-outputs-a-new-partition.-In-this-example-figure,-the-dataset-is-broken-into-four-partitions,-so-four-map()-tasks-are-launched."><code>map(f)</code>, the most common Spark transformation, is one such example: it applies a function <code>f</code> to each item in the dataset, and outputs the resulting dataset.  When you run <code>map()</code> on a dataset, a single <em>stage</em> of tasks is launched.  A <em>stage</em> is a group of tasks that all perform the same computation, but on different input data.  One task is launched for each partitition, as shown in the example below.  A task is a unit of execution that runs on a single machine. When we run <code>map(f)</code> within a partition, a new <em>task</em> applies <code>f</code> to all of the entries in a particular partition, and outputs a new partition. In this example figure, the dataset is broken into four partitions, so four <code>map()</code> tasks are launched.<a class="anchor-link" href="#map(f),-the-most-common-Spark-transformation,-is-one-such-example:-it-applies-a-function-f-to-each-item-in-the-dataset,-and-outputs-the-resulting-dataset.--When-you-run-map()-on-a-dataset,-a-single-stage-of-tasks-is-launched.--A-stage-is-a-group-of-tasks-that-all-perform-the-same-computation,-but-on-different-input-data.--One-task-is-launched-for-each-partitition,-as-shown-in-the-example-below.--A-task-is-a-unit-of-execution-that-runs-on-a-single-machine.-When-we-run-map(f)-within-a-partition,-a-new-task-applies-f-to-all-of-the-entries-in-a-particular-partition,-and-outputs-a-new-partition.-In-this-example-figure,-the-dataset-is-broken-into-four-partitions,-so-four-map()-tasks-are-launched.">&#182;</a></h4><p><img src="http://spark-mooc.github.io/web-assets/images/tasks.png" alt="tasks"></p>
+<h4 id="The-figure-below-shows-how-this-would-work-on-the-smaller-data-set-from-the-earlier-figures.--Note-that-one-task-is-launched-for-each-partition.">The figure below shows how this would work on the smaller data set from the earlier figures.  Note that one task is launched for each partition.<a class="anchor-link" href="#The-figure-below-shows-how-this-would-work-on-the-smaller-data-set-from-the-earlier-figures.--Note-that-one-task-is-launched-for-each-partition.">&#182;</a></h4><p><img src="http://spark-mooc.github.io/web-assets/images/map.png" alt="foo"></p>
+<h4 id="When-applying-the-map()-transformation,-each-item-in-the-parent-RDD-will-map-to-one-element-in-the-new-RDD.-So,-if-the-parent-RDD-has-twenty-elements,-the-new-RDD-will-also-have-twenty-items.">When applying the <code>map()</code> transformation, each item in the parent RDD will map to one element in the new RDD. So, if the parent RDD has twenty elements, the new RDD will also have twenty items.<a class="anchor-link" href="#When-applying-the-map()-transformation,-each-item-in-the-parent-RDD-will-map-to-one-element-in-the-new-RDD.-So,-if-the-parent-RDD-has-twenty-elements,-the-new-RDD-will-also-have-twenty-items.">&#182;</a></h4><h4 id="Now-we-will-use-map()-to-subtract-one-from-each-value-in-the-base-RDD-we-just-created.-First,-we-define-a-Python-function-called-sub()-that-will-subtract-one-from-the-input-integer.-Second,-we-will-pass-each-item-in-the-base-RDD-into-a-map()-transformation-that-applies-the-sub()-function-to-each-element.-And-finally,-we-print-out-the-RDD-transformation-hierarchy-using-toDebugString().">Now we will use <code>map()</code> to subtract one from each value in the base RDD we just created. First, we define a Python function called <code>sub()</code> that will subtract one from the input integer. Second, we will pass each item in the base RDD into a <code>map()</code> transformation that applies the <code>sub()</code> function to each element. And finally, we print out the RDD transformation hierarchy using <code>toDebugString()</code>.<a class="anchor-link" href="#Now-we-will-use-map()-to-subtract-one-from-each-value-in-the-base-RDD-we-just-created.-First,-we-define-a-Python-function-called-sub()-that-will-subtract-one-from-the-input-integer.-Second,-we-will-pass-each-item-in-the-base-RDD-into-a-map()-transformation-that-applies-the-sub()-function-to-each-element.-And-finally,-we-print-out-the-RDD-transformation-hierarchy-using-toDebugString().">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Create sub function to subtract 1</span>
+<span class="k">def</span> <span class="nf">sub</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;&quot;Subtracts one from `value`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">       value (int): A number.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: `value` minus one.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">value</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c"># Transform xrangeRDD through map transformation using sub function</span>
+<span class="c"># Because map is a transformation and Spark uses lazy evaluation, no jobs, stages,</span>
+<span class="c"># or tasks will be launched when we run this code.</span>
+<span class="n">subRDD</span> <span class="o">=</span> <span class="n">xrangeRDD</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">sub</span><span class="p">)</span>
+
+<span class="c"># Let&#39;s see the RDD transformation hierarchy</span>
+<span class="k">print</span> <span class="n">subRDD</span><span class="o">.</span><span class="n">toDebugString</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(8) PythonRDD[77] at RDD at PythonRDD.scala:43 []
+ |  ParallelCollectionRDD[74] at parallelize at PythonRDD.scala:392 []
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="-(3d)-Perform-action-collect-to-view-results-"><strong> (3d) Perform action <code>collect</code> to view results </strong><a class="anchor-link" href="#-(3d)-Perform-action-collect-to-view-results-">&#182;</a></h4><h4 id="To-see-a-list-of-elements-decremented-by-one,-we-need-to-create-a-new-list-on-the-driver-from-the-the-data-distributed-in-the-executor-nodes.--To-do-this-we-call-the-collect()-method-on-our-RDD.--collect()-is-often-used-after-a-filter-or-other-operation-to-ensure-that-we-are-only-returning-a-small-amount-of-data-to-the-driver.--This-is-done-because-the-data-returned-to-the-driver-must-fit-into-the-driver's-available-memory.--If-not,-the-driver-will-crash.">To see a list of elements decremented by one, we need to create a new list on the driver from the the data distributed in the executor nodes.  To do this we call the <code>collect()</code> method on our RDD.  <code>collect()</code> is often used after a filter or other operation to ensure that we are only returning a <em>small</em> amount of data to the driver.  This is done because the data returned to the driver must fit into the driver's available memory.  If not, the driver will crash.<a class="anchor-link" href="#To-see-a-list-of-elements-decremented-by-one,-we-need-to-create-a-new-list-on-the-driver-from-the-the-data-distributed-in-the-executor-nodes.--To-do-this-we-call-the-collect()-method-on-our-RDD.--collect()-is-often-used-after-a-filter-or-other-operation-to-ensure-that-we-are-only-returning-a-small-amount-of-data-to-the-driver.--This-is-done-because-the-data-returned-to-the-driver-must-fit-into-the-driver's-available-memory.--If-not,-the-driver-will-crash.">&#182;</a></h4><h4 id="The-collect()-method-is-the-first-action-operation-that-we-have-encountered.--Action-operations-cause-Spark-to-perform-the-(lazy)-transformation-operations-that-are-required-to-compute-the-RDD-returned-by-the-action.--In-our-example,-this-means-that-tasks-will-now-be-launched-to-perform-the-parallelize,-map,-and-collect-operations.">The <code>collect()</code> method is the first action operation that we have encountered.  Action operations cause Spark to perform the (lazy) transformation operations that are required to compute the RDD returned by the action.  In our example, this means that tasks will now be launched to perform the <code>parallelize</code>, <code>map</code>, and <code>collect</code> operations.<a class="anchor-link" href="#The-collect()-method-is-the-first-action-operation-that-we-have-encountered.--Action-operations-cause-Spark-to-perform-the-(lazy)-transformation-operations-that-are-required-to-compute-the-RDD-returned-by-the-action.--In-our-example,-this-means-that-tasks-will-now-be-launched-to-perform-the-parallelize,-map,-and-collect-operations.">&#182;</a></h4><h4 id="In-this-example,-the-dataset-is-broken-into-four-partitions,-so-four-collect()-tasks-are-launched.-Each-task-collects-the-entries-in-its-partition-and-sends-the-result-to-the-SparkContext,-which-creates-a-list-of-the-values,-as-shown-in-the-figure-below.">In this example, the dataset is broken into four partitions, so four <code>collect()</code> tasks are launched. Each task collects the entries in its partition and sends the result to the SparkContext, which creates a list of the values, as shown in the figure below.<a class="anchor-link" href="#In-this-example,-the-dataset-is-broken-into-four-partitions,-so-four-collect()-tasks-are-launched.-Each-task-collects-the-entries-in-its-partition-and-sends-the-result-to-the-SparkContext,-which-creates-a-list-of-the-values,-as-shown-in-the-figure-below.">&#182;</a></h4><p><img src="http://spark-mooc.github.io/web-assets/images/collect.png" alt="collect"></p>
+<h4 id="The-above-figures-showed-what-would-happen-if-we-ran-collect()-on-a-small-example-dataset-with-just-four-partitions.">The above figures showed what would happen if we ran <code>collect()</code> on a small example dataset with just four partitions.<a class="anchor-link" href="#The-above-figures-showed-what-would-happen-if-we-ran-collect()-on-a-small-example-dataset-with-just-four-partitions.">&#182;</a></h4><h4 id="Now-let's-run-collect()-on-subRDD.">Now let's run <code>collect()</code> on <code>subRDD</code>.<a class="anchor-link" href="#Now-let's-run-collect()-on-subRDD.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Let&#39;s collect the data</span>
+<span class="k">print</span> <span class="n">subRDD</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="-(3d)-Perform-action-count-to-view-counts-"><strong> (3d) Perform action <code>count</code> to view counts </strong><a class="anchor-link" href="#-(3d)-Perform-action-count-to-view-counts-">&#182;</a></h4><h4 id="One-of-the-most-basic-jobs-that-we-can-run-is-the-count()-job-which-will-count-the-number-of-elements-in-an-RDD-using-the-count()-action.-Since-map()-creates-a-new-RDD-with-the-same-number-of-elements-as-the-starting-RDD,-we-expect-that-applying-count()-to-each-RDD-will-return-the-same-result.">One of the most basic jobs that we can run is the <code>count()</code> job which will count the number of elements in an RDD using the <code>count()</code> action. Since <code>map()</code> creates a new RDD with the same number of elements as the starting RDD, we expect that applying <code>count()</code> to each RDD will return the same result.<a class="anchor-link" href="#One-of-the-most-basic-jobs-that-we-can-run-is-the-count()-job-which-will-count-the-number-of-elements-in-an-RDD-using-the-count()-action.-Since-map()-creates-a-new-RDD-with-the-same-number-of-elements-as-the-starting-RDD,-we-expect-that-applying-count()-to-each-RDD-will-return-the-same-result.">&#182;</a></h4><h4 id="Note-that-because-count()-is-an-action-operation,-if-we-had-not-already-performed-an-action-with-collect(),-then-Spark-would-now-perform-the-transformation-operations-when-we-executed-count().">Note that because <code>count()</code> is an action operation, if we had not already performed an action with <code>collect()</code>, then Spark would now perform the transformation operations when we executed <code>count()</code>.<a class="anchor-link" href="#Note-that-because-count()-is-an-action-operation,-if-we-had-not-already-performed-an-action-with-collect(),-then-Spark-would-now-perform-the-transformation-operations-when-we-executed-count().">&#182;</a></h4><h4 id="Each-task-counts-the-entries-in-its-partition-and-sends-the-result-to-your-SparkContext,-which-adds-up-all-of-the-counts.-The-figure-below-shows-what-would-happen-if-we-ran-count()-on-a-small-example-dataset-with-just-four-partitions.">Each task counts the entries in its partition and sends the result to your SparkContext, which adds up all of the counts. The figure below shows what would happen if we ran <code>count()</code> on a small example dataset with just four partitions.<a class="anchor-link" href="#Each-task-counts-the-entries-in-its-partition-and-sends-the-result-to-your-SparkContext,-which-adds-up-all-of-the-counts.-The-figure-below-shows-what-would-happen-if-we-ran-count()-on-a-small-example-dataset-with-just-four-partitions.">&#182;</a></h4><p><img src="http://spark-mooc.github.io/web-assets/images/count.png" alt="count"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="k">print</span> <span class="n">xrangeRDD</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">subRDD</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>10000
+10000
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="-(3e)-Apply-transformation-filter-and-view-results-with-collect-"><strong> (3e) Apply transformation <code>filter</code> and view results with <code>collect</code> </strong><a class="anchor-link" href="#-(3e)-Apply-transformation-filter-and-view-results-with-collect-">&#182;</a></h4><h4 id="Next,-we'll-create-a-new-RDD-that-only-contains-the-values-less-than-ten-by-using-the-filter(f)-data-parallel-operation.-The-filter(f)-method-is-a-transformation-operation-that-creates-a-new-RDD-from-the-input-RDD-by-applying-filter-function-f-to-each-item-in-the-parent-RDD-and-only-passing-those-elements-where-the-filter-function-returns-True.-Elements-that-do-not-return-True-will-be-dropped.-Like-map(),-filter-can-be-applied-individually-to-each-entry-in-the-dataset,-so-is-easily-parallelized-using-Spark.">Next, we'll create a new RDD that only contains the values less than ten by using the <code>filter(f)</code> data-parallel operation. The <code>filter(f)</code> method is a transformation operation that creates a new RDD from the input RDD by applying filter function <code>f</code> to each item in the parent RDD and only passing those elements where the filter function returns <code>True</code>. Elements that do not return <code>True</code> will be dropped. Like <code>map()</code>, filter can be applied individually to each entry in the dataset, so is easily parallelized using Spark.<a class="anchor-link" href="#Next,-we'll-create-a-new-RDD-that-only-contains-the-values-less-than-ten-by-using-the-filter(f)-data-parallel-operation.-The-filter(f)-method-is-a-transformation-operation-that-creates-a-new-RDD-from-the-input-RDD-by-applying-filter-function-f-to-each-item-in-the-parent-RDD-and-only-passing-those-elements-where-the-filter-function-returns-True.-Elements-that-do-not-return-True-will-be-dropped.-Like-map(),-filter-can-be-applied-individually-to-each-entry-in-the-dataset,-so-is-easily-parallelized-using-Spark.">&#182;</a></h4><h4 id="The-figure-below-shows-how-this-would-work-on-the-small-four-partition-dataset.">The figure below shows how this would work on the small four-partition dataset.<a class="anchor-link" href="#The-figure-below-shows-how-this-would-work-on-the-small-four-partition-dataset.">&#182;</a></h4><p><img src="http://spark-mooc.github.io/web-assets/images/filter.png" alt="filter"></p>
+<h4 id="To-filter-this-dataset,-we'll-define-a-function-called-ten(),-which-returns-True-if-the-input-is-less-than-10-and-False-otherwise.--This-function-will-be-passed-to-the-filter()-transformation-as-the-filter-function-f.">To filter this dataset, we'll define a function called <code>ten()</code>, which returns <code>True</code> if the input is less than 10 and <code>False</code> otherwise.  This function will be passed to the <code>filter()</code> transformation as the filter function <code>f</code>.<a class="anchor-link" href="#To-filter-this-dataset,-we'll-define-a-function-called-ten(),-which-returns-True-if-the-input-is-less-than-10-and-False-otherwise.--This-function-will-be-passed-to-the-filter()-transformation-as-the-filter-function-f.">&#182;</a></h4><h4 id="To-view-the-filtered-list-of-elements-less-than-ten,-we-need-to-create-a-new-list-on-the-driver-from-the-distributed-data-on-the-executor-nodes.--We-use-the-collect()-method-to-return-a-list-that-contains-all-of-the-elements-in-this-filtered-RDD-to-the-driver-program.">To view the filtered list of elements less than ten, we need to create a new list on the driver from the distributed data on the executor nodes.  We use the <code>collect()</code> method to return a list that contains all of the elements in this filtered RDD to the driver program.<a class="anchor-link" href="#To-view-the-filtered-list-of-elements-less-than-ten,-we-need-to-create-a-new-list-on-the-driver-from-the-distributed-data-on-the-executor-nodes.--We-use-the-collect()-method-to-return-a-list-that-contains-all-of-the-elements-in-this-filtered-RDD-to-the-driver-program.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Define a function to filter a single value</span>
+<span class="k">def</span> <span class="nf">ten</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return whether value is below ten.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        value (int): A number.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: Whether `value` is less than ten.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
+<span class="c"># The ten function could also be written concisely as: def ten(value): return value &lt; 10</span>
+
+<span class="c"># Pass the function ten to the filter transformation</span>
+<span class="c"># Filter is a transformation so no tasks are run</span>
+<span class="n">filteredRDD</span> <span class="o">=</span> <span class="n">subRDD</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ten</span><span class="p">)</span>
+
+<span class="c"># View the results using collect()</span>
+<span class="c"># Collect is an action and triggers the filter transformation to run</span>
+<span class="k">print</span> <span class="n">filteredRDD</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="-Part-4:-Lambda-Functions-"><strong> <mark style="background-color:yellow">Part 4: Lambda Functions</mark> </strong><a class="anchor-link" href="#-Part-4:-Lambda-Functions-">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="-(4a)-Using-Python-lambda()-functions-"><strong> (4a) Using Python <code>lambda()</code> functions </strong><a class="anchor-link" href="#-(4a)-Using-Python-lambda()-functions-">&#182;</a></h4><h4 id="Python-supports-the-use-of-small-one-line-anonymous-functions-that-are-not-bound-to-a-name-at-runtime.-Borrowed-from-LISP,-these-lambda-functions-can-be-used-wherever-function-objects-are-required.-They-are-syntactically-restricted-to-a-single-expression.-Remember-that-lambda-functions-are-a-matter-of-style-and-using-them-is-never-required---semantically,-they-are-just-syntactic-sugar-for-a-normal-function-definition.-You-can-always-define-a-separate-normal-function-instead,-but-using-a-lambda()-function-is-an-equivalent-and-more-compact-form-of-coding.-Ideally-you-should-consider-using-lambda-functions-where-you-want-to-encapsulate-non-reusable-code-without-littering-your-code-with-one-line-functions.">Python supports the use of small one-line anonymous functions that are not bound to a name at runtime. Borrowed from LISP, these <code>lambda</code> functions can be used wherever function objects are required. They are syntactically restricted to a single expression. Remember that <code>lambda</code> functions are a matter of style and using them is never required - semantically, they are just syntactic sugar for a normal function definition. You can always define a separate normal function instead, but using a <code>lambda()</code> function is an equivalent and more compact form of coding. Ideally you should consider using <code>lambda</code> functions where you want to encapsulate non-reusable code without littering your code with one-line functions.<a class="anchor-link" href="#Python-supports-the-use-of-small-one-line-anonymous-functions-that-are-not-bound-to-a-name-at-runtime.-Borrowed-from-LISP,-these-lambda-functions-can-be-used-wherever-function-objects-are-required.-They-are-syntactically-restricted-to-a-single-expression.-Remember-that-lambda-functions-are-a-matter-of-style-and-using-them-is-never-required---semantically,-they-are-just-syntactic-sugar-for-a-normal-function-definition.-You-can-always-define-a-separate-normal-function-instead,-but-using-a-lambda()-function-is-an-equivalent-and-more-compact-form-of-coding.-Ideally-you-should-consider-using-lambda-functions-where-you-want-to-encapsulate-non-reusable-code-without-littering-your-code-with-one-line-functions.">&#182;</a></h4><h4 id="Here,-instead-of-defining-a-separate-function-for-the-filter()-transformation,-we-will-use-an-inline-lambda()-function.">Here, instead of defining a separate function for the <code>filter()</code> transformation, we will use an inline <code>lambda()</code> function.<a class="anchor-link" href="#Here,-instead-of-defining-a-separate-function-for-the-filter()-transformation,-we-will-use-an-inline-lambda()-function.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">lambdaRDD</span> <span class="o">=</span> <span class="n">subRDD</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">lambdaRDD</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[78]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Let&#39;s collect the even values less than 10</span>
+<span class="n">evenRDD</span> <span class="o">=</span> <span class="n">lambdaRDD</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">evenRDD</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[79]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[0, 2, 4, 6, 8]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="-Part-5:-Additional-RDD-actions-"><strong> <mark style="background-color:yellow">Part 5: Additional RDD actions <mark></strong><a class="anchor-link" href="#-Part-5:-Additional-RDD-actions-">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="-(5a)-Other-common-actions-"><strong> (5a) Other common actions </strong><a class="anchor-link" href="#-(5a)-Other-common-actions-">&#182;</a></h4><h4 id="Let's-investigate-the-additional-actions:-first(),-take(),-top(),-takeOrdered(),-and-reduce()">Let's investigate the additional actions: <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD.first">first()</a>, <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD.take">take()</a>, <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD.top">top()</a>, <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD.takeOrdered">takeOrdered()</a>, and <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD.reduce">reduce()</a><a class="anchor-link" href="#Let's-investigate-the-additional-actions:-first(),-take(),-top(),-takeOrdered(),-and-reduce()">&#182;</a></h4><h4 id="One-useful-thing-to-do-when-we-have-a-new-dataset-is-to-look-at-the-first-few-entries-to-obtain-a-rough-idea-of-what-information-is-available.--In-Spark,-we-can-do-that-using-the-first(),-take(),-top(),-and-takeOrdered()-actions.-Note-that-for-the-first()-and-take()-actions,-the-elements-that-are-returned-depend-on-how-the-RDD-is-partitioned.">One useful thing to do when we have a new dataset is to look at the first few entries to obtain a rough idea of what information is available.  In Spark, we can do that using the <code>first()</code>, <code>take()</code>, <code>top()</code>, and <code>takeOrdered()</code> actions. Note that for the <code>first()</code> and <code>take()</code> actions, the elements that are returned depend on how the RDD is <em>partitioned</em>.<a class="anchor-link" href="#One-useful-thing-to-do-when-we-have-a-new-dataset-is-to-look-at-the-first-few-entries-to-obtain-a-rough-idea-of-what-information-is-available.--In-Spark,-we-can-do-that-using-the-first(),-take(),-top(),-and-takeOrdered()-actions.-Note-that-for-the-first()-and-take()-actions,-the-elements-that-are-returned-depend-on-how-the-RDD-is-partitioned.">&#182;</a></h4><h4 id="Instead-of-using-the-collect()-action,-we-can-use-the-take(n)-action-to-return-the-first-n-elements-of-the-RDD.-The-first()-action-returns-the-first-element-of-an-RDD,-and-is-equivalent-to-take(1).">Instead of using the <code>collect()</code> action, we can use the <code>take(n)</code> action to return the first n elements of the RDD. The <code>first()</code> action returns the first element of an RDD, and is equivalent to <code>take(1)</code>.<a class="anchor-link" href="#Instead-of-using-the-collect()-action,-we-can-use-the-take(n)-action-to-return-the-first-n-elements-of-the-RDD.-The-first()-action-returns-the-first-element-of-an-RDD,-and-is-equivalent-to-take(1).">&#182;</a></h4><h4 id="The-takeOrdered()-action-returns-the-first-n-elements-of-the-RDD,-using-either-their-natural-order-or-a-custom-comparator.-The-key-advantage-of-using-takeOrdered()-instead-of-first()-or-take()-is-that-takeOrdered()-returns-a-deterministic-result,-while-the-other-two-actions-may-return-differing-results,-depending-on-the-number-of-partions-or-execution-environment.-takeOrdered()-returns-the-list-sorted-in-ascending-order.--The-top()-action-is-similar-to-takeOrdered()-except-that-it-returns-the-list-in-descending-order.">The <code>takeOrdered()</code> action returns the first n elements of the RDD, using either their natural order or a custom comparator. The key advantage of using <code>takeOrdered()</code> instead of <code>first()</code> or <code>take()</code> is that <code>takeOrdered()</code> returns a deterministic result, while the other two actions may return differing results, depending on the number of partions or execution environment. <code>takeOrdered()</code> returns the list sorted in <em>ascending order</em>.  The <code>top()</code> action is similar to <code>takeOrdered()</code> except that it returns the list in <em>descending order.</em><a class="anchor-link" href="#The-takeOrdered()-action-returns-the-first-n-elements-of-the-RDD,-using-either-their-natural-order-or-a-custom-comparator.-The-key-advantage-of-using-takeOrdered()-instead-of-first()-or-take()-is-that-takeOrdered()-returns-a-deterministic-result,-while-the-other-two-actions-may-return-differing-results,-depending-on-the-number-of-partions-or-execution-environment.-takeOrdered()-returns-the-list-sorted-in-ascending-order.--The-top()-action-is-similar-to-takeOrdered()-except-that-it-returns-the-list-in-descending-order.">&#182;</a></h4><h4 id="The-reduce()-action-reduces-the-elements-of-a-RDD-to-a-single-value-by-applying-a-function-that-takes-two-parameters-and-returns-a-single-value.--The-function-should-be-commutative-and-associative,-as-reduce()-is-applied-at-the-partition-level-and-then-again-to-aggregate-results-from-partitions.--If-these-rules-don't-hold,-the-results-from-reduce()-will-be-inconsistent.--Reducing-locally-at-partitions-makes-reduce()-very-efficient.">The <code>reduce()</code> action reduces the elements of a RDD to a single value by applying a function that takes two parameters and returns a single value.  The function should be commutative and associative, as <code>reduce()</code> is applied at the partition level and then again to aggregate results from partitions.  If these rules don't hold, the results from <code>reduce()</code> will be inconsistent.  Reducing locally at partitions makes <code>reduce()</code> very efficient.<a class="anchor-link" href="#The-reduce()-action-reduces-the-elements-of-a-RDD-to-a-single-value-by-applying-a-function-that-takes-two-parameters-and-returns-a-single-value.--The-function-should-be-commutative-and-associative,-as-reduce()-is-applied-at-the-partition-level-and-then-again-to-aggregate-results-from-partitions.--If-these-rules-don't-hold,-the-results-from-reduce()-will-be-inconsistent.--Reducing-locally-at-partitions-makes-reduce()-very-efficient.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Let&#39;s get the first element</span>
+<span class="k">print</span> <span class="n">filteredRDD</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<span class="c"># The first 4</span>
+<span class="k">print</span> <span class="n">filteredRDD</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="c"># Note that it is ok to take more elements than the RDD has</span>
+<span class="k">print</span> <span class="n">filteredRDD</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0
+[0, 1, 2, 3]
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Retrieve the three smallest elements</span>
+<span class="k">print</span> <span class="n">filteredRDD</span><span class="o">.</span><span class="n">takeOrdered</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="c"># Retrieve the five largest elements</span>
+<span class="k">print</span> <span class="n">filteredRDD</span><span class="o">.</span><span class="n">top</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[0, 1, 2]
+[9, 8, 7, 6, 5]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Pass a lambda function to takeOrdered to reverse the order</span>
+<span class="n">filteredRDD</span><span class="o">.</span><span class="n">takeOrdered</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="o">-</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[82]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[9, 8, 7, 6]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Obtain Python&#39;s add function</span>
+<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">add</span>
+<span class="c"># Efficiently sum the RDD using reduce</span>
+<span class="k">print</span> <span class="n">filteredRDD</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">add</span><span class="p">)</span>
+<span class="c"># Sum using reduce with a lambda function</span>
+<span class="k">print</span> <span class="n">filteredRDD</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<span class="c"># Note that subtraction is not both associative and commutative</span>
+<span class="k">print</span> <span class="n">filteredRDD</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">filteredRDD</span><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+<span class="c"># While addition is</span>
+<span class="k">print</span> <span class="n">filteredRDD</span><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>45
+45
+-45
+21
+45
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="-(5b)-Advanced-actions-"><strong> (5b) Advanced actions </strong><a class="anchor-link" href="#-(5b)-Advanced-actions-">&#182;</a></h4><h4 id="Here-are-two-additional-actions-that-are-useful-for-retrieving-information-from-an-RDD:-takeSample()-and-countByValue()">Here are two additional actions that are useful for retrieving information from an RDD: <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD.takeSample">takeSample()</a> and <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD.countByValue">countByValue()</a><a class="anchor-link" href="#Here-are-two-additional-actions-that-are-useful-for-retrieving-information-from-an-RDD:-takeSample()-and-countByValue()">&#182;</a></h4><h4 id="The-takeSample()-action-returns-an-array-with-a-random-sample-of-elements-from-the-dataset.--It-takes-in-a-withReplacement-argument,-which-specifies-whether-it-is-okay-to-randomly-pick-the-same-item-multiple-times-from-the-parent-RDD-(so-when-withReplacement=True,-you-can-get-the-same-item-back-multiple-times).-It-also-takes-an-optional-seed-parameter-that-allows-you-to-specify-a-seed-value-for-the-random-number-generator,-so-that-reproducible-results-can-be-obtained.">The <code>takeSample()</code> action returns an array with a random sample of elements from the dataset.  It takes in a <code>withReplacement</code> argument, which specifies whether it is okay to randomly pick the same item multiple times from the parent RDD (so when <code>withReplacement=True</code>, you can get the same item back multiple times). It also takes an optional <code>seed</code> parameter that allows you to specify a seed value for the random number generator, so that reproducible results can be obtained.<a class="anchor-link" href="#The-takeSample()-action-returns-an-array-with-a-random-sample-of-elements-from-the-dataset.--It-takes-in-a-withReplacement-argument,-which-specifies-whether-it-is-okay-to-randomly-pick-the-same-item-multiple-times-from-the-parent-RDD-(so-when-withReplacement=True,-you-can-get-the-same-item-back-multiple-times).-It-also-takes-an-optional-seed-parameter-that-allows-you-to-specify-a-seed-value-for-the-random-number-generator,-so-that-reproducible-results-can-be-obtained.">&#182;</a></h4><h4 id="The-countByValue()-action-returns-the-count-of-each-unique-value-in-the-RDD-as-a-dictionary-that-maps-values-to-counts.">The <code>countByValue()</code> action returns the count of each unique value in the RDD as a dictionary that maps values to counts.<a class="anchor-link" href="#The-countByValue()-action-returns-the-count-of-each-unique-value-in-the-RDD-as-a-dictionary-that-maps-values-to-counts.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[84]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># takeSample reusing elements</span>
+<span class="k">print</span> <span class="n">filteredRDD</span><span class="o">.</span><span class="n">takeSample</span><span class="p">(</span><span class="n">withReplacement</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="c"># takeSample without reuse</span>
+<span class="k">print</span> <span class="n">filteredRDD</span><span class="o">.</span><span class="n">takeSample</span><span class="p">(</span><span class="n">withReplacement</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[2, 9, 7, 5, 9, 0]
+[6, 9, 8, 2, 5, 4]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[85]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Set seed for predictability</span>
+<span class="k">print</span> <span class="n">filteredRDD</span><span class="o">.</span><span class="n">takeSample</span><span class="p">(</span><span class="n">withReplacement</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="c"># Try reruning this cell and the cell above -- the results from this cell will remain constant</span>
+<span class="c"># Use ctrl-enter to run without moving to the next cell</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[0, 2, 5, 3, 6, 9]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Create new base RDD to show countByValue</span>
+<span class="n">repetitiveRDD</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="k">print</span> <span class="n">repetitiveRDD</span><span class="o">.</span><span class="n">countByValue</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>defaultdict(&lt;type &apos;int&apos;&gt;, {1: 4, 2: 4, 3: 5, 4: 2, 5: 1, 6: 1})
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="-Part-6:-Additional-RDD-transformations-"><strong> <mark style="background-color:yellow">Part 6: Additional RDD transformations </mark></strong><a class="anchor-link" href="#-Part-6:-Additional-RDD-transformations-">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="-(6a)-flatMap-"><strong> (6a) <code>flatMap</code> </strong><a class="anchor-link" href="#-(6a)-flatMap-">&#182;</a></h4><h4 id="When-performing-a-map()-transformation-using-a-function,-sometimes-the-function-will-return-more-(or-less)-than-one-element.-We-would-like-the-newly-created-RDD-to-consist-of-the-elements-outputted-by-the-function.-Simply-applying-a-map()-transformation-would-yield-a-new-RDD-made-up-of-iterators.--Each-iterator-could-have-zero-or-more-elements.--Instead,-we-often-want-an-RDD-consisting-of-the-values-contained-in-those-iterators.--The-solution-is-to-use-a-flatMap()-transformation,-flatMap()-is-similar-to-map(),-except-that-with-flatMap()-each-input-item-can-be-mapped-to-zero-or-more-output-elements.">When performing a <code>map()</code> transformation using a function, sometimes the function will return more (or less) than one element. We would like the newly created RDD to consist of the elements outputted by the function. Simply applying a <code>map()</code> transformation would yield a new RDD made up of iterators.  Each iterator could have zero or more elements.  Instead, we often want an RDD consisting of the values contained in those iterators.  The solution is to use a <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD.flatMap">flatMap()</a> transformation, <code>flatMap()</code> is similar to <code>map()</code>, except that with <code>flatMap()</code> each input item can be mapped to zero or more output elements.<a class="anchor-link" href="#When-performing-a-map()-transformation-using-a-function,-sometimes-the-function-will-return-more-(or-less)-than-one-element.-We-would-like-the-newly-created-RDD-to-consist-of-the-elements-outputted-by-the-function.-Simply-applying-a-map()-transformation-would-yield-a-new-RDD-made-up-of-iterators.--Each-iterator-could-have-zero-or-more-elements.--Instead,-we-often-want-an-RDD-consisting-of-the-values-contained-in-those-iterators.--The-solution-is-to-use-a-flatMap()-transformation,-flatMap()-is-similar-to-map(),-except-that-with-flatMap()-each-input-item-can-be-mapped-to-zero-or-more-output-elements.">&#182;</a></h4><h4 id="To-demonstrate-flatMap(),-we-will-first-emit-a-word-along-with-its-plural,-and-then-a-range-that-grows-in-length-with-each-subsequent-operation.">To demonstrate <code>flatMap()</code>, we will first emit a word along with its plural, and then a range that grows in length with each subsequent operation.<a class="anchor-link" href="#To-demonstrate-flatMap(),-we-will-first-emit-a-word-along-with-its-plural,-and-then-a-range-that-grows-in-length-with-each-subsequent-operation.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Let&#39;s create a new base RDD to work from</span>
+<span class="n">wordsList</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;cat&#39;</span><span class="p">,</span> <span class="s">&#39;elephant&#39;</span><span class="p">,</span> <span class="s">&#39;rat&#39;</span><span class="p">,</span> <span class="s">&#39;rat&#39;</span><span class="p">,</span> <span class="s">&#39;cat&#39;</span><span class="p">]</span>
+<span class="n">wordsRDD</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="p">(</span><span class="n">wordsList</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="c"># Use map</span>
+<span class="n">singularAndPluralWordsRDDMap</span> <span class="o">=</span> <span class="n">wordsRDD</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="s">&#39;s&#39;</span><span class="p">))</span>
+<span class="c"># Use flatMap</span>
+<span class="n">singularAndPluralWordsRDD</span> <span class="o">=</span> <span class="n">wordsRDD</span><span class="o">.</span><span class="n">flatMap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="s">&#39;s&#39;</span><span class="p">))</span>
+
+<span class="c"># View the results</span>
+<span class="k">print</span> <span class="n">singularAndPluralWordsRDDMap</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">singularAndPluralWordsRDD</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<span class="c"># View the number of elements in the RDD</span>
+<span class="k">print</span> <span class="n">singularAndPluralWordsRDDMap</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">singularAndPluralWordsRDD</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[(&apos;cat&apos;, &apos;cats&apos;), (&apos;elephant&apos;, &apos;elephants&apos;), (&apos;rat&apos;, &apos;rats&apos;), (&apos;rat&apos;, &apos;rats&apos;), (&apos;cat&apos;, &apos;cats&apos;)]
+[&apos;cat&apos;, &apos;cats&apos;, &apos;elephant&apos;, &apos;elephants&apos;, &apos;rat&apos;, &apos;rats&apos;, &apos;rat&apos;, &apos;rats&apos;, &apos;cat&apos;, &apos;cats&apos;]
+5
+10
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[88]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">simpleRDD</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="k">print</span> <span class="n">simpleRDD</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">simpleRDD</span><span class="o">.</span><span class="n">flatMap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[[1], [1, 2], [1, 2, 3]]
+[1, 1, 2, 1, 2, 3]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="-(6b)-groupByKey-and-reduceByKey-"><strong> (6b) <code>groupByKey</code> and <code>reduceByKey</code> </strong><a class="anchor-link" href="#-(6b)-groupByKey-and-reduceByKey-">&#182;</a></h4><h4 id="Let's-investigate-the-additional-transformations:-groupByKey()-and-reduceByKey().">Let's investigate the additional transformations: <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD.groupByKey">groupByKey()</a> and <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD.reduceByKey">reduceByKey()</a>.<a class="anchor-link" href="#Let's-investigate-the-additional-transformations:-groupByKey()-and-reduceByKey().">&#182;</a></h4><h4 id="Both-of-these-transformations-operate-on-pair-RDDs.--A-pair-RDD-is-an-RDD-where-each-element-is-a-pair-tuple-(key,-value).--For-example,-sc.parallelize([('a',-1),-('a',-2),-('b',-1)])-would-create-a-pair-RDD-where-the-keys-are-'a',-'a',-'b'-and-the-values-are-1,-2,-1.">Both of these transformations operate on pair RDDs.  A pair RDD is an RDD where each element is a pair tuple (key, value).  For example, <code>sc.parallelize([('a', 1), ('a', 2), ('b', 1)])</code> would create a pair RDD where the keys are 'a', 'a', 'b' and the values are 1, 2, 1.<a class="anchor-link" href="#Both-of-these-transformations-operate-on-pair-RDDs.--A-pair-RDD-is-an-RDD-where-each-element-is-a-pair-tuple-(key,-value).--For-example,-sc.parallelize([('a',-1),-('a',-2),-('b',-1)])-would-create-a-pair-RDD-where-the-keys-are-'a',-'a',-'b'-and-the-values-are-1,-2,-1.">&#182;</a></h4><h4 id="The-reduceByKey()-transformation-gathers-together-pairs-that-have-the-same-key-and-applies-a-function-to-two-associated-values-at-a-time.-reduceByKey()-operates-by-applying-the-function-first-within-each-partition-on-a-per-key-basis-and-then-across-the-partitions.">The <code>reduceByKey()</code> transformation gathers together pairs that have the same key and applies a function to two associated values at a time. <code>reduceByKey()</code> operates by applying the function first within each partition on a per-key basis and then across the partitions.<a class="anchor-link" href="#The-reduceByKey()-transformation-gathers-together-pairs-that-have-the-same-key-and-applies-a-function-to-two-associated-values-at-a-time.-reduceByKey()-operates-by-applying-the-function-first-within-each-partition-on-a-per-key-basis-and-then-across-the-partitions.">&#182;</a></h4><h4 id="While-both-the-groupByKey()-and-reduceByKey()-transformations-can-often-be-used-to-solve-the-same-problem-and-will-produce-the-same-answer,-the-reduceByKey()-transformation-works-much-better-for-large-distributed-datasets.-This-is-because-Spark-knows-it-can-combine-output-with-a-common-key-on-each-partition-before-shuffling-(redistributing)-the-data-across-nodes.--Only-use-groupByKey()-if-the-operation-would-not-benefit-from-reducing-the-data-before-the-shuffle-occurs.">While both the <code>groupByKey()</code> and <code>reduceByKey()</code> transformations can often be used to solve the same problem and will produce the same answer, the <code>reduceByKey()</code> transformation works much better for large distributed datasets. This is because Spark knows it can combine output with a common key on each partition <em>before</em> shuffling (redistributing) the data across nodes.  Only use <code>groupByKey()</code> if the operation would not benefit from reducing the data before the shuffle occurs.<a class="anchor-link" href="#While-both-the-groupByKey()-and-reduceByKey()-transformations-can-often-be-used-to-solve-the-same-problem-and-will-produce-the-same-answer,-the-reduceByKey()-transformation-works-much-better-for-large-distributed-datasets.-This-is-because-Spark-knows-it-can-combine-output-with-a-common-key-on-each-partition-before-shuffling-(redistributing)-the-data-across-nodes.--Only-use-groupByKey()-if-the-operation-would-not-benefit-from-reducing-the-data-before-the-shuffle-occurs.">&#182;</a></h4><h4 id="Look-at-the-diagram-below-to-understand-how-reduceByKey-works.--Notice-how-pairs-on-the-same-machine-with-the-same-key-are-combined-(by-using-the-lamdba-function-passed-into-reduceByKey)-before-the-data-is-shuffled.-Then-the-lamdba-function-is-called-again-to-reduce-all-the-values-from-each-partition-to-produce-one-final-result.">Look at the diagram below to understand how <code>reduceByKey</code> works.  Notice how pairs on the same machine with the same key are combined (by using the lamdba function passed into reduceByKey) before the data is shuffled. Then the lamdba function is called again to reduce all the values from each partition to produce one final result.<a class="anchor-link" href="#Look-at-the-diagram-below-to-understand-how-reduceByKey-works.--Notice-how-pairs-on-the-same-machine-with-the-same-key-are-combined-(by-using-the-lamdba-function-passed-into-reduceByKey)-before-the-data-is-shuffled.-Then-the-lamdba-function-is-called-again-to-reduce-all-the-values-from-each-partition-to-produce-one-final-result.">&#182;</a></h4><p><img src="http://spark-mooc.github.io/web-assets/images/reduce_by.png" alt="reduceByKey() figure"></p>
+<h4 id="On-the-other-hand,-when-using-the-groupByKey()-transformation---all-the-key-value-pairs-are-shuffled-around,-causing-a-lot-of-unnecessary-data-to-being-transferred-over-the-network.">On the other hand, when using the <code>groupByKey()</code> transformation - all the key-value pairs are shuffled around, causing a lot of unnecessary data to being transferred over the network.<a class="anchor-link" href="#On-the-other-hand,-when-using-the-groupByKey()-transformation---all-the-key-value-pairs-are-shuffled-around,-causing-a-lot-of-unnecessary-data-to-being-transferred-over-the-network.">&#182;</a></h4><h4 id="To-determine-which-machine-to-shuffle-a-pair-to,-Spark-calls-a-partitioning-function-on-the-key-of-the-pair.-Spark-spills-data-to-disk-when-there-is-more-data-shuffled-onto-a-single-executor-machine-than-can-fit-in-memory.-However,-it-flushes-out-the-data-to-disk-one-key-at-a-time,-so-if-a-single-key-has-more-key-value-pairs-than-can-fit-in-memory-an-out-of-memory-exception-occurs.-This-will-be-more-gracefully-handled-in-a-later-release-of-Spark-so-that-the-job-can-still-proceed,-but-should-still-be-avoided.--When-Spark-needs-to-spill-to-disk,-performance-is-severely-impacted.">To determine which machine to shuffle a pair to, Spark calls a partitioning function on the key of the pair. Spark spills data to disk when there is more data shuffled onto a single executor machine than can fit in memory. However, it flushes out the data to disk one key at a time, so if a single key has more key-value pairs than can fit in memory an out of memory exception occurs. This will be more gracefully handled in a later release of Spark so that the job can still proceed, but should still be avoided.  When Spark needs to spill to disk, performance is severely impacted.<a class="anchor-link" href="#To-determine-which-machine-to-shuffle-a-pair-to,-Spark-calls-a-partitioning-function-on-the-key-of-the-pair.-Spark-spills-data-to-disk-when-there-is-more-data-shuffled-onto-a-single-executor-machine-than-can-fit-in-memory.-However,-it-flushes-out-the-data-to-disk-one-key-at-a-time,-so-if-a-single-key-has-more-key-value-pairs-than-can-fit-in-memory-an-out-of-memory-exception-occurs.-This-will-be-more-gracefully-handled-in-a-later-release-of-Spark-so-that-the-job-can-still-proceed,-but-should-still-be-avoided.--When-Spark-needs-to-spill-to-disk,-performance-is-severely-impacted.">&#182;</a></h4><p><img src="http://spark-mooc.github.io/web-assets/images/group_by.png" alt="groupByKey() figure"></p>
+<h4 id="As-your-dataset-grows,-the-difference-in-the-amount-of-data-that-needs-to-be-shuffled,-between-the-reduceByKey()-and-groupByKey()-transformations,-becomes-increasingly-exaggerated.">As your dataset grows, the difference in the amount of data that needs to be shuffled, between the <code>reduceByKey()</code> and <code>groupByKey()</code> transformations, becomes increasingly exaggerated.<a class="anchor-link" href="#As-your-dataset-grows,-the-difference-in-the-amount-of-data-that-needs-to-be-shuffled,-between-the-reduceByKey()-and-groupByKey()-transformations,-becomes-increasingly-exaggerated.">&#182;</a></h4><h4 id="Here-are-more-transformations-to-prefer-over-groupByKey():">Here are more transformations to prefer over <code>groupByKey()</code>:<a class="anchor-link" href="#Here-are-more-transformations-to-prefer-over-groupByKey():">&#182;</a></h4><ul>
+<li>#### <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD.combineByKey">combineByKey()</a> can be used when you are combining elements but your return type differs from your input value type.</li>
+<li>#### <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD.foldByKey">foldByKey()</a> merges the values for each key using an associative function and a neutral "zero value".
+#### Now let's go through a simple <code>groupByKey()</code> and <code>reduceByKey()</code> example.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[89]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">pairRDD</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="p">([(</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+<span class="c"># mapValues only used to improve format for printing</span>
+<span class="k">print</span> <span class="n">pairRDD</span><span class="o">.</span><span class="n">groupByKey</span><span class="p">()</span><span class="o">.</span><span class="n">mapValues</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+
+<span class="c"># Different ways to sum by key</span>
+<span class="k">print</span> <span class="n">pairRDD</span><span class="o">.</span><span class="n">groupByKey</span><span class="p">()</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<span class="c"># Using mapValues, which is recommended when they key doesn&#39;t change</span>
+<span class="k">print</span> <span class="n">pairRDD</span><span class="o">.</span><span class="n">groupByKey</span><span class="p">()</span><span class="o">.</span><span class="n">mapValues</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<span class="c"># reduceByKey is more efficient / scalable</span>
+<span class="k">print</span> <span class="n">pairRDD</span><span class="o">.</span><span class="n">reduceByKey</span><span class="p">(</span><span class="n">add</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[(&apos;a&apos;, [1, 2]), (&apos;b&apos;, [1])]
+[(&apos;a&apos;, 3), (&apos;b&apos;, 1)]
+[(&apos;a&apos;, 3), (&apos;b&apos;, 1)]
+[(&apos;a&apos;, 3), (&apos;b&apos;, 1)]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="-(6c)-Advanced-transformations--[Optional]"><strong> (6c) Advanced transformations </strong> [Optional]<a class="anchor-link" href="#-(6c)-Advanced-transformations--[Optional]">&#182;</a></h4><h4 id="Let's-investigate-the-advanced-transformations:-mapPartitions()-and-mapPartitionsWithIndex()">Let's investigate the advanced transformations: <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD.mapPartitions">mapPartitions()</a> and <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD.mapPartitionsWithIndex">mapPartitionsWithIndex()</a><a class="anchor-link" href="#Let's-investigate-the-advanced-transformations:-mapPartitions()-and-mapPartitionsWithIndex()">&#182;</a></h4><h4 id="The-mapPartitions()-transformation-uses-a-function-that-takes-in-an-iterator-(to-the-items-in-that-specific-partition)-and-returns-an-iterator.--The-function-is-applied-on-a-partition-by-partition-basis.">The <code>mapPartitions()</code> transformation uses a function that takes in an iterator (to the items in that specific partition) and returns an iterator.  The function is applied on a partition by partition basis.<a class="anchor-link" href="#The-mapPartitions()-transformation-uses-a-function-that-takes-in-an-iterator-(to-the-items-in-that-specific-partition)-and-returns-an-iterator.--The-function-is-applied-on-a-partition-by-partition-basis.">&#182;</a></h4><h4 id="The-mapPartitionsWithIndex()-transformation-uses-a-function-that-takes-in-a-partition-index-(think-of-this-like-the-partition-number)-and-an-iterator-(to-the-items-in-that-specific-partition).-For-every-partition-(index,-iterator)-pair,-the-function-returns-a-tuple-of-the-same-partition-index-number-and-an-iterator-of-the-transformed-items-in-that-partition.">The <code>mapPartitionsWithIndex()</code> transformation uses a function that takes in a partition index (think of this like the partition number) and an iterator (to the items in that specific partition). For every partition (index, iterator) pair, the function returns a tuple of the same partition index number and an iterator of the transformed items in that partition.<a class="anchor-link" href="#The-mapPartitionsWithIndex()-transformation-uses-a-function-that-takes-in-a-partition-index-(think-of-this-like-the-partition-number)-and-an-iterator-(to-the-items-in-that-specific-partition).-For-every-partition-(index,-iterator)-pair,-the-function-returns-a-tuple-of-the-same-partition-index-number-and-an-iterator-of-the-transformed-items-in-that-partition.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[90]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># mapPartitions takes a function that takes an iterator and returns an iterator</span>
+<span class="k">print</span> <span class="n">wordsRDD</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<span class="n">itemsRDD</span> <span class="o">=</span> <span class="n">wordsRDD</span><span class="o">.</span><span class="n">mapPartitions</span><span class="p">(</span><span class="k">lambda</span> <span class="n">iterator</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">iterator</span><span class="p">)])</span>
+<span class="k">print</span> <span class="n">itemsRDD</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&apos;cat&apos;, &apos;elephant&apos;, &apos;rat&apos;, &apos;rat&apos;, &apos;cat&apos;]
+[&apos;cat&apos;, &apos;elephant&apos;, &apos;rat&apos;, &apos;rat,cat&apos;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="n">itemsByPartRDD</span> <span class="o">=</span> <span class="n">wordsRDD</span><span class="o">.</span><span class="n">mapPartitionsWithIndex</span><span class="p">(</span><span class="k">lambda</span> <span class="n">index</span><span class="p">,</span> <span class="n">iterator</span><span class="p">:</span> <span class="p">[(</span><span class="n">index</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">iterator</span><span class="p">))])</span>
+<span class="c"># We can see that three of the (partitions) workers have one element and the fourth worker has two</span>
+<span class="c"># elements, although things may not bode well for the rat...</span>
+<span class="k">print</span> <span class="n">itemsByPartRDD</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<span class="c"># Rerun without returning a list (acts more like flatMap)</span>
+<span class="n">itemsByPartRDD</span> <span class="o">=</span> <span class="n">wordsRDD</span><span class="o">.</span><span class="n">mapPartitionsWithIndex</span><span class="p">(</span><span class="k">lambda</span> <span class="n">index</span><span class="p">,</span> <span class="n">iterator</span><span class="p">:</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">iterator</span><span class="p">)))</span>
+<span class="k">print</span> <span class="n">itemsByPartRDD</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[(0, [&apos;cat&apos;]), (1, [&apos;elephant&apos;]), (2, [&apos;rat&apos;]), (3, [&apos;rat&apos;, &apos;cat&apos;])]
+[0, [&apos;cat&apos;], 1, [&apos;elephant&apos;], 2, [&apos;rat&apos;], 3, [&apos;rat&apos;, &apos;cat&apos;]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="-Part-7:-Caching-RDDs-and-storage-options-"><strong> <mark style="background-color:yellow"> Part 7: Caching RDDs and storage options <mark></strong><a class="anchor-link" href="#-Part-7:-Caching-RDDs-and-storage-options-">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="-(7a)-Caching-RDDs-"><strong> (7a) Caching RDDs </strong><a class="anchor-link" href="#-(7a)-Caching-RDDs-">&#182;</a></h4><h4 id="For-efficiency-Spark-keeps-your-RDDs-in-memory.-By-keeping-the-contents-in-memory,-Spark-can-quickly-access-the-data.-However,-memory-is-limited,-so-if-you-try-to-keep-too-many-RDDs-in-memory,-Spark-will-automatically-delete-RDDs-from-memory-to-make-space-for-new-RDDs.-If-you-later-refer-to-one-of-the-RDDs,-Spark-will-automatically-recreate-the-RDD-for-you,-but-that-takes-time.">For efficiency Spark keeps your RDDs in memory. By keeping the contents in memory, Spark can quickly access the data. However, memory is limited, so if you try to keep too many RDDs in memory, Spark will automatically delete RDDs from memory to make space for new RDDs. If you later refer to one of the RDDs, Spark will automatically recreate the RDD for you, but that takes time.<a class="anchor-link" href="#For-efficiency-Spark-keeps-your-RDDs-in-memory.-By-keeping-the-contents-in-memory,-Spark-can-quickly-access-the-data.-However,-memory-is-limited,-so-if-you-try-to-keep-too-many-RDDs-in-memory,-Spark-will-automatically-delete-RDDs-from-memory-to-make-space-for-new-RDDs.-If-you-later-refer-to-one-of-the-RDDs,-Spark-will-automatically-recreate-the-RDD-for-you,-but-that-takes-time.">&#182;</a></h4><h4 id="So,-if-you-plan-to-use-an-RDD-more-than-once,-then-you-should-tell-Spark-to-cache-that-RDD.-You-can-use-the-cache()-operation-to-keep-the-RDD-in-memory.-However,-if-you-cache-too-many-RDDs-and-Spark-runs-out-of-memory,-it-will-delete-the-least-recently-used-(LRU)-RDD-first.-Again,-the-RDD-will-be-automatically-recreated-when-accessed.">So, if you plan to use an RDD more than once, then you should tell Spark to cache that RDD. You can use the <code>cache()</code> operation to keep the RDD in memory. However, if you cache too many RDDs and Spark runs out of memory, it will delete the least recently used (LRU) RDD first. Again, the RDD will be automatically recreated when accessed.<a class="anchor-link" href="#So,-if-you-plan-to-use-an-RDD-more-than-once,-then-you-should-tell-Spark-to-cache-that-RDD.-You-can-use-the-cache()-operation-to-keep-the-RDD-in-memory.-However,-if-you-cache-too-many-RDDs-and-Spark-runs-out-of-memory,-it-will-delete-the-least-recently-used-(LRU)-RDD-first.-Again,-the-RDD-will-be-automatically-recreated-when-accessed.">&#182;</a></h4><h4 id="You-can-check-if-an-RDD-is-cached-by-using-the-is_cached-attribute,-and-you-can-see-your-cached-RDD-in-the-&quot;Storage&quot;-section-of-the-Spark-web-UI.-If-you-click-on-the-RDD's-name,-you-can-see-more-information-about-where-the-RDD-is-stored.">You can check if an RDD is cached by using the <code>is_cached</code> attribute, and you can see your cached RDD in the "Storage" section of the Spark web UI. If you click on the RDD's name, you can see more information about where the RDD is stored.<a class="anchor-link" href="#You-can-check-if-an-RDD-is-cached-by-using-the-is_cached-attribute,-and-you-can-see-your-cached-RDD-in-the-&quot;Storage&quot;-section-of-the-Spark-web-UI.-If-you-click-on-the-RDD's-name,-you-can-see-more-information-about-where-the-RDD-is-stored.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[92]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Name the RDD</span>
+<span class="n">filteredRDD</span><span class="o">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&#39;My Filtered RDD&#39;</span><span class="p">)</span>
+<span class="c"># Cache the RDD</span>
+<span class="n">filteredRDD</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<span class="c"># Is it cached</span>
+<span class="k">print</span> <span class="n">filteredRDD</span><span class="o">.</span><span class="n">is_cached</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>True
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="-(7b)-Unpersist-and-storage-options-"><strong> (7b) Unpersist and storage options </strong><a class="anchor-link" href="#-(7b)-Unpersist-and-storage-options-">&#182;</a></h4><h4 id="Spark-automatically-manages-the-RDDs-cached-in-memory-and-will-save-them-to-disk-if-it-runs-out-of-memory.-For-efficiency,-once-you-are-finished-using-an-RDD,-you-can-optionally-tell-Spark-to-stop-caching-it-in-memory-by-using-the-RDD's-unpersist()-method-to-inform-Spark-that-you-no-longer-need-the-RDD-in-memory.">Spark automatically manages the RDDs cached in memory and will save them to disk if it runs out of memory. For efficiency, once you are finished using an RDD, you can optionally tell Spark to stop caching it in memory by using the RDD's <code>unpersist()</code> method to inform Spark that you no longer need the RDD in memory.<a class="anchor-link" href="#Spark-automatically-manages-the-RDDs-cached-in-memory-and-will-save-them-to-disk-if-it-runs-out-of-memory.-For-efficiency,-once-you-are-finished-using-an-RDD,-you-can-optionally-tell-Spark-to-stop-caching-it-in-memory-by-using-the-RDD's-unpersist()-method-to-inform-Spark-that-you-no-longer-need-the-RDD-in-memory.">&#182;</a></h4><h4 id="You-can-see-the-set-of-transformations-that-were-applied-to-create-an-RDD-by-using-the-toDebugString()-method,-which-will-provide-storage-information,-and-you-can-directly-query-the-current-storage-information-for-an-RDD-using-the-getStorageLevel()-operation.">You can see the set of transformations that were applied to create an RDD by using the <code>toDebugString()</code> method, which will provide storage information, and you can directly query the current storage information for an RDD using the <code>getStorageLevel()</code> operation.<a class="anchor-link" href="#You-can-see-the-set-of-transformations-that-were-applied-to-create-an-RDD-by-using-the-toDebugString()-method,-which-will-provide-storage-information,-and-you-can-directly-query-the-current-storage-information-for-an-RDD-using-the-getStorageLevel()-operation.">&#182;</a></h4><h4 id="-Advanced:--Spark-provides-many-more-options-for-managing-how-RDDs-are-stored-in-memory-or-even-saved-to-disk.-You-can-explore-the-API-for-RDD's-persist()-operation-using-Python's-help()-command.--The-persist()-operation,-optionally,-takes-a-pySpark-StorageLevel-object."><strong> Advanced: </strong> Spark provides many more options for managing how RDDs are stored in memory or even saved to disk. You can explore the API for RDD's <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.RDD.persist">persist()</a> operation using Python's <a href="https://docs.python.org/2/library/functions.html?highlight=help#help">help()</a> command.  The <code>persist()</code> operation, optionally, takes a pySpark <a href="http://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.StorageLevel">StorageLevel</a> object.<a class="anchor-link" href="#-Advanced:--Spark-provides-many-more-options-for-managing-how-RDDs-are-stored-in-memory-or-even-saved-to-disk.-You-can-explore-the-API-for-RDD's-persist()-operation-using-Python's-help()-command.--The-persist()-operation,-optionally,-takes-a-pySpark-StorageLevel-object.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[93]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Note that toDebugString also provides storage information</span>
+<span class="k">print</span> <span class="n">filteredRDD</span><span class="o">.</span><span class="n">toDebugString</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(8) My Filtered RDD PythonRDD[80] at collect at &lt;ipython-input-77-2e6525e1a0c2&gt;:23 [Memory Serialized 1x Replicated]
+ |  ParallelCollectionRDD[74] at parallelize at PythonRDD.scala:392 [Memory Serialized 1x Replicated]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[94]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># If we are done with the RDD we can unpersist it so that its memory can be reclaimed</span>
+<span class="n">filteredRDD</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>
+<span class="c"># Storage level for a non cached RDD</span>
+<span class="k">print</span> <span class="n">filteredRDD</span><span class="o">.</span><span class="n">getStorageLevel</span><span class="p">()</span>
+<span class="n">filteredRDD</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+<span class="c"># Storage level for a cached RDD</span>
+<span class="k">print</span> <span class="n">filteredRDD</span><span class="o">.</span><span class="n">getStorageLevel</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Serialized 1x Replicated
+Memory Serialized 1x Replicated
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="-Part-8:-Debugging-Spark-applications-and-lazy-evaluation-"><strong> <mark style="background-color:yellow">Part 8: Debugging Spark applications and lazy evaluation</mark </strong><a class="anchor-link" href="#-Part-8:-Debugging-Spark-applications-and-lazy-evaluation-">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="-How-Python-is-Executed-in-Spark-"><strong> How Python is Executed in Spark </strong><a class="anchor-link" href="#-How-Python-is-Executed-in-Spark-">&#182;</a></h4><h4 id="Internally,-Spark-executes-using-a-Java-Virtual-Machine-(JVM).-pySpark-runs-Python-code-in-a-JVM-using-Py4J.-Py4J-enables-Python-programs-running-in-a-Python-interpreter-to-dynamically-access-Java-objects-in-a-Java-Virtual-Machine.-Methods-are-called-as-if-the-Java-objects-resided-in-the-Python-interpreter-and-Java-collections-can-be-accessed-through-standard-Python-collection-methods.-Py4J-also-enables-Java-programs-to-call-back-Python-objects.">Internally, Spark executes using a Java Virtual Machine (JVM). pySpark runs Python code in a JVM using <a href="http://py4j.sourceforge.net">Py4J</a>. Py4J enables Python programs running in a Python interpreter to dynamically access Java objects in a Java Virtual Machine. Methods are called as if the Java objects resided in the Python interpreter and Java collections can be accessed through standard Python collection methods. Py4J also enables Java programs to call back Python objects.<a class="anchor-link" href="#Internally,-Spark-executes-using-a-Java-Virtual-Machine-(JVM).-pySpark-runs-Python-code-in-a-JVM-using-Py4J.-Py4J-enables-Python-programs-running-in-a-Python-interpreter-to-dynamically-access-Java-objects-in-a-Java-Virtual-Machine.-Methods-are-called-as-if-the-Java-objects-resided-in-the-Python-interpreter-and-Java-collections-can-be-accessed-through-standard-Python-collection-methods.-Py4J-also-enables-Java-programs-to-call-back-Python-objects.">&#182;</a></h4><h4 id="Because-pySpark-uses-Py4J,-coding-errors-often-result-in-a-complicated,-confusing-stack-trace-that-can-be-difficult-to-understand.-In-the-following-section,-we'll-explore-how-to-understand-stack-traces.">Because pySpark uses Py4J, coding errors often result in a complicated, confusing stack trace that can be difficult to understand. In the following section, we'll explore how to understand stack traces.<a class="anchor-link" href="#Because-pySpark-uses-Py4J,-coding-errors-often-result-in-a-complicated,-confusing-stack-trace-that-can-be-difficult-to-understand.-In-the-following-section,-we'll-explore-how-to-understand-stack-traces.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="-(8a)-Challenges-with-lazy-evaluation-using-transformations-and-actions-"><strong> (8a) Challenges with lazy evaluation using transformations and actions </strong><a class="anchor-link" href="#-(8a)-Challenges-with-lazy-evaluation-using-transformations-and-actions-">&#182;</a></h4><h4 id="Spark's-use-of-lazy-evaluation-can-make-debugging-more-difficult-because-code-is-not-always-executed-immediately.-To-see-an-example-of-how-this-can-happen,-let's-first-define-a-broken-filter-function.">Spark's use of lazy evaluation can make debugging more difficult because code is not always executed immediately. To see an example of how this can happen, let's first define a broken filter function.<a class="anchor-link" href="#Spark's-use-of-lazy-evaluation-can-make-debugging-more-difficult-because-code-is-not-always-executed-immediately.-To-see-an-example-of-how-this-can-happen,-let's-first-define-a-broken-filter-function.">&#182;</a></h4><h4 id="Next-we-perform-a-filter()-operation-using-the-broken-filtering-function.--No-error-will-occur-at-this-point-due-to-Spark's-use-of-lazy-evaluation.">Next we perform a <code>filter()</code> operation using the broken filtering function.  No error will occur at this point due to Spark's use of lazy evaluation.<a class="anchor-link" href="#Next-we-perform-a-filter()-operation-using-the-broken-filtering-function.--No-error-will-occur-at-this-point-due-to-Spark's-use-of-lazy-evaluation.">&#182;</a></h4><h4 id="The-filter()-method-will-not-be-executed-until-an-action-operation-is-invoked-on-the-RDD.--We-will-perform-an-action-by-using-the-collect()-method-to-return-a-list-that-contains-all-of-the-elements-in-this-RDD.">The <code>filter()</code> method will not be executed <em>until</em> an action operation is invoked on the RDD.  We will perform an action by using the <code>collect()</code> method to return a list that contains all of the elements in this RDD.<a class="anchor-link" href="#The-filter()-method-will-not-be-executed-until-an-action-operation-is-invoked-on-the-RDD.--We-will-perform-an-action-by-using-the-collect()-method-to-return-a-list-that-contains-all-of-the-elements-in-this-RDD.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[95]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="k">def</span> <span class="nf">brokenTen</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Incorrect implementation of the ten function.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        The `if` statement checks an undefined variable `val` instead of `value`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        value (int): A number.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: Whether `value` is less than ten.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        NameError: The function references `val`, which is not available in the local or global</span>
+<span class="sd">            namespace, so a `NameError` is raised.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+<span class="n">brokenRDD</span> <span class="o">=</span> <span class="n">subRDD</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">brokenTen</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Now we&#39;ll see the error</span>
+<span class="n">brokenRDD</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="-(8b)-Finding-the-bug-"><strong> (8b) Finding the bug </strong><a class="anchor-link" href="#-(8b)-Finding-the-bug-">&#182;</a></h4><h4 id="When-the-filter()-method-is-executed,-Spark-evaluates-the-RDD-by-executing-the-parallelize()-and-filter()-methods.-Since-our-filter()-method-has-an-error-in-the-filtering-function-brokenTen(),-an-error-occurs.">When the <code>filter()</code> method is executed, Spark evaluates the RDD by executing the <code>parallelize()</code> and <code>filter()</code> methods. Since our <code>filter()</code> method has an error in the filtering function <code>brokenTen()</code>, an error occurs.<a class="anchor-link" href="#When-the-filter()-method-is-executed,-Spark-evaluates-the-RDD-by-executing-the-parallelize()-and-filter()-methods.-Since-our-filter()-method-has-an-error-in-the-filtering-function-brokenTen(),-an-error-occurs.">&#182;</a></h4><h4 id="Scroll-through-the-output-&quot;Py4JJavaError-----Traceback-(most-recent-call-last)&quot;-part-of-the-cell-and-first-you-will-see-that-the-line-that-generated-the-error-is-the-collect()-method-line.-There-is-nothing-wrong-with-this-line.-However,-it-is-an-action-and-that-caused-other-methods-to-be-executed.-Continue-scrolling-through-the-Traceback-and-you-will-see-the-following-error-line:">Scroll through the output "Py4JJavaError     Traceback (most recent call last)" part of the cell and first you will see that the line that generated the error is the <code>collect()</code> method line. There is <em>nothing wrong with this line</em>. However, it is an action and that caused other methods to be executed. Continue scrolling through the Traceback and you will see the following error line:<a class="anchor-link" href="#Scroll-through-the-output-&quot;Py4JJavaError-----Traceback-(most-recent-call-last)&quot;-part-of-the-cell-and-first-you-will-see-that-the-line-that-generated-the-error-is-the-collect()-method-line.-There-is-nothing-wrong-with-this-line.-However,-it-is-an-action-and-that-caused-other-methods-to-be-executed.-Continue-scrolling-through-the-Traceback-and-you-will-see-the-following-error-line:">&#182;</a></h4>
+<pre><code>NameError: global name 'val' is not defined
+</code></pre>
+<h4 id="Looking-at-this-error-line,-we-can-see-that-we-used-the-wrong-variable-name-in-our-filtering-function-brokenTen().">Looking at this error line, we can see that we used the wrong variable name in our filtering function <code>brokenTen()</code>.<a class="anchor-link" href="#Looking-at-this-error-line,-we-can-see-that-we-used-the-wrong-variable-name-in-our-filtering-function-brokenTen().">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="-(8c)-Moving-toward-expert-style-"><strong> (8c) Moving toward expert style </strong><a class="anchor-link" href="#-(8c)-Moving-toward-expert-style-">&#182;</a></h4><h4 id="As-you-are-learning-Spark,-I-recommend-that-you-write-your-code-in-the-form:">As you are learning Spark, I recommend that you write your code in the form:<a class="anchor-link" href="#As-you-are-learning-Spark,-I-recommend-that-you-write-your-code-in-the-form:">&#182;</a></h4>
+<pre><code>RDD.transformation1()
+RDD.action1()
+RDD.transformation2()
+RDD.action2()
+</code></pre>
+<h4 id="Using-this-style-will-make-debugging-your-code-much-easier-as-it-makes-errors-easier-to-localize---errors-in-your-transformations-will-occur-when-the-next-action-is-executed.">Using this style will make debugging your code much easier as it makes errors easier to localize - errors in your transformations will occur when the next action is executed.<a class="anchor-link" href="#Using-this-style-will-make-debugging-your-code-much-easier-as-it-makes-errors-easier-to-localize---errors-in-your-transformations-will-occur-when-the-next-action-is-executed.">&#182;</a></h4><h4 id="Once-you-become-more-experienced-with-Spark,-you-can-write-your-code-with-the-form:">Once you become more experienced with Spark, you can write your code with the form:<a class="anchor-link" href="#Once-you-become-more-experienced-with-Spark,-you-can-write-your-code-with-the-form:">&#182;</a></h4>
+<pre><code>RDD.transformation1().transformation2().action()
+</code></pre>
+<h4 id="We-can-also-use-lambda()-functions-instead-of-separately-defined-functions-when-their-use-improves-readability-and-conciseness.">We can also use <code>lambda()</code> functions instead of separately defined functions when their use improves readability and conciseness.<a class="anchor-link" href="#We-can-also-use-lambda()-functions-instead-of-separately-defined-functions-when-their-use-improves-readability-and-conciseness.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[97]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Cleaner code through lambda use</span>
+<span class="n">subRDD</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[97]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[98]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Even better by moving our chain of operators into a single line.</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[98]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="-(8d)-Readability-and-code-style-"><strong> (8d) Readability and code style </strong><a class="anchor-link" href="#-(8d)-Readability-and-code-style-">&#182;</a></h4><h4 id="To-make-the-expert-coding-style-more-readable,-enclose-the-statement-in-parentheses-and-put-each-method,-transformation,-or-action-on-a-separate-line.">To make the expert coding style more readable, enclose the statement in parentheses and put each method, transformation, or action on a separate line.<a class="anchor-link" href="#To-make-the-expert-coding-style-more-readable,-enclose-the-statement-in-parentheses-and-put-each-method,-transformation,-or-action-on-a-separate-line.">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[99]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># Final version</span>
+<span class="p">(</span><span class="n">sc</span>
+ <span class="o">.</span><span class="n">parallelize</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">collect</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[99]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
