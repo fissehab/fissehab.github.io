@@ -4149,7 +4149,7 @@ JFQBAEiSUAUAIElCFQCAJAlVAACS9P8Bo7LoNT6STVwAAAAASUVORK5CYII=
 <span class="n">logLossTest</span> <span class="o">=</span> <span class="n">evaluateResults</span><span class="p">()</span>
 
 <span class="c"># Log loss for the baseline model</span>
-<span class="n">logLossTestBaseline</span> <span class="o">=</span> <span class="c">#complete this</span>
+<span class="n">logLossTestBaseline=hashTestData.map(lambda lp: computeLogLoss(classOneFracTrain, lp.label)).mean()</span>
 
 <span class="k">print</span> <span class="p">(</span><span class="s">&#39;Hashed Features Test Log Loss:</span><span class="se">\n\t</span><span class="s">Baseline = {0:.3f}</span><span class="se">\n\t</span><span class="s">LogReg = {1:.3f}&#39;</span>
       <span class="c"># .format(logLossTestBaseline, logLossTest))</span>

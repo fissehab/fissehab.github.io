@@ -13,5 +13,12 @@ $(document).ready(function() {
   $(".mybanner").mouseleave(function() {
     $(this).css("background-color","#F0F5F5");
   });
+  
+        $(".myjhu").mouseenter(function() {
+    $(this).css("background-color","#E6FFE6");
+  });
+  $(".myjhu").mouseleave(function() {
+    $(this).css("background-color","#CCE680");
+  });
  
 });
