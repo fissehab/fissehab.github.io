@@ -13,4 +13,5 @@ $(document).ready(function() {
   $(".mybanner").mouseleave(function() {
     $(this).css("background-color","#F0F5F5");
   });
+ 
 });
