@@ -20,5 +20,12 @@ $(document).ready(function() {
     $(this).css("background-color","#CCE680");
   });
 
+      
+        $(".myed").mouseenter(function() {
+    $(this).css("background-color","#B2FFFF");
+  });
+  $(".myed").mouseleave(function() {
+    $(this).css("background-color","#f0f0f0");
+  });
  
 });
