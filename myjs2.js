@@ -19,5 +19,6 @@ $(document).ready(function() {
   $(".myjhu").mouseleave(function() {
     $(this).css("background-color","#CCE680");
   });
+
  
 });

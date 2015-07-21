@@ -20,5 +20,14 @@ $(document).ready(function() {
   $(".myjhu").mouseleave(function() {
     $(this).css("background-color","#CCE680");
   });
+  
+  
+    
+        $(".mycert").mouseenter(function() {
+    $(this).css("background-color","#B8FF70");
+  });
+  $(".mycert").mouseleave(function() {
+    $(this).css("background-color","#f0f0f0");
+  });
  
 });
