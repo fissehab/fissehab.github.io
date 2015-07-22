@@ -43,5 +43,12 @@ $(document).ready(function() {
   $(".myhere").mouseleave(function() {
     $(this).css("background-color","white");
   });
+  
+              $(".ds").mouseenter(function() {
+    $(this).css("background-color","#A3FF85");
+  });
+  $(".ds").mouseleave(function() {
+    $(this).css("background-color","white");
+  });
  
 });
