@@ -50,5 +50,10 @@ $(document).ready(function() {
   $(".ds").mouseleave(function() {
     $(this).css("background-color","white");
   });
- 
+               $(".mysk").mouseenter(function() {
+    $(this).css("background-color","#A3FF85");
+  });
+  $(".mysk").mouseleave(function() {
+    $(this).css("background-color","white");
+  });
 });
