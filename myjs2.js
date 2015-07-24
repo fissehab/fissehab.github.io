@@ -28,7 +28,13 @@ $(document).ready(function() {
     $(this).css("background-color","#f0f0f0");
   });
  
- 
+     $(".cvr").mouseenter(function() {
+    $(this).css("background-color","#FFCCCC");
+  });
+  $(".cvr").mouseleave(function() {
+    $(this).css("background-color","#CCE680");
+  });
+  
            $(".mysub").mouseenter(function() {
     $(this).css("background-color","#FFCCCC");
   });

@@ -7,6 +7,14 @@ $(document).ready(function() {
     $(this).css("background-color","#CCE680");
   });
   
+    $(".cvr").mouseenter(function() {
+    $(this).css("background-color","#FFCCCC");
+  });
+  $(".cvr").mouseleave(function() {
+    $(this).css("background-color","#CCE680");
+  });
+  
+  
     $(".mybanner").mouseenter(function() {
     $(this).css("background-color","#66A3FF");
   });
