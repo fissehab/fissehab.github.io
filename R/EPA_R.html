@@ -814,9 +814,7 @@ theme<span class="p">(</span>axis.title.x<span class="o">=</span>element_text<sp
 <div class="prompt input_prompt">In&nbsp;[70]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kp">options</span><span class="p">(</span>repr.plot.width <span class="o">=</span> <span class="m">8</span><span class="p">)</span>
-<span class="kp">options</span><span class="p">(</span>repr.plot.height <span class="o">=</span> <span class="m">5</span><span class="p">)</span>
-
+<div class=" highlight hl-r"><pre>
 baltimore <span class="o">&lt;-</span> NEI<span class="p">[</span>NEI<span class="o">$</span>fips<span class="o">==</span><span class="s">&quot;24510&quot;</span><span class="p">,]</span>
 
 baltimore <span class="o">&lt;-</span> aggregate<span class="p">(</span>Emissions <span class="o">~</span> year <span class="o">+</span> type<span class="p">,</span> baltimore<span class="p">,</span> <span class="kp">sum</span><span class="p">)</span>
