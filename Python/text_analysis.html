@@ -166,9 +166,7 @@ div#notebook {
     });
     </script>
     <!-- End of mathjax configuration -->
-
-	
-		<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -210,10 +208,6 @@ div#notebook {
       </ul>
     </nav>
 
-	
-	
-	
-	
 </head>
 <body>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
@@ -226,7 +220,7 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>version 1.0.3</p>
 <h1><img src="http://spark-mooc.github.io/web-assets/images/ta_Spark-logo-small.png" alt="Spark Logo"> + <img src="http://spark-mooc.github.io/web-assets/images/python-logo-master-v3-TM-flattened_small.png" alt="Python Logo"></h1>
-<h1 id="Text-Analysis-and-Entity-Resolution"><strong>Text Analysis and Entity Resolution</strong><a class="anchor-link" href="#Text-Analysis-and-Entity-Resolution">&#182;</a></h1><h4 id="Entity-resolution-is-a-common,-yet-difficult-problem-in-data-cleaning-and-integration.-This-lab-will-demonstrate-how-we-can-use-Apache-Spark-to-apply-powerful-and-scalable-text-analysis-techniques-and-perform-entity-resolution-across-two-datasets-of-commercial-products.">Entity resolution is a common, yet difficult problem in data cleaning and integration. This lab will demonstrate how we can use Apache Spark to apply powerful and scalable text analysis techniques and perform entity resolution across two datasets of commercial products.<a class="anchor-link" href="#Entity-resolution-is-a-common,-yet-difficult-problem-in-data-cleaning-and-integration.-This-lab-will-demonstrate-how-we-can-use-Apache-Spark-to-apply-powerful-and-scalable-text-analysis-techniques-and-perform-entity-resolution-across-two-datasets-of-commercial-products.">&#182;</a></h4>
+<h1 style="color:blue;text-align:center"id="Text-Analysis-and-Entity-Resolution"><strong>Text Analysis and Entity Resolution</strong><a class="anchor-link" href="#Text-Analysis-and-Entity-Resolution">&#182;</a></h1><h4 id="Entity-resolution-is-a-common,-yet-difficult-problem-in-data-cleaning-and-integration.-This-lab-will-demonstrate-how-we-can-use-Apache-Spark-to-apply-powerful-and-scalable-text-analysis-techniques-and-perform-entity-resolution-across-two-datasets-of-commercial-products.">Entity resolution is a common, yet difficult problem in data cleaning and integration. This lab will demonstrate how we can use Apache Spark to apply powerful and scalable text analysis techniques and perform entity resolution across two datasets of commercial products.<a class="anchor-link" href="#Entity-resolution-is-a-common,-yet-difficult-problem-in-data-cleaning-and-integration.-This-lab-will-demonstrate-how-we-can-use-Apache-Spark-to-apply-powerful-and-scalable-text-analysis-techniques-and-perform-entity-resolution-across-two-datasets-of-commercial-products.">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -483,7 +477,7 @@ amazon: b00004tkvy: noah&apos;s ark activity center (jewel case ages 3-8)  &quot
 <span class="sd">    Returns:</span>
 <span class="sd">        list: a list of tokens</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="nb">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">split_regex</span><span class="p">,</span><span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">string</span><span class="p">:</span> <span class="n">string</span> <span class="o">!=</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">split_regex</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span>
 
 <span class="k">print</span> <span class="n">simpleTokenize</span><span class="p">(</span><span class="n">quickbrownfox</span><span class="p">)</span> <span class="c"># Should give [&#39;a&#39;, &#39;quick&#39;, &#39;brown&#39;, ... ]</span>
 </pre></div>
@@ -571,8 +565,7 @@ amazon: b00004tkvy: noah&apos;s ark activity center (jewel case ages 3-8)  &quot
 <span class="sd">    Returns:</span>
 <span class="sd">        list: a list of tokens without stopwords</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c">#return filter(token for token in simpleTokenize(string) if token not in stopwords)</span>
-    <span class="k">return</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stopwords</span><span class="p">,</span><span class="n">simpleTokenize</span><span class="p">(</span><span class="n">string</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">tokens</span><span class="p">:</span> <span class="n">tokens</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stopwords</span><span class="p">,</span> <span class="n">simpleTokenize</span><span class="p">(</span><span class="n">string</span><span class="p">))</span>
 
 <span class="k">print</span> <span class="n">tokenize</span><span class="p">(</span><span class="n">quickbrownfox</span><span class="p">)</span> <span class="c"># Should give [&#39;quick&#39;, &#39;brown&#39;, ... ]</span>
 </pre></div>
@@ -645,8 +638,8 @@ amazon: b00004tkvy: noah&apos;s ark activity center (jewel case ages 3-8)  &quot
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># TODO: Replace &lt;FILL IN&gt; with appropriate code</span>
-<span class="n">amazonRecToToken</span> <span class="o">=</span> <span class="n">amazonSmall</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">):(</span><span class="n">k</span><span class="p">,</span><span class="n">tokenize</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span>
-<span class="n">googleRecToToken</span> <span class="o">=</span> <span class="n">googleSmall</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">):(</span><span class="n">k</span><span class="p">,</span><span class="n">tokenize</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span>
+<span class="n">amazonRecToToken</span> <span class="o">=</span> <span class="n">amazonSmall</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rec</span><span class="p">:</span> <span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tokenize</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+<span class="n">googleRecToToken</span> <span class="o">=</span> <span class="n">googleSmall</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rec</span><span class="p">:</span> <span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tokenize</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
 
 <span class="k">def</span> <span class="nf">countTokens</span><span class="p">(</span><span class="n">vendorRDD</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Count and return the number of tokens</span>
@@ -655,7 +648,7 @@ amazon: b00004tkvy: noah&apos;s ark activity center (jewel case ages 3-8)  &quot
 <span class="sd">    Returns:</span>
 <span class="sd">        count: count of all tokens</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">vendorRDD</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">):</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">))</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">vendorRDD</span><span class="o">.</span><span class="n">flatMap</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">tokens</span><span class="p">):</span> <span class="n">tokens</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 
 <span class="n">totalTokens</span> <span class="o">=</span> <span class="n">countTokens</span><span class="p">(</span><span class="n">amazonRecToToken</span><span class="p">)</span> <span class="o">+</span> <span class="n">countTokens</span><span class="p">(</span><span class="n">googleRecToToken</span><span class="p">)</span>
 <span class="k">print</span> <span class="s">&#39;There are </span><span class="si">%s</span><span class="s"> tokens in the combined datasets&#39;</span> <span class="o">%</span> <span class="n">totalTokens</span>
@@ -730,7 +723,7 @@ amazon: b00004tkvy: noah&apos;s ark activity center (jewel case ages 3-8)  &quot
 <span class="sd">    Returns:</span>
 <span class="sd">        list: a list of 1 Pair Tuple of record ID and tokens</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">vendorRDD</span><span class="o">.</span><span class="n">takeOrdered</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">vendorRDD</span><span class="o">.</span><span class="n">sortBy</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">tokens</span><span class="p">):</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">))</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">biggestRecordAmazon</span> <span class="o">=</span> <span class="n">findBiggestRecord</span><span class="p">(</span><span class="n">amazonRecToToken</span><span class="p">)</span>
 <span class="k">print</span> <span class="s">&#39;The Amazon record with ID &quot;</span><span class="si">%s</span><span class="s">&quot; has the most tokens (</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">biggestRecordAmazon</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
@@ -830,17 +823,17 @@ amazon: b00004tkvy: noah&apos;s ark activity center (jewel case ages 3-8)  &quot
 <span class="sd">    Returns:</span>
 <span class="sd">        dictionary: a dictionary of tokens to its TF values</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">mydict</span><span class="o">=</span><span class="p">{}</span>
-    <span class="k">for</span> <span class="n">each</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
-      <span class="k">if</span> <span class="n">each</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mydict</span><span class="p">:</span>
-        <span class="n">mydict</span><span class="p">[</span><span class="n">each</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
-      <span class="k">else</span><span class="p">:</span>
-        <span class="n">mydict</span><span class="p">[</span><span class="n">each</span><span class="p">]</span><span class="o">=</span><span class="n">mydict</span><span class="p">[</span><span class="n">each</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span>
-    <span class="n">total</span><span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">mydict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">mydict</span><span class="p">:</span>
-      <span class="n">mydict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">=</span><span class="n">mydict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">mydict</span>
+    <span class="n">tf_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tf_dict</span><span class="p">:</span>
+            <span class="n">tf_dict</span><span class="p">[</span><span class="n">token</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tf_dict</span><span class="p">[</span><span class="n">token</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">tf_norm</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">tf_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">tf_norm</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">*</span> <span class="n">tf_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">/</span> <span class="n">N</span>
+    <span class="k">return</span> <span class="n">tf_norm</span>
 
 <span class="k">print</span> <span class="n">tf</span><span class="p">(</span><span class="n">tokenize</span><span class="p">(</span><span class="n">quickbrownfox</span><span class="p">))</span> <span class="c"># Should give { &#39;quick&#39;: 0.1666 ... }</span>
 </pre></div>
@@ -915,8 +908,7 @@ amazon: b00004tkvy: noah&apos;s ark activity center (jewel case ages 3-8)  &quot
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># TODO: Replace &lt;FILL IN&gt; with appropriate code</span>
-<span class="c">#corpusRDD = amazonRecToToken.fullOuterJoin(googleRecToToken).map(lambda (k,v):(k,v))</span>
-<span class="n">corpusRDD</span> <span class="o">=</span> <span class="n">amazonRecToToken</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">googleRecToToken</span><span class="p">)</span>
+<span class="n">corpusRDD</span> <span class="o">=</span> <span class="n">amazonRecToToken</span> <span class="o">+</span> <span class="n">googleRecToToken</span>
 </pre></div>
 
 </div>
@@ -985,13 +977,11 @@ amazon: b00004tkvy: noah&apos;s ark activity center (jewel case ages 3-8)  &quot
 <span class="sd">    Returns:</span>
 <span class="sd">        RDD: a RDD of (token, IDF value)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">N</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-
-    <span class="n">N</span> <span class="o">=</span><span class="n">corpus</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-    <span class="n">uniqueTokens</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
-    <span class="n">tokenCountPairTuple</span> <span class="o">=</span> <span class="n">uniqueTokens</span><span class="o">.</span><span class="n">flatMap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">reduceByKey</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">:</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span>
-    <span class="n">tokenSumPairTuple</span> <span class="o">=</span> <span class="n">tokenCountPairTuple</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">N</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">tokenSumPairTuple</span><span class="o">.</span><span class="n">sortBy</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">doc</span><span class="p">:</span> <span class="n">doc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+    <span class="n">uniqueTokens</span> <span class="o">=</span> <span class="n">corpus</span><span class="o">.</span><span class="n">flatMap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">doc</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">doc</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+    <span class="n">tokenCountPairTuple</span> <span class="o">=</span> <span class="n">uniqueTokens</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">token</span><span class="p">:</span> <span class="p">(</span><span class="n">token</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">tokenSumPairTuple</span> <span class="o">=</span> <span class="n">tokenCountPairTuple</span><span class="o">.</span><span class="n">reduceByKey</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">:</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">tokenSumPairTuple</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span> <span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="mf">1.</span><span class="o">*</span> <span class="n">N</span> <span class="o">/</span> <span class="n">count</span><span class="p">)))</span>
 
 <span class="n">idfsSmall</span> <span class="o">=</span> <span class="n">idfs</span><span class="p">(</span><span class="n">amazonRecToToken</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">googleRecToToken</span><span class="p">))</span>
 <span class="n">uniqueTokenCount</span> <span class="o">=</span> <span class="n">idfsSmall</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
@@ -1026,6 +1016,7 @@ amazon: b00004tkvy: noah&apos;s ark activity center (jewel case ages 3-8)  &quot
 <div class=" highlight hl-ipython2"><pre><span class="c"># TEST Implement an IDFs function (2c)</span>
 <span class="n">Test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">uniqueTokenCount</span><span class="p">,</span> <span class="mi">4772</span><span class="p">,</span> <span class="s">&#39;incorrect uniqueTokenCount&#39;</span><span class="p">)</span>
 <span class="n">tokenSmallestIdf</span> <span class="o">=</span> <span class="n">idfsSmall</span><span class="o">.</span><span class="n">takeOrdered</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tokenSmallestIdf</span><span class="p">)</span>
 <span class="n">Test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">tokenSmallestIdf</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s">&#39;software&#39;</span><span class="p">,</span> <span class="s">&#39;incorrect smallest IDF token&#39;</span><span class="p">)</span>
 <span class="n">Test</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">tokenSmallestIdf</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mf">4.25531914894</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.0000000001</span><span class="p">,</span>
                 <span class="s">&#39;incorrect smallest IDF value&#39;</span><span class="p">)</span>
@@ -1042,6 +1033,7 @@ amazon: b00004tkvy: noah&apos;s ark activity center (jewel case ages 3-8)  &quot
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>1 test passed.
+(&apos;software&apos;, 4.25531914893617)
 1 test passed.
 1 test passed.
 </pre>
@@ -1309,12 +1301,8 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 <span class="sd">    Returns:</span>
 <span class="sd">        dictionary: a dictionary of records to TF-IDF values</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">tfIdfDict</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">tfs</span> <span class="o">=</span> <span class="n">tf</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
-   
-    <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">tfs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">tfIdfDict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span> <span class="o">*</span> <span class="n">idfs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-    
+    <span class="n">tfIdfDict</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span><span class="o">*</span><span class="n">idfs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">tfs</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
     <span class="k">return</span> <span class="n">tfIdfDict</span>
 
 <span class="n">recb000hkgj8k</span> <span class="o">=</span> <span class="n">amazonRecToToken</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;b000hkgj8k&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">collect</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
@@ -1415,11 +1403,7 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 <span class="sd">    Returns:</span>
 <span class="sd">        dotProd: result of the dot product with the two input dictionaries</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">ans</span><span class="o">=</span><span class="mi">0</span>
-    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">a</span> <span class="p">:</span>
-      <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">b</span><span class="p">:</span>
-       <span class="n">ans</span><span class="o">=</span><span class="n">ans</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="n">item</span><span class="p">]</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">ans</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">v</span><span class="o">*</span><span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">b</span><span class="o">.</span><span class="n">keys</span><span class="p">()])</span>
 
 <span class="k">def</span> <span class="nf">norm</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Compute square root of the dot product</span>
@@ -1428,11 +1412,7 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 <span class="sd">    Returns:</span>
 <span class="sd">        norm: a dictionary of tokens to its TF values</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">v</span><span class="o">=</span><span class="mi">0</span>
-    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-       <span class="n">v</span><span class="o">=</span><span class="n">v</span><span class="o">+</span><span class="p">(</span><span class="n">item</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">v</span><span class="o">**</span><span class="mf">0.5</span>
-
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dotprod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">cossim</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Compute cosine similarity</span>
@@ -1443,7 +1423,7 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 <span class="sd">        cossim: dot product of two dictionaries divided by the norm of the first dictionary and</span>
 <span class="sd">                then by the norm of the second dictionary</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">dotprod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">dotprod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
 
 <span class="n">testVec1</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;foo&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&#39;bar&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&#39;baz&#39;</span><span class="p">:</span> <span class="mi">5</span> <span class="p">}</span>
 <span class="n">testVec2</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;foo&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;bar&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&#39;baz&#39;</span><span class="p">:</span> <span class="mi">20</span> <span class="p">}</span>
@@ -1529,10 +1509,8 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 <span class="sd">    Returns:</span>
 <span class="sd">        cossim: cosine similarity value</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">w1</span> <span class="o">=</span> <span class="n">tfidf</span><span class="p">(</span><span class="n">tokenize</span><span class="p">(</span><span class="n">string1</span><span class="p">),</span><span class="n">idfsDictionary</span><span class="p">)</span>
-    <span class="n">w2</span> <span class="o">=</span> <span class="n">tfidf</span><span class="p">(</span><span class="n">tokenize</span><span class="p">(</span><span class="n">string2</span><span class="p">),</span><span class="n">idfsDictionary</span><span class="p">)</span>
-    
-
+    <span class="n">w1</span> <span class="o">=</span> <span class="n">tfidf</span><span class="p">(</span><span class="n">tokenize</span><span class="p">(</span><span class="n">string1</span><span class="p">),</span> <span class="n">idfsDictionary</span><span class="p">)</span>
+    <span class="n">w2</span> <span class="o">=</span> <span class="n">tfidf</span><span class="p">(</span><span class="n">tokenize</span><span class="p">(</span><span class="n">string2</span><span class="p">),</span> <span class="n">idfsDictionary</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">cossim</span><span class="p">(</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">)</span>
 
 <span class="n">cossimAdobe</span> <span class="o">=</span> <span class="n">cosineSimilarity</span><span class="p">(</span><span class="s">&#39;Adobe Photoshop&#39;</span><span class="p">,</span>
@@ -1614,6 +1592,7 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
               <span class="o">.</span><span class="n">cartesian</span><span class="p">(</span><span class="n">amazonSmall</span><span class="p">)</span>
               <span class="o">.</span><span class="n">cache</span><span class="p">())</span>
 
+
 <span class="k">def</span> <span class="nf">computeSimilarity</span><span class="p">(</span><span class="n">record</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Compute similarity on a combination record</span>
 <span class="sd">    Args:</span>
@@ -1623,7 +1602,6 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">googleRec</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">amazonRec</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    
     <span class="n">googleURL</span> <span class="o">=</span> <span class="n">googleRec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">amazonID</span> <span class="o">=</span> <span class="n">amazonRec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">googleValue</span> <span class="o">=</span> <span class="n">googleRec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -1631,8 +1609,9 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
     <span class="n">cs</span> <span class="o">=</span> <span class="n">cosineSimilarity</span><span class="p">(</span><span class="n">googleValue</span><span class="p">,</span> <span class="n">amazonValue</span><span class="p">,</span> <span class="n">idfsSmallWeights</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">googleURL</span><span class="p">,</span> <span class="n">amazonID</span><span class="p">,</span> <span class="n">cs</span><span class="p">)</span>
 
-
-<span class="n">similarities</span> <span class="o">=</span> <span class="p">(</span><span class="n">crossSmall</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">computeSimilarity</span><span class="p">)</span><span class="o">.</span><span class="n">cache</span><span class="p">())</span>
+<span class="n">similarities</span> <span class="o">=</span> <span class="p">(</span><span class="n">crossSmall</span>
+                <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rec</span><span class="p">:</span> <span class="n">computeSimilarity</span><span class="p">(</span><span class="n">rec</span><span class="p">))</span>
+                <span class="o">.</span><span class="n">cache</span><span class="p">())</span>
 
 <span class="k">def</span> <span class="nf">similar</span><span class="p">(</span><span class="n">amazonID</span><span class="p">,</span> <span class="n">googleURL</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Return similarity value</span>
@@ -1727,19 +1706,17 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">googleRec</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">amazonRec</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    
-    <span class="n">googleURL</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">amazonID</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">googleValue</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">amazonValue</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-    
+    <span class="n">googleURL</span> <span class="o">=</span> <span class="n">googleRec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">amazonID</span> <span class="o">=</span> <span class="n">amazonRec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">googleValue</span> <span class="o">=</span> <span class="n">googleRec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">amazonValue</span> <span class="o">=</span> <span class="n">amazonRec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">cs</span> <span class="o">=</span> <span class="n">cosineSimilarity</span><span class="p">(</span><span class="n">googleValue</span><span class="p">,</span> <span class="n">amazonValue</span><span class="p">,</span> <span class="n">idfsSmallBroadcast</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-  
     <span class="k">return</span> <span class="p">(</span><span class="n">googleURL</span><span class="p">,</span> <span class="n">amazonID</span><span class="p">,</span> <span class="n">cs</span><span class="p">)</span>
 
 <span class="n">idfsSmallBroadcast</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">idfsSmallWeights</span><span class="p">)</span>
-
-<span class="n">similaritiesBroadcast</span> <span class="o">=</span> <span class="p">(</span><span class="n">crossSmall</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">computeSimilarityBroadcast</span><span class="p">)</span> <span class="o">.</span><span class="n">cache</span><span class="p">())</span>
+<span class="n">similaritiesBroadcast</span> <span class="o">=</span> <span class="p">(</span><span class="n">crossSmall</span>
+                         <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rec</span><span class="p">:</span> <span class="n">computeSimilarityBroadcast</span><span class="p">(</span><span class="n">rec</span><span class="p">))</span>
+                         <span class="o">.</span><span class="n">cache</span><span class="p">())</span>
 
 <span class="k">def</span> <span class="nf">similarBroadcast</span><span class="p">(</span><span class="n">amazonID</span><span class="p">,</span> <span class="n">googleURL</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Return similarity value, computed using Broadcast variable</span>
@@ -1821,7 +1798,7 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">GOLDFILE_PATTERN</span> <span class="o">=</span> <span class="s">&#39;^(.+),(.+)&#39;</span>
@@ -1911,31 +1888,21 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># TODO: Replace &lt;FILL IN&gt; with appropriate code</span>
-
-<span class="n">sims</span> <span class="o">=</span> <span class="n">similaritiesBroadcast</span><span class="c">#.map(lambda x: (x[1]+&quot; &quot;+x[0],x[2]))</span>
+<span class="n">sims</span> <span class="o">=</span> <span class="n">similaritiesBroadcast</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rec</span><span class="p">:</span> <span class="p">(</span><span class="s">&quot;{0} {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="n">rec</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
 
 
 <span class="n">trueDupsRDD</span> <span class="o">=</span> <span class="p">(</span><span class="n">sims</span>
-               <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">amazonId</span><span class="p">,</span><span class="n">googleId</span><span class="p">,</span><span class="n">cosineScore</span><span class="p">)</span> <span class="p">:</span> 
-                    <span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">removeQuotes</span><span class="p">(</span><span class="n">googleId</span><span class="p">),</span> <span class="n">removeQuotes</span><span class="p">(</span><span class="n">amazonId</span><span class="p">)),</span><span class="n">cosineScore</span><span class="p">))</span>
                <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">goldStandard</span><span class="p">))</span>
-
-<span class="n">trueDupsCount</span> <span class="o">=</span> <span class="n">trueDupsRDD</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="n">value</span><span class="p">)</span> <span class="p">:</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">reduceByKey</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="n">count</span><span class="p">)</span> <span class="p">:</span> <span class="n">count</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-
-
-<span class="n">avgSimDups</span> <span class="o">=</span> <span class="n">trueDupsRDD</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">ID</span><span class="p">,(</span><span class="n">cosScore</span><span class="p">,</span><span class="n">goldStr</span><span class="p">)):(</span><span class="n">ID</span><span class="p">,</span><span class="n">cosScore</span><span class="p">))</span><span class="o">.</span><span class="n">reduceByKey</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="n">score</span><span class="p">):</span><span class="n">score</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">trueDupsCount</span><span class="p">)</span>
-
+<span class="n">trueDupsCount</span> <span class="o">=</span> <span class="n">trueDupsRDD</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">avgSimDups</span> <span class="o">=</span> <span class="n">trueDupsRDD</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rec</span><span class="p">:</span> <span class="n">rec</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
 <span class="n">nonDupsRDD</span> <span class="o">=</span> <span class="p">(</span><span class="n">sims</span>
-               <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">amazonID</span><span class="p">,</span><span class="n">googleID</span><span class="p">,</span><span class="n">cosineScore</span><span class="p">):(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> 
-                <span class="p">(</span><span class="n">removeQuotes</span><span class="p">(</span><span class="n">googleID</span><span class="p">),</span><span class="n">removeQuotes</span><span class="p">(</span><span class="n">amazonID</span><span class="p">)),</span><span class="n">cosineScore</span><span class="p">))</span>
-               <span class="o">.</span><span class="n">subtractByKey</span><span class="p">(</span><span class="n">goldStandard</span><span class="p">))</span>
-<span class="n">avgSimNon</span> <span class="o">=</span> <span class="p">(</span><span class="n">nonDupsRDD</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">))</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">nonDupsRDD</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
-
+              <span class="o">.</span><span class="n">subtractByKey</span><span class="p">(</span><span class="n">trueDupsRDD</span><span class="p">))</span>
+<span class="n">avgSimNon</span> <span class="o">=</span> <span class="n">nonDupsRDD</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rec</span><span class="p">:</span> <span class="n">rec</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
 <span class="k">print</span> <span class="s">&#39;There are </span><span class="si">%s</span><span class="s"> true duplicates.&#39;</span> <span class="o">%</span> <span class="n">trueDupsCount</span>
 <span class="k">print</span> <span class="s">&#39;The average similarity of true duplicates is </span><span class="si">%s</span><span class="s">.&#39;</span> <span class="o">%</span> <span class="n">avgSimDups</span>
@@ -1946,9 +1913,26 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>There are 146 true duplicates.
+The average similarity of true duplicates is 0.264332573435.
+And for non duplicates, it is 0.00123476304656.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># TEST Perform a Gold Standard evaluation (3e)</span>
@@ -1958,6 +1942,22 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1 test passed.
+1 test passed.
+1 test passed.
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -1984,12 +1984,12 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># TODO: Replace &lt;FILL IN&gt; with appropriate code</span>
-<span class="n">amazonFullRecToToken</span> <span class="o">=</span> <span class="n">amazon</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">):(</span><span class="n">k</span><span class="p">,</span><span class="n">tokenize</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span>
-<span class="n">googleFullRecToToken</span> <span class="o">=</span> <span class="n">google</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">):(</span><span class="n">k</span><span class="p">,</span><span class="n">tokenize</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span>
+<span class="n">amazonFullRecToToken</span> <span class="o">=</span> <span class="n">amazon</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rec</span><span class="p">:</span> <span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tokenize</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+<span class="n">googleFullRecToToken</span> <span class="o">=</span> <span class="n">google</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rec</span><span class="p">:</span> <span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tokenize</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
 <span class="k">print</span> <span class="s">&#39;Amazon full dataset is </span><span class="si">%s</span><span class="s"> products, Google full dataset is </span><span class="si">%s</span><span class="s"> products&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">amazonFullRecToToken</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span>
                                                                                     <span class="n">googleFullRecToToken</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
 </pre></div>
@@ -2015,7 +2015,7 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># TEST Tokenize the full dataset (4a)</span>
@@ -2060,23 +2060,22 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># TODO: Replace &lt;FILL IN&gt; with appropriate code</span>
-<span class="n">fullCorpusRDD</span> <span class="o">=</span> <span class="n">amazonFullRecToToken</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">googleFullRecToToken</span><span class="p">)</span>
+<span class="n">fullCorpusRDD</span> <span class="o">=</span> <span class="n">amazonFullRecToToken</span> <span class="o">+</span> <span class="n">googleFullRecToToken</span>
 <span class="n">idfsFull</span> <span class="o">=</span> <span class="n">idfs</span><span class="p">(</span><span class="n">fullCorpusRDD</span><span class="p">)</span>
 <span class="n">idfsFullCount</span> <span class="o">=</span> <span class="n">idfsFull</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 <span class="k">print</span> <span class="s">&#39;There are </span><span class="si">%s</span><span class="s"> unique tokens in the full datasets.&#39;</span> <span class="o">%</span> <span class="n">idfsFullCount</span>
 
 <span class="c"># Recompute IDFs for full dataset</span>
-<span class="n">idfsFullWeights</span> <span class="o">=</span> <span class="n">tfidf</span><span class="p">(</span><span class="n">fullCorpusRDD</span><span class="o">.</span><span class="n">flatMap</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">row</span><span class="p">):(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span><span class="o">.</span><span class="n">collect</span><span class="p">(),</span><span class="n">idfsFull</span><span class="o">.</span><span class="n">collectAsMap</span><span class="p">())</span>
+<span class="n">idfsFullWeights</span> <span class="o">=</span> <span class="n">idfsFull</span><span class="o">.</span><span class="n">collectAsMap</span><span class="p">()</span>
 <span class="n">idfsFullBroadcast</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">idfsFullWeights</span><span class="p">)</span>
 
-<span class="c"># Pre-compute TF-IDF weights.  Build mappings from record ID weight vector.</span>
-
-<span class="n">amazonWeightsRDD</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">FILL</span> <span class="n">IN</span><span class="o">&gt;</span>
-<span class="n">googleWeightsRDD</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">FILL</span> <span class="n">IN</span><span class="o">&gt;</span>
+<span class="c"># # Pre-compute TF-IDF weights.  Build mappings from record ID weight vector.</span>
+<span class="n">amazonWeightsRDD</span> <span class="o">=</span> <span class="n">amazonFullRecToToken</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rec</span><span class="p">:</span> <span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">tfidf</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">idfsFullBroadcast</span><span class="o">.</span><span class="n">value</span><span class="p">)))</span>
+<span class="n">googleWeightsRDD</span> <span class="o">=</span> <span class="n">googleFullRecToToken</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rec</span><span class="p">:</span> <span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">tfidf</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">idfsFullBroadcast</span><span class="o">.</span><span class="n">value</span><span class="p">)))</span>
 <span class="k">print</span> <span class="s">&#39;There are </span><span class="si">%s</span><span class="s"> Amazon weights and </span><span class="si">%s</span><span class="s"> Google weights.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">amazonWeightsRDD</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span>
                                                               <span class="n">googleWeightsRDD</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
 </pre></div>
@@ -2092,14 +2091,10 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>There are 17078 unique tokens in the full datasets.
+There are 1363 Amazon weights and 3226 Google weights.
 </pre>
 </div>
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_text output_error">
-<pre>
-
 
 </div>
 </div>
@@ -2107,13 +2102,264 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># TEST Compute IDFs and TF-IDFs for the full datasets (4b)</span>
 <span class="n">Test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">idfsFullCount</span><span class="p">,</span> <span class="mi">17078</span><span class="p">,</span> <span class="s">&#39;incorrect idfsFullCount&#39;</span><span class="p">)</span>
 <span class="n">Test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">amazonWeightsRDD</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="mi">1363</span><span class="p">,</span> <span class="s">&#39;incorrect amazonWeightsRDD.count()&#39;</span><span class="p">)</span>
 <span class="n">Test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">googleWeightsRDD</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="mi">3226</span><span class="p">,</span> <span class="s">&#39;incorrect googleWeightsRDD.count()&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1 test passed.
+1 test passed.
+1 test passed.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="(4c)-Compute-Norms-for-the-weights-from-the-full-datasets"><strong>(4c) Compute Norms for the weights from the full datasets</strong><a class="anchor-link" href="#(4c)-Compute-Norms-for-the-weights-from-the-full-datasets">&#182;</a></h3><h4 id="We-will-reuse-your-code-from-above-to-compute-norms-of-the-IDF-weights-for-the-complete-combined-dataset.">We will reuse your code from above to compute norms of the IDF weights for the complete combined dataset.<a class="anchor-link" href="#We-will-reuse-your-code-from-above-to-compute-norms-of-the-IDF-weights-for-the-complete-combined-dataset.">&#182;</a></h4><h4 id="The-steps-you-should-perform-are:">The steps you should perform are:<a class="anchor-link" href="#The-steps-you-should-perform-are:">&#182;</a></h4><ul>
+<li>#### Create two collections, one for each of the full Amazon and Google datasets, where IDs/URLs map to the norm of the associated TF-IDF weighted token vectors.</li>
+<li>#### Convert each collection into a broadcast variable, containing a dictionary of the norm of IDF weights for the full dataset</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># TODO: Replace &lt;FILL IN&gt; with appropriate code</span>
+<span class="n">amazonNorms</span> <span class="o">=</span> <span class="n">amazonWeightsRDD</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">norm</span><span class="p">(</span><span class="n">weights</span><span class="p">)))</span>                                 
+<span class="n">amazonNormsBroadcast</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">amazonNorms</span><span class="o">.</span><span class="n">collect</span><span class="p">())</span>
+<span class="n">googleNorms</span> <span class="o">=</span> <span class="n">googleWeightsRDD</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">norm</span><span class="p">(</span><span class="n">weights</span><span class="p">)))</span>
+<span class="n">googleNormsBroadcast</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">googleNorms</span><span class="o">.</span><span class="n">collect</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># TEST Compute Norms for the weights from the full datasets (4c)</span>
+<span class="n">Test</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">amazonNormsBroadcast</span><span class="p">,</span> <span class="n">Broadcast</span><span class="p">),</span> <span class="s">&#39;incorrect amazonNormsBroadcast&#39;</span><span class="p">)</span>
+<span class="n">Test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">amazonNormsBroadcast</span><span class="o">.</span><span class="n">value</span><span class="p">),</span> <span class="mi">1363</span><span class="p">,</span> <span class="s">&#39;incorrect amazonNormsBroadcast.value&#39;</span><span class="p">)</span>
+<span class="n">Test</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">googleNormsBroadcast</span><span class="p">,</span> <span class="n">Broadcast</span><span class="p">),</span> <span class="s">&#39;incorrect googleNormsBroadcast&#39;</span><span class="p">)</span>
+<span class="n">Test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">googleNormsBroadcast</span><span class="o">.</span><span class="n">value</span><span class="p">),</span> <span class="mi">3226</span><span class="p">,</span> <span class="s">&#39;incorrect googleNormsBroadcast.value&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1 test passed.
+1 test passed.
+1 test passed.
+1 test passed.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="(4d)-Create-inverted-indicies-from-the-full-datasets"><strong>(4d) Create inverted indicies from the full datasets</strong><a class="anchor-link" href="#(4d)-Create-inverted-indicies-from-the-full-datasets">&#182;</a></h3><h4 id="Build-inverted-indices-of-both-data-sources.">Build inverted indices of both data sources.<a class="anchor-link" href="#Build-inverted-indices-of-both-data-sources.">&#182;</a></h4><h4 id="The-steps-you-should-perform-are:">The steps you should perform are:<a class="anchor-link" href="#The-steps-you-should-perform-are:">&#182;</a></h4><ul>
+<li>#### Create an invert function that given a pair of (ID/URL, TF-IDF weighted token vector), returns a list of pairs of (token, ID/URL). Recall that the TF-IDF weighted token vector is a Python dictionary with keys that are tokens and values that are weights.</li>
+<li>#### Use your invert function to convert the full Amazon and Google TF-IDF weighted token vector datasets into two RDDs where each element is a pair of a token and an ID/URL that contain that token. These are inverted indicies.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># TODO: Replace &lt;FILL IN&gt; with appropriate code</span>
+<span class="k">def</span> <span class="nf">invert</span><span class="p">(</span><span class="n">record</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Invert (ID, tokens) to a list of (token, ID)</span>
+<span class="sd">    Args:</span>
+<span class="sd">        record: a pair, (ID, token vector)</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        pairs: a list of pairs of token to ID</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">id_url</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">token</span><span class="p">,</span> <span class="n">id_url</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span> <span class="ow">in</span> <span class="n">weights</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">pairs</span><span class="p">)</span>
+
+<span class="n">amazonInvPairsRDD</span> <span class="o">=</span> <span class="p">(</span><span class="n">amazonWeightsRDD</span>
+                    <span class="o">.</span><span class="n">flatMap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rec</span><span class="p">:</span> <span class="n">invert</span><span class="p">(</span><span class="n">rec</span><span class="p">))</span>
+                    <span class="o">.</span><span class="n">cache</span><span class="p">())</span>
+
+<span class="n">googleInvPairsRDD</span> <span class="o">=</span> <span class="p">(</span><span class="n">googleWeightsRDD</span>
+                    <span class="o">.</span><span class="n">flatMap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rec</span><span class="p">:</span> <span class="n">invert</span><span class="p">(</span><span class="n">rec</span><span class="p">))</span>
+                    <span class="o">.</span><span class="n">cache</span><span class="p">())</span>
+
+<span class="k">print</span> <span class="s">&#39;There are </span><span class="si">%s</span><span class="s"> Amazon inverted pairs and </span><span class="si">%s</span><span class="s"> Google inverted pairs.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">amazonInvPairsRDD</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span>
+                                                                            <span class="n">googleInvPairsRDD</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>There are 111387 Amazon inverted pairs and 77678 Google inverted pairs.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># TEST Create inverted indicies from the full datasets (4d)</span>
+<span class="n">invertedPair</span> <span class="o">=</span> <span class="n">invert</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;foo&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">invertedPair</span><span class="p">)</span>
+<span class="n">Test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">invertedPair</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;incorrect invert result&#39;</span><span class="p">)</span>
+<span class="n">Test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">amazonInvPairsRDD</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="mi">111387</span><span class="p">,</span> <span class="s">&#39;incorrect amazonInvPairsRDD.count()&#39;</span><span class="p">)</span>
+<span class="n">Test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">googleInvPairsRDD</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="mi">77678</span><span class="p">,</span> <span class="s">&#39;incorrect googleInvPairsRDD.count()&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[(&apos;foo&apos;, 1)]
+1 test passed.
+1 test passed.
+1 test passed.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="(4e)-Identify-common-tokens-from-the-full-dataset"><strong>(4e) Identify common tokens from the full dataset</strong><a class="anchor-link" href="#(4e)-Identify-common-tokens-from-the-full-dataset">&#182;</a></h3><h4 id="We-are-now-in-position-to-efficiently-perform-ER-on-the-full-datasets.-Implement-the-following-algorithm-to-build-an-RDD-that-maps-a-pair-of-(ID,-URL)-to-a-list-of-tokens-they-share-in-common:">We are now in position to efficiently perform ER on the full datasets. Implement the following algorithm to build an RDD that maps a pair of (ID, URL) to a list of tokens they share in common:<a class="anchor-link" href="#We-are-now-in-position-to-efficiently-perform-ER-on-the-full-datasets.-Implement-the-following-algorithm-to-build-an-RDD-that-maps-a-pair-of-(ID,-URL)-to-a-list-of-tokens-they-share-in-common:">&#182;</a></h4><ul>
+<li>#### Using the two inverted indicies (RDDs where each element is a pair of a token and an ID or URL that contains that token), create a new RDD that contains only tokens that appear in both datasets. This will yield an RDD of pairs of (token, iterable(ID, URL)).</li>
+<li>#### We need a mapping from (ID, URL) to token, so create a function that will swap the elements of the RDD you just created to create this new RDD consisting of ((ID, URL), token) pairs.</li>
+<li>#### Finally, create an RDD consisting of pairs mapping (ID, URL) to all the tokens the pair shares in common</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># TODO: Replace &lt;FILL IN&gt; with appropriate code</span>
+<span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="n">record</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Swap (token, (ID, URL)) to ((ID, URL), token)</span>
+<span class="sd">    Args:</span>
+<span class="sd">        record: a pair, (token, (ID, URL))</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        pair: ((ID, URL), token)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">token</span><span class="p">)</span>
+
+<span class="n">commonTokens</span> <span class="o">=</span> <span class="p">(</span><span class="n">amazonInvPairsRDD</span>
+                <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">googleInvPairsRDD</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rec</span><span class="p">:</span> <span class="n">swap</span><span class="p">(</span><span class="n">rec</span><span class="p">))</span>
+                <span class="o">.</span><span class="n">groupByKey</span><span class="p">()</span>
+                <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">rec</span><span class="p">:</span> <span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+                <span class="o">.</span><span class="n">cache</span><span class="p">())</span>
+
+<span class="k">print</span> <span class="s">&#39;Found </span><span class="si">%d</span><span class="s"> common tokens&#39;</span> <span class="o">%</span> <span class="n">commonTokens</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Found 2441100 common tokens
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span class="c"># TEST Identify common tokens from the full dataset (4e)</span>
+<span class="n">Test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">commonTokens</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="mi">2441100</span><span class="p">,</span> <span class="s">&#39;incorrect commonTokens.count()&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2140,174 +2386,6 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="(4c)-Compute-Norms-for-the-weights-from-the-full-datasets"><strong>(4c) Compute Norms for the weights from the full datasets</strong><a class="anchor-link" href="#(4c)-Compute-Norms-for-the-weights-from-the-full-datasets">&#182;</a></h3><h4 id="We-will-reuse-your-code-from-above-to-compute-norms-of-the-IDF-weights-for-the-complete-combined-dataset.">We will reuse your code from above to compute norms of the IDF weights for the complete combined dataset.<a class="anchor-link" href="#We-will-reuse-your-code-from-above-to-compute-norms-of-the-IDF-weights-for-the-complete-combined-dataset.">&#182;</a></h4><h4 id="The-steps-you-should-perform-are:">The steps you should perform are:<a class="anchor-link" href="#The-steps-you-should-perform-are:">&#182;</a></h4><ul>
-<li>#### Create two collections, one for each of the full Amazon and Google datasets, where IDs/URLs map to the norm of the associated TF-IDF weighted token vectors.</li>
-<li>#### Convert each collection into a broadcast variable, containing a dictionary of the norm of IDF weights for the full dataset</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="c"># TODO: Replace &lt;FILL IN&gt; with appropriate code</span>
-
-<span class="n">amazonNorms</span> <span class="o">=</span> <span class="n">amazonWeightsRDD</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">norm</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
-<span class="n">amazonNormsBroadcast</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">amazonNorms</span><span class="o">.</span><span class="n">collectAsMap</span><span class="p">())</span>
-<span class="n">googleNorms</span> <span class="o">=</span> <span class="n">googleWeightsRDD</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">norm</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
-<span class="n">googleNormsBroadcast</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">googleNorms</span><span class="o">.</span><span class="n">collectAsMap</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[81]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="c"># TEST Compute Norms for the weights from the full datasets (4c)</span>
-<span class="n">Test</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">amazonNormsBroadcast</span><span class="p">,</span> <span class="n">Broadcast</span><span class="p">),</span> <span class="s">&#39;incorrect amazonNormsBroadcast&#39;</span><span class="p">)</span>
-<span class="n">Test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">amazonNormsBroadcast</span><span class="o">.</span><span class="n">value</span><span class="p">),</span> <span class="mi">1363</span><span class="p">,</span> <span class="s">&#39;incorrect amazonNormsBroadcast.value&#39;</span><span class="p">)</span>
-<span class="n">Test</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">googleNormsBroadcast</span><span class="p">,</span> <span class="n">Broadcast</span><span class="p">),</span> <span class="s">&#39;incorrect googleNormsBroadcast&#39;</span><span class="p">)</span>
-<span class="n">Test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">googleNormsBroadcast</span><span class="o">.</span><span class="n">value</span><span class="p">),</span> <span class="mi">3226</span><span class="p">,</span> <span class="s">&#39;incorrect googleNormsBroadcast.value&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="(4d)-Create-inverted-indicies-from-the-full-datasets"><strong>(4d) Create inverted indicies from the full datasets</strong><a class="anchor-link" href="#(4d)-Create-inverted-indicies-from-the-full-datasets">&#182;</a></h3><h4 id="Build-inverted-indices-of-both-data-sources.">Build inverted indices of both data sources.<a class="anchor-link" href="#Build-inverted-indices-of-both-data-sources.">&#182;</a></h4><h4 id="The-steps-you-should-perform-are:">The steps you should perform are:<a class="anchor-link" href="#The-steps-you-should-perform-are:">&#182;</a></h4><ul>
-<li>#### Create an invert function that given a pair of (ID/URL, TF-IDF weighted token vector), returns a list of pairs of (token, ID/URL). Recall that the TF-IDF weighted token vector is a Python dictionary with keys that are tokens and values that are weights.</li>
-<li>#### Use your invert function to convert the full Amazon and Google TF-IDF weighted token vector datasets into two RDDs where each element is a pair of a token and an ID/URL that contain that token. These are inverted indicies.</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="c"># TODO: Replace &lt;FILL IN&gt; with appropriate code</span>
-<span class="k">def</span> <span class="nf">invert</span><span class="p">(</span><span class="n">record</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Invert (ID, tokens) to a list of (token, ID)</span>
-<span class="sd">    Args:</span>
-<span class="sd">        record: a pair, (ID, token vector)</span>
-<span class="sd">    Returns:</span>
-<span class="sd">        pairs: a list of pairs of token to ID</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="o">&lt;</span><span class="n">FILL</span> <span class="n">IN</span><span class="o">&gt;</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">pairs</span><span class="p">)</span>
-
-<span class="n">amazonInvPairsRDD</span> <span class="o">=</span> <span class="p">(</span><span class="n">amazonWeightsRDD</span>
-                    <span class="o">.&lt;</span><span class="n">FILL</span> <span class="n">IN</span><span class="o">&gt;</span>
-                    <span class="o">.</span><span class="n">cache</span><span class="p">())</span>
-
-<span class="n">googleInvPairsRDD</span> <span class="o">=</span> <span class="p">(</span><span class="n">googleWeightsRDD</span>
-                    <span class="o">.&lt;</span><span class="n">FILL</span> <span class="n">IN</span><span class="o">&gt;</span>
-                    <span class="o">.</span><span class="n">cache</span><span class="p">())</span>
-
-<span class="k">print</span> <span class="s">&#39;There are </span><span class="si">%s</span><span class="s"> Amazon inverted pairs and </span><span class="si">%s</span><span class="s"> Google inverted pairs.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">amazonInvPairsRDD</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span>
-                                                                            <span class="n">googleInvPairsRDD</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="c"># TEST Create inverted indicies from the full datasets (4d)</span>
-<span class="n">invertedPair</span> <span class="o">=</span> <span class="n">invert</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;foo&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}))</span>
-<span class="n">Test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">invertedPair</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;incorrect invert result&#39;</span><span class="p">)</span>
-<span class="n">Test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">amazonInvPairsRDD</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="mi">111387</span><span class="p">,</span> <span class="s">&#39;incorrect amazonInvPairsRDD.count()&#39;</span><span class="p">)</span>
-<span class="n">Test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">googleInvPairsRDD</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="mi">77678</span><span class="p">,</span> <span class="s">&#39;incorrect googleInvPairsRDD.count()&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="(4e)-Identify-common-tokens-from-the-full-dataset"><strong>(4e) Identify common tokens from the full dataset</strong><a class="anchor-link" href="#(4e)-Identify-common-tokens-from-the-full-dataset">&#182;</a></h3><h4 id="We-are-now-in-position-to-efficiently-perform-ER-on-the-full-datasets.-Implement-the-following-algorithm-to-build-an-RDD-that-maps-a-pair-of-(ID,-URL)-to-a-list-of-tokens-they-share-in-common:">We are now in position to efficiently perform ER on the full datasets. Implement the following algorithm to build an RDD that maps a pair of (ID, URL) to a list of tokens they share in common:<a class="anchor-link" href="#We-are-now-in-position-to-efficiently-perform-ER-on-the-full-datasets.-Implement-the-following-algorithm-to-build-an-RDD-that-maps-a-pair-of-(ID,-URL)-to-a-list-of-tokens-they-share-in-common:">&#182;</a></h4><ul>
-<li>#### Using the two inverted indicies (RDDs where each element is a pair of a token and an ID or URL that contains that token), create a new RDD that contains only tokens that appear in both datasets. This will yield an RDD of pairs of (token, iterable(ID, URL)).</li>
-<li>#### We need a mapping from (ID, URL) to token, so create a function that will swap the elements of the RDD you just created to create this new RDD consisting of ((ID, URL), token) pairs.</li>
-<li>#### Finally, create an RDD consisting of pairs mapping (ID, URL) to all the tokens the pair shares in common</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="c"># TODO: Replace &lt;FILL IN&gt; with appropriate code</span>
-<span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="n">record</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Swap (token, (ID, URL)) to ((ID, URL), token)</span>
-<span class="sd">    Args:</span>
-<span class="sd">        record: a pair, (token, (ID, URL))</span>
-<span class="sd">    Returns:</span>
-<span class="sd">        pair: ((ID, URL), token)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">token</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">FILL</span> <span class="n">IN</span><span class="o">&gt;</span>
-    <span class="n">keys</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">FILL</span> <span class="n">IN</span><span class="o">&gt;</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">token</span><span class="p">)</span>
-
-<span class="n">commonTokens</span> <span class="o">=</span> <span class="p">(</span><span class="n">amazonInvPairsRDD</span>
-                <span class="o">.&lt;</span><span class="n">FILL</span> <span class="n">IN</span><span class="o">&gt;</span>
-                <span class="o">.</span><span class="n">cache</span><span class="p">())</span>
-
-<span class="k">print</span> <span class="s">&#39;Found </span><span class="si">%d</span><span class="s"> common tokens&#39;</span> <span class="o">%</span> <span class="n">commonTokens</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="c"># TEST Identify common tokens from the full dataset (4e)</span>
-<span class="n">Test</span><span class="o">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">commonTokens</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="mi">2441100</span><span class="p">,</span> <span class="s">&#39;incorrect commonTokens.count()&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="(4f)-Identify-common-tokens-from-the-full-dataset"><strong>(4f) Identify common tokens from the full dataset</strong><a class="anchor-link" href="#(4f)-Identify-common-tokens-from-the-full-dataset">&#182;</a></h3><h4 id="Use-the-data-structures-from-parts-(4a)-and-(4e)-to-build-a-dictionary-to-map-record-pairs-to-cosine-similarity-scores.">Use the data structures from parts <strong>(4a)</strong> and <strong>(4e)</strong> to build a dictionary to map record pairs to cosine similarity scores.<a class="anchor-link" href="#Use-the-data-structures-from-parts-(4a)-and-(4e)-to-build-a-dictionary-to-map-record-pairs-to-cosine-similarity-scores.">&#182;</a></h4><h4 id="The-steps-you-should-perform-are:">The steps you should perform are:<a class="anchor-link" href="#The-steps-you-should-perform-are:">&#182;</a></h4><ul>
 <li>#### Create two broadcast dictionaries from the amazonWeights and googleWeights RDDs</li>
 <li>#### Create a <code>fastCosinesSimilarity</code> function that takes in a record consisting of the pair ((Amazon ID, Google URL), tokens list) and computes the sum for each of the tokens in the token list of the products of the Amazon weight for the token times the Google weight for the token. The sum should then be divided by the norm for the Google URL and then divided by the norm for the Amazon ID. The function should return this value in a pair with the key being the (Amazon ID, Google URL). <em>Make sure you use broadcast variables you created for both the weights and norms</em></li>
@@ -2319,12 +2397,12 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># TODO: Replace &lt;FILL IN&gt; with appropriate code</span>
-<span class="n">amazonWeightsBroadcast</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">FILL</span> <span class="n">IN</span><span class="o">&gt;</span>
-<span class="n">googleWeightsBroadcast</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">FILL</span> <span class="n">IN</span><span class="o">&gt;</span>
+<span class="n">amazonWeightsBroadcast</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">amazonWeightsRDD</span><span class="o">.</span><span class="n">collectAsMap</span><span class="p">())</span>
+<span class="n">googleWeightsBroadcast</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">googleWeightsRDD</span><span class="o">.</span><span class="n">collectAsMap</span><span class="p">())</span>
 
 <span class="k">def</span> <span class="nf">fastCosineSimilarity</span><span class="p">(</span><span class="n">record</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Compute Cosine Similarity using Broadcast variables</span>
@@ -2333,16 +2411,18 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 <span class="sd">    Returns:</span>
 <span class="sd">        pair: ((ID, URL), cosine similarity value)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">amazonRec</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">FILL</span> <span class="n">IN</span><span class="o">&gt;</span>
-    <span class="n">googleRec</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">FILL</span> <span class="n">IN</span><span class="o">&gt;</span>
-    <span class="n">tokens</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">FILL</span> <span class="n">IN</span><span class="o">&gt;</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">FILL</span> <span class="n">IN</span><span class="o">&gt;</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">FILL</span> <span class="n">IN</span><span class="o">&gt;</span>
+    <span class="n">amazonRec</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">googleRec</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([(</span><span class="n">amazonWeightsBroadcast</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">amazonRec</span><span class="p">][</span><span class="n">token</span><span class="p">]</span> <span class="o">*</span> <span class="n">googleWeightsBroadcast</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">googleRec</span><span class="p">][</span><span class="n">token</span><span class="p">])</span> 
+         <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">])</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">s</span> <span class="o">/</span> <span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">amazonNormsBroadcast</span><span class="o">.</span><span class="n">value</span><span class="p">)[</span><span class="n">amazonRec</span><span class="p">]</span><span class="o">*</span><span class="nb">dict</span><span class="p">(</span><span class="n">googleNormsBroadcast</span><span class="o">.</span><span class="n">value</span><span class="p">)[</span><span class="n">googleRec</span><span class="p">])</span>
     <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">amazonRec</span><span class="p">,</span> <span class="n">googleRec</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
+
 <span class="n">similaritiesFullRDD</span> <span class="o">=</span> <span class="p">(</span><span class="n">commonTokens</span>
-                       <span class="o">.&lt;</span><span class="n">FILL</span> <span class="n">IN</span><span class="o">&gt;</span>
+                       <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">record</span><span class="p">:</span> <span class="n">fastCosineSimilarity</span><span class="p">(</span><span class="n">record</span><span class="p">))</span>
                        <span class="o">.</span><span class="n">cache</span><span class="p">())</span>
 
 <span class="k">print</span> <span class="n">similaritiesFullRDD</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
@@ -2352,10 +2432,24 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>2441100
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># TEST Identify common tokens from the full dataset (4f)</span>
@@ -2366,6 +2460,22 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1 test passed.
+1 test passed.
+1 test passed.
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -2397,7 +2507,7 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># Create an RDD of ((Amazon ID, Google URL), similarity score)</span>
@@ -2432,6 +2542,20 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>There are 1300 true duplicates.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -2451,7 +2575,7 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">pyspark.accumulators</span> <span class="kn">import</span> <span class="n">AccumulatorParam</span>
@@ -2533,7 +2657,7 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="c"># Precision = true-positives / (true-positives + false-positives)</span>
@@ -2570,7 +2694,7 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="n">thresholds</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">nthresholds</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nthresholds</span><span class="p">)]</span>
@@ -2599,6 +2723,753 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.000532546802671 0.00106452669505
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+QmCC
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -2609,8 +3480,7 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
 </div>
 </div>
 </div>
-    </div>
-	
+
 	
    <span style="width:400px;display:inline-block"></span><span> 
   <a href="spark_wordCount.html"><img src="../figures/previous.png" height="40" width="40"/></a>
@@ -2623,7 +3493,7 @@ kQiyAAAAMBJBFgAAAEYiyAIAAMBIBFkAAAAY6f8D5oCIiyECmJEAAAAASUVORK5CYII=
  <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
  <script type="text/javascript" src="../myjs.js"></script>
 	
-	
+    </div>
   </div>
 </body>
 </html>
