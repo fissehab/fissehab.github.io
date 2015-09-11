@@ -42,4 +42,11 @@ $(document).ready(function() {
     $(this).css("background-color","white");
   });
   
+             $(".all").mouseenter(function() {
+    $(this).css("background-color","#CCFFFF");
+  });
+  $(".all").mouseleave(function() {
+    $(this).css("background-color","#f0f0f0");
+  });
+  
 });
