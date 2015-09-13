@@ -70,11 +70,18 @@ $(document).ready(function() {
   
    
               $(".myprod").mouseenter(function() {
-    $(this).css("background-color","#FFEBD6");
+    $(this).css("background-color","#E6FFFF");
   });
   $(".myprod").mouseleave(function() {
     $(this).css("background-color","white");
   });
   
+  
+                $(".top").mouseenter(function() {
+    $(this).css("background-color","#CCFFFF");
+  });
+  $(".top").mouseleave(function() {
+    $(this).css("background-color","white");
+  });
   
 });
