@@ -58,10 +58,23 @@ $(document).ready(function() {
   $(".ds").mouseleave(function() {
     $(this).css("background-color","white");
   });
+  
+  
                $(".mysk").mouseenter(function() {
     $(this).css("background-color","#A3FF85");
   });
   $(".mysk").mouseleave(function() {
     $(this).css("background-color","white");
   });
+  
+  
+   
+              $(".myprod").mouseenter(function() {
+    $(this).css("background-color","#FFEBD6");
+  });
+  $(".myprod").mouseleave(function() {
+    $(this).css("background-color","white");
+  });
+  
+  
 });
