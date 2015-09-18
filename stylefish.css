@@ -69,7 +69,7 @@ aside {
 
 body {
   width: 1000px;
- 
+  float: left;
   margin-left: auto;
   margin-right: auto;
   background-color:#FFFFFF ;
