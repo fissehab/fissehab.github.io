@@ -13,15 +13,24 @@ article, aside, footer, header, main, nav, section {
 .myheader  h1{
 	text-align:left;
 	color:rgb(30%,50%,70%);
+	font-size:1.4em;
 }
 
 
 .myheader  p	.myjhu{
 		text-decoration:none;
 		color:#D65C33;
+		font-size:1em;
+	}
+	
+.email,.phone{
+		font-size:1em;
 	}
 
-
+.cv,.resume{
+		font-size:1.1em;
+	}
+	
 
 
 .myheader {
@@ -29,7 +38,6 @@ article, aside, footer, header, main, nav, section {
  
   color: black;
   padding: 1% 2%;
-  font-family:1em
 }
 
 #nav01{
@@ -95,6 +103,7 @@ nav li a {
 }
 
 
+
 footer {
   clear: both;
   background-color: #F5E0FF;
@@ -122,7 +131,37 @@ footer {
 	
   font-size:0.6em;
  }
-			
+ 
+  .myheader  h1{
+  font-family:1em
+}
+	
+
+.myheader  h1{
+	font-size:0.8em;
+}
+
+
+.myheader  p	{
+		font-size:0.9em;
+	}
+	
+.myheader  p	.phone{
+		font-size:0.9em;
+	}
+	
+.myheader  p	.email{
+		font-size:0.9em;
+	}
+	
+.cv,.resume{
+		font-size:0.9em;
+	}
+	
+	.email,.phone{
+		font-size:0.7em;
+	}
+		
 }
 
 
@@ -138,6 +177,25 @@ footer {
 	
   font-size:0.5em;
  }
+ 
+ .myheader  h1{
+	font-size:0.75em;
+}
+
+
+.myheader  p	{
+		font-size:0.65em;
+	}
+
+.cv,.resume{
+		font-size:0.7em;
+	}
+	
+	.email,.phone{
+		font-size:0.55em;
+	}
+	
+
 }
 
 
