@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+article, aside, footer, header, main, nav, section {
+  display: block;
+}
+
+html, body, h1, h2, h3, ul, li, a, p, 
+article, aside, footer, header, main, nav, section {
+  padding: 0;
+  margin: 0;
+}
+
+.myheader  h1{
+	text-align:left;
+	color:rgb(30%,50%,70%);
+}
+
+
+.myheader  p	.myjhu{
+		text-decoration:none;
+		color:#D65C33;
+	}
+
+
+
+
+.myheader {
+  background-color: #CCE680;
+ 
+  color: black;
+  padding: 1% 2%;
+  font-family:1em
+}
+
+#nav01{
+	padding:0;
+	margin:1%;
+}
+
+
+section {
+  background-color: #ffffff;
+  margin-top: 1%;
+  padding: 0.5%;
+}
+
+
+main {
+	
+  width: 64%;
+  float: left;
+  margin-bottom: 1%;
+  margin-left: 2%;
+  text-align:center;
+  font-size:1.1em;
+  color:black;
+
+
+}
+
+aside {
+  background-color:#f0f0f0;
+  width: 30%;
+  float: right;
+  padding: 1%;
+  margin-top: 0;
+  text-align:center-left
+  
+}
+
+body {
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color:#FFFFFF ;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+
+.mynav{
+	background-color: #F0F5F5;
+	padding:0.5%
+}
+
+nav li {
+  display: inline;
+  margin-left: 1.5%;
+  margin-right: 1%;
+}
+
+nav li a {
+  color: black;
+   font-size: 1em;
+  font-weight: bold;
+}
+
+
+footer {
+  clear: both;
+  background-color: #F5E0FF;
+  padding: 0.5% 2%;
+  text-align:center;
+  padding:1%;
+  font-size:0.9em;
+  color:black;
+  
+}
+
+
+
+
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+
+	nav li a {
+  color: blue;
+   font-size: 0.65em;
+  font-weight: bold;
+	}
+  
+  
+  main {
+	
+  font-size:0.6em;
+ }
+			
+}
+
+
+@media only screen and (max-width: 480px) {
+
+	nav li a {
+  color: red;
+  font-size: 0.43em;
+  font-weight: bold;
+			}
+			
+			  main {
+	
+  font-size:0.5em;
+ }
+}
+
+
+
