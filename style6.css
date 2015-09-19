@@ -113,4 +113,14 @@ ul#menu li a:hover {
     background-color: black;
 } 
 
+nav li {
+  display: inline;
+  margin-left: 1.5%;
+  margin-right: 1%;
+}
 
+nav li a {
+  color: black;
+   font-size: 1em;
+  font-weight: bold;
+}
