@@ -121,7 +121,6 @@ footer {
 @media only screen and (min-width: 480px) and (max-width: 768px) {
 
 	nav li a {
-  color: blue;
    font-size: 0.65em;
   font-weight: bold;
 	}
@@ -168,7 +167,6 @@ footer {
 @media only screen and (max-width: 480px) {
 
 	nav li a {
-  color: red;
   font-size: 0.43em;
   font-weight: bold;
 			}
