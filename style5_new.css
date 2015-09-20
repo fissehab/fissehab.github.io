@@ -198,3 +198,86 @@ footer {
 
 
 
+
+
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+
+	nav li a {
+   font-size: 0.65em;
+  font-weight: bold;
+	}
+  
+  
+  main {
+	
+  font-size:0.6em;
+ }
+ 
+  .myheader  h1{
+  font-family:1em
+}
+	
+
+.myheader  h1{
+	font-size:0.8em;
+}
+
+
+.myheader  p	{
+		font-size:0.9em;
+	}
+	
+.myheader  p	.phone{
+		font-size:0.9em;
+	}
+	
+.myheader  p	.email{
+		font-size:0.9em;
+	}
+	
+.cv,.resume{
+		font-size:0.9em;
+	}
+	
+	.email,.phone{
+		font-size:0.7em;
+	}
+		
+}
+
+
+@media only screen and (max-width: 480px) {
+
+	nav li a {
+  font-size: 0.43em;
+  font-weight: bold;
+			}
+			
+			  main {
+	
+  font-size:0.5em;
+ }
+ 
+ .myheader  h1{
+	font-size:0.75em;
+}
+
+
+.myheader  p	{
+		font-size:0.65em;
+	}
+
+.cv,.resume{
+		font-size:0.7em;
+	}
+	
+	.email,.phone{
+		font-size:0.55em;
+	}
+	
+
+}
+
+
+
+

@@ -7,10 +7,18 @@ $(document).ready(function() {
     $(this).css("background-color","#CCE680");
   });
   
-    $(".cvr").mouseenter(function() {
+    $(".cv").mouseenter(function() {
     $(this).css("background-color","#FFCCCC");
   });
-  $(".cvr").mouseleave(function() {
+  $(".cv").mouseleave(function() {
+    $(this).css("background-color","#CCE680");
+  });
+  
+  
+      $(".resume").mouseenter(function() {
+    $(this).css("background-color","#FFCCCC");
+  });
+  $(".resume").mouseleave(function() {
     $(this).css("background-color","#CCE680");
   });
   
@@ -82,6 +90,13 @@ $(document).ready(function() {
   });
   $(".top").mouseleave(function() {
     $(this).css("background-color","white");
+  });
+  
+                 $(".all").mouseenter(function() {
+    $(this).css("background-color","#CCFFFF");
+  });
+  $(".all").mouseleave(function() {
+    $(this).css("background-color","#f0f0f0");
   });
   
 });
