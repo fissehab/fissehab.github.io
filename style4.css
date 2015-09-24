@@ -16,6 +16,11 @@ article, aside, footer, header, main, nav, section {
 	font-size:1.4em;
 }
 
+.icon{
+	text-decoration:none;
+	background:#B2FFB2
+	
+}
 
 .myheader  p	.myjhu{
 		text-decoration:none;
