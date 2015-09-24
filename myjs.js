@@ -7,6 +7,17 @@ $(document).ready(function() {
     $(this).css("background-color","#CCE680");
   });
   
+  
+  						   
+  $(".giticon").mouseenter(function() {
+    $(this).css("background-color","#FF99C2");
+  });
+  $(".giticon").mouseleave(function() {
+    $(this).css("background-color","#CCE680");
+  });
+  
+  
+  
     $(".cv").mouseenter(function() {
     $(this).css("background-color","#FFCCCC");
   });
