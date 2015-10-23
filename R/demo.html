@@ -213,6 +213,7 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 style="color:blue; text-align:center"   id="Spatial-distribution-of-FDA's-drug-adverse-events-report">Spatial distribution of FDA's drug adverse events report<a class="anchor-link" href="#Spatial-distribution-of-FDA's-drug-adverse-events-report">&#182;</a></h3>
+
 </div>
 </div>
 </div>
@@ -324,7 +325,7 @@ year_last<span class="o">=</span><span class="kp">as.integer</span><span class="
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>After downloading the quartely data sets, let's concatenate them. The unzipped data set fro the first quarter of 2013 is demo2013q1.csv</p>
+<p>After downloading the quartely data sets, let's concatenate them. The unzipped data set for the first quarter of 2013 is demo2013q1.csv</p>
 
 </div>
 </div>
@@ -441,7 +442,16 @@ year_last<span class="o">=</span><span class="kp">as.integer</span><span class="
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, let's merge the demography (demo2) data with the c_codes, which contains country codes and full names.</p>
 
+</div>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -482,16 +492,7 @@ demo2<span class="o">$</span>id<span class="o">=</span>demo2<span class="o">$</s
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, let's merge the demography (demo2) data with the c_codes, which contains country codes and full names.</p>
 
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[39]:</div>
