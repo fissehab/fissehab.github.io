@@ -13,7 +13,7 @@ $(document).ready(function() {
     $(this).css("background-color","#FF99C2");
   });
   $(".giticon").mouseleave(function() {
-    $(this).css("background-color","#CCE680");
+    $(this).css("background-color","#f0f0f0");;
   });
   
   
