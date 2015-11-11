@@ -17,6 +17,17 @@ article, aside, footer, header, main, nav, section {
 }
 
 
+
+hr
+{
+border:solid 1px black;
+width: 96%;
+color: #FFFF00;
+height: 1px;
+
+}
+
+
 .myheader  p	.myjhu{
 		text-decoration:none;
 		color:#D65C33;
