@@ -13,7 +13,7 @@ article, aside, footer, header, main, nav, section {
 .myheader  h1{
 	text-align:left;
 	color:rgb(30%,50%,70%);
-	font-size:1.4em;
+	font-size:2em;
 }
 
 
@@ -34,11 +34,11 @@ height: 1px;
 	}
 	
 .email,.phone{
-		font-size:1em;
+		font-size:1.5em;
 	}
 
 .cv,.resume{
-		font-size:1.1em;
+		font-size:1.4em;
 	}
 	
 
@@ -70,7 +70,7 @@ main {
   margin-bottom: 1%;
   margin-left: 2%;
   text-align:center;
-  font-size:1.1em;
+  font-size:1.4em;
   color:black;
 
 
@@ -114,7 +114,7 @@ nav li {
 
 nav li a {
   color: black;
-   font-size: 1em;
+   font-size: 1.2em;
   font-weight: bold;
 }
 

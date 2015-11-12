@@ -13,7 +13,7 @@ article, aside, footer, header, main, nav, section {
 .myheader  h1{
 	text-align:left;
 	color:rgb(30%,50%,70%);
-	font-size:1.4em;
+	font-size:2em;
 }
 
 hr
@@ -31,6 +31,8 @@ height: 1px;
 	
 }
 
+
+
 .myheader  p	.myjhu{
 		text-decoration:none;
 		color:#D65C33;
@@ -38,13 +40,14 @@ height: 1px;
 	}
 	
 .email,.phone{
-		font-size:1em;
+		font-size:1.5em;
 	}
 
 .cv,.resume{
-		font-size:1.1em;
+		font-size:1.4em;
 	}
 	
+
 
 
 .myheader {
@@ -108,7 +111,7 @@ nav li {
 
 nav li a {
   color: black;
-   font-size: 1em;
+   font-size: 1.2em;
   font-weight: bold;
 }
 
