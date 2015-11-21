@@ -166,7 +166,6 @@ div#notebook {
     </script>
     <!-- End of mathjax configuration -->
 	
-		
 		<title>Fisseha Berhane</title>
      <link rel="stylesheet" type="text/css" href="../style5_new.css">
 	
@@ -178,11 +177,11 @@ div#notebook {
  
          <header class="myheader">
       <h1>Fisseha Berhane </h1>
-   	  <h4>Data Scientist at <a class="myjhu" style="color:blue;text-decoration:none" 
+   	   <h4>Data Scientist at <a class="myjhu" style="color:blue;text-decoration:none" 
 	  href="http://aurotechcorp.com/"  target="_blank">Aurotech</a> and PhD Candidate, 
 	  <a  style="color:blue;text-decoration:none" class="myjhu"  href="http://jhu.edu">Johns Hopkins University</a> </h4>
             
-	         
+	           
 	    
 	 <p><img src="../figures/mobile.PNG" height="30" width="12"/> 443-970-2353</span> <span style="width:50px;display:inline-block"></span>
 	 <img src="../figures/emailimage.png" height="28" width="33"/>  fisseha@jhu.edu</span> <span style="width:50px;display:inline-block"></span>
@@ -211,78 +210,77 @@ div#notebook {
 	 </ul>
     </nav>
 	
-	
 	</head>
- <main style="width:960px;text-align:justify" >
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
 
- <br/>
-  <br/>
- <body>
-	 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 style=" text-decoration:none;color:blue"  id="Uisng-R-machine-learning-techniques-inside-Tableau:-2012-presidential-election-prediction">Uisng R machine learning techniques inside Tableau: 2012 presidential election prediction<a class="anchor-link" href="#Uisng-R-machine-learning-techniques-inside-Tableau:-2012-presidential-election-prediction">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is an example of Tableau and R integration. Here, I am using a machine learning technique to predict the winner of 2012 election using polling data from likely voters. The data is from <a href="http://www.realclearpolitics.com/">RealClearPolitics.com</a> and basically represents polling data that was collected in the months leading up to the 2004 and 2008 US presidential election. Using logistic regression (a machine learning technique), I predicted for 2012. Then, we can access the performance of our model using various metrics.</p>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong> In this exercise, I imported the data to Tableau and wrote an R code inside Tableau, which is shown below. </strong></p>
 
-<section> 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">SCRIPT_REAL</span><span class="p">(</span><span class="s">&#39;mydata &lt;- data.frame(Rep=.arg1, survey=.arg2, diffc=.arg3);</span>
+<span class="n">lrmodel</span> <span class="o">&lt;-</span> <span class="n">glm</span><span class="p">(</span><span class="n">Rep</span> <span class="o">~</span> <span class="n">survey</span> <span class="o">+</span> <span class="n">diffc</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">mydata</span><span class="p">,</span> <span class="n">family</span> <span class="o">=</span> <span class="s">&quot;binomial&quot;</span><span class="p">);</span>
+<span class="n">prob</span> <span class="o">&lt;-</span> <span class="n">predict</span><span class="p">(</span><span class="n">lrmodel</span><span class="p">,</span> <span class="n">newdata</span> <span class="o">=</span> <span class="n">mydata</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="s">&quot;response&quot;</span><span class="p">)</span><span class="s">&#39;,</span>
+<span class="n">AVG</span><span class="p">([</span><span class="n">Republican</span><span class="p">]),</span><span class="n">AVG</span><span class="p">([</span><span class="n">SurveyUSA</span><span class="p">]),</span><span class="n">AVG</span><span class="p">([</span><span class="n">Diff</span> <span class="n">Count</span><span class="p">]))</span>
+</pre></div>
 
-  <h4><a  class="mysub"  style=" text-decoration:none;color:blue" href="Tableau_R.html"  target="_blank"> <strong>Integrating R and Tableau</strong></a></h4>
-       
- 
-  <p style="color:#003300;text-align:justify">In this post, I will download quarterly datasets from the FDA Adverse Event Reporting System (FAERS) 
-  <a href="http://www.nber.org/data/fda-adverse-event-reporting-system-faers-data.html">website</a>,
-  concatenate them, and do some data cleaning in R. Then, I will visualize the data in Tableau...
+</div>
+</div>
+</div>
 
- <a style=" text-decoration:none;color:red" href ="Tableau_R.html"  target="_blank">more</a></p>
-  
-   <br/>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>One of the main advantages of using R inside Tableau is, I believe, being able to process and analyze data in various formats using R. For example, accessing APIs (such as <a href="https://open.fda.gov/">OpenFDA</a>) which have data in JSON, XML or other formats. We can even integrate R and Tableau for text data mining in social media analysis. We know Tableau cannot work with these data formats directly but using R inside Tableau will help to download the data and make the data tidy and usable by Tableau. After that, we can take advantage of the painless visualizations of Tableau.</p>
 
+<script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1004px; height: 869px;' ><noscript><a href='#'><img alt='2012 Election Prediction ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ma&#47;MachineLearninginTableau&#47;2012ElectionPrediction&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1004' height='869' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='MachineLearninginTableau&#47;2012ElectionPrediction' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ma&#47;MachineLearninginTableau&#47;2012ElectionPrediction&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showVizHome' value='no' /><param name='showTabs' value='y' /><param name='bootstrapWhenNotified' value='true' /></object></div>
 
+</div>
+</div>
 
-</section>
-
-<hr/>
-
-<section> 
-
-  <h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="Tableau_ML.html"  target="_blank"> <strong>Uisng R machine learning techniques inside Tableau: 2012 presidential election prediction</strong></a></h4>
-       
- 
-  <p style="color:#003300;text-align:justify">This is an example of Tableau and R integration. Here, I am using a machine learning technique to predict the winner of 2012 election using polling data from likely voters....
-
- <a style=" text-decoration:none;color:red" href ="Tableau_ML.html"  target="_blank">more</a></p>
-  
-   <br/>
-
-
-
-</section>
-
-<hr/>
-
-<section> 
-
-   <h4  style="color:blue"><strong>Interactive Tableau Dashboard</strong></h4>
-       
- 
-<script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1004px; height: 869px;'><noscript><a href='#'><img alt='My complete dashboard ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;In&#47;InteractiveDashboard_2&#47;Mycompletedashboard&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1004' height='869' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='InteractiveDashboard_2&#47;Mycompletedashboard' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;In&#47;InteractiveDashboard_2&#47;Mycompletedashboard&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showVizHome' value='no' /><param name='showTabs' value='y' /><param name='bootstrapWhenNotified' value='true' /></object></div>
-</section>
-<hr/>
-	</body>
-      <br/>
-	  <br/>
-		
- </main>
- 
-   <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="myjs.js"></script>
-	
-	
-	  </body>
-
-	
-		<footer>
-		<p style ="text-align:center">&copy; 2015 Berhane</p>
-		</footer>
-			<script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
+</div>
+    </div>
+  </div>
+   <span style="width:400px;display:inline-block"></span><span> 
+  <a href="Tableau_R.html"><img src="../figures/previous.png" height="40" width="40"/></a>
+  <a href="../index.html"><img src="../figures/home.png" height="40" width="40"/></a>
+  <a href="Tableau_R.html"><img src="../figures/next.png" height="40" width="40"/></a>
+  </span>
+  		<script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="../myjs.js"></script>
-		<br/>
-		<br/>
+</body>
 </html>
