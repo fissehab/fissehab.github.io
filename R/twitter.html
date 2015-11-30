@@ -346,12 +346,17 @@ and Sentiment Analysis with R:<span style="color:red"> Russia this week</span><a
 <span class="n">russialist</span><span class="o">=</span><span class="n">gsub</span><span class="p">(</span><span class="s">&quot;https&quot;</span><span class="p">,</span> <span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="n">russialist</span><span class="p">)</span>
 <span class="n">russialist</span><span class="o">=</span><span class="n">gsub</span><span class="p">(</span><span class="s">&quot;com&quot;</span><span class="p">,</span> <span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="n">russialist</span><span class="p">)</span>
 
-
+# Create corpus
 <span class="n">russiacorpus</span><span class="o">=</span><span class="n">Corpus</span><span class="p">(</span><span class="n">VectorSource</span><span class="p">(</span><span class="n">russialist</span><span class="p">))</span>
+
+# Convert to lower-case
 <span class="n">russiacorpus</span><span class="o">=</span><span class="n">tm_map</span><span class="p">(</span><span class="n">russiacorpus</span><span class="p">,</span><span class="n">tolower</span><span class="p">)</span>
 
+# Remove stopwords; other words that are not relevant to the analysis such as http(s) can also be included
 
 <span class="n">russiacorpus</span><span class="o">=</span><span class="n">tm_map</span><span class="p">(</span><span class="n">russiacorpus</span><span class="p">,</span><span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">removeWords</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">stopwords</span><span class="p">()))</span>
+
+# convert corpus to a Plain Text Document
 <span class="n">russiacorpus</span><span class="o">=</span><span class="n">tm_map</span><span class="p">(</span><span class="n">russiacorpus</span><span class="p">,</span><span class="n">PlainTextDocument</span><span class="p">)</span>
 </pre></div>
 
@@ -426,11 +431,24 @@ and Sentiment Analysis with R:<span style="color:red"> Russia this week</span><a
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">russiatdm</span> <span class="o">&lt;-</span> <span class="n">TermDocumentMatrix</span><span class="p">(</span><span class="n">russiacorpus</span><span class="p">)</span>
+	                  
+<div class=" highlight hl-ipython3"><pre>
+# Create matrix
+
+<span class="n">russiatdm</span> <span class="o">&lt;-</span> <span class="n">TermDocumentMatrix</span><span class="p">(</span><span class="n">russiacorpus</span><span class="p">)</span>
+
+# Remove sparse terms
 <span class="n">findFreqTerms</span><span class="p">(</span><span class="n">russiatdm</span><span class="p">,</span> <span class="n">lowfreq</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span> <span class="c"># experiment with the lowfreq</span>
 <span class="n">tdm</span> <span class="o">&lt;-</span><span class="n">removeSparseTerms</span><span class="p">(</span><span class="n">russiatdm</span><span class="p">,</span> <span class="n">sparse</span><span class="o">=</span><span class="mf">0.93</span><span class="p">)</span> <span class="c"># experimet with sparse</span>
+                         
+						 # scale it
 <span class="n">tdmscale</span> <span class="o">&lt;-</span> <span class="n">scale</span><span class="p">(</span><span class="n">tdm</span><span class="p">)</span>
+
+                      # calculate distance for clustering
 <span class="n">dist</span> <span class="o">&lt;-</span> <span class="n">dist</span><span class="p">(</span><span class="n">tdmscale</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s">&quot;euclidean&quot;</span><span class="p">)</span>
+
+
+ # Use hierarchical clustering
 <span class="n">fit</span> <span class="o">&lt;-</span> <span class="n">hclust</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
 
 
@@ -504,18 +522,56 @@ sanctions that Putin approved today.</em></p>
 </div>
 </div>
 </div>
+
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="c">#import positive and negative words</span>
+<div class=" highlight hl-ipython3"><pre><span class="c">#import positive and negative words; data can be downloaded from https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html</span>
+
 <span class="n">pos</span> <span class="o">=</span> <span class="n">readLines</span><span class="p">(</span><span class="s">&quot;positivewords.txt&quot;</span><span class="p">)</span>
 <span class="n">neg</span> <span class="o">=</span> <span class="n">readLines</span><span class="p">(</span><span class="s">&quot;negativewords.txt&quot;</span><span class="p">)</span>
 <span class="n">library</span><span class="p">(</span><span class="s">&quot;stringr&quot;</span><span class="p">)</span>
-<span class="n">library</span><span class="p">(</span><span class="s">&quot;plyr&quot;</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="s">&quot;plyr&quot;</span><span class="p">)</span>        
+</pre></div>
+
+</div>
+</div>
+</div>
 
 
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 style="color:blue"  id="Sentiment-analysis">Sentiment analysis<a class="anchor-link" href="#Sentiment-analysis">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, let's analyze the sentiment of the tweets.</p>
+
+</div>
+</div>
+</div>
+
+
+
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c"></span>
 <span class="n">score</span><span class="o">.</span><span class="n">sentiment</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">sentences</span><span class="p">,</span> <span class="n">pos</span><span class="o">.</span><span class="n">words</span><span class="p">,</span> <span class="n">neg</span><span class="o">.</span><span class="n">words</span><span class="p">,</span> <span class="o">.</span><span class="n">progress</span><span class="o">=</span><span class="s">&#39;none&#39;</span><span class="p">)</span>
   
 <span class="p">{</span>
@@ -562,10 +618,25 @@ sanctions that Putin approved today.</em></p>
   <span class="n">scores</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">sentences</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="n">scores</span><span class="p">)</span>
   <span class="k">return</span><span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">df</span><span class="p">)</span>
 <span class="p">}</span>
-                     
+                                     
+</pre></div>
 
+</div>
+</div>
+</div>
+
+</div>
+
+
+
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c"></span>
 <span class="n">scores</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">sentiment</span><span class="p">(</span><span class="n">russialist</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">neg</span><span class="p">,</span> <span class="o">.</span><span class="n">progress</span><span class="o">=</span><span class="s">&#39;text&#39;</span><span class="p">)</span>
-
 
 <span class="n">hist</span><span class="p">(</span><span class="n">scores</span><span class="p">[,</span><span class="mi">2</span><span class="p">],</span><span class="n">xlab</span><span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="n">main</span><span class="o">=</span><span class="s">&quot;Sentiment of tweets from 24-29 Nov, 2015 that pertain to Russia&quot;</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="s">&quot;skyblue&quot;</span><span class="p">)</span>
                      
@@ -576,6 +647,12 @@ sanctions that Putin approved today.</em></p>
 </div>
 
 </div>
+
+
+
+
+
+
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
@@ -610,6 +687,15 @@ sanctions that Putin approved on the 29th of November.</em></p>
   </div>
    		<br/>
 		<br/>
+		
+		
+      <span style="width:400px;display:inline-block"></span><span> 
+  
+  <a href="../index.html"><img src="../figures/home.png" height="40" width="40"/></a>
+  <a href="R_Python_ml.html"><img src="../figures/next.png" height="40" width="40"/></a>
+  </span>
+
+  
 	<script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="../myjs.js"></script>
 	
