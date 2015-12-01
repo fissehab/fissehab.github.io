@@ -343,8 +343,8 @@ and Sentiment Analysis with R:<span style="color:red"> Russia this week</span><a
 <span class="n">russialist</span><span class="o">=</span><span class="n">sapply</span><span class="p">(</span><span class="n">russiatweets</span><span class="p">,</span><span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span><span class="err">$</span><span class="n">getText</span><span class="p">())</span>
 <span class="n">russialist</span><span class="o">=</span><span class="n">str_replace_all</span><span class="p">(</span><span class="n">russialist</span><span class="p">,</span> <span class="s">&quot;[^[:alnum:]]&quot;</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">)</span>
 <span class="n">russialist</span><span class="o">=</span><span class="n">gsub</span><span class="p">(</span><span class="s">&quot;[^A-Za-z0-9]&quot;</span><span class="p">,</span> <span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="n">russialist</span><span class="p">)</span>
-<span class="n">russialist</span><span class="o">=</span><span class="n">gsub</span><span class="p">(</span><span class="s">&quot;https&quot;</span><span class="p">,</span> <span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="n">russialist</span><span class="p">)</span>
-<span class="n">russialist</span><span class="o">=</span><span class="n">gsub</span><span class="p">(</span><span class="s">&quot;com&quot;</span><span class="p">,</span> <span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="n">russialist</span><span class="p">)</span>
+<span class="n">russialist</span><span class="o">=</span><span class="n">gsub</span><span class="p">(</span><span class="s">&quot;https&quot;</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">,</span> <span class="n">russialist</span><span class="p">)</span>
+<span class="n">russialist</span><span class="o">=</span><span class="n">gsub</span><span class="p">(</span><span class="s">&quot;com&quot;</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">,</span> <span class="n">russialist</span><span class="p">)</span>
 
 # Create corpus
 <span class="n">russiacorpus</span><span class="o">=</span><span class="n">Corpus</span><span class="p">(</span><span class="n">VectorSource</span><span class="p">(</span><span class="n">russialist</span><span class="p">))</span>
@@ -453,7 +453,7 @@ and Sentiment Analysis with R:<span style="color:red"> Russia this week</span><a
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">Out&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3">
@@ -472,7 +472,7 @@ and Sentiment Analysis with R:<span style="color:red"> Russia this week</span><a
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">&nbsp;&nbsp;</div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 
@@ -647,7 +647,7 @@ sanctions that Putin approved today.</em></p>
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">Out&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 	
