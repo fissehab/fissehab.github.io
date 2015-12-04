@@ -610,6 +610,8 @@ profitables
 </div>
 </div>
 
+
+
 <div class="output_wrapper">
 <div class="output">
 
@@ -646,10 +648,61 @@ profitables
 </div>
 
 </div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>profitables<span class="o">=</span><span class="kp">as.data.frame</span><span class="p">(</span>profitables<span class="p">)</span>
+<span class="kp">names</span><span class="p">(</span>profitables<span class="p">)</span><span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;Country&#39;</span><span class="p">,</span><span class="s">&#39;Number-of-companies&#39;</span><span class="p">)</span>
+country<span class="o">=</span><span class="kp">names</span><span class="p">(</span>profitables<span class="p">)</span>
+companies<span class="o">=</span><span class="kp">as.vector</span><span class="p">(</span>profitables<span class="p">)</span>
+
+profitables<span class="o">=</span><span class="kp">as.data.frame</span><span class="p">(</span><span class="kt">list</span><span class="p">(</span>country<span class="o">=</span>country<span class="p">,</span>companies<span class="o">=</span>companies<span class="p">))</span>
+
+ggplot<span class="p">(</span>profitables<span class="p">,</span> aes<span class="p">(</span>country<span class="p">,</span>companies<span class="p">))</span><span class="o">+</span>  
+geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&#39;identity&#39;</span><span class="p">,</span>fill<span class="o">=</span><span class="s">&#39;orange&#39;</span><span class="p">,</span>color<span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">)</span><span class="o">+</span>
+ggtitle<span class="p">(</span><span class="s">&#39;Number of companies \nwith profits above $5\n billion by country&#39;</span><span class="p">)</span><span class="o">+</span>
+  theme<span class="p">(</span>plot.title <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">18</span><span class="p">,</span>colour<span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">))</span><span class="o">+</span>
+theme<span class="p">(</span>axis.title.x<span class="o">=</span>element_blank<span class="p">(),</span>axis.title.y <span class="o">=</span>element_blank<span class="p">(),</span>
+        axis.text.y <span class="o">=</span> element_text<span class="p">(</span>colour<span class="o">=</span><span class="s">&quot;grey20&quot;</span><span class="p">,</span>size<span class="o">=</span><span class="m">14</span><span class="p">,</span>angle<span class="o">=</span><span class="m">0</span><span class="p">,</span>hjust<span class="o">=</span><span class="m">1</span><span class="p">,</span>vjust<span class="o">=</span><span class="m">0</span><span class="p">,</span>face<span class="o">=</span><span class="s">&quot;plain&quot;</span><span class="p">),</span>
+        axis.text.x <span class="o">=</span> element_text<span class="p">(</span>colour<span class="o">=</span><span class="s">&quot;grey20&quot;</span><span class="p">,</span>size<span class="o">=</span><span class="m">14</span><span class="p">,</span>angle<span class="o">=</span><span class="m">60</span><span class="p">,</span>hjust<span class="o">=</span><span class="m">.5</span><span class="p">,</span>vjust<span class="o">=</span><span class="m">.5</span><span class="p">,</span>face<span class="o">=</span><span class="s">&quot;plain&quot;</span><span class="p">))</span><span class="o">+</span>
+        coord_flip<span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[98]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<img style="margin:0px auto;display:block" src="../figures/companies.png", height="300" width="600"/>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
+
+
+
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As expected more than 60% of them are from the USA.</p>
 
