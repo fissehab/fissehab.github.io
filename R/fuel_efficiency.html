@@ -233,7 +233,15 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this analysis, the relationship between a set of variables and miles per gallon (MPG) is explored using the mtcars dataset. Particularly, the MPG difference between automatic and manual transmissions is evaluated and quantified.The final selected multivariable linear regression model shows that manual transmission cars have about 1.81 miles more per gallon as compared to automatic transmission cars, keeping other variables constant. However, caution should be practiced in interpreting this assocation:(1) the dataset is relatively old and may not reflect present conditions, (2) the sample size is small as compared to the number of features and conclusions derived from models employing small sample size could be biased, (3) the association between transmission type and MPG is particularly clear with four cylinder cars which are light weight as compared to six and eight cylinder cars.(4) Automatic transmission cars weight more than manual transmission cars. Therefore, the difference in weight could be the main reason for the association found between MPG and transmission type.</p>
+<p>In this analysis, the relationship between a set of variables and miles per gallon (MPG) is explored using the mtcars dataset. 
+Particularly, the MPG difference between automatic and manual transmissions is evaluated and quantified. The final selected multivariable linear r
+egression model shows that manual transmission cars have about 1.81 miles more per gallon as compared to automatic transmission cars,
+ keeping other variables constant. However, caution should be practiced in interpreting this assocation: 
+ (1) the dataset is relatively old and may not reflect present conditions, 
+ (2) the sample size is small as compared to the number of features and conclusions derived from models employing small sample size could be biased, 
+ (3) the association between transmission type and MPG is particularly clear with four cylinder cars which are light weight 
+ as compared to six and eight cylinder cars. 
+ (4) Automatic transmission cars weight more than manual transmission cars. Therefore, the difference in weight could be the main reason for the association found between MPG and transmission type.</p>
 
 </div>
 </div>
@@ -340,7 +348,8 @@ mtcars<span class="o">$</span>carb<span class="o">&lt;-</span>relevel<span class
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Using pairs(mtcars), we get that fuel consumption increases as the number of cylinders (cyl), displacement (disp), horsepower (hp), and weight (wt) increase. That is to say, as these variables increase, the Miles per gallon (MPG) of cars dereases. We also observe that in this old dataset, manual tranmsiiion cars (am=1) have higher MPG than automatic transmission cars (am=0) as can be observed in Fig. 1.</p>
+<p>Using pairs(mtcars), we get that fuel consumption increases as the number of cylinders (cyl), displacement (disp), horsepower (hp), and weight (wt) increase. 
+That is to say, as these variables increase, the Miles per gallon (MPG) of cars dereases. We also observe that in this old dataset, manual tranmsion cars (am=1) have higher MPG than automatic transmission cars (am=0) as can be observed in Fig. 1.</p>
 <p>Let’s use t test and see if the difference in the mean MPG of automatic and maual transmisssion cars is significantly different from zero.</p>
 
 </div>
@@ -453,7 +462,9 @@ mean of x mean of y
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In modelA all features are not significant. Moreover, from the adjusted R-square, the model has included variables that are not important. Now, let’s use atomatic model selection using all covariates and the step function which finds a good compromise of model simplicity and R-square. The step function is formalized by the Akaike information criterion (AIC).</p>
+<p>In modelA all features are not significant. Moreover, from the adjusted R-square, the model has included variables that are not important. 
+Now, let’s use atomatic model selection using all covariates and the step function which finds a good compromise of model simplicity and R-square. 
+The step function is formalized by the Akaike information criterion (AIC).</p>
 
 </div>
 </div>
@@ -541,7 +552,11 @@ mean of x mean of y
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>So from modelB, we see that the step function selected variables wt (weight),hp (horse power),cyl (number of cylinders) and am (transmission type) as features.From the coeffiencets, we see that manual transmission cars have 1.81 miles more per gallon as compared to automatic transmission cars, keeping other factors constant.Moreover, the model says that MPG deacrease by about 2.5 Miles as weight increases by 1000lb, keeping other factors constant. On the other hand, we see that four cylinder cars have about 2.2 more MPG than eight cylinder cars, keeping other variables constant.</p>
+<p>So from modelB, we see that the step function selected variables wt (weight), hp (horse power), cyl (number of cylinders) and am (transmission type) as features. 
+From the coeffiencets, we see that manual transmission cars have 1.81 miles more per gallon as compared to automatic transmission cars,
+ keeping other factors constant. Moreover, the model says that MPG deacrease by about 2.5 Miles as weight increases by 1000lb,
+ keeping other factors constant. On the other hand, we see that four cylinder cars have about 2.2 more MPG than eight cylinder cars, 
+ keeping other variables constant.</p>
 
 </div>
 </div>
