@@ -165,7 +165,6 @@ div#notebook {
     });
     </script>
     <!-- End of mathjax configuration -->
-	
 		
 		<title>Fisseha Berhane</title>
      <link rel="stylesheet" type="text/css" href="../style5_new.css">
@@ -178,11 +177,11 @@ div#notebook {
  
          <header class="myheader">
       <h1>Fisseha Berhane </h1>
-   	  <h4>Data Scientist at <a class="myjhu" style="color:blue;text-decoration:none" 
+   	   <h4>Data Scientist at <a class="myjhu" style="color:blue;text-decoration:none" 
 	  href="http://aurotechcorp.com/"  target="_blank">Aurotech</a> and PhD Candidate, 
 	  <a  style="color:blue;text-decoration:none" class="myjhu"  href="http://jhu.edu">Johns Hopkins University</a> </h4>
             
-	         
+	           
 	    
 	 <p><img src="../figures/mobile.PNG" height="30" width="12"/> 443-970-2353</span> <span style="width:50px;display:inline-block"></span>
 	 <img src="../figures/emailimage.png" height="28" width="33"/>  fisseha@jhu.edu</span> <span style="width:50px;display:inline-block"></span>
@@ -211,141 +210,338 @@ div#notebook {
 	 </ul>
     </nav>
 	
-	
 	</head>
- <main style="width:960px;text-align:justify" >
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
 
- <br/>
-  <br/>
- <body>
-	 
-   <h4  style="color:blue"><strong>Combined dynamic sets with formulas controlled via parameters:<span style="color:red"> startups with best investment opportunities</span></strong></h4>
-                              
-	  <p> This Tableau Dashboard helps to select exciting start-ups to invest in. The criterion for selection is a combination of:
-	   
-	   <ui >
-  <li style="color:green;margin-left: 40px">High Revenue</li>
-   <li style="color:green;margin-left: 40px">Low Expenses</li>
-  <li style="color:green;margin-left: 40px">Top growth</li>
-</ui>
-</p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 style="text-align:center;color:blue" id="Integrating-R-and-Tableau">Integrating R and Tableau<a class="anchor-link" href="#Integrating-R-and-Tableau">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Today, I started playing with <strong>Tableau</strong>, an interactive data visualization product. The fact that <strong>R</strong> and Tableau can be integrated gives the possibility of taking advantage of both tools. We can do data cleaning, advanced analytics, modeling and machine learning, etc, in R and visualize our results in Tableau. We can visualize our results in R as far as we are comfortable with the coding, however, using Tableau helps us to save time and get insights momentarily.</p>
+<p>We can also build interactive dashboards in R with shiny and embed it in Tableau. This enables us to take advantage of the various statistical analysis and machine learning packages in R.</p>
 
-<script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1004px; height: 869px;'><noscript><a href='#'><img alt='The startup quadrant ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Th&#47;Thestartupquadrant&#47;Thestartupquadrant&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1004' height='869' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='Thestartupquadrant&#47;Thestartupquadrant' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Th&#47;Thestartupquadrant&#47;Thestartupquadrant&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showVizHome' value='no' /><param name='showTabs' value='y' /><param name='bootstrapWhenNotified' value='true' /></object></div> 
-</section>
-<hr/>
-  <br/>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this post, I will download quarterly datasets from the FDA Adverse Event Reporting System (FAERS) <a href="http://www.nber.org/data/fda-adverse-event-reporting-system-faers-data.html">website</a>, concatenate them, and do some data cleaning in R. Since the country names are two-letter codes, I will change them to the appropriate country names.  Then, I will visualize the data in Tableau. Let's visualize advere event reports by country.</p>
 
-<section> 
+<p>The data covers since the fourth quarter of 2012 to the second quarter of 2015 (at the time of writing this post).</p>
 
-  <h4><a  class="mysub"  style=" text-decoration:none;color:blue" href="Tableau_R.html"  target="_blank"> <strong>Integrating R and Tableau</strong></a></h4>
-       
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 style="color:red" id="Working-with-R">Working with R<a class="anchor-link" href="#Working-with-R">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">require</span><span class="p">(</span><span class="n">downloader</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">year_start</span><span class="o">=</span><span class="mi">2012</span>
+<span class="n">year_last</span><span class="o">=</span><span class="k">as</span><span class="o">.</span><span class="n">integer</span><span class="p">(</span><span class="nb">format</span><span class="p">(</span><span class="n">Sys</span><span class="o">.</span><span class="n">Date</span><span class="p">(),</span> <span class="s">&quot;%Y&quot;</span><span class="p">))</span>
+
+
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="n">year_start</span><span class="p">:</span><span class="n">year_last</span><span class="p">){</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">2012</span><span class="p">){</span>
+        <span class="n">url</span><span class="o">&lt;-</span><span class="s">&quot;http://www.nber.org/fda/faers/2012/demo2012q4.csv.zip&quot;</span>
+        
+        <span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="s">&quot;data.zip&quot;</span><span class="p">)</span>
+        <span class="n">unzip</span> <span class="p">(</span><span class="s">&quot;data.zip&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="k">else</span><span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">year_last</span><span class="p">){</span>
+            <span class="n">j</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">)</span>
+            
+            <span class="k">for</span> <span class="p">(</span><span class="n">m</span> <span class="ow">in</span> <span class="n">j</span><span class="p">){</span>
+            
+            <span class="n">url</span><span class="o">&lt;-</span><span class="n">paste0</span><span class="p">(</span><span class="s">&quot;http://www.nber.org/fda/faers/&quot;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s">&quot;/demo&quot;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s">&quot;q&quot;</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="s">&quot;.csv.zip&quot;</span><span class="p">)</span>
+            
+            <span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="s">&quot;data.zip&quot;</span><span class="p">)</span>
+            <span class="n">unzip</span> <span class="p">(</span><span class="s">&quot;data.zip&quot;</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+            
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">year_last</span><span class="p">){</span>
+            <span class="n">j</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">m</span> <span class="ow">in</span> <span class="n">j</span><span class="p">){</span>
+                
+                <span class="n">url</span><span class="o">&lt;-</span><span class="n">paste0</span><span class="p">(</span><span class="s">&quot;http://www.nber.org/fda/faers/&quot;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s">&quot;/demo&quot;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s">&quot;q&quot;</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="s">&quot;.csv.zip&quot;</span><span class="p">)</span>
+                
+            <span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">dest</span><span class="o">=</span><span class="s">&quot;data.zip&quot;</span><span class="p">)</span>
+            <span class="n">unzip</span> <span class="p">(</span><span class="s">&quot;data.zip&quot;</span><span class="p">)</span>
+            
+            <span class="p">}</span>
+            <span class="p">}</span>
+            
+        <span class="p">}</span>
+        
+    <span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>After downloading the quartely data sets, let's concatenate them. The unzipped data set for the first quarter of 2013 is demo2013q1.csv</p>
+<p>The demographic data contains various variables. "occr_country" is the country where the adverse event took place.</p>
+<p>We can use the <strong>select</strong> function from the <strong>dplyr</strong> package.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">demo</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s">&quot;demo2012q4.csv&quot;</span><span class="p">,</span><span class="n">stringsAsFactors</span><span class="o">=</span><span class="n">F</span><span class="p">),</span><span class="n">occr_country</span><span class="p">)</span> 
  
-  <p style="color:#003300;text-align:justify">In this post, I will download quarterly datasets from the FDA Adverse Event Reporting System (FAERS) 
-  <a href="http://www.nber.org/data/fda-adverse-event-reporting-system-faers-data.html">website</a>,
-  concatenate them, and do some data cleaning in R. Then, I will visualize the data in Tableau...
+ <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="n">year_start</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">year_last</span><span class="p">){</span>
+          
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">year_last</span><span class="p">){</span>
+             <span class="n">j</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">)</span>
+             
+             <span class="k">for</span> <span class="p">(</span><span class="n">m</span> <span class="ow">in</span> <span class="n">j</span><span class="p">){</span>
+                 
+            <span class="n">demo</span><span class="o">=</span><span class="n">rbind</span><span class="p">(</span><span class="n">demo</span><span class="p">,</span><span class="n">select</span><span class="p">(</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s">&quot;demo&quot;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s">&quot;q&quot;</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="s">&quot;.csv&quot;</span><span class="p">),</span><span class="n">stringsAsFactors</span><span class="o">=</span><span class="n">F</span><span class="p">),</span><span class="n">occr_country</span><span class="p">))</span>
+                 
+             <span class="p">}</span>
+         <span class="p">}</span>
+         
+         <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">year_last</span><span class="p">){</span>
+             <span class="n">j</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">)</span>
+             
+             <span class="k">for</span> <span class="p">(</span><span class="n">m</span> <span class="ow">in</span> <span class="n">j</span><span class="p">){</span>
+            <span class="n">demo</span><span class="o">=</span><span class="n">rbind</span><span class="p">(</span><span class="n">demo</span><span class="p">,</span><span class="n">select</span><span class="p">(</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s">&quot;demo&quot;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s">&quot;q&quot;</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="s">&quot;.csv&quot;</span><span class="p">),</span><span class="n">stringsAsFactors</span><span class="o">=</span><span class="n">F</span><span class="p">),</span><span class="n">occr_country</span><span class="p">))</span>
+             <span class="p">}</span>
+         <span class="p">}</span>
+         
+     <span class="p">}</span>
+</pre></div>
 
- <a style=" text-decoration:none;color:red" href ="Tableau_R.html"  target="_blank">more</a></p>
- <script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1004px; height: 869px;'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FE&#47;FEARSadverseevents&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1004' height='869' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='FEARSadverseevents&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FE&#47;FEARSadverseevents&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showVizHome' value='no' /><param name='showTabs' value='y' /><param name='bootstrapWhenNotified' value='true' /></object></div>
+</div>
+</div>
+</div>
 
-</section>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The "occr_country" variable in the FAERS data is two letter country code. We can map the code to the country name using the appropriate codes from this <a href="http://data.okfn.org/data/core/country-list">website</a>.</p>
 
-<hr/>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's change the variable name "occr_country" to "Code" to merge it with the country names and codes data.</p>
 
-<section> 
-   <br/>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">demo</span><span class="o">=</span><span class="n">rename</span><span class="p">(</span><span class="n">demo</span><span class="p">,</span><span class="n">Code</span><span class="o">=</span><span class="n">occr_country</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">c_codes</span><span class="o">&lt;-</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s">&quot;http://data.okfn.org/data/core/country-list/r/data.csv&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, let's merge the demography data with the c_codes, which contains country codes and full names.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">demo</span><span class="o">=</span><span class="n">merge</span><span class="p">(</span><span class="n">demo</span><span class="p">,</span> <span class="n">c_codes</span><span class="p">,</span><span class="n">by</span> <span class="o">=</span><span class="s">&quot;Code&quot;</span><span class="p">,</span><span class="nb">all</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span> <span class="c">#left outer join</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">demo</span><span class="o">=</span><span class="n">rename</span><span class="p">(</span><span class="n">demo</span><span class="p">,</span><span class="n">Country</span><span class="o">=</span><span class="n">Name</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's calculate adverse event reports by country using the <strong>dplyr</strong> package.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">demo</span><span class="o">&lt;-</span><span class="n">demo</span><span class="o">%&gt;%</span><span class="k">group_by</span>(Country)%&gt;%summarise(count = n())
+<span class="n">demo</span><span class="o">=</span><span class="n">mutate</span><span class="p">(</span><span class="n">demo</span><span class="p">,</span><span class="n">log_count</span><span class="o">=</span><span class="n">log10</span><span class="p">(</span><span class="n">count</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, let's save our data as csv and use Tableau to visualize it.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">write</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="n">demo</span><span class="p">,</span><span class="s">&#39;demography.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 style="color:red" id="Working-with-Tableau">Working with Tableau<a class="anchor-link" href="#Working-with-Tableau">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, let's import the csv data to Tableau and produce the visualization. Since the data is highly skewed, it has been log-transformed.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
 
 
+<script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1004px; height: 869px;'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FE&#47;FEARSadverseevents&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1004' height='869' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='FEARSadverseevents&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FE&#47;FEARSadverseevents&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showVizHome' value='no' /><param name='showTabs' value='y' /><param name='bootstrapWhenNotified' value='true' /></object></div>
 
-  <h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="Tableau_ML.html"  target="_blank"> <strong>Using R machine learning techniques inside Tableau: 2012 presidential election prediction</strong></a></h4>
-       
- 
-  <p style="color:#003300;text-align:justify">This is an example of Tableau and R integration. Here, I am using a machine learning technique to predict the winner of 2012 election using polling data from likely voters....
-
- <a style=" text-decoration:none;color:red" href ="Tableau_ML.html"  target="_blank">more</a></p>
-  
-<script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 804px; height: 669px;'><noscript><a href='#'><img alt='2012 Election Prediction ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ma&#47;MachineLearninginTableau&#47;2012ElectionPrediction&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='804' height='669' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='MachineLearninginTableau&#47;2012ElectionPrediction' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ma&#47;MachineLearninginTableau&#47;2012ElectionPrediction&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showVizHome' value='no' /><param name='showVizHome' value='no' /><param name='showTabs' value='y' /></object></div>
-
-</section>
-
-<hr/>
-
-<section> 
-   <br/>
-
-   <h4  style="color:blue"><strong>Interactive Tableau Dashboard: <span style="color:red">Customer Segmentation</span> using dummy data for an imaginary bank operating in the UK</strong></h4>
-       
- 
-<script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1004px; height: 869px;'><noscript><a href='#'><img alt='My complete dashboard ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;In&#47;InteractiveDashboard_2&#47;Mycompletedashboard&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1004' height='869' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='InteractiveDashboard_2&#47;Mycompletedashboard' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;In&#47;InteractiveDashboard_2&#47;Mycompletedashboard&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showVizHome' value='no' /><param name='showTabs' value='y' /><param name='bootstrapWhenNotified' value='true' /></object></div>
-</section>
-<hr/>
-
-<section> 
-  <br/>
-
-   <h4  style="color:blue"><strong>Fetching JSON data into Tableau using web data connector</strong></h4>
-   <p style="text-align:justified"> Web Data Connector helps to connect to data which is accessible over HTTP including internal web services, JSON data, and REST APIs. 
-   Here JSON data from the <a  style="text-decoration:none"  href="https://open.fda.gov/">openFDA website</a>
-   is used to create the dashboard below in Tableau. The data is on adverse events reported to the FDA.</p>
-       
- 
-<script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1004px; height: 869px;'><noscript><a href='#'><img alt='openFDA drug adverse events and labeling ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ap&#47;Applicationofwebdataconnector-openFDAdrugadverseeventsandlabelingreports&#47;openFDAdrugadverseeventsandlabeling&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1004' height='869' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='Applicationofwebdataconnector-openFDAdrugadverseeventsandlabelingreports&#47;openFDAdrugadverseeventsandlabeling' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ap&#47;Applicationofwebdataconnector-openFDAdrugadverseeventsandlabelingreports&#47;openFDAdrugadverseeventsandlabeling&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showVizHome' value='no' /><param name='showTabs' value='y' /><param name='bootstrapWhenNotified' value='true' /></object></div>
- 
-</section>
-<hr/>
-  <br/>
-
-
-<section> 
-  <br/>
-
-   <h4  style="color:blue"><strong>Global population distribution by income, 2011</strong></h4>
-       
-	 <p>  This is a Tableau Dashboard that shows world population by income in 2011. The income data can be downloaded from <a href="http://www.pewglobal.org/wp-content/themes/pew-global/interactive-global-class.csv ">here</a>. D3 version is available <a style="text-decoration:none" href="http://www.pewglobal.org/interactives/global-population-by-income/">here</a>.</p>
- 
-<script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1004px; height: 869px;'><noscript><a href='#'><img alt='How many live on how much and where ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Gl&#47;Globalpopulationdistributionbyincome2011&#47;Howmanyliveonhowmuchandwhere&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1004' height='869' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='Globalpopulationdistributionbyincome2011&#47;Howmanyliveonhowmuchandwhere' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Gl&#47;Globalpopulationdistributionbyincome2011&#47;Howmanyliveonhowmuchandwhere&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showVizHome' value='no' /><param name='showTabs' value='y' /><param name='bootstrapWhenNotified' value='true' /></object></div> 
-</section>
-<hr/>
-  <br/>
-  
-  
-<section> 
-  <br/>
-
-   <h4  style="color:blue"><strong><a    class="mysub"  style=" text-decoration:none;color:blue" href="Tableau_world_population.html"  target="_blank">World Demographics Analysis Dashboard</a></strong></h4>
-       
-	 <p style="text-align:justified">  This is a world demographics analysis dashboard using data from the world bank. 
-	 It shows life expectancy, fertility rate and population size by year. It also helps to drill into indivisual countries and compare thier developments 
-	 with other countries... <a style="text-decoration:none;color:red" href ="Tableau_world_population.html"  target="_blank">more</p>
-<script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1004px; height: 869px;'><noscript><a href='#'><img alt='World demographics ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Wo&#47;WorldDemographicsAnalysisDashboard_0&#47;Worlddemographics&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1004' height='869' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='WorldDemographicsAnalysisDashboard_0&#47;Worlddemographics' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Wo&#47;WorldDemographicsAnalysisDashboard_0&#47;Worlddemographics&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showVizHome' value='no' /><param name='showTabs' value='y' /><param name='bootstrapWhenNotified' value='true' /></object></div>
-
-
-</section>
-<hr/>
-  </br>
-
-
-	</body>
-      <br/>
-	  <br/>
-		
- </main>
- 
-   <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="myjs.js"></script>
-	
-	
-	  </body>
-
-	
-		<footer>
-		<p style ="text-align:center">&copy; 2015 Berhane</p>
-		</footer>
-			<script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
+</div>
+</div>
+</div>
+     <span style="width:400px;display:inline-block"></span><span> 
+  <a href="Tableau_R.html"><img src="../figures/previous.png" height="40" width="40"/></a>
+  <a href="../index.html"><img src="../figures/home.png" height="40" width="40"/></a>
+  <a href="Tableau_R.html"><img src="../figures/next.png" height="40" width="40"/></a>
+  </span>
+  		<script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="../myjs.js"></script>
-		<br/>
-		<br/>
-		
-		 <div id="disqus_thread"></div>
+</div>
+    </div>
+  </div>
+  
+  <div id="disqus_thread"></div>
 <script type="text/javascript">
 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 var disqus_shortname = 'httpdatascienceenthusiastcom'; // required: replace example with your forum shortname
@@ -360,5 +556,5 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
   
-	
+</body>
 </html>
