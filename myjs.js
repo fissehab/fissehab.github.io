@@ -1,10 +1,10 @@
 $(document).ready(function() {
 						   
   $(".icon").mouseenter(function() {
-    $(this).css("background-color","#FF99C2");
+    $(this).css("background-color","white");
   });
   $(".icon").mouseleave(function() {
-    $(this).css("background-color","#CCE680");
+    $(this).css("background-color","#53c68c");
   });
   
   
@@ -19,18 +19,18 @@ $(document).ready(function() {
   
   
     $(".cv").mouseenter(function() {
-    $(this).css("background-color","#FFCCCC");
+    $(this).css("background-color","white");
   });
   $(".cv").mouseleave(function() {
-    $(this).css("background-color","#CCE680");
+    $(this).css("background-color","#53c68c");
   });
   
   
       $(".resume").mouseenter(function() {
-    $(this).css("background-color","#FFCCCC");
+    $(this).css("background-color","white");
   });
   $(".resume").mouseleave(function() {
-    $(this).css("background-color","#CCE680");
+    $(this).css("background-color","#53c68c");
   });
   
   
@@ -42,10 +42,10 @@ $(document).ready(function() {
   });
   
         $(".myjhu").mouseenter(function() {
-    $(this).css("background-color","#E6FFE6");
+    $(this).css("background-color","white");
   });
   $(".myjhu").mouseleave(function() {
-    $(this).css("background-color","#CCE680");
+    $(this).css("background-color","#53c68c");
   });
   
   

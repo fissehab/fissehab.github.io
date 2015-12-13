@@ -1,10 +1,10 @@
 $(document).ready(function() {
 						   
   $(".icon").mouseenter(function() {
-    $(this).css("background-color","#FF99C2");
+    $(this).css("background-color","white");
   });
   $(".icon").mouseleave(function() {
-    $(this).css("background-color","#CCE680");
+    $(this).css("background-color","#53c68c");
   });
   
     $(".mybanner").mouseenter(function() {
