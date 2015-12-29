@@ -600,8 +600,8 @@ scale_fill_gradient<span class="p">(</span>low <span class="o">=</span> <span cl
 <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="kp">dim</span><span class="p">(</span>countries<span class="p">)[</span><span class="m">1</span><span class="p">]){</span>
     data<span class="o">=</span>gtrends<span class="p">(</span><span class="kp">as.character</span><span class="p">(</span>countries<span class="p">[</span>i<span class="p">,</span><span class="m">1</span><span class="p">]))</span>
     z<span class="o">=</span>data<span class="o">$</span>searches
-    top_5<span class="o">=</span><span class="kp">paste</span><span class="p">(</span><span class="kp">as.data.frame</span><span class="p">(</span>z<span class="p">)[,</span><span class="m">1</span><span class="p">][</span><span class="m">1</span><span class="p">],</span>collapse<span class="o">=</span><span class="s">&quot;, &quot;</span><span class="p">)</span>
-    searches<span class="o">=</span><span class="kt">c</span><span class="p">(</span>searches<span class="p">,</span>top_5<span class="p">)</span>
+    top_1<span class="o">=</span><span class="kp">paste</span><span class="p">(</span><span class="kp">as.data.frame</span><span class="p">(</span>z<span class="p">)[,</span><span class="m">1</span><span class="p">][</span><span class="m">1</span><span class="p">],</span>collapse<span class="o">=</span><span class="s">&quot;, &quot;</span><span class="p">)</span>
+    searches<span class="o">=</span><span class="kt">c</span><span class="p">(</span>searches<span class="p">,</span>top_1<span class="p">)</span>
     
 <span class="p">}</span>
 </pre></div>
@@ -629,7 +629,7 @@ scale_fill_gradient<span class="p">(</span>low <span class="o">=</span> <span cl
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The data frame <strong>data</strong> above cotains, the top most searched term associated with each country.</p>
+<p>The data frame <strong>Data</strong> above cotains, the top most searched term associated with each country.</p>
 
 </div>
 </div>
