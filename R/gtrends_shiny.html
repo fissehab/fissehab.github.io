@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>Fisseha Berhane</title>
+<title>Google Trends analytics with shiny</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -139,7 +139,9 @@ div#notebook {
   }
 }
 </style>
-
+	<style>
+div.prompt {display:none}
+</style>
 <!-- Custom stylesheet, it must be in the same directory as the html file -->
 <link rel="stylesheet" href="custom.css">
 
@@ -166,21 +168,19 @@ div#notebook {
     </script>
     <!-- End of mathjax configuration -->
 	
-		<title>Fisseha Berhane</title>
-     <link rel="stylesheet" type="text/css" href="../style5_new.css">
-	
-	</head>
-  
-<body>
-  
- <nav id="nav01"></nav>
+	<title>Fisseha Berhane</title>
+    <link rel="stylesheet" type="text/css" href="../style3.css">
+  </head>
+  <body>
+  <nav id="nav01"></nav>
  
-         <header class="myheader">
+     <header class="myheader">
       <h1>Fisseha Berhane </h1>
-   	  <h4>Data Scientist at <a class="myjhu" style="color:blue;text-decoration:none" 
+    <h4>Data Scientist at <a class="myjhu" style="color:blue;text-decoration:none" 
 	  href="http://aurotechcorp.com/"  target="_blank">Aurotech</a> and PhD Candidate, 
 	  <a  style="color:blue;text-decoration:none" class="myjhu"  href="http://jhu.edu">Johns Hopkins University</a> </h4>
             
+	        
 	    
 	 <p><img src="../figures/mobile.PNG" height="30" width="12"/> 443-970-2353</span> <span style="width:50px;display:inline-block"></span>
 	 <img src="../figures/emailimage.png" height="28" width="33"/>  fisseha@jhu.edu</span> <span style="width:50px;display:inline-block"></span>
@@ -192,936 +192,549 @@ div#notebook {
 	</p>
     </header>
  
- 
     <nav class ="mynav">
       <ul>
-        <li><a   class="mybanner"  style="text-decoration:none" href="../index.html">Home</a></li>
-        <li><a  class="mybanner"  style="text-decoration:none" href="../education.html">Education</a></li>
-		  <li><a  class="mybanner"  style="text-decoration:none" href="../projects.html">Projects</a></li>
-		  <li><a  class="mybanner"  style="text-decoration:none" href="../publications.html">Publications</a></li>
+   <li><a   class="mybanner"  style="text-decoration:none" href="../index.html">Home</a></li>
+        <li><a   class="mybanner"  style="text-decoration:none" href="../education.html">Education</a></li>
+		  <li><a   class="mybanner"  style="text-decoration:none" href="../projects.html">Projects</a></li>
+		  <li><a   class="mybanner"  style="text-decoration:none" href="../publications.html">Publications</a></li>
 		   <li><a  class="mybanner"  style="text-decoration:none"   href="../Python/pythonindex.html">Python & Spark</a></li>
 		  <li><a  class="mybanner"  style="text-decoration:none" href="Rindex.html">R & SparkR</a></li>
 	      <li><a  class="mybanner"  style="text-decoration:none" href="../certificates.html">Data Science Certificates & Skills</a></li>   
-        <li><a  class="mybanner"  style="text-decoration:none" href="../d3.html">D3</a></li>   
-		<li><a  class="mybanner"  style="text-decoration:none" href="../Tableau/tableau.html">Tableau</a></li>  
+		  <li><a  class="mybanner"  style="text-decoration:none" href="../d3.html">D3</a></li>   
+	      <li><a  class="mybanner"  style="text-decoration:none" href="../Tableau/tableau.html">Tableau</a></li> 
      
-
-	 </ul>
+      </ul>
     </nav>
+
 	
 	</head>
- <main>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
 
-  
-  
-  <br/>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3  style="color:red; text-align:center" id="Google-Trends-Analytics-using-Shiny">Google Trends Analytics using Shiny<a class="anchor-link" href="#Google-Trends-Analytics-using-Shiny">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Lots of searches are performed in Google search engine every second. According to Google, Google Trends gives us a glimpse into the topics the world is searching for. We can use Google Trends to see the interest of a search term spatio-temporally. Google Trends also enables us to compare search terms and see thier popularity over time.</p>
+<p>Can Google Trends data be used to track disease out breaks and natural hazards? At least, it can be a starting point. If there is a disease outbreak in a city, people will search about it, its symptoms and how to cure it. So, if we see an anomaly in the search pattern of a disease in a city, this will be a call for further investigation.</p>
+<p>We can get Google Trends data for the whole world and for the whole time period the Google Trends API provides data for. Or, we can select a certain region (country or city) and time span.</p>
+<p>Google trends begin in the year 2004 and go forward.  The API allows us to compare up to five search terms at a time. However, using <strong>R</strong> we can write a program that fetches the trends of many search terms and do spatial comparison where the searches are performed. Further, once we have the data in <strong>R</strong>, we can perform any kind of anaysis that we think is fit. For example, in this <a href="http://datascience-enthusiast.com/R/top_hits.html">blog post</a>, I used <strong>R</strong> to find top-searches associated with each nation.</p>
 
-  <h4 style="color:black"> <strong>Data Analysis  and Machine Learning with R</strong> </h4>
- 
-    <hr style="color:#F5F5F0"/>
-<section> 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this post, I will show how we can use <strong>Shiny</strong> to analyse Google Trends Data and create a dashboard. <a href="http://shiny.rstudio.com/">Shiny</a> is an <strong>R</strong> package that makes it easy to build interactive web apps straight from R. For a nice look and feel, we will use the <a href="https://rstudio.github.io/shinydashboard/"><strong>shinydashboard</strong></a> package.</p>
+<p>The <strong>gtrendsR</strong> package is used to get data from Google Trends.</p>
 
- <h4  style="color:blue"><strong><a    class="mysub"  style=" text-decoration:none;color:blue" 
- href="donald.html"  target="_blank">Sentiment Analysis of Donald Trump's views on Muslims using R and Tableau
-</a></strong></h4>
-       
-	 <p style="text-align:left">In this post, we will focus on how to integrate R and Tableau for text mining, 
-	 sentiment analysis and visualization. 
-	 Using these tools together enables us to answer detailed questions... 
-	 
-	<span> <a style="text-decoration:none;color:red" href ="donald.html"  target="_blank">more</span></a></p>
-	
-	
-<a href="donald.html"  target="_blank"><img style="margin:0px auto;display:block"  
-src="../figures/R_Twitter_Tableau.png", height="200" width="500"/></a>
-  
-</section>
-  
-   <hr style="color:#F5F5F0"/>
+</div>
+</div>
+</div>
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the screenshot below, I launched the app and entered 'headache', 'nausea' and 'diarrhea' as search terms. 
+I have selected world wide and for all time period. But, I can zoom in to a specific region or city and select a 
+time span of interest. In the time series plot, we see the relative trend of each term.</p>
 
- <section>
- 
-<h4 style="color:blue"><strong>Semi-automated rainfall prediction models for any geographic region using <span> <a style ="text-decoration:none;color:red" href ="http://shiny.rstudio.com/" target="_blank"> R (Shiny)</a></span></strong></h4>
-		
- <p style="color:#003300;text-align:justify"> Here, I used <a style ="text-decoration:none" href= "http://shiny.rstudio.com/" target="_blank">shiny</a>, an R package that makes it easy to build interactive web applications (apps) straight from R, <span style="color:blue">HTML</span>, <span style="color:red">CSS</span> and  <span style="color:blue">JavaScript</span>
-to develop semi-automated machine learning models to predict rainfall over a region the user selects.
+</div>
+</div>
+</div>
 
-   The user can extract predictand and predictors by drawing a polygon over a 
-	region. Then, the user can select some or all of the machine learning algorithms provided.
-	Provided models include <a  style="text-decoration:none" href="https://en.wikipedia.org/wiki/Linear_regression"  target="_blank"> Linear regression models (GLM, SGLM)</a>, <a  style ="text-decoration:none"  href ="https://en.wikipedia.org/wiki/Decision_tree_learning"  target="_blank">Tree-based ensemble models (Random Forest and Boosting)</a>, 
-	<a  style ="text-decoration:none" href ="https://en.wikipedia.org/wiki/Support_vector_machine"  target="_blank">Support vector Machines</a>,<a style="text-decoration:none" href ="https://en.wikipedia.org/wiki/Artificial_neural_network" target="_blank"> Artificial Neural Network</a>, and other non-linear models (<a style="text-decoration:none" href ="https://en.wikipedia.org/wiki/Generalized_additive_model"  target="_blank">GAM, SGAM</a>, <a style ="text-decoration:none "  href ="https://en.wikipedia.org/wiki/Multivariate_adaptive_regression_splines"  target="_blank"> MARS</a>). 
-	Finally, the user can download the analysis steps they used, such as the region they selected, the time period they specified, the predictand and predictors they chose and preprocessing options they used, and the model results in PDF or HTML format. A quick demo is shown in the video below.</p>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
 
-	 <span style="width:200px;display:inline-block"></span><p style="text-align:center"> Server.R and ui.R codes are on  <a style=" font-size:20px;color:red; text-decoration:none" href="https://github.com/fissehab/Shiny_prediction_project" target="_blank">GitHub</a></p>
-	    <br/>  
-   <iframe style="margin:0px auto;display:block"  width="560" height="315" src="https://www.youtube.com/embed/9ZQDfXFegXg" frameborder="0" allowfullscreen></iframe>
-		 
-</section>
+<img style="margin:0px auto;display:block" src="../figures/shiny1.png", height="370" width="900"/>
 
+</div>
 
+</div>
+</div>
+</div>
 
-
- 
-  <hr style="color:#F5F5F0"/>
-  
-   <section>	
-			<h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="R_Python_ml.html" target="_blank"><strong>Supervised Machine Learning with R and Python</strong></a></h4>
-			     
-<p style="color:#003300;text-align:justify"> Here I show how to build various machine learning models in Python and R. The models include linear regression, 
-logistic regression, tree-based models (bagging and random forest) and support vector machines (SVM)...
-  <a style="text-decoration:none;color:red" href ="R_Python_ml.html"  target="_blank">more</a></p>
-
-
-</section>
-
-    <hr style="color:#F5F5F0"/>
-	
-
-  
-	  
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="webscrapping_2_US_population.html"  target="_blank">
-								 <strong>Web scraping with R using rvest: Population of U.S. states and territories</a></strong></h4>
-							
-							<p style="text-align:justify">In this post, we will use the <strong>rvest</strong> web scraping R package to scrape US population data from <a href="https://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population">Wikipedia</a> and use <strong>ggplo2</strong> to visualize the population data by state... <a  style="text-decoration:none;color:red" href ="webscrapping_2_US_population.html"  target="_blank">more.</a></p>
-
-<a href="webscrapping_2_US_population.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/population.png", height="400" width="800"/></a>
-
-</section>	
-  <hr style="color:#F5F5F0"/>
-  
-<section>
-
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="https://fisseha.shinyapps.io/drug_events"  target="_blank">
-								 <strong>A Shiny Dashboard of Adverse Drug Event Reports</a></strong></h4>
-							
-							<p style="text-align:justify"> This is a shiny dashboard developed using<a  style="text-decoration:none"  href="https://open.fda.gov/",target="_blank">
-							openFDA</a> data. The data is in <span style="color:red">JSON</span> format. The R library <span style="color:blue">jsonlite</span> is used to access the data from the openFDA website and change it to data frame. The user can select one , a couple or all types of events.</p>
-							     
-								<span style="color:green">  The ui.R and server.R codes are available <a style="color:blue;text-decoration:none" href="drug_adverse_event.html"  target="_blank">here</a></span>
-								 <br/>
-
-<a href="https://fisseha.shinyapps.io/drug_events"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/shiny_drugeffects.PNG", height="250" width="646"/></a>
-
-</section>
-
-
-  <hr style="color:#F5F5F0"/>
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="https://fisseha.shinyapps.io/my_shiny"  target="_blank">
-								 <strong>How Many Live on How Much, and Where with <span style="color:red"><strong>Shiny</strong></span></a></strong></h4>
-							
-							<p style="text-align:justify"> This is a shiny app that shows world population by income. The income data can be downloaded from <a  style="text-decoration:none"  href="http://www.pewglobal.org/wp-content/themes/pew-global/interactive-global-class.csv",target="_blank">
-							here</a> and the shape file can be downloaded from <a  style="text-decoration:none"  href="http://www.pewglobal.org/wp-content/lib/js/world-geo.json",target="_blank">here</a>. 
-							     
-								<span style="color:green">  The ui.R and server.R codes are available <a style="color:blue;text-decoration:none" href="income.html"  target="_blank">here</a></span>
-								 <br/>
-
-<a href="https://fisseha.shinyapps.io/my_shiny"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/income.png", height="500" width="646"/></a>
-
-</section>
 <br/>
-	
-	<hr style="color:#F5F5F0"/>
-	
-    <section>	
-			<h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="regression_models.html"  target="_blank"><strong>Using linear and non-linear regression models to predict global temperature</strong></a></h4>
-			     
-<p style="color:#003300;text-align:justify"> 	In this project, the performances of <span style="color:#B2246B">support vector machines, neural network, boosting, classification and regression trees, random forest and 
-linear models, such as generalized linear model, lasso, ridge regression and elastic net</span>, 
-in predicitng average global temperature anomaly are compared... 
- 
-  <a style="text-decoration:none;color:red" href ="regression_models.html"  target="_blank">more</a></p>
-<a href="regression_models.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/all_models.png", height="350" width="525"/></a>
-  
-
-</section>
-
-    <hr style="color:#F5F5F0"/>
-	
- 
-<section>
-
-  <h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="ensemble_trees.html"  target="_blank"><strong>Ensemble Machine Learning Techniques for Human Activity Recognition</strong></a></h4>
-   
-  <p style="color:#003300; text-align:justify"> In this project, <span> <a style="text-decoration:none" href="(https://en.wikipedia.org/wiki/Ensemble_learning" target="_blank"> ensemble tree-based predictive models</a></span> 
-  that determine the manner an exercise is done are built. The models considered are <span style="color:purple"> Random Forest, 
-  Adaptive Boosting and Bagged Adaptive Boosting...
-  </span> <a style="text-decoration:none;color:red" href ="ensemble_trees.html"  target="_blank">more</a></p>
-  <br/>
-  
-  
-   
-     <a href="ensemble_trees.html" target="_blank"><img style="margin:0px auto;display:block" src="../figures/pml.PNG" alt =" No image to show" height='300' width='300'/></a>
-   
-   
-   <a style ="text-decoration:none;text-align:center; color:skyblue" href="http://perceptual.mpi-inf.mpg.de/files/2013/03/velloso13_ah.pdf
-"  target="_blank"><span><h4 > Velloso et al. (2013)</h4></span></a>
-  
-
-</section>
-
- <hr style="color:#F5F5F0"/>
-
-   <section>	
-			<h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="ggplot_python_R.html"  target="_blank"><strong>ggplot in R and Python</strong></a></h4>
-			   
-<p style="color:#003300;text-align:justify"> The grammar of graphics package <strong>(ggplot2)</strong> 
-is the best data visualization library in R. The concept of grammar of graphics is 
-also implemented in Python with the library <strong>ggplot</strong> 
-and it has similar commands to <strong>ggplot2</strong>...
-  <a style="text-decoration:none;color:red" href ="ggplot_python_R.html"  target="_blank">more</a></p>
-
-  <a href="ggplot_python_R.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/ggplot2_PR.png", height="394" width="525"/></a>
-
-
-</section>
-
- <hr style="color:#F5F5F0"/>
- 
- 
-<section> 
-
-  <h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="R_netcdf_correlation.html"  target="_blank"> <strong>Correlation map of climate variables</strong></a></h4>
-       
-  <p style="color:#003300;text-align:justify"> To understand physical mechanisms and to develop statistical rainfall prediction models, correlation analysis is 
-used as a first step. Here, I show how to use R to generate correlation map between rainfall and 
-sea surface temperature... 
- <a style=" text-decoration:none;color:red" href ="R_netcdf_correlation.html"  target="_blank">more</a></p>
-  
-   <br/>
- <a href="R_netcdf_correlation.html"  target="_blank"> <img style="margin:0px auto;display:block" src="../figures/correlation.png", height="240" width="680"/></a>
-   
-
-
-</section>
-
-      <hr style="color:#F5F5F0"/>
-  
-   
- <section>   
-	<h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="PA1_template.html"  target="_blank"> <strong>Reproducible Research with R</a></strong></h4>
-	
-<p style="color:#003300;text-align:justify">It is now possible to collect a large amount of data about personal movement using activity monitoring
-devices such as a Fitbit <a style="color:green;text-decoration:none" href="http://www.fitbit.com"  target="_blank"> (http://www.fitbit.com)</a>, Nike Fuelband <a style="color:green;text-decoration:none" href=
-"http://www.nike.com/us/en_us/c/nikeplusfuelband"  target="_blank"> (http://www.nike.com/us/en_us/c/nikeplusfuelband)</a>,
-or Jawbone Up <a  style="color:green; text-decoration:none" href="https://jawbone.com/up"  target="_blank"> (https://jawbone.com/up)</a>. These type of devices are part of the “quantified self”
-movement – a group of enthusiasts who take measurements about themselves regularly to improve their
-health, to find patterns in their behavior, or because they are tech...    
- <a style="text-decoration:none;color:red" href ="PA1_template.html"  target="_blank">more</a></p>
-
-</section>
-
-     <hr style="color:#F5F5F0"/>
-  
- <section>	
-		<h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="reading_from_web.html"  target="_blank"><strong> Downloading data from the web using R</a></strong></h4>
-               
-<p style="color:#003300;text-align:justify">There are different ways that we can download and read data into R.
- Some examples are shown... <a style="text-decoration:none;color:red" href ="reading_from_web.html" target="_blank">more</a></p>
- 
-</section>
-     <hr style="color:#F5F5F0"/>
- 
- <section>	
-			<h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="google_scholar_R.html"  target="_blank"><strong>Google scholar scraping with R</a></strong></h4>
-			   
-<p style="color:#003300;text-align:justify"> In this post, I will show how to scrape google scholar account. 
-Particularly, we will use the <strong>'rvest'</strong> R package to scrape the google scholar account 
-of my advisor. We will see his coauthors, how many times they are cited and thier affilations...
- 
-  <a style="text-decoration:none;color:red" href ="google_scholar_R.html"  target="_blank">more</a></p>
-<a href="google_scholar_R.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/scholaR.png", height="200" width="460"/></a>
-  
-
-</section>
- 
-     <hr style="color:#F5F5F0"/>
-
- <section>	
-			<h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="shiny/index.html"  target="_blank"> <strong>Slidify presentation of a Shiny App</a></strong></h4>
-			   
-<p style="color:#003300;text-align:justify"> Slidify helps to create data-centric presentations.
-It allows embedded code chunks and mathematical formulas to be rendered correctly. Final products are HTML files, which can be viewed with 
-any web browser and shared easily.</p>
 <br/>
-<p>Shiny is an R package that makes it easy to build interactive web applications straight from R. Here I have developed
- a shiny app that calculates the area average rainfall 
-and temperature climatologies and trend over any region selected by the user over Africa
-<a style="text-decoration:none;color:blue" href ="shiny/index.html"  target="_blank">(see presentation).</a></p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the figures below, the top searches associated with each search term we entered are shown.</p>
 
-<a href="shiny/index.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/unnamed-chunk-1-1.png", height="300" width="400"/></a>
- 
-
-</section>
-
-     <hr style="color:#F5F5F0"/>
-   
-
- <section>
-	
-	<h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="R_netcdf_composite.html"  target="_blank"><strong> Composite analysis to capture non-linear relationships</a></strong></h4>
-			
-<p style="color:#003300;text-align:justify"> Though correlation is able to capture linear relationships, 
-since it does not handle non-linear relationships, composite analysis is also widely used to understand 
-physical mechanisms and to develop statistical rainfall prediction models. 
-Here, I show how to use R to generate composites of rainfall based on sea surface temperature...
- <a style="text-decoration:none;color:red" href ="R_netcdf_composite.html"  target="_blank">more.</a></p>
+</div>
+</div>
+</div>
 
 
-<a href="R_netcdf_composite.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/composite.png", height="250" width="600"/></a>
-   
- </section>
- 
-     <hr style="color:#F5F5F0"/>
-   
- 
- <section>
-	
-			<h4><a   class="mysub"   style=" text-decoration:none;color:blue"  href="harmful_events.html"  target="_blank"> <strong>Most Harmful Storms and Weather Events In The United States </a></strong></h4>
-			                   <br/>
-<p style="color:#003300;text-align:justify"> This report seeks to investigate storms and other weather events that cause the highest
- number of fatalities and injuries. 
-Moreover, it shows which events have the greatest economic consequences...
- <a style="text-decoration:none;color:red" href ="harmful_events.html"   target="_blank">more.</a></p>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
 
-<a href="harmful_events.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/harmfulstorms.PNG", height="300" width="600"/></a>
-   
- </section>
+<img style="margin:0px auto;display:block" src="../figures/shiny2.png", height="400" width="800"/>
 
-      <hr style="color:#F5F5F0"/>
-   
-
-  <section>
- 			<h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="hospital_rank.html"  target="_blank"> <strong>Hospital Rankings In The United States </a></strong></h4>
-			           
-<p style="color:#003300;text-align:justify"> Here, I compare the performance of hospitals in the USA using data that come from the Hospital 
-Compare web site (<a style="text-decoration:none" href="http://hospitalcompare.hhs.gov"  target="_blank">http://hospitalcompare.hhs.gov</a>) run by the U.S.
- Department of Health and Human Services. Hospital rankings are performed on state-wide and nation-wise basis considering 
- different outcomes... <a style="text-decoration:none;color:red" href ="hospital_rank.html"  target="_blank">more.</a></p>
-
-<a href="hospital_rank.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/md_best.PNG", height="150" width="300"/></a>
-
- </section>
- 
-      <hr style="color:#F5F5F0"/>
-   
- 
- <section>
- 			<h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="fuel_efficiency.html"  target="_blank"> <strong>Car Fuel Efficiency and Transmission Type </a></strong></h4>
-			   
-<p style="color:#003300;text-align:justify"> In this analysis, the relationship between a set of variables and miles per gallon (MPG) is explored using the <mark>mtcars</mark> dataset. 
-Particularly, the MPG difference between automatic and manual transmissions is evaluated and quantified using
- multivariate linear regression models... <a style="text-decoration:none;color:red" href ="fuel_efficiency.html"  target="_blank">more.</a></p>
 <br/>
-<a href="fuel_efficiency.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/car_efficieny.PNG", height="300" width="300"/></a>
-
- </section>
- 
-  <hr style="color:#F5F5F0"/>
-   
-
- <section>
- 			<h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="re_tidy_data.html"  target="_blank"> <strong>The Role of Regular Expressions in Creating a Tidy Data </a></strong></h4>
-			 
-<p style="color:#003300;text-align:justify">In this analysis, let's prepare a tidy data that can be used for later analysis 
-employing regular expressions in R and demonstrate the strength of regular expressions...
- <a  style="text-decoration:none;color:red   "href ="re_tidy_data.html"  target="_blank">more.</a></p>
- 
- </section>
- 
-     <hr style="color:#F5F5F0"/>
-   
- <section>
- 
- 			<h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="companies.html"  target="_blank"><strong>World's Biggest Companies </a></strong></h4>
-			    
-<p style="color:#003300;text-align:justify"> Let's visualize the distribution of the world's biggest companies using 
-the Forbes2000 data from HSAUR2 package... <a  style="text-decoration:none;color:red" href ="companies.html"  target="_blank">more.</a></p>
-
-<a href="companies.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/companies.png", height="300" width="600"/></a>
-
- </section>
-      <hr style="color:#F5F5F0"/>
-	  
-
- <section>	  
-	   			<h4><a   class="mysub"   style=" text-decoration:none;color:blue"  href="distributions_R.html"  target="_blank"><strong>Approximating distributions </a></strong></h4>
-			      
-<p style="color:#003300;text-align:justify"> Here, let's see the approximation of some distributions by other
- distributions, when certain criteria are met, through simulations... <a  style="text-decoration:none;color:red" href ="distributions_R.html"  target="_blank">more.</a></p>
-
-  </section>
-      <hr style="color:#F5F5F0"/>
-	  
-	  
- <section>	  
-	  	   			<h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="earnings.html"  target="_blank"><strong>Predicting Earnings from census data </a></strong></h4>
-			                    
-<p style="color:#003300;text-align:justify">In this problem, we are going to use census information about an individual to predict how much a person earns 
--- in particular, whether the person earns more than $50,000 per year... <a  style="text-decoration:none;color:red" href ="earnings.html"  target="_blank">more.</a></p>
-
-<a href="earnings.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/earnings.png", height="400" width="400"/></a>
-
- </section>
-
-    <hr style="color:#F5F5F0"/>
-   
-
- <section>  
-   	  	   			<h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="letter.html"  target="_blank"><strong>Letter Recognition </a></strong></h4>
-			                      <br/>
-<p style="color:#003300;text-align:justify">This is letter recognition exercise using tree-based models... <a  style="text-decoration:none;color:red" href ="letter.html"  target="_blank">more.</a></p>
-
-
- </section>
- 
-      <hr style="color:#F5F5F0"/>
-	  
-	  
- <section>  
-	     	  	   			<h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="http://fisseha.shinyapps.io/dataproducts_project"  target="_blank">
-							<strong>Quick overview of climate  trends using <strong><mark style="background-color:yellow">Shiny</mark></strong> </a></strong></h4>
-			                          
-<p style="color:#003300;text-align:justify">Global climate is changing and this change is apparent across a wide range of observations.
-The impacts of climate change on rainfall and temperature varies from region to region. Shiny, which is an R package that makes it easy to build interactive web applications (apps) straight from R,
-can be used to see the trends of different climate variables over different parts of the world very quickly. Here, I developed a Shiny App that displays the 
-trends of temperature and rainfall over any selected region over Africa. This app can be used as a starting point in studying impacts of, adaptation to and mitigation of climate change over a region. The app is available on
- <a  style="text-decoration:none;color:red" href ="http://fisseha.shinyapps.io/dataproducts_project"  target="_blank">RStudio.</a></p>
-
-<a href="earnings.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/trend.png", height="400" width="400"/></a>
-
- </section>
- 
-      <hr style="color:#F5F5F0"/>
-	  
- <section>
-   
-   <h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="dates.html"  target="_blank">
-							<strong>Working with Dates and Times in R using Power Consumption Data</strong></a></h4>
-							 
-							<p style="color:#003300;text-align:justify">Here data from <a  style="text-decoration:none" href="http://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption"  target="_blank">the UC Irvine Machine Learning Repository</a>, a popular repository for machine learning datasets, 
-							is used to show how to work with dates in R... <a  style="text-decoration:none;color:red" href ="dates.html"  target="_blank">more.</a></p>
-
-<a href="dates.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/plot4.png", height="480" width="480"/></a>
-
- </section>
-
-      <hr style="color:#F5F5F0"/>	
-
- <section>	  
-   
-    <h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="textanalytics.html"  target="_blank">
-							<strong>Text Analytics with R</strong></a></h4>
-							   
-							<p >This lab is on text analytics with R using logistic regression and regression trees... <a  style="text-decoration:none;color:red" href ="textanalytics.html"  target="_blank">more.</a></p>
-
-
- </section>
- 
-      <hr style="color:#F5F5F0"/>	
-	  
- <section>
-	  
-	      <h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="ggplot2-election.html"  target="_blank">
-							<strong>Visualizing election predictions using ggplot2</strong></a></h4>
-							               
-							<p>Here, ggplot2 is used to visualize US presidential election predictions... 
-							<a  style="text-decoration:none;color:red" href ="ggplot2-election.html"  target="_blank">more.</a></p>
-
-<a href="ggplot2-election.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/election.png", height="450" width="750"/></a>
-
-</section>
-
-      <hr style="color:#F5F5F0"/>
-	  
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="us_murder.html"  target="_blank">
-							<strong>Visualizing murder rates by state in the US with ggplot2</a></strong></h4>
-							  
-							<p>Let's visualize murder rate by state in the US using ggplot2... <a  style="text-decoration:none;color:red" href ="us_murder.html"  target="_blank">more.</a></p>
-
-<a href="us_murder.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/murder.png", height="450" width="750"/></a>
-
-</section>
-	 
-	 
-	 
-	       <hr style="color:#F5F5F0"/>
-	  
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="CLT.html"  target="_blank">
-								 <strong>Using simulation to demosntrate the Central Limit Theorem</a></strong></h4>
-							  
-							<p style="text-align:justify">The central limit theorem (CLT) states that the arithmetic mean of a sufficiently large number of iterates of independent random variables, each with a well-defined expected value and well-defined variance, will be approximately normally distributed, regardless of the underlying distribution <a href="https://en.wikipedia.org/wiki/Central_limit_theorem"  target="_blank">(Wikipedia)</a>. Here, I demonstrate this theorem using simulations... <a  style="text-decoration:none;color:red" href ="CLT.html"  target="_blank">more.</a></p>
-
-<a href="CLT.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/clt.png", height="300" width="450"/></a>
-
-</section>
-
-	       <hr style="color:#F5F5F0"/>
-	  
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="inference.html"  target="_blank">
-								 <strong>The Effect of Vitamin C on Tooth Growth in Guinea Pigs</a></strong></h4>
-							
-							<pstyle="text-align:justify">In this analysis, inferential statistics is employed to investigate if the length of odontoblasts (cells responsible for tooth growth) in guinea pigs is influenced by the dose levels of vitamin C (0.5, 1, and 2 mg/day). Moreover, the impacts of two delivery methods (orange juice or ascorbic acid) on the length of odontoblasts are studied... <a  style="text-decoration:none;color:red" href ="inference.html"  target="_blank">more.</a></p>
-
-<a href="inference.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/inference.png", height="300" width="450"/></a>
-
-</section>
-	
-	       <hr style="color:#F5F5F0"/>
-	  
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="EPA_R.html"  target="_blank">
-								 <strong>Exploratory Analysis of Fine Particulate Matter</a></strong></h4>
-							
-							<p style="text-align:justify">In this analysis, the trend of fine particulate matter over time, by source, in the United States and over specific cities is investigated... <a  style="text-decoration:none;color:red" href ="EPA_R.html"  target="_blank">more.</a></p>
-
-<a href="EPA_R.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/bal_los.png", height="350" width="540"/></a>
-
-</section>
-
-  <hr style="color:#F5F5F0"/>
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="demo.html"  target="_blank">
-								 <strong>Spatial distribution of Food and Drug Administration's adverse events reports data</a></strong></h4>
-							
-							<p style="text-align:justify; color:black"> This post shows how to download the quartley FDA's adverse events reports data, concatenate them and do some analysis  using the <span style="color:red">dplyr</span> package and display them by 
-							country and gender using <span style="color:blue">ggplot2</span>... <a  style="text-decoration:none;color:red" href ="demo.html"  target="_blank">more.</a> </p>
-
-						 <br/>
-						 
-<a href="demo.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/demo.png", height="260" width="700"/></a>
-
-</section>
-<br/>
-   <hr style="color:#F5F5F0"/>
-<section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="FEARS_Outcome.html"  target="_blank">
-								 <strong>Visualizing outcomes of drug related adverse events </a></strong></h4>
-							
-							<p style="text-align:justify"> How many of the drug related adverse events in the FDA database resulted in deaths, 
-disabilities, hopspitalization, etc? Here we will download various datasets and join them... <a  style="text-decoration:none;color:red" href ="FEARS_Outcome.html"  target="_blank">more.</a> </p>
-
-						 <br/>
-						 
-<a href="FEARS_Outcome.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/outcome.png", height="260" width="700"/></a>
-
-</section>
-
+<img style="margin:0px auto;display:block" src="../figures/shiny4.png", height="400" width="800"/>
 
 
 <br/>
-   <hr style="color:#F5F5F0"/>
-<section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="webscraping.html"  target="_blank">
-								 <strong>Web scraping with R using rvest: List of countries by proven oil reserves</a></strong></h4>
-							
-							<p style="text-align:justify"> In this post, let's see how to scrape information from the web using the rvest R package.
-							Specifically, we will scrape the "List of countries by proven oil reserves" table from wikipedia... <a  style="text-decoration:none;color:red" href ="webscraping.html"  target="_blank">more.</a> </p>
+<img style="margin:0px auto;display:block" src="../figures/shiny7.png", height="400" width="800"/>
 
-						 <br/>
-						 
-<a href="webscraping.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/oil_reserves.png", height="319" width="700"/></a>
-  <span style="width:200px;display:inline-block"></span> <a  style="text-align:center; text-decoration:none;color:green">Wikipedia</a>
+</div>
 
-</section>
+</div>
+</div>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+
+
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+<br/>
+<br/>
+<p>In the figures below, the spatial distribution of the searches are shown.</p>
+
+</div>
+</div>
+</div>
+
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+
+<img style="margin:0px auto;display:block" src="../figures/shiny3.png", height="400" width="800"/>
+
+<br/>
+<img style="margin:0px auto;display:block" src="../figures/shiny5.png", height="400" width="800"/>
 
 
 <br/>
-   <hr style="color:#F5F5F0"/>
-<section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="common_words.html"  target="_blank">
-								 <strong>Web Scraping and Natural Language Processing: most commonly used words in a journal paper</a></strong></h4>
-							
-							<p style="text-align:justify"> I am practicing web scrapping, regular expressions and natural language processing in R. 
-							In this post, I will find the most commonly used words in one of my published papers... <a  style="text-decoration:none;color:red" href ="common_words.html"  target="_blank">more.</a> </p>
+<img style="margin:0px auto;display:block" src="../figures/shiny6.png", height="400" width="800"/>
 
-		
-<a href="common_words.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/webnplregex.png", height="300" width="500"/></a>
-  
-</section>
+</div>
 
-<br/>
+</div>
+</div>
+</div>
+</div>
 
 
-<br/>
-   <hr style="color:#F5F5F0"/>
-   
-   
-   <section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="twitter.html"  target="_blank">
-								 <strong>Text Mining, Scraping and Sentiment Analysis with R: <span style="color:red">Russia this week</span></a></strong></h4>
-							
-							<p style="text-align:justify">In this post, I am scraping twitter to understand what has been being said about Russia and its relations with the middle east. Particularly, we will see the sentiment of posts from November 24-29, 2015. For this excercise, we will consider posts in English... <a  style="text-decoration:none;color:red" href ="twitter.html"  target="_blank">more.</a> </p>
-
-		
-<a href="twitter.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/R_twitter.png", height="270" width="500"/></a>
-  
-</section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 
 <br/>
-   <hr style="color:#F5F5F0"/>
-   
-   
-   <section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="top_hits.html"  target="_blank">
-								 <strong>Top searches associated with each nation with R</a></strong></h4>
-							
-							<p style="text-align:justify">In this post, we will get top searches associated with each nation.
-							In doing so, first, we will scrape the list of world countries from <href a ="https://en.wikipedia.org/wiki/Member_states_of_the_United_Nations" >wikipedia</a>... <a  style="text-decoration:none;color:red" href ="top_hits.html"  target="_blank">more.</a> </p>
-
-		
-<a href="top_hits.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/india.png", height="400" width="400"/></a>
-  
-</section>
-
 <br/>
-   <hr style="color:#F5F5F0"/>
-   
-   
-   <section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="gtrends_shiny.html"  target="_blank">
-								 <strong>Google Trends Analytics using Shiny</a></strong></h4>
-							
-							<p style="text-align:justify">In this post, I will show how we can use Shiny to analyse Google Trends data and 
-							create a dashboard. Shiny is an R package that makes it easy to build interactive web apps straight from R. 
-							For a nice look and feel, we will use the shinydashboard package.... <a  style="text-decoration:none;color:red" href ="gtrends_shiny.html"  target="_blank">more.</a> </p>
+<p>Usually Shiny apps have at least two parts. A <strong>server.R</strong>, which is R script, and <strong>ui.R</strong>, which controls the look and feel of the user interface.</p>
 
-		
-<a href="gtrends_shiny.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/shiny1.png", height="290" width="700"/></a>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>My server.R and ur.R codes are given below. You can download them to the same folder and change <strong>AAAAA</strong> by your gmail and <strong>BBBBB</strong> by your gmail password and try the app.</p>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="ur.-R">ur. R<a class="anchor-link" href="#ur.-R">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c"># start user interface ----</span>
 
-</section>
+<span class="n">library</span><span class="p">(</span><span class="n">shiny</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">shinydashboard</span><span class="p">)</span>
 
- <hr/>
-
-
-
-     <!-- <hr style="color:#F5F5F0"/> -->
- 
-	 
-	 <br/>
-	  <br/>
- </main>
- 
+<span class="n">dashboardPage</span><span class="p">(</span>
+  <span class="n">dashboardHeader</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&quot;By Fish&quot;</span><span class="p">),</span>
   
-
+  <span class="n">dashboardSidebar</span><span class="p">(</span>
+    <span class="n">br</span><span class="p">(),</span>
+    
+    
+    <span class="n">h6</span><span class="p">(</span><span class="s">&quot; Search Term(s)&quot;</span><span class="p">,</span><span class="n">style</span><span class="o">=</span><span class="s">&quot;text-align:center;color:#FFA319;font-size:150%&quot;</span><span class="p">),</span>
+    
+    <span class="n">helpText</span><span class="p">(</span><span class="s">&quot;Give one or more terms that you want R to retrieve data from the Google Trends API.</span>
+             <span class="n">Use</span> <span class="n">comma</span> <span class="n">to</span> <span class="n">separate</span> <span class="n">terms</span><span class="s">&quot;, style=&quot;</span><span class="n">text</span><span class="o">-</span><span class="n">align</span><span class="p">:</span><span class="n">center</span><span class="s">&quot;),</span>
+    
+    <span class="n">textInput</span><span class="p">(</span><span class="s">&#39;terms&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">),</span>
+    
+    
+    <span class="n">selectInput</span><span class="p">(</span><span class="s">&quot;geography&quot;</span><span class="p">,</span> 
+<span class="n">label</span> <span class="o">=</span> <span class="n">tags</span><span class="err">$</span><span class="n">h4</span><span class="p">(</span><span class="n">strong</span><span class="p">(</span><span class="n">em</span><span class="p">(</span><span class="s">&quot;Geography&quot;</span><span class="p">)),</span><span class="n">style</span><span class="o">=</span><span class="s">&quot;text-align:center;color:#FFA319;font-size:150%&quot;</span><span class="p">),</span>
+                <span class="n">choices</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="s">&quot;Worldwide&quot;</span><span class="p">,</span><span class="s">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="s">&quot;Albania&quot;</span><span class="p">,</span><span class="s">&quot;Algeria&quot;</span><span class="p">,</span><span class="s">&quot;Angola&quot;</span><span class="p">,</span><span class="s">&quot;Argentina&quot;</span><span class="p">,</span><span class="s">&quot;Armenia&quot;</span><span class="p">,</span><span class="s">&quot;Australia&quot;</span><span class="p">,</span><span class="s">&quot;Austria&quot;</span><span class="p">,</span>  <span class="s">&quot;Azerbaijan&quot;</span><span class="p">,</span><span class="s">&quot;Bahamas&quot;</span><span class="p">,</span><span class="s">&quot;Bahrain&quot;</span><span class="p">,</span><span class="s">&quot;Bangladesh&quot;</span><span class="p">,</span><span class="s">&quot;Belarus&quot;</span><span class="p">,</span><span class="s">&quot;Belgium&quot;</span><span class="p">,</span><span class="s">&quot;Botswana&quot;</span><span class="p">,</span> <span class="s">&quot;Brazil&quot;</span><span class="p">,</span><span class="s">&quot;Bulgaria&quot;</span><span class="p">,</span><span class="s">&quot;Burkina Faso&quot;</span><span class="p">,</span><span class="s">&quot;Burundi&quot;</span><span class="p">,</span><span class="s">&quot;Cambodia&quot;</span><span class="p">,</span><span class="s">&quot;Cameroon&quot;</span><span class="p">,</span><span class="s">&quot;Canada&quot;</span><span class="p">,</span><span class="s">&quot;Chad&quot;</span><span class="p">,</span><span class="s">&quot;Chile&quot;</span><span class="p">,</span><span class="s">&quot;China&quot;</span><span class="p">,</span><span class="s">&quot;Colombia&quot;</span><span class="p">,</span><span class="s">&quot;Cuba&quot;</span><span class="p">,</span><span class="s">&quot;Cyprus&quot;</span><span class="p">,</span><span class="s">&quot;Czech Republic&quot;</span><span class="p">,</span><span class="s">&quot;Denmark&quot;</span><span class="p">,</span><span class="s">&quot;Djibouti&quot;</span><span class="p">,</span><span class="s">&quot;Ecuador&quot;</span><span class="p">,</span><span class="s">&quot;Egypt&quot;</span><span class="p">,</span><span class="s">&quot;Equatorial Guinea&quot;</span><span class="p">,</span><span class="s">&quot;Eritrea&quot;</span><span class="p">,</span><span class="s">&quot;Estonia&quot;</span><span class="p">,</span><span class="s">&quot;Ethiopia&quot;</span><span class="p">,</span><span class="s">&quot;Finland&quot;</span><span class="p">,</span><span class="s">&quot;France&quot;</span><span class="p">,</span><span class="s">&quot;Gabon&quot;</span><span class="p">,</span><span class="s">&quot;Gambia&quot;</span><span class="p">,</span><span class="s">&quot;Georgia&quot;</span><span class="p">,</span><span class="s">&quot;Germany&quot;</span><span class="p">,</span><span class="s">&quot;Ghana&quot;</span><span class="p">,</span><span class="s">&quot;Greece&quot;</span><span class="p">,</span><span class="s">&quot;Hong Kong&quot;</span><span class="p">,</span><span class="s">&quot;Hungary&quot;</span><span class="p">,</span><span class="s">&quot;Iceland&quot;</span><span class="p">,</span><span class="s">&quot;India&quot;</span><span class="p">,</span><span class="s">&quot;Indonesia&quot;</span><span class="p">,</span><span class="s">&quot;Iran&quot;</span><span class="p">,</span><span class="s">&quot;Iraq&quot;</span><span class="p">,</span><span class="s">&quot;Ireland&quot;</span><span class="p">,</span><span class="s">&quot;Israel&quot;</span><span class="p">,</span><span class="s">&quot;Italy&quot;</span><span class="p">,</span><span class="s">&quot;Jamaica&quot;</span><span class="p">,</span><span class="s">&quot;Japan&quot;</span><span class="p">,</span><span class="s">&quot;Jordan&quot;</span><span class="p">,</span><span class="s">&quot;Kazakhstan&quot;</span><span class="p">,</span><span class="s">&quot;Kenya&quot;</span><span class="p">,</span><span class="s">&quot;Kiribati&quot;</span><span class="p">,</span><span class="s">&quot;Korea (North)&quot;</span><span class="p">,</span><span class="s">&quot;Korea (South)&quot;</span><span class="p">,</span><span class="s">&quot;Kuwait&quot;</span><span class="p">,</span><span class="s">&quot;Kyrgyzstan&quot;</span><span class="p">,</span><span class="s">&quot;Lebanon&quot;</span><span class="p">,</span><span class="s">&quot;Liberia&quot;</span><span class="p">,</span><span class="s">&quot;Libya&quot;</span><span class="p">,</span><span class="s">&quot;Macedonia&quot;</span><span class="p">,</span><span class="s">&quot;Madagascar&quot;</span><span class="p">,</span><span class="s">&quot;Malawi&quot;</span><span class="p">,</span><span class="s">&quot;Malaysia&quot;</span><span class="p">,</span><span class="s">&quot;Mali&quot;</span><span class="p">,</span><span class="s">&quot;Malta&quot;</span><span class="p">,</span><span class="s">&quot;Mexico&quot;</span><span class="p">,</span><span class="s">&quot;Morocco&quot;</span><span class="p">,</span><span class="s">&quot;Mozambique&quot;</span><span class="p">,</span><span class="s">&quot;Namibia&quot;</span><span class="p">,</span><span class="s">&quot;Nepal&quot;</span><span class="p">,</span><span class="s">&quot;Netherlands&quot;</span><span class="p">,</span><span class="s">&quot;New Zealand&quot;</span><span class="p">,</span><span class="s">&quot;Niger&quot;</span><span class="p">,</span><span class="s">&quot;Nigeria&quot;</span><span class="p">,</span><span class="s">&quot;Norway&quot;</span><span class="p">,</span><span class="s">&quot;Oman&quot;</span><span class="p">,</span><span class="s">&quot;Pakistan&quot;</span><span class="p">,</span><span class="s">&quot;Paraguay&quot;</span><span class="p">,</span><span class="s">&quot;Peru&quot;</span><span class="p">,</span><span class="s">&quot;Philippines&quot;</span><span class="p">,</span><span class="s">&quot;Poland&quot;</span><span class="p">,</span><span class="s">&quot;Portugal&quot;</span><span class="p">,</span><span class="s">&quot;Qatar&quot;</span><span class="p">,</span><span class="s">&quot;Romania&quot;</span><span class="p">,</span><span class="s">&quot;Russian Federation&quot;</span><span class="p">,</span><span class="s">&quot;Rwanda&quot;</span><span class="p">,</span><span class="s">&quot;Saudi Arabia&quot;</span><span class="p">,</span><span class="s">&quot;Senegal&quot;</span><span class="p">,</span><span class="s">&quot;Serbia&quot;</span><span class="p">,</span><span class="s">&quot;Sierra Leone&quot;</span><span class="p">,</span><span class="s">&quot;Singapore&quot;</span><span class="p">,</span><span class="s">&quot;Somalia&quot;</span><span class="p">,</span><span class="s">&quot;South Africa&quot;</span><span class="p">,</span><span class="s">&quot;Spain&quot;</span><span class="p">,</span><span class="s">&quot;Sudan&quot;</span><span class="p">,</span><span class="s">&quot;Swaziland&quot;</span><span class="p">,</span><span class="s">&quot;Sweden&quot;</span><span class="p">,</span><span class="s">&quot;Switzerland&quot;</span><span class="p">,</span><span class="s">&quot;Syria&quot;</span><span class="p">,</span><span class="s">&quot;Taiwan&quot;</span><span class="p">,</span><span class="s">&quot;Tajikistan&quot;</span><span class="p">,</span><span class="s">&quot;Tanzania&quot;</span><span class="p">,</span><span class="s">&quot;Thailand&quot;</span><span class="p">,</span><span class="s">&quot;Togo&quot;</span><span class="p">,</span><span class="s">&quot;Tunisia&quot;</span><span class="p">,</span><span class="s">&quot;Turkey&quot;</span><span class="p">,</span><span class="s">&quot;Turkmenistan&quot;</span><span class="p">,</span><span class="s">&quot;Uganda&quot;</span><span class="p">,</span><span class="s">&quot;Ukraine&quot;</span><span class="p">,</span><span class="s">&quot;United Arab Emirates&quot;</span><span class="p">,</span><span class="s">&quot;United Kingdom&quot;</span><span class="p">,</span><span class="s">&quot;United States&quot;</span><span class="p">,</span><span class="s">&quot;Uzbekistan&quot;</span><span class="p">,</span><span class="s">&quot;Venezuela&quot;</span><span class="p">,</span><span class="s">&quot;Viet Nam&quot;</span><span class="p">,</span><span class="s">&quot;Yemen&quot;</span><span class="p">,</span><span class="s">&quot;Zaire&quot;</span><span class="p">,</span><span class="s">&quot;Zambia&quot;</span><span class="p">,</span><span class="s">&quot;Zimbabwe&quot;</span><span class="p">),</span>
+                <span class="n">selected</span> <span class="o">=</span> <span class="s">&quot;Worldwide&quot;</span><span class="p">),</span>           
+            <span class="n">selectInput</span><span class="p">(</span><span class="s">&quot;period&quot;</span><span class="p">,</span> 
+                <span class="n">label</span> <span class="o">=</span> <span class="n">tags</span><span class="err">$</span><span class="n">h4</span><span class="p">(</span><span class="n">strong</span><span class="p">(</span><span class="n">em</span><span class="p">(</span><span class="s">&quot;Time Period&quot;</span><span class="p">)),</span><span class="n">style</span><span class="o">=</span><span class="s">&quot;text-align:center;color:#FFA319;font-size:150%&quot;</span><span class="p">),</span>
+                <span class="n">choices</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="s">&quot;2004-present&quot;</span><span class="p">,</span>
+                            <span class="s">&quot;Past30Days&quot;</span><span class="p">,</span>
+                            <span class="s">&quot;Past90Days&quot;</span><span class="p">,</span>
+                            <span class="s">&quot;Past12Months&quot;</span><span class="p">,</span>
+                            <span class="s">&quot;2011&quot;</span><span class="p">,</span>
+                            <span class="s">&quot;2012&quot;</span><span class="p">,</span>
+                            <span class="s">&quot;2013&quot;</span><span class="p">,</span>
+                            <span class="s">&quot;2014&quot;</span><span class="p">,</span>
+                            <span class="s">&quot;2015&quot;</span>
+                <span class="p">),</span>
+                <span class="n">selected</span> <span class="o">=</span> <span class="s">&quot;2004-present&quot;</span><span class="p">),</span>
+    
+    <span class="n">checkboxInput</span><span class="p">(</span><span class="s">&quot;corr&quot;</span><span class="p">,</span> 
+                  <span class="n">label</span> <span class="o">=</span> <span class="n">strong</span><span class="p">(</span><span class="s">&quot;Correlation&quot;</span><span class="p">,</span><span class="n">style</span><span class="o">=</span><span class="s">&quot;text-align:center;color:#FFA319;font-size:150%&quot;</span><span class="p">)),</span>
+    <span class="n">br</span><span class="p">(),</span>
+    
+    <span class="n">tags</span><span class="err">$</span><span class="n">h1</span><span class="p">(</span><span class="n">submitButton</span><span class="p">(</span><span class="s">&quot;Update!&quot;</span><span class="p">),</span><span class="n">style</span><span class="o">=</span><span class="s">&quot;text-align:center&quot;</span><span class="p">),</span>
+    <span class="n">helpText</span><span class="p">(</span><span class="s">&quot;To get results, click the &#39;Update!&#39; button&quot;</span><span class="p">,</span><span class="n">style</span><span class="o">=</span><span class="s">&quot;text-align:center&quot;</span><span class="p">),</span>
+    
+    <span class="n">br</span><span class="p">(),</span>
+    <span class="n">br</span><span class="p">(),</span>
+    <span class="n">br</span><span class="p">(),</span>
+    <span class="n">br</span><span class="p">(),</span>
+    <span class="n">br</span><span class="p">(),</span>
+    <span class="n">br</span><span class="p">()</span>
+    
+    
+    
+    <span class="p">),</span>
   
-  <aside>
-   <section>
+  
+  <span class="c">#####</span>
+  <span class="c">##  Main Panel</span>
+  <span class="c">#### help ====        </span>
+  <span class="n">dashboardBody</span><span class="p">(</span>    
+    <span class="n">fluidRow</span><span class="p">(</span>
+      <span class="n">br</span><span class="p">(),</span>
+      <span class="n">h5</span><span class="p">(</span><span class="n">em</span><span class="p">(</span><span class="n">strong</span><span class="p">(</span><span class="s">&quot;Google Trends Analytics&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s">&quot;color:darkblue;font-size:210%&quot;</span><span class="p">)),</span><span class="n">align</span> <span class="o">=</span> <span class="s">&quot;center&quot;</span><span class="p">),</span>
+
+      <span class="n">plotOutput</span><span class="p">(</span><span class="s">&quot;myplot&quot;</span><span class="p">),</span>
+      <span class="n">br</span><span class="p">(),</span>
+      <span class="n">plotOutput</span><span class="p">(</span><span class="s">&quot;myplot3&quot;</span><span class="p">),</span>
+      <span class="n">plotOutput</span><span class="p">(</span><span class="s">&quot;myplot2&quot;</span><span class="p">)</span>
+      
+      
+    <span class="p">)</span>
+  <span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><br/></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="server.R">server.R<a class="anchor-link" href="#server.R">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="c"># Load libraries ====</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span>require<span class="o">(</span>shiny<span class="o">)){</span>
+    <span class="n">install</span><span class="o">.</span><span class="n">packages</span><span class="p">(</span><span class="s">&#39;shiny&#39;</span><span class="p">)</span>
+      <span class="p">}</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span>require<span class="o">(</span>gtrendsR<span class="o">)){</span>
+    <span class="n">install</span><span class="o">.</span><span class="n">packages</span><span class="p">(</span><span class="s">&#39;gtrendsR&#39;</span><span class="p">)</span>
+      <span class="p">}</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span>require<span class="o">(</span>reshape2<span class="o">)){</span>
+    <span class="n">install</span><span class="o">.</span><span class="n">packages</span><span class="p">(</span><span class="s">&#39;reshape2&#39;</span><span class="p">)</span>
+      <span class="p">}</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span>require<span class="o">(</span>ggplot2<span class="o">)){</span>
+    <span class="n">install</span><span class="o">.</span><span class="n">packages</span><span class="p">(</span><span class="s">&#39;ggplot2&#39;</span><span class="p">)</span>
+      <span class="p">}</span>
+
+<span class="n">library</span><span class="p">(</span><span class="n">shiny</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">gtrendsR</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">reshape2</span><span class="p">)</span>
+<span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+
+<span class="n">data</span><span class="p">(</span><span class="n">countries</span><span class="p">)</span>
+
+<span class="c"># Start shiny application</span>
+
+<span class="n">shinyServer</span><span class="p">(</span><span class="n">function</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span> <span class="p">{</span>
+  
+  
+  <span class="n">gconnect</span><span class="p">(</span><span class="s">&#39;AAAAA&#39;</span><span class="p">,</span><span class="s">&#39;BBBBB&#39;</span><span class="p">)</span>
+  
+  
+  <span class="n">out</span> <span class="o">&lt;-</span> <span class="n">reactive</span><span class="p">({</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="nb">input</span><span class="err">$</span><span class="n">terms</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+      
+      <span class="n">unlist</span><span class="p">(</span><span class="n">strsplit</span><span class="p">(</span><span class="nb">input</span><span class="err">$</span><span class="n">terms</span><span class="p">,</span><span class="s">&quot;,&quot;</span><span class="p">))</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  
+  <span class="n">start_date</span><span class="o">&lt;-</span><span class="n">reactive</span><span class="p">({</span>
+    
+    <span class="k">if</span><span class="p">(</span><span class="nb">input</span><span class="err">$</span><span class="n">period</span><span class="o">==</span><span class="s">&quot;2004-present&quot;</span><span class="p">){</span><span class="k">as</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="s">&quot;2004-01-01&quot;</span><span class="p">)}</span>
+    
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">input</span><span class="err">$</span><span class="n">period</span><span class="o">==</span><span class="s">&quot;Past90Days&quot;</span><span class="p">){</span><span class="k">as</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="n">Sys</span><span class="o">.</span><span class="n">time</span><span class="p">())</span><span class="o">-</span><span class="mi">90</span><span class="p">}</span>
+    
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">input</span><span class="err">$</span><span class="n">period</span><span class="o">==</span><span class="s">&quot;Past12Months&quot;</span><span class="p">){</span>
+      <span class="n">m</span><span class="o">=</span><span class="k">as</span><span class="o">.</span><span class="n">POSIXlt</span><span class="p">(</span><span class="k">as</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="n">Sys</span><span class="o">.</span><span class="n">time</span><span class="p">()))</span>
+      <span class="n">m</span><span class="err">$</span><span class="n">year</span><span class="o">=</span><span class="n">m</span><span class="err">$</span><span class="n">year</span><span class="o">-</span><span class="mi">1</span>
+      <span class="n">m</span><span class="p">}</span>
+    
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">input</span><span class="err">$</span><span class="n">period</span><span class="o">==</span><span class="s">&quot;2011&quot;</span><span class="p">){</span><span class="k">as</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="s">&quot;2011-01-01&quot;</span><span class="p">)}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">input</span><span class="err">$</span><span class="n">period</span><span class="o">==</span><span class="s">&quot;2012&quot;</span><span class="p">){</span><span class="k">as</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="s">&quot;2012-01-01&quot;</span><span class="p">)}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">input</span><span class="err">$</span><span class="n">period</span><span class="o">==</span><span class="s">&quot;2013&quot;</span><span class="p">){</span><span class="k">as</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="s">&quot;2013-01-01&quot;</span><span class="p">)}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">input</span><span class="err">$</span><span class="n">period</span><span class="o">==</span><span class="s">&quot;2014&quot;</span><span class="p">){</span><span class="k">as</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="s">&quot;2014-01-01&quot;</span><span class="p">)}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">input</span><span class="err">$</span><span class="n">period</span><span class="o">==</span><span class="s">&quot;2015&quot;</span><span class="p">){</span><span class="k">as</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="s">&quot;2015-01-01&quot;</span><span class="p">)}</span>
+    
+    
+    
+  <span class="p">})</span>
+  
+  
+  <span class="n">end_date</span><span class="o">&lt;-</span><span class="n">reactive</span><span class="p">({</span>
+    
+    <span class="k">if</span><span class="p">(</span><span class="nb">input</span><span class="err">$</span><span class="n">period</span> <span class="o">%</span><span class="k">in</span>% c(&quot;2004-present&quot;,
+                           <span class="s">&quot;Past90Days&quot;</span><span class="p">,</span><span class="s">&quot;Past12Months&quot;</span><span class="p">))</span>
+                 <span class="p">{</span>
+      <span class="k">as</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="n">Sys</span><span class="o">.</span><span class="n">time</span><span class="p">())}</span>
+      
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">input</span><span class="err">$</span><span class="n">period</span><span class="o">==</span><span class="s">&quot;2011&quot;</span><span class="p">){</span><span class="k">as</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="s">&quot;2011-12-31&quot;</span><span class="p">)}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">input</span><span class="err">$</span><span class="n">period</span><span class="o">==</span><span class="s">&quot;2012&quot;</span><span class="p">){</span><span class="k">as</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="s">&quot;2012-12-31&quot;</span><span class="p">)}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">input</span><span class="err">$</span><span class="n">period</span><span class="o">==</span><span class="s">&quot;2013&quot;</span><span class="p">){</span><span class="k">as</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="s">&quot;2013-12-31&quot;</span><span class="p">)}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">input</span><span class="err">$</span><span class="n">period</span><span class="o">==</span><span class="s">&quot;2014&quot;</span><span class="p">){</span><span class="k">as</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="s">&quot;2014-12-31&quot;</span><span class="p">)}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">input</span><span class="err">$</span><span class="n">period</span><span class="o">==</span><span class="s">&quot;2015&quot;</span><span class="p">){</span><span class="k">as</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="n">Sys</span><span class="o">.</span><span class="n">time</span><span class="p">())}</span> 
+      
+    <span class="p">})</span>
+  
+<span class="n">geo</span><span class="o">&lt;-</span><span class="n">reactive</span><span class="p">({</span>
+  <span class="k">if</span><span class="p">(</span><span class="nb">input</span><span class="err">$</span><span class="n">geography</span><span class="o">==</span><span class="s">&quot;Worldwide&quot;</span><span class="p">){</span><span class="s">&quot;&quot;</span><span class="p">}</span>
+  
+  <span class="k">else</span><span class="p">{</span>
+  
+    <span class="n">countries</span><span class="err">$</span><span class="n">CODE</span><span class="p">[</span><span class="n">countries</span><span class="err">$</span><span class="n">COUNTRY</span><span class="o">==</span><span class="nb">input</span><span class="err">$</span><span class="n">geography</span><span class="p">]</span>
+  <span class="p">}</span>
+  
+<span class="p">})</span>
+  
+  <span class="n">data</span><span class="o">&lt;-</span><span class="n">reactive</span><span class="p">({</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">out</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">))</span>
+    <span class="p">{</span>
+      
+      <span class="n">out2</span><span class="o">&lt;-</span><span class="n">gtrends</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="n">out</span><span class="p">(),</span><span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">(),</span><span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">(),</span><span class="n">geo</span><span class="o">=</span><span class="n">geo</span><span class="p">())</span>
+      
+    <span class="p">}</span>
+    
+  <span class="p">})</span>
+  
+  
+  
+  
+  <span class="n">output</span><span class="err">$</span><span class="n">myplot</span> <span class="o">&lt;-</span> <span class="n">renderPlot</span><span class="p">({</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">out</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)){</span>
+      <span class="n">z</span><span class="o">=</span><span class="n">data</span><span class="p">()</span>
+      <span class="n">trend</span><span class="o">=</span><span class="n">z</span><span class="err">$</span><span class="n">trend</span>
+      
+      <span class="k">if</span><span class="p">(</span><span class="s">&quot;end&quot;</span><span class="o">%</span><span class="k">in</span>%names(trend)==T)
+                           <span class="p">{</span>
+      <span class="n">trend</span><span class="o">=</span><span class="n">select</span><span class="p">(</span><span class="n">trend</span><span class="p">,</span><span class="o">-</span><span class="n">end</span><span class="p">)}</span>
+      
+      <span class="n">trend</span> <span class="o">&lt;-</span> <span class="n">melt</span><span class="p">(</span><span class="n">trend</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">&#39;start&#39;</span><span class="p">)</span>
+      
+      <span class="n">ggplot</span><span class="p">(</span><span class="n">trend</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="n">value</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">variable</span><span class="p">))</span> <span class="o">+</span> <span class="n">geom_line</span><span class="p">()</span><span class="o">+</span><span class="n">ggtitle</span><span class="p">(</span><span class="s">&quot;Interest over time&quot;</span><span class="p">)</span><span class="o">+</span>
+        <span class="n">ylab</span><span class="p">(</span><span class="s">&quot;Relative Trend&quot;</span><span class="p">)</span><span class="o">+</span>
+        <span class="n">theme</span><span class="p">(</span><span class="n">plot</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">18</span><span class="p">,</span><span class="n">colour</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">))</span><span class="o">+</span>
+        <span class="n">xlab</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">)</span><span class="o">+</span><span class="n">theme</span><span class="p">(</span><span class="n">axis</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="o">=</span><span class="s">&quot;#00007A&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">angle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span><span class="n">hjust</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span><span class="n">vjust</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                       <span class="n">axis</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="o">=</span><span class="s">&quot;darkred&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">angle</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">hjust</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">vjust</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+                       <span class="n">axis</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="o">=</span><span class="s">&quot;darkred&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">angle</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">hjust</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">vjust</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">+</span>
+        <span class="n">theme</span><span class="p">(</span><span class="n">legend</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> 
+                                          <span class="n">face</span><span class="o">=</span><span class="s">&quot;bold&quot;</span><span class="p">))</span><span class="o">+</span>
+        <span class="n">theme</span><span class="p">(</span><span class="n">legend</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> 
+                                         <span class="n">face</span><span class="o">=</span><span class="s">&quot;bold&quot;</span><span class="p">))</span>
+      
+    <span class="p">}</span>
+    
+  <span class="p">})</span>
+  
+  
+ <span class="n">corr</span><span class="o">&lt;-</span><span class="n">reactive</span><span class="p">({</span>
+   
+   <span class="k">if</span><span class="p">(</span><span class="nb">input</span><span class="err">$</span><span class="n">corr</span><span class="o">==</span><span class="n">T</span> <span class="o">&amp;</span> <span class="n">length</span><span class="p">(</span><span class="n">out</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">)){</span>
+     
+     <span class="n">z</span><span class="o">=</span><span class="n">data</span><span class="p">()</span>
+     <span class="n">trend</span><span class="o">=</span><span class="n">z</span><span class="err">$</span><span class="n">trend</span>
+     <span class="n">trend</span><span class="o">=</span><span class="n">trend</span><span class="p">[,</span><span class="mi">3</span><span class="p">:</span><span class="n">ncol</span><span class="p">(</span><span class="n">trend</span><span class="p">)]</span>
+     <span class="n">cor</span><span class="p">(</span><span class="n">trend</span><span class="p">)</span>
+     
+   <span class="p">}</span>
+ <span class="p">})</span> 
+  
+  
+ <span class="n">output</span><span class="err">$</span><span class="n">myplot3</span> <span class="o">&lt;-</span> <span class="n">renderPlot</span><span class="p">({</span>
+   <span class="k">if</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">corr</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)){</span>
+     <span class="n">data</span><span class="o">=</span><span class="n">corr</span><span class="p">()</span>
+     
+     <span class="n">qplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">Var1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">Var2</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">melt</span><span class="p">(</span><span class="n">cor</span><span class="p">(</span><span class="n">data</span><span class="p">)),</span> <span class="n">fill</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">geom</span><span class="o">=</span><span class="s">&quot;tile&quot;</span><span class="p">)</span><span class="o">+</span>
+       <span class="n">ggtitle</span><span class="p">(</span><span class="s">&#39;Correlation Matrix&#39;</span><span class="p">)</span><span class="o">+</span><span class="n">theme</span><span class="p">(</span><span class="n">axis</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span><span class="n">element_blank</span><span class="p">(),</span><span class="n">axis</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span><span class="n">element_blank</span><span class="p">(),</span>
+                                           <span class="n">axis</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="o">=</span><span class="s">&quot;darkred&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">angle</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">hjust</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">vjust</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+                                           <span class="n">axis</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="o">=</span><span class="s">&quot;darkred&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">angle</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">hjust</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">vjust</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">+</span>
+       <span class="n">theme</span><span class="p">(</span><span class="n">legend</span><span class="o">.</span><span class="n">title</span><span class="o">=</span><span class="n">element_blank</span><span class="p">())</span><span class="o">+</span>
+       <span class="n">theme</span><span class="p">(</span><span class="n">legend</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">))</span><span class="o">+</span><span class="n">scale_fill_gradient2</span><span class="p">(</span><span class="n">limits</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span><span class="n">low</span><span class="o">=</span><span class="s">&quot;skyblue&quot;</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span><span class="o">+</span>
+       <span class="n">theme</span><span class="p">(</span><span class="n">plot</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span><span class="n">colour</span><span class="o">=</span><span class="s">&quot;black&quot;</span><span class="p">))</span>
+   <span class="p">}</span>
+ <span class="p">})</span>
+     
+  
+  <span class="n">output</span><span class="err">$</span><span class="n">myplot2</span> <span class="o">&lt;-</span> <span class="n">renderPlot</span><span class="p">({</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">out</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)){</span>
+      <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">()</span>
+      
+      
+      <span class="n">z</span><span class="o">=</span><span class="n">data</span><span class="err">$</span><span class="n">searches</span>
+      <span class="n">rr</span><span class="o">=</span><span class="n">data</span><span class="err">$</span><span class="n">regions</span>
+      
+      <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">z</span><span class="p">)){</span>
+        <span class="n">n</span><span class="o">=</span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">n</span><span class="o">=</span><span class="k">as</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">names</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s">&quot;searches&quot;</span><span class="p">,</span><span class="s">&quot;hits&quot;</span><span class="p">)</span>
+        <span class="n">n</span><span class="err">$</span><span class="n">searches</span> <span class="o">&lt;-</span> <span class="n">factor</span><span class="p">(</span><span class="n">n</span><span class="err">$</span><span class="n">searches</span><span class="p">,</span> <span class="n">levels</span> <span class="o">=</span> <span class="n">n</span><span class="err">$</span><span class="n">searches</span><span class="p">[</span><span class="n">order</span><span class="p">(</span><span class="n">n</span><span class="err">$</span><span class="n">hits</span><span class="p">,</span><span class="n">decreasing</span> <span class="o">=</span><span class="n">T</span><span class="p">)])</span>
+        
+        <span class="n">colors</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s">&quot;orange&quot;</span><span class="p">,</span><span class="s">&quot;skyblue&quot;</span><span class="p">,</span><span class="s">&quot;#999966&quot;</span><span class="p">)</span>
+        
+        <span class="n">col</span><span class="o">=</span><span class="n">sample</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="n">replace</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+        
+        <span class="n">x11</span><span class="p">()</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="n">ggplot</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="n">searches</span><span class="p">,</span><span class="n">hits</span><span class="p">))</span><span class="o">+</span>  
+                <span class="n">geom_bar</span><span class="p">(</span><span class="n">stat</span><span class="o">=</span><span class="s">&#39;identity&#39;</span><span class="p">,</span><span class="n">fill</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">col</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s">&#39;black&#39;</span><span class="p">)</span><span class="o">+</span>
+                <span class="n">ggtitle</span><span class="p">(</span><span class="n">data</span><span class="err">$</span><span class="n">headers</span><span class="p">[</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">length</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">+</span><span class="n">i</span><span class="p">])</span><span class="o">+</span><span class="n">ylab</span><span class="p">(</span><span class="s">&#39;Hits&#39;</span><span class="p">)</span><span class="o">+</span>
+                <span class="n">theme</span><span class="p">(</span><span class="n">plot</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">18</span><span class="p">,</span><span class="n">colour</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">))</span><span class="o">+</span>
+                <span class="n">theme</span><span class="p">(</span><span class="n">axis</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">x</span><span class="o">=</span><span class="n">element_blank</span><span class="p">(),</span><span class="n">axis</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">),</span><span class="n">axis</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="o">=</span><span class="s">&quot;grey20&quot;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">angle</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span><span class="n">hjust</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span><span class="n">vjust</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span><span class="n">face</span><span class="o">=</span><span class="s">&quot;plain&quot;</span><span class="p">))</span>
+              
+              
+        <span class="p">)</span>
+        
+        
+        <span class="k">if</span><span class="p">(</span><span class="n">geo</span><span class="p">()</span><span class="o">==</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+        <span class="p">{</span>
+        <span class="n">x11</span><span class="p">()</span>
+        
+        
+        <span class="n">regions</span> <span class="o">=</span> <span class="k">as</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">rr</span><span class="p">)[</span><span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+        
+        <span class="n">names</span><span class="p">(</span><span class="n">regions</span><span class="p">)</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s">&#39;region&#39;</span><span class="p">,</span><span class="s">&#39;hits&#39;</span><span class="p">)</span>
+        
+        <span class="n">regions</span><span class="err">$</span><span class="n">region</span><span class="p">[</span><span class="n">regions</span><span class="err">$</span><span class="n">region</span><span class="o">==</span><span class="s">&quot;United States&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;USA&quot;</span>
+        
+        <span class="n">world_map</span> <span class="o">=</span> <span class="n">map_data</span><span class="p">(</span><span class="s">&quot;world&quot;</span><span class="p">)</span>
+        
+        <span class="n">world_map</span> <span class="o">=</span><span class="n">merge</span><span class="p">(</span><span class="n">world_map</span><span class="p">,</span> <span class="n">regions</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;region&quot;</span><span class="p">,</span><span class="nb">all</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span>
+        
+        <span class="n">world_map</span> <span class="o">=</span> <span class="n">world_map</span><span class="p">[</span><span class="n">order</span><span class="p">(</span><span class="n">world_map</span><span class="err">$</span><span class="n">group</span><span class="p">,</span> <span class="n">world_map</span><span class="err">$</span><span class="n">order</span><span class="p">),]</span>
+        
+        <span class="n">g</span><span class="o">=</span><span class="n">ggplot</span><span class="p">(</span><span class="n">world_map</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">long</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">lat</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">))</span><span class="o">+</span>
+          <span class="n">geom_polygon</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="n">hits</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s">&quot;gray70&quot;</span><span class="p">)</span> 
+        
+        <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">+</span><span class="n">theme</span><span class="p">(</span><span class="n">axis</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">y</span>   <span class="o">=</span> <span class="n">element_blank</span><span class="p">(),</span>
+                      <span class="n">axis</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">x</span>   <span class="o">=</span> <span class="n">element_blank</span><span class="p">(),</span>
+                      <span class="n">axis</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">y</span>  <span class="o">=</span> <span class="n">element_blank</span><span class="p">(),</span>
+                      <span class="n">axis</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">x</span>  <span class="o">=</span> <span class="n">element_blank</span><span class="p">(),</span>
+                      <span class="n">panel</span><span class="o">.</span><span class="n">background</span> <span class="o">=</span> <span class="n">element_blank</span><span class="p">(),</span>
+                      <span class="n">panel</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">major</span> <span class="o">=</span> <span class="n">element_blank</span><span class="p">(),</span> 
+                      <span class="n">panel</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">minor</span> <span class="o">=</span> <span class="n">element_blank</span><span class="p">())</span><span class="o">+</span>
+                <span class="n">scale_fill_gradient</span><span class="p">(</span><span class="n">low</span> <span class="o">=</span> <span class="s">&quot;skyblue&quot;</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="n">guide</span> <span class="o">=</span> <span class="s">&quot;colorbar&quot;</span><span class="p">,</span><span class="n">na</span><span class="o">.</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;white&quot;</span><span class="p">)</span><span class="o">+</span><span class="n">ggtitle</span><span class="p">(</span><span class="n">data</span><span class="err">$</span><span class="n">headers</span><span class="p">[</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">length</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">+</span><span class="n">i</span><span class="p">])</span><span class="o">+</span><span class="n">ylab</span><span class="p">(</span><span class="s">&#39;Hits&#39;</span><span class="p">)</span><span class="o">+</span>
+                <span class="n">theme</span><span class="p">(</span><span class="n">legend</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">unit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&quot;cm&quot;</span><span class="p">),</span>
+                      <span class="n">legend</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span> <span class="n">colour</span> <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">),</span>
+                      <span class="n">legend</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">align</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span><span class="n">legend</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">))</span><span class="o">+</span>
+                <span class="n">theme</span><span class="p">(</span><span class="n">panel</span><span class="o">.</span><span class="n">border</span> <span class="o">=</span> <span class="n">element_rect</span><span class="p">(</span><span class="n">colour</span> <span class="o">=</span> <span class="s">&quot;gray70&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">NA</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      
+    <span class="p">}</span>
+    
+  <span class="p">})</span> 
+  
+  <span class="p">})</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+
+
+    </div>
+  </div>
+  
+  
+  <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../myjs.js"></script>
 	
-			
-			 <p style="font-size:16px;color:blue"><mark, style="background-color: #CCFFFF">Data Science Resources</mark></p>
+	
+<br/>
+<br/>
+<br/>
+<br/>
+	
 
-                  <hr/>
-				
-					  				     <p >
-							<a  class="ds"   
-							href="http://www.ngdata.com/top-data-science-resources/"  target="_blank">Free Data Science eBooks</a>
-			           </p>
-				   		
-				  			  				     <p >
-							<a  class="ds"   
-							href="http://datascienceplus.com/about-us/"  target="_blank">DataScience+</a>
-			           </p>
-					   
-					   
-				  
-				  			  				     <p >
-							<a  class="ds"   
-							href="http://www.topitbooks.com/?s=spark"  target="_blank">top it books</a>
-			           </p>
-				  
-				  
-				    				     <p >
-							<a  class="ds"   
-							href="http://www.learndatasci.com/free-books"  target="_blank">learndatasci.com 's free-ebook list </a>
-			                              </p>
-				  
-				  			  				     <p >
-							<a  class="ds"   
-							href="http://www.wzchen.com/data-science-books/"  target="_blank">16 Free Data Science Books</a>
-			           </p>
-					   		
-				  
-				  			  				     <p >
-							<a  class="ds"  href="http://blog.echen.me/"  target="_blank">Edwin Chen's blog</a>
-			           </p>
-					   		
-							
-						<p >
-							<a  class="ds"  href=" https://blog.rjmetrics.com/category/data-science/"  target="_blank">TheDataPoint</a>
-			           </p>
-				  
-				  
-				 
-			
-				  			  				     <p >
-							<a   class="ds"  
-							href="http://datasciencereport.com/2014/10/09/23-top-us-schools-offering-a-masters-programs-in-data-science/?utm_content=buffer640f5&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer#.VYwzR0bSyUH"  target="_blank">Data Science Report</a>
-			           </p>
-					   		
-			  				     <p >
-							<a  class="ds"   
-							href="http://amunategui.github.io/"  target="_blank">Data Exploration and Machine Learning</a>
-			           </p>
-					   			
-				  
-				  				     <p >
-							<a  class="ds"  
-							href="http://blog.revolutionanalytics.com/"  target="_blank">Revolutions</a>
-			           </p>
-					   
-			 	  				     <p >
-							<a  class="ds"  
-							href="http://www.datasciencecentral.com/m/blogpost?id=6448529%3ABlogPost%3A294841"  target="_blank">DS central</a>
-			           </p>
-					   
-			 				  
-				  				     <p >
-							<a class="ds"   
-							href="http://www.r-statistics.com/2012/03/do-more-with-dates-and-times-in-r-with-lubridate-1-1-0/"  target="_blank">R-statistics blog</a>
-			           </p>
-					   
-					   
-			 		 <p >
-							<a  class="ds"  
-							href="http://www.datasciencecentral.com/group/research/forum/topics/awesome-data-science-repository?xg_source=activity?utm_source=marketo&utm_medium=email&utm_campaign=DA-NL-203&mkt_tok=3RkMMJWWfF9wsRoksqrPZKXonjHpfsX84%2B8rUKC1lMI%2F0ER3fOvrPUfGjI4CTMJlI%2BSLDwEYGJlv6SgFTLHGMbdlwLgJWBg%3D"  target="_blank">Data Science Central</a>
-			           </p>
-					   
-					 
-					   
-				     <p >
-							<a  class="ds"   
-							href="http://www.r-bloggers.com/"  target="_blank">R-bloggers</a>
-			           </p>
-					   
-				     <p >
-							<a  class="ds"   
-							href="http://jtleek.com/"  target="_blank">jtleek</a>
-			           </p>
-									   
-				     <p >
-							<a  class="ds"   
-							href="http://blog.mikiobraun.de/"  target="_blank">ML blog</a>
-			           </p>
-
-								     <p >
-							<a  class="ds"  
-							href="http://blog.dato.com/"  target="_blank">Dato blog</a>
-			           </p>
-   
-
-					   
-											     <p >
-							<a  class="ds"   
-							href="http://datasciencemasters.org/"  target="_blank">Data Science Masters</a>
-			           </p>
-					  
-
-											     <p >
-							<a  class="ds"  
-							href="http://blog.yhathq.com/"  target="_blank">Yhat</a>
-			           </p>
-					   					  
-					   
-					   
-				     <p >
-							<a  class="ds"  
-							href="http://garrettgman.github.io/"  target="_blank">Data Science with R</a>
-			           </p>
-
-					   
-					   
-				     <p >
-							<a  class="ds"  
-							href="http://cs109.github.io/2014/"  target="_blank">Data science Harvard</a>
-			           </p>
-			 
-                          <p >
-							<a  class="ds"   
-							href="http://datasciencespecialization.github.io/"  target="_blank">JHU coursera Data Science GitHub</a>
-			           </p>
-			 
-			 
-			                         <p >
-							<a  class="ds"  
-							href="http://www.datawrangling.com/"  target="_blank">Data Wrangling</a>
-			                        </p>
-			 
-			 			 
-						                          <p >
-							<a  class="ds"  
-							href="http://flowingdata.com/category/statistics"  target="_blank">FlowingDATA</a>
-			                        </p>
-									
-								 
-						                          <p >
-							<a  class="ds"   
-							href="http://101.datascience.community/"  target="_blank">Data Science Community</a>
-			                        </p>
-							
-
-			                          <p >
-							<a  class="ds"  
-							href="http://columbiadatascience.com/"  target="_blank">Columbia Data Science</a>
-			                        </p>
-
-									
-                          <p >
-							<a  class="ds"  
-							href="http://www.hadoop360.com/blog/big-data-seven-meta-resources-for-best-practices-lessons-learned-"   target="_blank">Hadoop360</a>
-			           </p>
-			 
-		  			 
-                          <p >
-							<a  class="ds"   
-							href="https://www.goodreads.com/shelf/show/data-science"   target="_blank">  Data science books</a>
-			           </p>
-			 
-			 
-			 				  				     <p >
-							<a  class="ds"  
-							href="http://www.rstudio.com/resources/webinars/?mkt_tok=3RkMMJWWfF9wsRonvqnLZKXonjHpfsX77estWaK1lMI%2F0ER3fOvrPUfGjI4ARMJkI%2BSLDwEYGJlv6SgFTbDMMa541LgKWxc%3D"  target="_blank">Rstudio Webinars and Videos</a>
-			           </p>
-					   
-			 
-			 
-		  			 
-                          <p >
-							<a  class="ds"  
-							href="http://adv-r.had.co.nz/"   target="_blank"> Advanced R</a>
-			           </p>
-			 
-		  			 
-                          <p >
-							<a  class="ds"  
-							href="http://garrettgman.github.io/"  target="_blank">Data Science with R</a>
-			           </p>
-			 
-		  			 
-                          <p >
-							<a  class="ds"  
-							href="http://machinelearningmastery.com/best-machine-learning-resources-for-getting-started/"  target="_blank">Machine Learning Mastery</a>
-			           </p>
-			 
-		  			 
-                          <p >
-							<a  class="ds"  
-							href="http://www.mastersindatascience.org/blog/7-must-read-books-for-the-budding-data-scientist/"  target="_blank">Master's in Data science</a>
-			           </p>
-			 
-		  			 
-                          <p >
-							<a  class="ds"   
-							href="https://archive.ics.uci.edu/ml/datasets.html"  target="_blank">UCI ML Repository</a>
-			           </p>
-			 
-		
-		  		  			 
-                          <p >
-							<a   class="ds"  
-							<a href ="https://www.youtube.com/watch?v=mbyG85GZ0PI&list=PLD63A284B7615313A"  target="_blank">Caltech's Machine Learning Course</a>
-			           </p>
-			 
-			 		  			 
-                          <p >
-							<a   class="ds"  
-							<a href="https://github.com/zero323/ds-capstone-survival-guide"  target="_blank">JHU Data Science Capstone</a>
-			           </p>
-			 
-			 		  			 
-                          <p >
-							<a  class="ds"  
-							<a href="http://simplystatistics.org/"  target="_blank">simplystatistics.org</a>
-			           </p>
-			 
-			 
-			 		  			 
-                          <p >
-							<a  class="ds"  
-							<a href="https://github.com/bayandin/awesome-awesomeness"  target="_blank">awesomeness</a>
-			           </p>
-			 
-			 
-			 		  			 
-                          <p >
-							<a  class="ds"  
-							<a href="http://www.analyticsvidhya.com/blog/"  target="_blank">analyticsvidhya</a>
-			           </p>
-			 
-		
-			 		  			 
-                          <p >
-							<a  class="ds"   
-							<a href="http://allendowney.blogspot.com/"  target="_blank">A blog by Allen Downey</a>
-			           </p>
-					   
-					                             <p >
-							<a   class="ds"  
-							<a href="http://www.mmds.org/"  target="_blank">Mining of Massive Datasets</a>
-			           </p>
-					   
-					   
-					   
-					     <p >
-							<a   class="ds"  
-							<a href="http://www.springer.com/statistics?SGWID=0-10128-0-0-0"  target="_blank">Statistics publications from Springer</a>
-			           </p>
-					   
-					   
-					        <p >
-							<a   class="ds"  
-							<a href="http://www.datacommunitydc.org/"  target="_blank">DC data science community</a>
-			           </p>
-			 
-			 
-			 	   
-					        <p >
-							<a   class="ds"  
-							<a href="https://github.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition"  target="_blank">mining popular social websites </a>
-			           </p>
-			 
-			   
-					        <p >
-							<a   class="ds"  
-							<a href="https://jessesw.com/"  target="_blank">Jesse Steinweg-Woods  </a>
-			           </p>
-					   
-					        <p >
-							<a   class="ds"  
-							<a href="http://blog.danielemaasit.com/2015/07/26/installing-and-starting-sparkr-locally-on-windows-8-1-and-rstudio/#comments"  target="_blank">Emaasit's Blog</a>
-			           </p>
-					   
-					   
-					   	        <p >
-							<a   class="ds"  
-							<a href="http://www.boozallen.com/consulting/strategic-innovation/nextgen-analytics-data-science"  target="_blank">Booz Allen Hamilton data science  </a>
-			           </p>
-			 
-			 
-			 
-	           </section>  
-			   
-			   
-			   <section>
-			   <h1 style="color:blue">Data sources</h1>
-			  <a style="text-decoration:none" href="http://www.smartdatacollective.com/bernardmarr/235366/big-data-20-free-big-data-sources-everyone-should-know"   target="_blank">   Big Data: 20 Free Big Data Sources Everyone Should Know</a>
-			   
-			   </section>
-			   
-			   <br/>
-			    <br/>
-				<h4 style="color:green; text-align:justify">Any data science resource that should be added to the list? Please add a link in the comment section below</h4>
-				 
-				 <br/>
-				  <br/>
-			   
-			    <div id="disqus_thread"></div>
+	<div id="disqus_thread"></div>
 <script type="text/javascript">
 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 var disqus_shortname = 'httpdatascienceenthusiastcom'; // required: replace example with your forum shortname
@@ -1135,20 +748,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
- 
 
-    </aside>
-	
-	<footer>
-	<p style ="text-align:center">&copy; 2015 Berhane</p>
-    </footer>
-			<br/>
-		<br/>
-	<script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="../myjs.js"></script>
-	
-	   <script id="dsq-count-scr" src="//httpdatascienceenthusiastcom.disqus.com/count.js" async></script> 
 
- </body>		
-</html> 
-	
+</body>
+</html>
