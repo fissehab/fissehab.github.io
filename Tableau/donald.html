@@ -138,7 +138,14 @@ div#notebook {
     page-break-inside: avoid; 
   }
 }
+
+
 </style>
+
+	<style>
+div.prompt {display:none}
+</style>
+
 
 <!-- Custom stylesheet, it must be in the same directory as the html file -->
 <link rel="stylesheet" href="custom.css">
@@ -763,6 +770,22 @@ and day and the dashboard will change based on the selected time unit. Pattern o
 </div>
 </div>
 </div>
+
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">pos</span><span class="o">=</span> <span class="n">readLines</span><span class="p">(</span><span class="s">&quot;positivewords.txt&quot;</span><span class="p">)</span>
+<span class="n">neg</span><span class="o">=</span> <span class="n">readLines</span><span class="p">(</span><span class="s">&quot;negativewords.txt&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt"></div>
@@ -821,6 +844,8 @@ and day and the dashboard will change based on the selected time unit. Pattern o
 </div>
 </div>
 </div>
+
+
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
