@@ -1156,26 +1156,30 @@ cold_pre_ave<span class="o">&lt;-</span><span class="kp">apply</span><span class
 </div>
 </div>
 </div>
+
+ <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[133]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
-
+<div class=" highlight hl-r"><pre>par<span class="p">(</span>mfrow<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
 mypalette<span class="o">&lt;-</span>brewer.pal<span class="p">(</span><span class="m">9</span><span class="p">,</span><span class="s">&quot;BrBG&quot;</span><span class="p">)</span>
 
 
 image.plot<span class="p">(</span>lon_india<span class="p">,</span>lat_india<span class="p">,</span>warm_pre_ave<span class="o">-</span>pre_summer_ave<span class="p">,</span> col <span class="o">=</span> mypalette<span class="p">,</span>
- xlab <span class="o">=</span><span class="s">&quot;Longitude&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Latitude&quot;</span><span class="p">,</span>
+ xlab <span class="o">=</span><span class="s">&quot;Longitude&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Latitude&quot;</span><span class="p">,</span>lab.breaks<span class="o">=</span><span class="kp">seq</span><span class="p">(</span><span class="m">-125</span><span class="p">,</span><span class="m">100</span><span class="p">,</span>by<span class="o">=</span><span class="m">25</span><span class="p">),</span>
  main <span class="o">=</span><span class="s">&quot;During El Nino&quot;</span><span class="p">)</span>
 
 plot<span class="p">(</span>wrld_simpl<span class="p">,</span>add<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span> <span class="c1"># overlay world map</span>
 
 
 image.plot<span class="p">(</span>lon_india<span class="p">,</span>lat_india<span class="p">,</span>cold_pre_ave<span class="o">-</span>pre_summer_ave<span class="p">,</span> col <span class="o">=</span> mypalette<span class="p">,</span>
- xlab <span class="o">=</span><span class="s">&quot;Longitude&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Latitude&quot;</span><span class="p">,</span>
- main <span class="o">=</span><span class="s">&quot;During La Nina&quot;</span><span class="p">)</span>
+ xlab <span class="o">=</span><span class="s">&quot;Longitude&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span>lab.breaks<span class="o">=</span><span class="kp">seq</span><span class="p">(</span><span class="m">-125</span><span class="p">,</span><span class="m">100</span><span class="p">,</span>by<span class="o">=</span><span class="m">25</span><span class="p">),</span>
+ main <span class="o">=</span><span class="s">&quot;During La Nina&quot;</span><span class="p">,</span>legend.width<span class="o">=</span><span class="m">0.001</span><span class="p">,</span> legend.shrink<span class="o">=</span><span class="m">.001</span><span class="p">,</span>
+ legend.mar<span class="o">=</span><span class="m">0.001</span><span class="p">,</span>legend.cex<span class="o">=</span><span class="m">0.0</span><span class="p">,</span>horizontal<span class="o">=</span><span class="bp">T</span><span class="p">)</span>
 
 plot<span class="p">(</span>wrld_simpl<span class="p">,</span>add<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span> <span class="c1"># overlay world map</span>
 </pre></div>
@@ -1183,6 +1187,14 @@ plot<span class="p">(</span>wrld_simpl<span class="p">,</span>add<span class="o"
 </div>
 </div>
 </div>
+
+</div>
+    </div>
+  </div>
+  
+  
+  
+  
 
 <div class="output_wrapper">
 <div class="output">
@@ -1209,8 +1221,9 @@ plot<span class="p">(</span>wrld_simpl<span class="p">,</span>add<span class="o"
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 style="color:blue"> Summary</h3>
-<p>We can see from the composite maps (note the difference in the color bars) that Indian summer rainfall is influenced by SST over the eastern Pacific Ocean. 
-When the eastern Pacific Ocean is anomalously warm (called El Nino), large parts of India get less rainfall. On the other hand, when the eastern Pacific Ocean is anomalously cold (called La Nina), large parts of India get enhanced rainfall. Further, we can use significance tests to support our conclusions.</p>
+<p>We can see from the composite maps that Indian summer rainfall is influenced by SST over the eastern Pacific Ocean. 
+When the eastern Pacific Ocean is anomalously warm (called El Nino),
+ large parts of India get less rainfall. On the other hand, when the eastern Pacific Ocean is anomalously cold (called La Nina), large parts of India get enhanced rainfall. Further, we can use significance tests to support our conclusions.</p>
 
     <span style="width:400px;display:inline-block"></span><span> 
   <a href="shiny/index.html"><img src="../figures/previous.png" height="40" width="40"/></a>
