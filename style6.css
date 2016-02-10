@@ -17,7 +17,12 @@ article, aside, footer, header, main, nav, section {
 }
 
 
-
+	
+.phd{
+		font-size:0.8em;
+		 color: purple;
+	}
+	
 hr
 {
 border:solid 1px black;

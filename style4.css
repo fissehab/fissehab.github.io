@@ -10,6 +10,13 @@ article, aside, footer, header, main, nav, section {
   margin: 0;
 }
 
+	
+.phd{
+		font-size:0.8em;
+		 color: purple;
+	}
+	
+	
 .myheader  h1{
 	text-align:left;
 	

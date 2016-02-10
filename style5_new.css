@@ -37,11 +37,14 @@ height: 1px;
 		font-size:1.5em;
 	}
 
-.cv,.resume{
+.cv,.resume,.phd{
 		font-size:1.4em;
 	}
 	
-
+.phd{
+		font-size:0.8em;
+		 color: purple;
+	}
 
 .myheader {
   background-color: #53c68c;
