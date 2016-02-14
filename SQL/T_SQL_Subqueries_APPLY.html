@@ -167,7 +167,8 @@ div#notebook {
     });
     </script>
     <!-- End of mathjax configuration -->
-			
+	
+	
 	
 		<style>
 div.prompt {display:none}
@@ -213,9 +214,6 @@ div.prompt {display:none}
      
       </ul>
     </nav>
-
-	
-	
 	</head>
 <body>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
@@ -226,16 +224,30 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3  style="text-align:center; color:blue"   id="Querying-Multiple-Tables-with-Joins">Querying Multiple Tables with Joins<a class="anchor-link" href="#Querying-Multiple-Tables-with-Joins">&#182;</a></h3>
+<h3  style="text-align:center; color:blue"   id="Using-Subqueries-and-APPLY">Using Subqueries and APPLY<a class="anchor-link" href="#Using-Subqueries-and-APPLY">&#182;</a></h3>
 </div>
 </div>
 </div>
+
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This post is lab exercise I did on <a href="https://s3.amazonaws.com/verify.edx.org/downloads/cb977a59e4b544bd954bf7313c76e934/Certificate.pdf">Querying with Transact-SQL</a> edx course.</p>
+<p>This post is the sixth lab exercise I did on <a href="https://s3.amazonaws.com/verify.edx.org/downloads/cb977a59e4b544bd954bf7313c76e934/Certificate.pdf">
+Querying with Transact-SQL</a> edx course.</p>
+
+</div>
+</div>
+</div>
+
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I will use subqueries and the APPLY operator to retrieve data from the AdventureWorksLT database.</p>
 
 </div>
 </div>
@@ -245,8 +257,7 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this lab, I will use joins to combine data from multiple tables in the AdventureWorksLT database.</p>
-
+<h4 id="Retrieve-Product-Price-Information">Retrieve Product Price Information<a class="anchor-link" href="#Retrieve-Product-Price-Information">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -255,7 +266,8 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Generate-Invoice-Reports">Generate Invoice Reports<a class="anchor-link" href="#Generate-Invoice-Reports">&#182;</a></h4>
+<p>Adventure Works products each have a standard cost price that indicates the cost of manufacturing the product, and a list price that indicates the recommended selling price for the product. This data is stored in the SalesLT.Product table. Whenever a product is ordered, the actual unit price at which it was sold is also recorded in the SalesLT.SalesOrderDetail table. You must use subqueries to compare the cost and list prices for each product with the unit prices charged in each sale.</p>
+
 </div>
 </div>
 </div>
@@ -265,8 +277,8 @@ div.prompt {display:none}
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Retrieve customer orders<br/>
-As an initial step towards generating the invoice report, write a query that returns the company name from the SalesLT.Customer table, and the sales order ID and total due from the SalesLT.SalesOrderHeader table.</li>
+<li>Retrieve products whose list price is higher than the average unit price<br/>
+Retrieve the product ID, name, and list price for each product where the list price is higher than the average unit price for all products that have been sold.</li>
 </ul>
 
 </div>
@@ -277,10 +289,10 @@ As an initial step towards generating the invoice report, write a query that ret
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">SELECT</span> <span class="n">c</span><span class="o">.</span><span class="n">CompanyName</span><span class="p">,</span> <span class="n">oh</span><span class="o">.</span><span class="n">SalesOrderID</span><span class="p">,</span> <span class="n">oh</span><span class="o">.</span><span class="n">TotalDue</span>
-<span class="n">FROM</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">Customer</span> <span class="n">AS</span> <span class="n">c</span>
-<span class="n">JOIN</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">SalesOrderHeader</span> <span class="n">AS</span> <span class="n">oh</span>
-<span class="n">ON</span> <span class="n">oh</span><span class="o">.</span><span class="n">CustomerID</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">CustomerID</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">SELECT</span> <span class="n">ProductID</span><span class="p">,</span> <span class="n">Name</span><span class="p">,</span> <span class="n">ListPrice</span> <span class="kn">from</span> <span class="nn">SalesLT.Product</span>
+<span class="n">WHERE</span> <span class="n">ListPrice</span> <span class="o">&gt;</span>
+<span class="p">(</span><span class="n">SELECT</span> <span class="n">AVG</span><span class="p">(</span><span class="n">UnitPrice</span><span class="p">)</span> <span class="n">FROM</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">SalesOrderDetail</span><span class="p">)</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">ProductID</span><span class="p">;</span>
 </pre></div>
 
 </div>
@@ -294,9 +306,8 @@ As an initial step towards generating the invoice report, write a query that ret
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Retrieve customer orders with addresses<br/>
-Extend your customer orders query to include the Main Office address for each customer, including the full street address, city, state or province, postal code, and country or region<br/>
-Tip: Note that each customer can have multiple addressees in the SalesLT.Address table, so the database developer has created the SalesLT.CustomerAddress table to enable a many-to-many relationship between customers and addresses. Your query will need to include both of these tables, and should filter the join to SalesLT.CustomerAddress so that only Main Office addresses are included.</li>
+<li>Retrieve Products with a list price of 100 dollars or more that have been sold for less than 100 dollars<br/>
+Retrieve the product ID, name, and list price for each product where the list price is 100 dollars or more, and the product has been sold for less than 100 dollars.</li>
 </ul>
 
 </div>
@@ -307,54 +318,12 @@ Tip: Note that each customer can have multiple addressees in the SalesLT.Address
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">SELECT</span> <span class="n">c</span><span class="o">.</span><span class="n">CompanyName</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">AddressLine1</span><span class="p">,</span> <span class="n">ISNULL</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">AddressLine2</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="n">AS</span> <span class="n">AddressLine2</span><span class="p">,</span>
-<span class="n">a</span><span class="o">.</span><span class="n">City</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">StateProvince</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">PostalCode</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">CountryRegion</span><span class="p">,</span> <span class="n">oh</span><span class="o">.</span><span class="n">SalesOrderID</span><span class="p">,</span> <span class="n">oh</span><span class="o">.</span><span class="n">TotalDue</span>
-<span class="n">FROM</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">Customer</span> <span class="n">AS</span> <span class="n">c</span>
-<span class="n">JOIN</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">SalesOrderHeader</span> <span class="n">AS</span> <span class="n">oh</span>
-<span class="n">ON</span> <span class="n">oh</span><span class="o">.</span><span class="n">CustomerID</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">CustomerID</span>
-<span class="n">JOIN</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">CustomerAddress</span> <span class="n">AS</span> <span class="n">ca</span>
-<span class="n">ON</span> <span class="n">c</span><span class="o">.</span><span class="n">CustomerID</span> <span class="o">=</span> <span class="n">ca</span><span class="o">.</span><span class="n">CustomerID</span> <span class="n">AND</span> <span class="n">AddressType</span> <span class="o">=</span> <span class="s1">&#39;Main Office&#39;</span>
-<span class="n">JOIN</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">Address</span> <span class="n">AS</span> <span class="n">a</span>
-<span class="n">ON</span> <span class="n">ca</span><span class="o">.</span><span class="n">AddressID</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">AddressID</span><span class="p">;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Retrieve-Sales-Data">Retrieve Sales Data<a class="anchor-link" href="#Retrieve-Sales-Data">&#182;</a></h4>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Retrieve a list of all customers and their orders<br/>
-The sales manager wants a list of all customer companies and their contacts (first name and last name), showing the sales order ID and total due for each order they have placed. Customers who have not placed any orders should be included at the bottom of the list with NULL values for the order ID and total due.</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">SELECT</span> <span class="n">c</span><span class="o">.</span><span class="n">CompanyName</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">FirstName</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">LastName</span><span class="p">,</span> <span class="n">oh</span><span class="o">.</span><span class="n">SalesOrderID</span><span class="p">,</span> <span class="n">oh</span><span class="o">.</span><span class="n">TotalDue</span>
-<span class="n">FROM</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">Customer</span> <span class="n">AS</span> <span class="n">c</span>
-<span class="n">LEFT</span> <span class="n">JOIN</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">SalesOrderHeader</span> <span class="n">AS</span> <span class="n">oh</span>
-<span class="n">ON</span> <span class="n">c</span><span class="o">.</span><span class="n">CustomerID</span> <span class="o">=</span> <span class="n">oh</span><span class="o">.</span><span class="n">CustomerID</span>
-<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">oh</span><span class="o">.</span><span class="n">SalesOrderID</span> <span class="n">DESC</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">SELECT</span> <span class="n">ProductID</span><span class="p">,</span> <span class="n">Name</span><span class="p">,</span> <span class="n">ListPrice</span> <span class="n">FROM</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">Product</span>
+<span class="n">WHERE</span> <span class="n">ProductID</span> <span class="n">IN</span>
+<span class="p">(</span><span class="n">SELECT</span> <span class="n">ProductID</span> <span class="kn">from</span> <span class="nn">SalesLT.SalesOrderDetail</span>
+ <span class="n">WHERE</span> <span class="n">UnitPrice</span> <span class="o">&lt;</span> <span class="mf">100.00</span><span class="p">)</span>
+<span class="n">AND</span> <span class="n">ListPrice</span> <span class="o">&gt;=</span> <span class="mf">100.00</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">ProductID</span><span class="p">;</span>
 </pre></div>
 
 </div>
@@ -368,8 +337,8 @@ The sales manager wants a list of all customer companies and their contacts (fir
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Retrieve a list of customers with no address<br/>
-A sales employee has noticed that Adventure Works does not have address information for all customers. You must write a query that returns a list of customer IDs, company names, contact names (first name and last name), and phone numbers for customers with no address stored in the database.</li>
+<li>Retrieve the cost, list price, and average selling price for each product<br/>
+Retrieve the product ID, name, cost, and list price for each product along with the average unit price for which that product has been sold.</li>
 </ul>
 
 </div>
@@ -380,11 +349,12 @@ A sales employee has noticed that Adventure Works does not have address informat
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">SELECT</span> <span class="n">c</span><span class="o">.</span><span class="n">CompanyName</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">FirstName</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">LastName</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">Phone</span>
-<span class="n">FROM</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">Customer</span> <span class="n">AS</span> <span class="n">c</span>
-<span class="n">LEFT</span> <span class="n">JOIN</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">CustomerAddress</span> <span class="n">AS</span> <span class="n">ca</span>
-<span class="n">ON</span> <span class="n">c</span><span class="o">.</span><span class="n">CustomerID</span> <span class="o">=</span> <span class="n">ca</span><span class="o">.</span><span class="n">CustomerID</span>
-<span class="n">WHERE</span> <span class="n">ca</span><span class="o">.</span><span class="n">AddressID</span> <span class="n">IS</span> <span class="n">NULL</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">SELECT</span> <span class="n">ProductID</span><span class="p">,</span> <span class="n">Name</span><span class="p">,</span> <span class="n">StandardCost</span><span class="p">,</span> <span class="n">ListPrice</span><span class="p">,</span>
+    <span class="p">(</span><span class="n">SELECT</span> <span class="n">AVG</span><span class="p">(</span><span class="n">UnitPrice</span><span class="p">)</span>
+     <span class="n">FROM</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">SalesOrderDetail</span> <span class="n">AS</span> <span class="n">SOD</span>
+     <span class="n">WHERE</span> <span class="n">P</span><span class="o">.</span><span class="n">ProductID</span> <span class="o">=</span> <span class="n">SOD</span><span class="o">.</span><span class="n">ProductID</span><span class="p">)</span> <span class="n">AS</span> <span class="n">AvgSellingPrice</span>
+<span class="n">FROM</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">Product</span> <span class="n">AS</span> <span class="n">P</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">P</span><span class="o">.</span><span class="n">ProductID</span><span class="p">;</span>
 </pre></div>
 
 </div>
@@ -398,8 +368,8 @@ A sales employee has noticed that Adventure Works does not have address informat
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Retrieve a list of customers and products without orders<br/>
-Some customers have never placed orders, and some products have never been ordered. Create a query that returns a column of customer IDs for customers who have never placed an order, and a column of product IDs for products that have never been ordered. Each row with a customer ID should have a NULL product ID (because the customer has never ordered a product) and each row with a product ID should have a NULL customer ID (because the product has never been ordered by a customer).</li>
+<li>Retrieve products that have an average selling price that is lower than the cost<br/>
+Filter your previous query to include only products where the cost price is higher than the average selling price.</li>
 </ul>
 
 </div>
@@ -410,16 +380,95 @@ Some customers have never placed orders, and some products have never been order
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span class="n">SELECT</span> <span class="n">c</span><span class="o">.</span><span class="n">CustomerID</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">ProductID</span>
-<span class="n">FROM</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">Customer</span> <span class="n">AS</span> <span class="n">c</span>
-<span class="n">FULL</span> <span class="n">JOIN</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">SalesOrderHeader</span> <span class="n">AS</span> <span class="n">oh</span>
-<span class="n">ON</span> <span class="n">c</span><span class="o">.</span><span class="n">CustomerID</span> <span class="o">=</span> <span class="n">oh</span><span class="o">.</span><span class="n">CustomerID</span>
-<span class="n">FULL</span> <span class="n">JOIN</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">SalesOrderDetail</span> <span class="n">AS</span> <span class="n">od</span>
-<span class="n">ON</span> <span class="n">od</span><span class="o">.</span><span class="n">SalesOrderID</span> <span class="o">=</span> <span class="n">oh</span><span class="o">.</span><span class="n">SalesOrderID</span>
-<span class="n">FULL</span> <span class="n">JOIN</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">Product</span> <span class="n">AS</span> <span class="n">p</span>
-<span class="n">ON</span> <span class="n">p</span><span class="o">.</span><span class="n">ProductID</span> <span class="o">=</span> <span class="n">od</span><span class="o">.</span><span class="n">ProductID</span>
-<span class="n">WHERE</span> <span class="n">oh</span><span class="o">.</span><span class="n">SalesOrderID</span> <span class="n">IS</span> <span class="n">NULL</span>
-<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">ProductID</span><span class="p">,</span> <span class="n">CustomerID</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span class="n">SELECT</span> <span class="n">ProductID</span><span class="p">,</span> <span class="n">Name</span><span class="p">,</span> <span class="n">StandardCost</span><span class="p">,</span> <span class="n">ListPrice</span><span class="p">,</span>
+<span class="p">(</span><span class="n">SELECT</span> <span class="n">AVG</span><span class="p">(</span><span class="n">UnitPrice</span><span class="p">)</span>
+ <span class="n">FROM</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">SalesOrderDetail</span> <span class="n">AS</span> <span class="n">SOD</span>
+ <span class="n">WHERE</span> <span class="n">P</span><span class="o">.</span><span class="n">ProductID</span> <span class="o">=</span> <span class="n">SOD</span><span class="o">.</span><span class="n">ProductID</span><span class="p">)</span> <span class="n">AS</span> <span class="n">AvgSellingPrice</span>
+<span class="n">FROM</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">Product</span> <span class="n">AS</span> <span class="n">P</span>
+<span class="n">WHERE</span> <span class="n">StandardCost</span> <span class="o">&gt;</span>
+<span class="p">(</span><span class="n">SELECT</span> <span class="n">AVG</span><span class="p">(</span><span class="n">UnitPrice</span><span class="p">)</span>
+ <span class="n">FROM</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">SalesOrderDetail</span> <span class="n">AS</span> <span class="n">SOD</span>
+ <span class="n">WHERE</span> <span class="n">P</span><span class="o">.</span><span class="n">ProductID</span> <span class="o">=</span> <span class="n">SOD</span><span class="o">.</span><span class="n">ProductID</span><span class="p">)</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">P</span><span class="o">.</span><span class="n">ProductID</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Retrieve-Customer-Information">Retrieve Customer Information<a class="anchor-link" href="#Retrieve-Customer-Information">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The AdventureWorksLT database includes a table-valued user-defined function named dbo.ufnGetCustomerInformation. You must use this function to retrieve details of customers based on customer ID values retrieved from tables in the database.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Retrieve customer information for all sales orders<br/>
+Retrieve the sales order ID, customer ID, first name, last name, and total due for all sales orders from the SalesLT.SalesOrderHeader table and the dbo.ufnGetCustomerInformation function.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">SELECT</span> <span class="n">SOH</span><span class="o">.</span><span class="n">SalesOrderID</span><span class="p">,</span> <span class="n">SOH</span><span class="o">.</span><span class="n">CustomerID</span><span class="p">,</span> <span class="n">CI</span><span class="o">.</span><span class="n">FirstName</span><span class="p">,</span> <span class="n">CI</span><span class="o">.</span><span class="n">LastName</span><span class="p">,</span> <span class="n">SOH</span><span class="o">.</span><span class="n">TotalDue</span>
+<span class="n">FROM</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">SalesOrderHeader</span> <span class="n">AS</span> <span class="n">SOH</span>
+<span class="n">CROSS</span> <span class="n">APPLY</span> <span class="n">dbo</span><span class="o">.</span><span class="n">ufnGetCustomerInformation</span><span class="p">(</span><span class="n">SOH</span><span class="o">.</span><span class="n">CustomerID</span><span class="p">)</span> <span class="n">AS</span> <span class="n">CI</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">SOH</span><span class="o">.</span><span class="n">SalesOrderID</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Retrieve customer address information<br/>
+Retrieve the customer ID, first name, last name, address line 1 and city for all customers from the SalesLT.Address and SalesLT.CustomerAddress tables, and the dbo.ufnGetCustomerInformation function.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span class="n">SELECT</span> <span class="n">CA</span><span class="o">.</span><span class="n">CustomerID</span><span class="p">,</span> <span class="n">CI</span><span class="o">.</span><span class="n">FirstName</span><span class="p">,</span> <span class="n">CI</span><span class="o">.</span><span class="n">LastName</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">AddressLine1</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">City</span>
+<span class="n">FROM</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">Address</span> <span class="n">AS</span> <span class="n">A</span>
+<span class="n">JOIN</span> <span class="n">SalesLT</span><span class="o">.</span><span class="n">CustomerAddress</span> <span class="n">AS</span> <span class="n">CA</span>
+<span class="n">ON</span> <span class="n">A</span><span class="o">.</span><span class="n">AddressID</span> <span class="o">=</span> <span class="n">CA</span><span class="o">.</span><span class="n">AddressID</span>
+<span class="n">CROSS</span> <span class="n">APPLY</span> <span class="n">dbo</span><span class="o">.</span><span class="n">ufnGetCustomerInformation</span><span class="p">(</span><span class="n">CA</span><span class="o">.</span><span class="n">CustomerID</span><span class="p">)</span> <span class="n">AS</span> <span class="n">CI</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">CA</span><span class="o">.</span><span class="n">CustomerID</span><span class="p">;</span>
 </pre></div>
 
 </div>
@@ -430,7 +479,7 @@ Some customers have never placed orders, and some products have never been order
     </div>
   </div>
   
-    
+  
       <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="../myjs.js"></script>
 	
@@ -456,6 +505,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
-
+  
+  
 </body>
 </html>
