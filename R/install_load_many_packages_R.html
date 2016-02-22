@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>Fisseha Berhane</title>
+<title>install_load_many_packages_R</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -166,14 +166,13 @@ div#notebook {
         }
     });
     </script>
+    <!-- End of mathjax configuration -->
 	
-			<style>
+	
+		<style>
 div.prompt {display:none}
 </style>
 
-
-
-    <!-- End of mathjax configuration -->
 	
 	<title>Fisseha Berhane</title>
     <link rel="stylesheet" type="text/css" href="../style3.css">
@@ -184,12 +183,11 @@ div.prompt {display:none}
  
     <header class="myheader">
        
-      <h1>Fisseha Berhane,<span class="phd">  PhD</span> </h1>
+        <h1>Fisseha Berhane,<span class="phd">  PhD</span> </h1>
    	  <h4>Data Scientist at <a class="myjhu" style="color:blue;text-decoration:none" 
 	  href="http://aurotechcorp.com/"  target="_blank">Aurotech</a> </h4>
             
 	         
-	        
 	    
 	 <p><img src="../figures/mobile.PNG" height="30" width="12"/> 443-970-2353</span> <span style="width:50px;display:inline-block"></span>
 	 <img src="../figures/emailimage.png" height="28" width="33"/>  fisseha@jhu.edu</span> <span style="width:50px;display:inline-block"></span>
@@ -202,19 +200,22 @@ div.prompt {display:none}
     </header>
  
  
- 
     <nav class ="mynav">
       <ul>
-   <li><a   class="mybanner"  style="text-decoration:none" href="../index.html">Home</a></li>
-        <li><a   class="mybanner"  style="text-decoration:none" href="../education.html">Education</a></li>
-		  <li><a   class="mybanner"  style="text-decoration:none" href="../projects.html">Projects</a></li>
-		  <li><a   class="mybanner"  style="text-decoration:none" href="../publications.html">Publications</a></li>
+        <li><a   class="mybanner"  style="text-decoration:none" href="../index.html">Home</a></li>
+        <li><a  class="mybanner"  style="text-decoration:none" href="../education.html">Education</a></li>
+		  <li><a  class="mybanner"  style="text-decoration:none" href="../projects.html">Projects</a></li>
+		  <li><a  class="mybanner"  style="text-decoration:none" href="../publications.html">Publications</a></li>
 		   <li><a  class="mybanner"  style="text-decoration:none"   href="../Python/pythonindex.html">Python & Spark</a></li>
 		  <li><a  class="mybanner"  style="text-decoration:none" href="Rindex.html">R & SparkR</a></li>
-	      <li><a  class="mybanner"  style="text-decoration:none" href="../certificates.html">Data Science Certificates & Skills</a></li>  
-          <li><a  class="mybanner"  style="text-decoration:none" href="../d3.html">D3</a></li>   
-	       <li><a  class="mybanner"  style="text-decoration:none" href="../Tableau/tableau.html">Tableau</a></li>  		  
-      </ul>
+	      <li><a  class="mybanner"  style="text-decoration:none" href="../certificates.html">Data Science Certificates & Skills</a></li>   
+        <li><a  class="mybanner"  style="text-decoration:none" href="../Matlab/matlab.html">Matlab</a></li>   
+		<li><a  class="mybanner"  style="text-decoration:none" href="../Tableau/tableau.html">Tableau</a></li>  
+			  	  <li><a  class="mybanner"  style="text-decoration:none" href="../SQL/sql.html">SQL</a></li> 
+     
+     
+
+	 </ul>
     </nav>
 	
 	
@@ -228,7 +229,22 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3  style="color:blue; text-align:center"  id="Installing-and-loading-many-R-packages-at-once">Installing and loading many <strong>R</strong> packages at once<a class="anchor-link" href="#Installing-and-loading-many-R-packages-at-once">&#182;</a></h3>
+<h3  style="color:blue; text-align:center"   id="Installing-and-loading-many-R-packages-at-once">Installing and loading many <strong>R</strong> packages at once<a class="anchor-link" href="#Installing-and-loading-many-R-packages-at-once">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+
+<img style="margin:0px auto;display:block"  src="../figures/install.png", height="128" width="128"/>
+
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I like Jupyter notebook because it enables me to use <strong>R</strong>, <strong>Python</strong> and <strong>Matlab</strong> on the same session. Recently, I was trying to insall other kernels and for unknown reason my Jupyter notebook crushed. Then, I uninstalled Anaconda and reinstalled it. The problem, I have lost all <strong>R packages</strong> I installed over time. Then, I wanted to check if I can install and load the packages I want using a function. This short post shows how to achieve that.</p>
+
 </div>
 </div>
 </div>
@@ -237,7 +253,7 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I like Jupyter notebook because it enables me to use <strong>R</strong> and <strong>Python</strong> on the same session. Recently, I was trying to insall other kernels and for unknown reason my Jupyter notebook crushed. Then, I uninstalled Anaconda and reinstalled it. The problem, I have lost all <strong>R packages</strong> I installed over time. Then, I wanted to check if I can install and load the packages I want using a function. This short post shows how to achieve that.</p>
+<p>The function below enabled me to check if the packages are installed and then load them. If they are not installed, it will install them first.</p>
 
 </div>
 </div>
@@ -247,26 +263,13 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The function below enabled me to check if the packages are installed and then to load them. If they are not installed, it will install them first.</p>
-
+<h4 id="Packages-I-want-to-install">Packages I want to install<a class="anchor-link" href="#Packages-I-want-to-install">&#182;</a></h4>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 style="color:blue; text-align:center" id="Packages-I-want-to-install">Packages I want to install<a class="anchor-link" href="#Packages-I-want-to-install">&#182;</a></h4>
-</div>
-</div>
-</div>
-
-
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>my_packages<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;manipulate&quot;</span><span class="p">,</span><span class="s">&quot;dbscan&quot;</span><span class="p">,</span><span class="s">&quot;tm&quot;</span><span class="p">,</span><span class="s">&quot;downloader&quot;</span><span class="p">,</span><span class="s">&quot;wordcloud&quot;</span><span class="p">,</span><span class="s">&quot;rgdal&quot;</span><span class="p">,</span><span class="s">&quot;httr&quot;</span><span class="p">,</span><span class="s">&quot;rvest&quot;</span><span class="p">,</span><span class="s">&quot;ggmap&quot;</span><span class="p">,</span><span class="s">&quot;calibrate&quot;</span><span class="p">,</span><span class="s">&quot;maps&quot;</span><span class="p">,</span><span class="s">&quot;maptools&quot;</span><span class="p">,</span><span class="s">&quot;stringi&quot;</span><span class="p">,</span><span class="s">&quot;caret&quot;</span><span class="p">,</span><span class="s">&quot;nnet&quot;</span><span class="p">,</span><span class="s">&quot;NeuralNetTools&quot;</span><span class="p">,</span><span class="s">&quot;tidyr&quot;</span><span class="p">,</span><span class="s">&quot;ggthemes&quot;</span><span class="p">,</span><span class="s">&quot;gridExtra&quot;</span><span class="p">,</span><span class="s">&quot;shiny&quot;</span><span class="p">,</span><span class="s">&quot;shinydashboard&quot;</span><span class="p">,</span><span class="s">&quot;plyr&quot;</span><span class="p">,</span><span class="s">&quot;RCurl&quot;</span><span class="p">,</span><span class="s">&quot;ROAuth&quot;</span><span class="p">,</span><span class="s">&quot;twitteR&quot;</span><span class="p">,</span><span class="s">&quot;chron&quot;</span><span class="p">,</span><span class="s">&quot;RColorBrewer&quot;</span><span class="p">,</span><span class="s">&quot;lattice&quot;</span><span class="p">,</span><span class="s">&quot;lubridate&quot;</span><span class="p">,</span><span class="s">&quot;sp&quot;</span><span class="p">,</span><span class="s">&quot;fields&quot;</span><span class="p">,</span><span class="s">&quot;ROCR&quot;</span><span class="p">,</span><span class="s">&quot;caTools&quot;</span><span class="p">,</span><span class="s">&quot;rpart&quot;</span><span class="p">,</span><span class="s">&quot;e1071&quot;</span><span class="p">,</span><span class="s">&quot;randomForest&quot;</span><span class="p">,</span><span class="s">&quot;plotmo&quot;</span><span class="p">,</span><span class="s">&quot;XML&quot;</span><span class="p">,</span><span class="s">&quot;xlsx&quot;</span><span class="p">,</span><span class="s">&quot;readr&quot;</span><span class="p">,</span><span class="s">&quot;scales&quot;</span><span class="p">,</span><span class="s">&quot;reshape2&quot;</span><span class="p">,</span><span class="s">&quot;gtrendsR&quot;</span><span class="p">)</span>
@@ -277,34 +280,32 @@ div.prompt {display:none}
 </div>
 
 </div>
-
-
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 style="color:blue; text-align:center"  id="A-function-that-performs-the-required-task">A function that performs the required task<a class="anchor-link" href="#A-function-that-performs-the-required-task">&#182;</a></h4>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Since the function <strong>require</strong> prints True or False based on the output, let's use the function <strong>invisible</strong> to hide the output.</li>
-<li>The function <strong>installed.packages</strong> gives a matrix of all the instaled packages with thier attributes. </li>
+<li>The function <strong>installed.packages</strong> gives a matrix of all the instaled packages with their attributes. </li>
 <li>I am setting the mirror to "<a href="http://cran.us.r-project.org">http://cran.us.r-project.org</a>" but other mirrors can also be used.</li>
+<li>Even if installing many packages of interest at once is useful, it is known that we probably will not use all of them in one session. We can modify the function below for only installing packages or use it as it is if we are including only packages that we want to use in the session we are working on.</li>
 </ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="A-function-that-performs-the-required-task">A function that performs the required task<a class="anchor-link" href="#A-function-that-performs-the-required-task">&#182;</a></h4>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>install_load<span class="o">=</span> <span class="kr">function</span><span class="p">(</span>packages<span class="p">){</span>
@@ -313,7 +314,7 @@ div.prompt {display:none}
     <span class="kr">if</span> <span class="p">(</span><span class="kp">length</span><span class="p">(</span>to_install<span class="p">)){</span>
         install.packages<span class="p">(</span>to_install<span class="p">,</span> repos<span class="o">=</span><span class="s">&#39;http://cran.us.r-project.org&#39;</span><span class="p">,</span>dependencies <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
                      <span class="p">}</span>
-        <span class="kp">invisible</span><span class="p">(</span><span class="kp">lapply</span><span class="p">(</span>packages<span class="p">,</span> <span class="kn">require</span><span class="p">,</span> character.only <span class="o">=</span> <span class="kc">TRUE</span><span class="p">))</span>
+        <span class="kp">lapply</span><span class="p">(</span>packages<span class="p">,</span><span class="kn">library</span><span class="p">,</span> character.only <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
   <span class="p">}</span>
 </pre></div>
 
@@ -322,21 +323,18 @@ div.prompt {display:none}
 </div>
 
 </div>
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 style="color:blue; text-align:center" id="Then,-just-use-the-function-above">Then, just use the function above<a class="anchor-link" href="#Then,-just-use-the-function-above">&#182;</a></h3>
+<h5 id="Then,-just-use-the-function-above">Then, just use the function above<a class="anchor-link" href="#Then,-just-use-the-function-above">&#182;</a></h5>
 </div>
 </div>
 </div>
-
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>install_load<span class="p">(</span>my_packages<span class="p">)</span>
@@ -350,7 +348,7 @@ div.prompt {display:none}
     </div>
   </div>
   
-  <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="../myjs.js"></script>
 </div>
 
