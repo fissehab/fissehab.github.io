@@ -574,7 +574,9 @@ in_this_state<span class="o">&lt;-</span>reactive<span class="p">({</span>
   m<span class="o">=</span>select<span class="p">(</span>m<span class="p">,</span>Hospital<span class="p">,</span> City<span class="p">)</span>
   m<span class="o">$</span>Rank<span class="o">=</span><span class="kp">rownames</span><span class="p">(</span>m<span class="p">)</span>
   m<span class="o">=</span>select<span class="p">(</span>m<span class="p">,</span>Rank<span class="p">,</span>Hospital<span class="p">,</span>City<span class="p">)</span>
-  <span class="kp">rbind</span><span class="p">(</span>m<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,],</span>m<span class="p">[(</span><span class="kp">nrow</span><span class="p">(</span>m<span class="p">)</span><span class="m">-5</span><span class="p">)</span><span class="o">:</span><span class="kp">nrow</span><span class="p">(</span>m<span class="p">),])</span>
+  <span class="kr">if</span><span class="p">(</span><span class="kp">nrow</span><span class="p">(</span>m<span class="p">)</span><span class="o">&gt;</span><span class="m">9</span><span class="p">){</span>
+  <span class="kp">rbind</span><span class="p">(</span>m<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,],</span>m<span class="p">[(</span><span class="kp">nrow</span><span class="p">(</span>m<span class="p">)</span><span class="m">-4</span><span class="p">)</span><span class="o">:</span><span class="kp">nrow</span><span class="p">(</span>m<span class="p">),])</span>
+  <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>m<span class="p">}</span>
 <span class="p">})</span>
 
 
