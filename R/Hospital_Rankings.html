@@ -170,6 +170,9 @@ div#notebook {
 	
 	
 	
+	
+	
+	
 		<style>
 div.prompt {display:none}
 </style>
@@ -229,7 +232,7 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 style="color:blue; text-align:center"  id="US-Hospitals-Ranking-Shiny-aPP">US Hospital Ranking Shiny App<a class="anchor-link" href="#US-Hospitals-Ranking-Shiny-aPP">&#182;</a></h3>
+<h3 style="color:blue; text-align:center"  id="US-Hospitals-Ranking-Shiny-aPP">US Hospitals Ranking Shiny App<a class="anchor-link" href="#US-Hospitals-Ranking-Shiny-aPP">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -238,19 +241,8 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>
-
-
-
-This is my shiny app that helps to see the performances of various US hospitals in heart attack, heart failure and pneumonia. 
-Tha data is from the <a href="http://hospitalcompare.hhs.gov">Hospital Compare web site</a>, which is run by the U.S. Department of Health and Human Services. 
-You can download the data <a href="../data/outcome-of-care-measures-of-Medicare-certfied hospitals.csv">here</a>.</p>
-<p><a href="http://shiny.rstudio.com/">Shiny</a> is an R package that makes it easy to build interactive web apps straight from R. For a nice look and feel, 
-we will use the <a href="https://rstudio.github.io/shinydashboard/">shinydashboard package</a>.</p>
-
-<p style="color:red"> I have deployed the app to <a href= "https://fishdata.shinyapps.io/hospital_ranking/"   target="_blank">Rstuio</a>, so you can give it a try.</p>
-<br/>
-
+<p>This is my shiny app that helps to see the performances of various US hospitals in heart attack, heart failure and pneumonia. The data is from the <a href="http://hospitalcompare.hhs.gov">Hospital Compare web site</a>, which is run by the U.S. Department of Health and Human Services. You can download the data <a href="/data.cv">here</a>.</p>
+<p><a href="http://shiny.rstudio.com/">Shiny</a> is an R package that makes it easy to build interactive web apps straight from R. For a nice look and feel, we will use the <a href="https://rstudio.github.io/shinydashboard/">shinydashboard package</a>.</p>
 <p>We are using 30-day mortality and readmission rates for heart attacks, heart failure, and pneumonia for over 4,000 hospitals across the USA.</p>
 
 </div>
@@ -261,7 +253,7 @@ we will use the <a href="https://rstudio.github.io/shinydashboard/">shinydashboa
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If you select a state and outcome, you will see top 5 and worst 5 hospitals in the state on the right of the page. If you enter a value into the rank input control, it gives you the hospital with that rank in the selected state and a comparison of that hospital with all hospitals in the US. If rank value more than the number of hospitals in the state with the selected outcome is requested, we get a message that our request is out of range.</p>
+<p>We can select a state and outcome and see the best hospitals in the state. Further, we can select a hospital from the drop down menu and see its rank in the state and compare its performance with all hospitals across the nation.</p>
 
 </div>
 </div>
@@ -271,18 +263,7 @@ we will use the <a href="https://rstudio.github.io/shinydashboard/">shinydashboa
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If no rank is enetered, a density distribution plot of all three outcomes is shown.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The screenshot below is shown when the app is launched. Maryland sate and heart attack are selected but there is no rank value enetered. So, we see density distributions for all hospitals in the US in the figure and the table on the right shows top five and worst five hospitals in Maryland based on heart attack data.</p>
-
+<p>The screenshot below shows the top ten best hospitals in heart attack in MD. We also see that Johns Hopkins Hospital is the best hospital in the state and the vertical line shows average 30-day death rate in the hospital. The histogram is the average 30-day death rate from all hospitals in the USA.</p>
 <br/>
 <a href="https://fishdata.shinyapps.io/hospital_ranking/"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/hospital_ranking1.PNG", height="410" width="1000"/></a>
 
@@ -298,7 +279,7 @@ we will use the <a href="https://rstudio.github.io/shinydashboard/">shinydashboa
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The screenshot shown below is what we see when we select WA and heart failure. The five best and worst hospitals in WA are shown on the right. The vertical line shows the average 30-day death rate in the hospital with the entered rank.</p>
+<p>Similarly, the screenshot below shows top ten best hospitals in NY in pneumonia. In the histogram, we see that Jamaica Hospital Medical Center is ranked 114. When we change the state, the hospital drop down menu in the left shows all hospitals in the selected state. Then, we can select any hospital from the drop down menu to see what its rank is and where in the histogram the average 30-day death rate in the hospital lies.</p>
 
 <br/>
 <a href="https://fishdata.shinyapps.io/hospital_ranking/"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/hospital_ranking2.PNG", height="410" width="1000"/></a>
@@ -312,11 +293,6 @@ we will use the <a href="https://rstudio.github.io/shinydashboard/">shinydashboa
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-
-<br/>
-
-
-
 <p>Usually Shiny apps have at least two parts. A <strong>server.R</strong>, which is R script, and <strong>ui.R</strong>, which controls the look and feel of the user interface.</p>
 <p>My <strong>server.R</strong> and <strong>ui.R</strong> codes are given below. You can download them to the same folder and try the app.</p>
 
@@ -340,52 +316,47 @@ we will use the <a href="https://rstudio.github.io/shinydashboard/">shinydashboa
 <div class=" highlight hl-r"><pre><span class="kn">library</span><span class="p">(</span>shiny<span class="p">)</span>
 <span class="kn">library</span><span class="p">(</span>shinydashboard<span class="p">)</span>
 
+outcome_data<span class="o">=</span>read.csv<span class="p">(</span><span class="s">&quot;data/outcome-of-care-measures-of-Medicare-certfied hospitals.csv&quot;</span><span class="p">,</span>stringsAsFactors <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+outcome_data<span class="o">=</span>outcome_data<span class="p">[</span>outcome_data<span class="p">[,</span><span class="m">6</span><span class="p">]</span><span class="o">!=</span><span class="s">&#39;Not Available&#39;</span><span class="p">,]</span>
+outcome_data<span class="o">=</span>outcome_data<span class="p">[</span>outcome_data<span class="p">[,</span><span class="m">7</span><span class="p">]</span><span class="o">!=</span><span class="s">&#39;Not Available&#39;</span><span class="p">,]</span>
+outcome_data<span class="o">=</span>outcome_data<span class="p">[</span>outcome_data<span class="p">[,</span><span class="m">8</span><span class="p">]</span><span class="o">!=</span><span class="s">&#39;Not Available&#39;</span><span class="p">,]</span>
+
+
+
 dashboardPage<span class="p">(</span>
   dashboardHeader<span class="p">(</span>title<span class="o">=</span><span class="s">&quot;US Hospital Ranking&quot;</span><span class="p">),</span>
   
-  dashboardSidebar<span class="p">(</span>width <span class="o">=</span> <span class="m">150</span><span class="p">,</span>
-
-    selectInput<span class="p">(</span><span class="s">&quot;state&quot;</span><span class="p">,</span> 
-                label <span class="o">=</span> em<span class="p">(</span><span class="s">&quot;Select State&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;text-align:center;color:#FFA319;font-size:100%&quot;</span><span class="p">),</span>
-                choices <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;AK&quot;</span><span class="p">,</span><span class="s">&quot;AL&quot;</span><span class="p">,</span><span class="s">&quot;AR&quot;</span><span class="p">,</span><span class="s">&quot;AZ&quot;</span><span class="p">,</span><span class="s">&quot;CA&quot;</span><span class="p">,</span><span class="s">&quot;CO&quot;</span><span class="p">,</span><span class="s">&quot;CT&quot;</span><span class="p">,</span><span class="s">&quot;DC&quot;</span><span class="p">,</span><span class="s">&quot;DE&quot;</span><span class="p">,</span><span class="s">&quot;FL&quot;</span><span class="p">,</span><span class="s">&quot;GA&quot;</span><span class="p">,</span><span class="s">&quot;GU&quot;</span><span class="p">,</span><span class="s">&quot;HI&quot;</span><span class="p">,</span><span class="s">&quot;IA&quot;</span><span class="p">,</span><span class="s">&quot;ID&quot;</span><span class="p">,</span>	
-                            <span class="s">&quot;IL&quot;</span><span class="p">,</span><span class="s">&quot;IN&quot;</span><span class="p">,</span><span class="s">&quot;KS&quot;</span><span class="p">,</span><span class="s">&quot;KY&quot;</span><span class="p">,</span><span class="s">&quot;LA&quot;</span><span class="p">,</span><span class="s">&quot;MA&quot;</span><span class="p">,</span><span class="s">&quot;MD&quot;</span><span class="p">,</span><span class="s">&quot;ME&quot;</span><span class="p">,</span><span class="s">&quot;MI&quot;</span><span class="p">,</span><span class="s">&quot;MN&quot;</span><span class="p">,</span><span class="s">&quot;MO&quot;</span><span class="p">,</span><span class="s">&quot;MS&quot;</span><span class="p">,</span><span class="s">&quot;MT&quot;</span><span class="p">,</span><span class="s">&quot;NC&quot;</span><span class="p">,</span><span class="s">&quot;ND&quot;</span><span class="p">,</span><span class="s">&quot;NE&quot;</span><span class="p">,</span>
-                            <span class="s">&quot;NH&quot;</span><span class="p">,</span><span class="s">&quot;NJ&quot;</span><span class="p">,</span><span class="s">&quot;NM&quot;</span><span class="p">,</span><span class="s">&quot;NV&quot;</span><span class="p">,</span><span class="s">&quot;NY&quot;</span><span class="p">,</span><span class="s">&quot;OH&quot;</span><span class="p">,</span><span class="s">&quot;OK&quot;</span><span class="p">,</span><span class="s">&quot;OR&quot;</span><span class="p">,</span><span class="s">&quot;PA&quot;</span><span class="p">,</span><span class="s">&quot;PR&quot;</span><span class="p">,</span><span class="s">&quot;RI&quot;</span><span class="p">,</span><span class="s">&quot;SC&quot;</span><span class="p">,</span><span class="s">&quot;SD&quot;</span><span class="p">,</span>
-                            <span class="s">&quot;TN&quot;</span><span class="p">,</span><span class="s">&quot;TX&quot;</span><span class="p">,</span><span class="s">&quot;UT&quot;</span><span class="p">,</span><span class="s">&quot;VA&quot;</span><span class="p">,</span><span class="s">&quot;VI&quot;</span><span class="p">,</span><span class="s">&quot;VT&quot;</span><span class="p">,</span><span class="s">&quot;WA&quot;</span><span class="p">,</span><span class="s">&quot;WI&quot;</span><span class="p">,</span><span class="s">&quot;WV&quot;</span><span class="p">,</span><span class="s">&quot;WY&quot;</span><span class="p">),</span>selected <span class="o">=</span> <span class="s">&quot;MD&quot;</span><span class="p">),</span> 
-    
-    selectInput<span class="p">(</span><span class="s">&quot;outcome&quot;</span><span class="p">,</span> 
-                label <span class="o">=</span> em<span class="p">(</span><span class="s">&quot;Select Outcome&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;text-align:center;color:#FFA319;font-size:100%&quot;</span><span class="p">),</span>
-                choices <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;heart failure&quot;</span><span class="p">,</span><span class="s">&quot;heart attack&quot;</span><span class="p">,</span><span class="s">&quot;pneumonia&quot;</span><span class="p">),</span>
-                selected <span class="o">=</span> <span class="s">&quot;heart attack&quot;</span><span class="p">),</span>
-  
-    
-    textInput<span class="p">(</span><span class="s">&#39;rank&#39;</span><span class="p">,</span>em<span class="p">(</span><span class="s">&#39;Rank&#39;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;text-align:center;color:#FFA319;font-size:100%&quot;</span><span class="p">)),</span>
-    
-   helpText<span class="p">(</span><span class="s">&quot;Enter Rank and you will see which hospital has that rank in the state you selected.\n</span>
-<span class="s">             The values can be numeric, &#39;best&#39; or &#39;worst&#39;&quot;</span><span class="p">,</span> style<span class="o">=</span><span class="s">&quot;text-align:center&quot;</span><span class="p">),</span>
-   
-    
-    br<span class="p">()</span>
+  dashboardSidebar<span class="p">(</span>width <span class="o">=</span> <span class="m">200</span><span class="p">,</span>
+                   selectInput<span class="p">(</span><span class="s">&quot;state&quot;</span><span class="p">,</span> 
+                               label <span class="o">=</span> em<span class="p">(</span><span class="s">&quot;Select State&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;text-align:center;color:#FFA319;font-size:100%&quot;</span><span class="p">),</span>
+                               <span class="kp">unique</span><span class="p">(</span>outcome_data<span class="o">$</span>State<span class="p">),</span>selected <span class="o">=</span> <span class="s">&#39;MD&#39;</span><span class="p">),</span> 
+        
+            selectInput<span class="p">(</span><span class="s">&quot;outcome&quot;</span><span class="p">,</span> 
+                               label <span class="o">=</span> em<span class="p">(</span><span class="s">&quot;Select Outcome&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;text-align:center;color:#FFA319;font-size:100%&quot;</span><span class="p">),</span>
+                               choices <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;heart failure&quot;</span><span class="p">,</span><span class="s">&quot;heart attack&quot;</span><span class="p">,</span><span class="s">&quot;pneumonia&quot;</span><span class="p">),</span>
+                               selected <span class="o">=</span> <span class="s">&quot;heart attack&quot;</span><span class="p">),</span>
+                   
+      selectInput<span class="p">(</span><span class="s">&#39;columns&#39;</span><span class="p">,</span>em<span class="p">(</span><span class="s">&#39;Choose Hospital&#39;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;text-align:center;color:#FFA319;font-size:100%&quot;</span><span class="p">),</span><span class="s">&quot;&quot;</span><span class="p">,</span>
+                  selectize <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span>selected <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="p">)</span>  
     <span class="p">),</span>
-  
-  
-  <span class="c1">##  Main Panel</span>
-
-  dashboardBody<span class="p">(</span>   
-
-    fluidRow<span class="p">(</span>
-    box<span class="p">(</span>width <span class="o">=</span> <span class="m">7</span><span class="p">,</span>
-        plotOutput<span class="p">(</span><span class="s">&quot;myplot&quot;</span><span class="p">),</span>
-        collapsible <span class="o">=</span> <span class="kc">FALSE</span><span class="p">),</span>
     
-    box<span class="p">(</span>width <span class="o">=</span> <span class="m">5</span><span class="p">,</span>
-        h5<span class="p">(</span>strong<span class="p">(</span><span class="s">&quot;Top 5 and Bottom 5 Hospitals&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;text-align:right;color:darkblue;font-size:100%&quot;</span><span class="p">)),</span>
-       div<span class="p">(</span>tableOutput<span class="p">(</span><span class="s">&quot;table&quot;</span><span class="p">),</span> style <span class="o">=</span> <span class="s">&quot;font-size:80%&quot;</span><span class="p">)</span>
-    <span class="p">)</span>
-
+ 
+  dashboardBody<span class="p">(</span>   
+    
+    fluidRow<span class="p">(</span>
+      column<span class="p">(</span>width <span class="o">=</span> <span class="m">7</span><span class="p">,</span>
+  
+          plotOutput<span class="p">(</span><span class="s">&quot;myplot&quot;</span><span class="p">)),</span>
+     
       
-<span class="p">)</span>
+      column<span class="p">(</span>width <span class="o">=</span> <span class="m">5</span><span class="p">,</span>
+    
+          h5<span class="p">(</span>strong<span class="p">(</span><span class="s">&quot;Best Hospitals in the State&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;text-align:right;color:darkblue;font-size:100%&quot;</span><span class="p">)),</span>
+          
+          div<span class="p">(</span>tableOutput<span class="p">(</span><span class="s">&quot;table1&quot;</span><span class="p">),</span> style <span class="o">=</span> <span class="s">&quot;font-size:80%&quot;</span><span class="p">,</span>collapsible <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)))</span>
+   
     <span class="p">)</span>
-  <span class="p">)</span>
+    <span class="p">)</span>
 </pre></div>
 
 </div>
@@ -410,245 +381,149 @@ dashboardPage<span class="p">(</span>
 <div class=" highlight hl-r"><pre><span class="kn">library</span><span class="p">(</span>shiny<span class="p">)</span>
 <span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span>
 <span class="kn">library</span><span class="p">(</span>dplyr<span class="p">)</span>    
-<span class="kn">library</span><span class="p">(</span>gridExtra<span class="p">)</span>
-<span class="kn">library</span><span class="p">(</span>data.table<span class="p">)</span>
 <span class="kn">library</span><span class="p">(</span>tidyr<span class="p">)</span>
 
+outcome_data<span class="o">=</span>read.csv<span class="p">(</span><span class="s">&quot;data/outcome-of-care-measures-of-Medicare-certfied hospitals.csv&quot;</span><span class="p">,</span>stringsAsFactors <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
 
-data<span class="o">=</span>read.csv<span class="p">(</span><span class="s">&quot;data/outcome-of-care-measures-of-Medicare-certfied hospitals.csv&quot;</span><span class="p">,</span>stringsAsFactors <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+<span class="kp">names</span><span class="p">(</span>outcome_data<span class="p">)</span><span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;Hospital&#39;</span><span class="p">,</span><span class="s">&quot;Address&quot;</span><span class="p">,</span><span class="s">&quot;City&quot;</span><span class="p">,</span><span class="s">&quot;State&quot;</span><span class="p">,</span><span class="s">&quot;ZIP&quot;</span><span class="p">,</span><span class="s">&quot;heart attack&quot;</span><span class="p">,</span><span class="s">&quot;heart failure&quot;</span><span class="p">,</span><span class="s">&quot;pneumonia&quot;</span><span class="p">)</span>
 
-data<span class="o">=</span>data<span class="p">[</span>data<span class="p">[,</span><span class="m">6</span><span class="p">]</span><span class="o">!=</span><span class="s">&#39;Not Available&#39;</span><span class="p">,]</span>
-data<span class="o">=</span>data<span class="p">[</span>data<span class="p">[,</span><span class="m">7</span><span class="p">]</span><span class="o">!=</span><span class="s">&#39;Not Available&#39;</span><span class="p">,]</span>
-data<span class="o">=</span>data<span class="p">[</span>data<span class="p">[,</span><span class="m">8</span><span class="p">]</span><span class="o">!=</span><span class="s">&#39;Not Available&#39;</span><span class="p">,]</span>
-
-data2<span class="o">=</span>data
-
-<span class="kp">names</span><span class="p">(</span>data2<span class="p">)</span><span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;Hospital_Name&#39;</span><span class="p">,</span><span class="s">&quot;Address&quot;</span><span class="p">,</span><span class="s">&quot;City&quot;</span><span class="p">,</span><span class="s">&quot;State&quot;</span><span class="p">,</span><span class="s">&quot;ZIP&quot;</span><span class="p">,</span><span class="s">&quot;Heart Attack&quot;</span><span class="p">,</span><span class="s">&quot;Heart Failure&quot;</span><span class="p">,</span><span class="s">&quot;Pneumonia&quot;</span><span class="p">)</span>
-data3 <span class="o">&lt;-</span> data2<span class="o">%&gt;%</span> gather<span class="p">(</span>Type<span class="p">,</span> Deaths<span class="p">,</span> <span class="o">-</span>Hospital_Name<span class="p">,</span><span class="o">-</span>Address<span class="p">,</span><span class="o">-</span>City<span class="p">,</span><span class="o">-</span>State<span class="p">,</span><span class="o">-</span>ZIP<span class="p">)</span>
-data3<span class="o">$</span>Type<span class="o">=</span><span class="kp">as.factor</span><span class="p">(</span>data3<span class="o">$</span>Type<span class="p">)</span>
-mydata<span class="o">=</span>data
-<span class="kp">names</span><span class="p">(</span>mydata<span class="p">)</span><span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;Hospital&#39;</span><span class="p">,</span><span class="s">&quot;Address&quot;</span><span class="p">,</span><span class="s">&quot;City&quot;</span><span class="p">,</span><span class="s">&quot;State&quot;</span><span class="p">,</span><span class="s">&quot;ZIP&quot;</span><span class="p">,</span><span class="s">&quot;heart attack&quot;</span><span class="p">,</span><span class="s">&quot;heart failure&quot;</span><span class="p">,</span><span class="s">&quot;pneumonia&quot;</span><span class="p">)</span>
-mydata<span class="o">=</span>mydata<span class="o">%&gt;%</span>gather<span class="p">(</span>Type<span class="p">,</span> Deaths<span class="p">,</span> <span class="o">-</span>Hospital<span class="p">,</span><span class="o">-</span>Address<span class="p">,</span><span class="o">-</span>City<span class="p">,</span><span class="o">-</span>State<span class="p">,</span><span class="o">-</span>ZIP<span class="p">)</span>
-mydata<span class="o">$</span>Deaths<span class="o">=</span><span class="kp">as.numeric</span><span class="p">(</span>mydata<span class="o">$</span>Deaths<span class="p">)</span>
-
-rankhospital <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>state<span class="p">,</span> outcome<span class="p">,</span>num<span class="o">=</span><span class="s">&#39;best&#39;</span><span class="p">)</span> <span class="p">{</span>
-  
-  <span class="kr">if</span><span class="p">(</span><span class="kp">is.character</span><span class="p">(</span>num<span class="p">)){</span>
-    <span class="kr">if</span> <span class="p">(</span>num <span class="o">%in%</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;best&#39;</span><span class="p">,</span><span class="s">&#39;worst&#39;</span><span class="p">)</span><span class="o">==</span><span class="kc">FALSE</span><span class="p">){</span>
-      <span class="kp">stop</span><span class="p">(</span><span class="s">&#39;Invalid Rank&#39;</span><span class="p">)</span>
-    <span class="p">}</span> <span class="p">}</span>
-  
-  <span class="kr">if</span> <span class="p">(</span>state <span class="o">%in%</span> data<span class="o">$</span>State <span class="o">==</span><span class="kc">FALSE</span><span class="p">)</span> <span class="p">{</span> <span class="kp">stop</span><span class="p">(</span><span class="s">&quot;invalid state&quot;</span><span class="p">)}</span>
-  
-  <span class="kr">if</span> <span class="p">(</span>outcome <span class="o">%in%</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;heart failure&quot;</span><span class="p">,</span><span class="s">&quot;heart attack&quot;</span><span class="p">,</span><span class="s">&quot;pneumonia&quot;</span><span class="p">)</span><span class="o">==</span><span class="kc">FALSE</span><span class="p">){</span>
-    <span class="kp">stop</span><span class="p">(</span><span class="s">&quot;invalid outcome&quot;</span><span class="p">)}</span>
-  
-  
-  
-  
-  <span class="kr">if</span> <span class="p">(</span>state <span class="o">%in%</span> data<span class="o">$</span>State <span class="o">&amp;</span> outcome <span class="o">%in%</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;heart failure&quot;</span><span class="p">,</span><span class="s">&quot;heart attack&quot;</span><span class="p">,</span><span class="s">&quot;pneumonia&quot;</span><span class="p">)){</span>
-    <span class="kr">if</span><span class="p">(</span>outcome<span class="o">==</span><span class="s">&quot;heart attack&quot;</span><span class="p">){</span>
-      a<span class="o">&lt;-</span>data<span class="p">[,</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">6</span><span class="p">)]</span>
-    <span class="p">}</span>
-    
-    <span class="kr">if</span><span class="p">(</span>outcome<span class="o">==</span><span class="s">&quot;heart failure&quot;</span><span class="p">){</span>
-      a<span class="o">&lt;-</span>data<span class="p">[,</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">7</span><span class="p">)]</span>
-    <span class="p">}</span>
-    
-    <span class="kr">if</span><span class="p">(</span>outcome<span class="o">==</span><span class="s">&quot;pneumonia&quot;</span><span class="p">){</span>
-      a<span class="o">&lt;-</span>data<span class="p">[,</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">8</span><span class="p">)]</span>
-    <span class="p">}</span>
-    
-    b<span class="o">&lt;-</span><span class="kp">split</span><span class="p">(</span>a<span class="p">,</span>a<span class="o">$</span>State<span class="p">)</span>
-    <span class="kt">c</span><span class="o">&lt;-</span>b<span class="p">[[</span>state<span class="p">]]</span>
-    <span class="kt">c</span><span class="o">&lt;-</span><span class="kt">c</span><span class="p">[,</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">)]</span>
-    <span class="kp">colnames</span><span class="p">(</span><span class="kt">c</span><span class="p">)</span><span class="o">&lt;-</span><span class="kp">cbind</span><span class="p">(</span><span class="s">&#39;Hospital.Name&#39;</span><span class="p">,</span>outcome<span class="p">)</span>
-    <span class="kt">c</span><span class="p">[,</span><span class="m">2</span><span class="p">]</span><span class="o">&lt;-</span><span class="kp">as.numeric</span><span class="p">(</span><span class="kt">c</span><span class="p">[,</span><span class="m">2</span><span class="p">])</span>
-    
-    
-    <span class="kr">if</span> <span class="p">(</span>num<span class="o">==</span><span class="s">&#39;best&#39;</span><span class="p">){</span>
-      
-      d<span class="o">&lt;-</span> <span class="kt">c</span><span class="p">[</span><span class="kp">which</span><span class="p">(</span><span class="kt">c</span><span class="p">[,</span><span class="m">2</span><span class="p">]</span><span class="o">==</span><span class="kp">min</span><span class="p">(</span><span class="kt">c</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span>na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">)),]</span>
-      
-      hospitals<span class="o">&lt;-</span>d<span class="o">$</span>Hospital.Name
-      hospital<span class="o">&lt;-</span><span class="kp">sort</span><span class="p">(</span>hospitals<span class="p">)[</span><span class="m">1</span><span class="p">]</span>
-      
-    <span class="p">}</span>
-    
-    <span class="kr">if</span> <span class="p">(</span>num<span class="o">==</span><span class="s">&#39;worst&#39;</span><span class="p">){</span>
-      
-      d<span class="o">&lt;-</span> <span class="kt">c</span><span class="p">[</span><span class="kp">which</span><span class="p">(</span><span class="kt">c</span><span class="p">[,</span><span class="m">2</span><span class="p">]</span><span class="o">==</span><span class="kp">max</span><span class="p">(</span><span class="kt">c</span><span class="p">[,</span><span class="m">2</span><span class="p">],</span>na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">)),]</span>
-      
-      hospitals<span class="o">&lt;-</span>d<span class="o">$</span>Hospital.Name
-      hospital<span class="o">&lt;-</span><span class="kp">sort</span><span class="p">(</span>hospitals<span class="p">)[</span><span class="m">1</span><span class="p">]</span>
-      
-    <span class="p">}</span>
-    
-    <span class="kr">if</span><span class="p">(</span><span class="kp">is.numeric</span><span class="p">(</span>num<span class="p">)</span> <span class="o">&amp;</span> num <span class="o">&lt;=</span> <span class="kp">length</span><span class="p">(</span><span class="kt">c</span><span class="o">$</span>Hospital.Name<span class="p">)){</span>
-      
-      
-      l<span class="o">&lt;-</span><span class="kt">c</span><span class="p">[</span><span class="o">!</span><span class="kp">is.na</span><span class="p">(</span><span class="kt">c</span><span class="p">[,</span><span class="m">2</span><span class="p">]),]</span>
-      ll<span class="o">&lt;-</span><span class="kp">unique</span><span class="p">(</span><span class="kp">sort</span><span class="p">(</span>l<span class="p">[,</span><span class="m">2</span><span class="p">]))</span>
-      
-      m<span class="o">&lt;-</span><span class="kt">c</span><span class="p">()</span>
-      
-      <span class="kr">for</span> <span class="p">(</span> i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>ll<span class="p">)){</span>
-        temp<span class="o">&lt;-</span><span class="kp">which</span><span class="p">(</span>l<span class="p">[,</span><span class="m">2</span><span class="p">]</span><span class="o">==</span>ll<span class="p">[</span>i<span class="p">])</span>
-        m<span class="o">&lt;-</span><span class="kp">rbind</span><span class="p">(</span>m<span class="p">,</span>l<span class="p">[</span>temp<span class="p">,])</span>
-      <span class="p">}</span>
-      
-      k<span class="o">&lt;-</span>m<span class="p">[</span>num<span class="p">,</span><span class="m">2</span><span class="p">]</span>
-      p1<span class="o">&lt;-</span><span class="kp">which</span><span class="p">(</span>m<span class="p">[,</span><span class="m">2</span><span class="p">]</span><span class="o">&lt;</span>k<span class="p">)</span>
-      p<span class="o">&lt;-</span><span class="kp">which</span><span class="p">(</span>m<span class="p">[,</span><span class="m">2</span><span class="p">]</span><span class="o">==</span>k<span class="p">)</span>
-      
-      num2<span class="o">&lt;-</span>num<span class="o">-</span><span class="kp">length</span><span class="p">(</span>p1<span class="p">)</span>
-      
-      hospitals<span class="o">&lt;-</span><span class="kp">sort</span><span class="p">(</span>m<span class="p">[</span>p<span class="p">,</span><span class="m">1</span><span class="p">])</span>
-      
-      hospital<span class="o">&lt;-</span>hospitals<span class="p">[</span>num2<span class="p">]</span> 
-      
-    <span class="p">}</span>
-    
-    <span class="kr">if</span> <span class="p">(</span><span class="kp">is.numeric</span><span class="p">(</span>num<span class="p">)){</span>
-      <span class="kr">if</span> <span class="p">(</span>num <span class="o">&gt;</span> <span class="kp">length</span><span class="p">(</span><span class="kt">c</span><span class="o">$</span>Hospital.Name<span class="p">)){</span> 
-        <span class="kr">return</span><span class="p">(</span><span class="kc">NA</span><span class="p">)}}</span>
-    
-  <span class="p">}</span>
-  
-  hospital   
-<span class="p">}</span>
+outcome_data<span class="o">=</span>outcome_data<span class="p">[</span>outcome_data<span class="p">[,</span><span class="m">6</span><span class="p">]</span><span class="o">!=</span><span class="s">&#39;Not Available&#39;</span><span class="p">,]</span>
+outcome_data<span class="o">=</span>outcome_data<span class="p">[</span>outcome_data<span class="p">[,</span><span class="m">7</span><span class="p">]</span><span class="o">!=</span><span class="s">&#39;Not Available&#39;</span><span class="p">,]</span>
+outcome_data<span class="o">=</span>outcome_data<span class="p">[</span>outcome_data<span class="p">[,</span><span class="m">8</span><span class="p">]</span><span class="o">!=</span><span class="s">&#39;Not Available&#39;</span><span class="p">,]</span>
 
 
-<span class="c1">#### start shiny</span>
+outcome_data1 <span class="o">&lt;-</span> outcome_data<span class="o">%&gt;%</span> gather<span class="p">(</span>Type<span class="p">,</span> Deaths<span class="p">,</span> <span class="o">-</span>Hospital<span class="p">,</span><span class="o">-</span>Address<span class="p">,</span><span class="o">-</span>City<span class="p">,</span><span class="o">-</span>State<span class="p">,</span><span class="o">-</span>ZIP<span class="p">)</span>
+outcome_data1<span class="o">$</span>Type<span class="o">=</span><span class="kp">as.factor</span><span class="p">(</span>outcome_data1<span class="o">$</span>Type<span class="p">)</span>
+outcome_data1<span class="o">$</span>Deaths<span class="o">=</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data1<span class="o">$</span>Deaths<span class="p">)</span>
 
-shinyServer<span class="p">(</span><span class="kr">function</span><span class="p">(</span>input<span class="p">,</span> output<span class="p">)</span> <span class="p">{</span>
-  
+
+
+
+shinyServer<span class="p">(</span><span class="kr">function</span><span class="p">(</span>input<span class="p">,</span> output<span class="p">,</span> session<span class="p">)</span> <span class="p">{</span>
+
+
   state<span class="o">&lt;-</span>reactive<span class="p">({</span>
     input<span class="o">$</span>state
   <span class="p">})</span>
   
+
+  
+  hospital<span class="o">&lt;-</span>reactive<span class="p">({</span>
+    input<span class="o">$</span>columns
+  <span class="p">})</span>
+  
+
+  
+  
+  
+  outvar<span class="o">=</span>reactive<span class="p">({</span>
+    mm<span class="o">=</span>outcome_data<span class="o">$</span>Hospital<span class="p">[</span>outcome_data<span class="o">$</span>State<span class="o">==</span>state<span class="p">()]</span>
+    <span class="kp">unique</span><span class="p">(</span>mm<span class="p">)</span>
+  <span class="p">})</span>
+  
+  
+  observe<span class="p">({</span>
+    
+    updateSelectInput<span class="p">(</span>session<span class="p">,</span><span class="s">&quot;columns&quot;</span><span class="p">,</span>
+                      choices<span class="o">=</span>outvar<span class="p">())</span>
+  <span class="p">})</span>
+  
+  
+  deaths<span class="o">&lt;-</span> reactive<span class="p">({</span>
+    
+    
+    m<span class="o">=</span>filter<span class="p">(</span>outcome_data1<span class="p">,</span> State<span class="o">==</span>state<span class="p">(),</span>Type<span class="o">==</span>outcome<span class="p">(),</span>Hospital<span class="o">==</span>hospital<span class="p">())</span>
+    
+    <span class="kp">as.numeric</span><span class="p">(</span>select<span class="p">(</span>m<span class="p">,</span>Deaths<span class="p">))</span>
+    
+    
+  <span class="p">})</span>
+  
+  
+
   
   outcome<span class="o">&lt;-</span>reactive<span class="p">({</span>
     input<span class="o">$</span>outcome
   <span class="p">})</span>
   
+
   
-  <span class="kp">rank</span><span class="o">&lt;-</span>reactive<span class="p">({</span>
+  best_in_this_state<span class="o">&lt;-</span>reactive<span class="p">({</span>
     
-    <span class="kr">if</span><span class="p">(</span>input<span class="o">$</span>rank <span class="o">%in%</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;best&quot;</span><span class="p">,</span><span class="s">&quot;worst&quot;</span><span class="p">)){</span>
-      input<span class="o">$</span><span class="kp">rank</span>
-    <span class="p">}</span>
+    m<span class="o">=</span>filter<span class="p">(</span>outcome_data1<span class="p">,</span> State<span class="o">==</span>state<span class="p">(),</span>Type<span class="o">==</span>outcome<span class="p">())</span>
+    m<span class="o">=</span>arrange<span class="p">(</span>m<span class="p">,</span>Deaths<span class="p">,</span>Hospital<span class="p">)</span>
+    m<span class="o">=</span>select<span class="p">(</span>m<span class="p">,</span>Hospital<span class="p">,</span> City<span class="p">)</span>
+    m<span class="o">$</span>Rank<span class="o">=</span><span class="kp">rownames</span><span class="p">(</span>m<span class="p">)</span>
+    m<span class="o">=</span>select<span class="p">(</span>m<span class="p">,</span>Rank<span class="p">,</span>Hospital<span class="p">,</span>City<span class="p">)</span>
     
-    <span class="kr">else</span> <span class="kr">if</span><span class="p">(</span><span class="kp">is.numeric</span><span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>input<span class="o">$</span><span class="kp">rank</span><span class="p">))){</span>
-      <span class="kp">as.numeric</span><span class="p">(</span>input<span class="o">$</span><span class="kp">rank</span><span class="p">)</span>
-    <span class="p">}</span>
+    <span class="kr">if</span><span class="p">(</span><span class="kp">nrow</span><span class="p">(</span>m<span class="p">)</span><span class="o">&gt;</span><span class="m">9</span><span class="p">){</span>
+      m<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,]</span>
+    <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>m<span class="p">}</span>
     
   <span class="p">})</span>
   
-
   
-  hosp<span class="o">&lt;-</span>reactive<span class="p">({</span>
+  its_rank<span class="o">&lt;-</span>reactive<span class="p">({</span>
     
-    <span class="kr">if</span><span class="p">(</span><span class="o">!</span><span class="kp">is.na</span><span class="p">(</span><span class="kp">rank</span><span class="p">())){</span>
-      rankhospital<span class="p">(</span>state<span class="p">(),</span>outcome<span class="p">(),</span><span class="kp">rank</span><span class="p">())</span>
-      <span class="p">}</span>
-    <span class="p">})</span>
+    m<span class="o">=</span>filter<span class="p">(</span>outcome_data1<span class="p">,</span> State<span class="o">==</span>state<span class="p">(),</span>Type<span class="o">==</span>outcome<span class="p">())</span>
+    m<span class="o">=</span>arrange<span class="p">(</span>m<span class="p">,</span>Deaths<span class="p">,</span>Hospital<span class="p">)</span>
+    m<span class="o">=</span>select<span class="p">(</span>m<span class="p">,</span>Hospital<span class="p">)</span>
+    m<span class="o">$</span>Rank<span class="o">=</span><span class="kp">rownames</span><span class="p">(</span>m<span class="p">)</span>
+    m<span class="o">=</span>select<span class="p">(</span>m<span class="p">,</span>Rank<span class="p">,</span>Hospital<span class="p">)</span>
+    <span class="kp">as.numeric</span><span class="p">(</span>m<span class="o">$</span>Rank<span class="p">[</span>m<span class="o">$</span>Hospital<span class="o">==</span>hospital<span class="p">()])</span>
   
-  
-v_value<span class="o">&lt;-</span>reactive<span class="p">({</span>
     
-  filter<span class="p">(</span>data<span class="p">,</span>Hospital.Name<span class="o">==</span>hosp<span class="p">()</span> <span class="o">&amp;</span> State<span class="o">==</span>state<span class="p">())</span>
-  
   <span class="p">})</span>
-
-myrows<span class="o">&lt;-</span>reactive<span class="p">({</span>
   
-  m<span class="o">=</span>filter<span class="p">(</span>mydata<span class="p">,</span> State<span class="o">==</span>state<span class="p">(),</span>Type<span class="o">==</span>outcome<span class="p">())</span>
-  <span class="kp">nrow</span><span class="p">(</span>m<span class="p">)</span>
-<span class="p">})</span>
-
-in_this_state<span class="o">&lt;-</span>reactive<span class="p">({</span>
   
-  m<span class="o">=</span>filter<span class="p">(</span>mydata<span class="p">,</span> State<span class="o">==</span>state<span class="p">(),</span>Type<span class="o">==</span>outcome<span class="p">())</span>
-  m<span class="o">=</span>arrange<span class="p">(</span>m<span class="p">,</span>Deaths<span class="p">,</span>Hospital<span class="p">)</span>
-  m<span class="o">=</span>select<span class="p">(</span>m<span class="p">,</span>Hospital<span class="p">,</span> City<span class="p">)</span>
-  m<span class="o">$</span>Rank<span class="o">=</span><span class="kp">rownames</span><span class="p">(</span>m<span class="p">)</span>
-  m<span class="o">=</span>select<span class="p">(</span>m<span class="p">,</span>Rank<span class="p">,</span>Hospital<span class="p">,</span>City<span class="p">)</span>
-  <span class="kr">if</span><span class="p">(</span><span class="kp">nrow</span><span class="p">(</span>m<span class="p">)</span><span class="o">&gt;</span><span class="m">9</span><span class="p">){</span>
-  <span class="kp">rbind</span><span class="p">(</span>m<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">,],</span>m<span class="p">[(</span><span class="kp">nrow</span><span class="p">(</span>m<span class="p">)</span><span class="m">-4</span><span class="p">)</span><span class="o">:</span><span class="kp">nrow</span><span class="p">(</span>m<span class="p">),])</span>
-  <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>m<span class="p">}</span>
-<span class="p">})</span>
-
-
-output<span class="o">$</span>table <span class="o">&lt;-</span> renderTable<span class="p">(</span>in_this_state<span class="p">(),</span>include.rownames<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
-
+  
+  output<span class="o">$</span>table1 <span class="o">&lt;-</span> renderTable<span class="p">(</span>best_in_this_state<span class="p">(),</span>include.rownames<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
  
- 
-output<span class="o">$</span>myplot<span class="o">&lt;-</span>renderPlot<span class="p">({</span>
-  
   color<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;#75a3a3&#39;</span><span class="p">,</span><span class="s">&#39;#999966&#39;</span><span class="p">,</span><span class="s">&#39;#79a6d2&#39;</span><span class="p">,</span><span class="s">&#39;#c68c53&#39;</span><span class="p">)</span>
   
+
+    
   
-  <span class="kr">if</span><span class="p">(</span><span class="kp">is.na</span><span class="p">(</span><span class="kp">rank</span><span class="p">())</span><span class="o">==</span><span class="kc">TRUE</span><span class="p">){</span>
+  output<span class="o">$</span>myplot<span class="o">&lt;-</span>renderPlot<span class="p">({</span>
     
-    p<span class="o">&lt;-</span>ggplot<span class="p">(</span>data3<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span><span class="kp">as.numeric</span><span class="p">(</span>Deaths<span class="p">),</span> fill <span class="o">=</span> Type<span class="p">))</span> <span class="o">+</span> geom_density<span class="p">(</span>alpha <span class="o">=</span> <span class="m">0.5</span><span class="p">,</span>position<span class="o">=</span><span class="s">&quot;stack&quot;</span><span class="p">)</span>
-    
-    p<span class="o">+</span>ggtitle<span class="p">(</span><span class="s">&#39;Distribution of monthly hospital death\n rates in the US &#39;</span><span class="p">)</span><span class="o">+</span>xlab<span class="p">(</span><span class="s">&#39;Number of deaths&#39;</span><span class="p">)</span><span class="o">+</span>ylab<span class="p">(</span><span class="s">&#39;Density&#39;</span><span class="p">)</span><span class="o">+</span>
-      theme<span class="p">(</span>axis.title.y <span class="o">=</span> element_text<span class="p">(</span>size<span class="o">=</span><span class="m">12</span><span class="p">,</span>angle<span class="o">=</span><span class="m">90</span><span class="p">,</span>hjust<span class="o">=</span><span class="m">.5</span><span class="p">,</span>vjust<span class="o">=</span><span class="m">2</span><span class="p">),</span>
-            axis.title.x <span class="o">=</span> element_text<span class="p">(</span>size<span class="o">=</span><span class="m">12</span><span class="p">),</span>
-            plot.title <span class="o">=</span> element_text<span class="p">(</span>vjust<span class="o">=</span><span class="m">1.5</span><span class="p">,</span>size <span class="o">=</span> <span class="m">16</span><span class="p">,</span>colour<span class="o">=</span><span class="s">&quot;darkblue&quot;</span><span class="p">),</span>
-            axis.text.x <span class="o">=</span> element_text<span class="p">(</span>size<span class="o">=</span><span class="m">13</span><span class="p">,</span>angle<span class="o">=</span><span class="m">0</span><span class="p">,</span>hjust<span class="o">=</span><span class="m">.5</span><span class="p">,</span> vjust<span class="o">=</span><span class="m">.5</span><span class="p">),</span>
-            axis.text.y <span class="o">=</span> element_text<span class="p">(</span>size<span class="o">=</span><span class="m">13</span><span class="p">))</span><span class="o">+</span> theme<span class="p">(</span>legend.position <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">0.93</span><span class="p">,</span> <span class="m">.85</span><span class="p">))</span>
-    <span class="p">}</span>
-    
-  <span class="kr">else</span> <span class="kr">if</span><span class="p">(</span><span class="o">!</span><span class="kp">is.na</span><span class="p">(</span><span class="kp">rank</span><span class="p">())</span> <span class="o">&amp;</span> myrows<span class="p">()</span><span class="o">&lt;</span> <span class="kp">rank</span><span class="p">()){</span>
-    
-    p<span class="o">&lt;-</span>ggplot<span class="p">(</span>data3<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span><span class="kp">as.numeric</span><span class="p">(</span>Deaths<span class="p">),</span> fill <span class="o">=</span> Type<span class="p">))</span> <span class="o">+</span> geom_density<span class="p">(</span>alpha <span class="o">=</span> <span class="m">0.5</span><span class="p">,</span>position<span class="o">=</span><span class="s">&quot;stack&quot;</span><span class="p">)</span>
-    
-    p<span class="o">+</span>ggtitle<span class="p">(</span><span class="s">&#39;Distribution of monthly hospital death\n rates in the US &#39;</span><span class="p">)</span><span class="o">+</span>xlab<span class="p">(</span><span class="s">&#39;Number of deaths&#39;</span><span class="p">)</span><span class="o">+</span>ylab<span class="p">(</span><span class="s">&#39;Density&#39;</span><span class="p">)</span><span class="o">+</span>
-      theme<span class="p">(</span>axis.title.y <span class="o">=</span> element_text<span class="p">(</span>size<span class="o">=</span><span class="m">12</span><span class="p">,</span>angle<span class="o">=</span><span class="m">90</span><span class="p">,</span>hjust<span class="o">=</span><span class="m">.5</span><span class="p">,</span>vjust<span class="o">=</span><span class="m">2</span><span class="p">),</span>
-            axis.title.x <span class="o">=</span> element_text<span class="p">(</span>size<span class="o">=</span><span class="m">12</span><span class="p">),</span>
-            plot.title <span class="o">=</span> element_text<span class="p">(</span>vjust<span class="o">=</span><span class="m">1.5</span><span class="p">,</span>size <span class="o">=</span> <span class="m">16</span><span class="p">,</span>colour<span class="o">=</span><span class="s">&quot;darkblue&quot;</span><span class="p">),</span>
-            axis.text.x <span class="o">=</span> element_text<span class="p">(</span>size<span class="o">=</span><span class="m">13</span><span class="p">,</span>angle<span class="o">=</span><span class="m">0</span><span class="p">,</span>hjust<span class="o">=</span><span class="m">.5</span><span class="p">,</span> vjust<span class="o">=</span><span class="m">.5</span><span class="p">),</span>
-            axis.text.y <span class="o">=</span> element_text<span class="p">(</span>size<span class="o">=</span><span class="m">13</span><span class="p">))</span><span class="o">+</span> theme<span class="p">(</span>legend.position <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">0.93</span><span class="p">,</span> <span class="m">.85</span><span class="p">))</span><span class="o">+</span>
-            annotate<span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span> label <span class="o">=</span> <span class="s">&quot;Out of range&quot;</span><span class="p">,</span> x <span class="o">=</span> <span class="m">15</span><span class="p">,</span> y <span class="o">=</span> <span class="m">0.45</span><span class="p">,</span> size <span class="o">=</span> <span class="m">5</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">)</span>
-  <span class="p">}</span>
-  
-   <span class="kr">else</span> <span class="kr">if</span><span class="p">(</span><span class="o">!</span><span class="kp">is.na</span><span class="p">(</span><span class="kp">rank</span><span class="p">())){</span>
-    
-      <span class="kr">if</span><span class="p">(</span>outcome<span class="p">()</span><span class="o">==</span><span class="s">&quot;heart attack&quot;</span><span class="p">){</span>
-    hist<span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>data<span class="p">[,</span> <span class="m">6</span><span class="p">]),</span>xlab<span class="o">=</span><span class="s">&quot;Deaths from heart attack&quot;</span><span class="p">,</span>
-         main <span class="o">=</span><span class="s">&quot;Nationwide 30-day death rates from heart attack\n</span>
-<span class="s">         and performance of selected hospital&quot;</span><span class="p">,</span>cex.lab<span class="o">=</span><span class="m">1</span><span class="p">,</span>cex.axis<span class="o">=</span><span class="m">1</span><span class="p">,</span>
-         col<span class="o">=</span><span class="kp">sample</span><span class="p">(</span>color<span class="p">,</span><span class="m">1</span><span class="p">,</span>replace<span class="o">=</span><span class="bp">T</span><span class="p">),</span>border<span class="o">=</span><span class="s">&#39;white&#39;</span><span class="p">,</span>cex.main<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
-      abline<span class="p">(</span>v<span class="o">=</span><span class="kp">as.numeric</span><span class="p">(</span>v_value<span class="p">()[</span><span class="m">6</span><span class="p">]),</span>col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span>lwd<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+    <span class="kr">if</span><span class="p">(</span>outcome<span class="p">()</span><span class="o">==</span><span class="s">&quot;heart attack&quot;</span><span class="p">){</span>
       
-      text<span class="p">(</span><span class="m">1.25</span><span class="o">*</span><span class="kp">mean</span><span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>data<span class="p">[,</span> <span class="m">6</span><span class="p">]),</span>na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span> <span class="m">600</span><span class="p">,</span> hosp<span class="p">(),</span> col <span class="o">=</span> <span class="s">&quot;#660066&quot;</span><span class="p">,</span>
+      hist<span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data<span class="p">[,</span> <span class="m">6</span><span class="p">]),</span>xlab<span class="o">=</span><span class="s">&quot;Deaths from heart attack&quot;</span><span class="p">,</span>
+           main <span class="o">=</span><span class="s">&quot;Nationwide 30-day death rates from heart attack\n</span>
+<span class="s">           and performance of selected hospital&quot;</span><span class="p">,</span>cex.lab<span class="o">=</span><span class="m">1</span><span class="p">,</span>cex.axis<span class="o">=</span><span class="m">1</span><span class="p">,</span>
+           col<span class="o">=</span><span class="kp">sample</span><span class="p">(</span>color<span class="p">,</span><span class="m">1</span><span class="p">,</span>replace<span class="o">=</span><span class="bp">T</span><span class="p">),</span>border<span class="o">=</span><span class="s">&#39;white&#39;</span><span class="p">,</span>cex.main<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
+      abline<span class="p">(</span>v<span class="o">=</span>deaths<span class="p">(),</span>col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span>lwd<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+      
+      text<span class="p">(</span><span class="m">1.25</span><span class="o">*</span><span class="kp">mean</span><span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data<span class="p">[,</span> <span class="m">6</span><span class="p">]),</span>na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span> <span class="m">600</span><span class="p">,</span> hospital<span class="p">(),</span> col <span class="o">=</span> <span class="s">&quot;#660066&quot;</span><span class="p">,</span>
            cex <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+      text<span class="p">(</span><span class="kp">mean</span><span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data<span class="p">[,</span> <span class="m">7</span><span class="p">]),</span>na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span> <span class="m">500</span><span class="p">,</span> <span class="kp">paste0</span><span class="p">(</span><span class="s">&quot;Rank in &quot;</span><span class="p">,</span>state<span class="p">(),</span><span class="s">&quot;: &quot;</span><span class="p">,</span> its_rank<span class="p">()),</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span>cex<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+      
     <span class="p">}</span>
-      
-  <span class="kr">else</span> <span class="kr">if</span><span class="p">(</span>outcome<span class="p">()</span><span class="o">==</span><span class="s">&quot;heart failure&quot;</span><span class="p">){</span>
-        hist<span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>data<span class="p">[,</span> <span class="m">7</span><span class="p">]),</span>xlab<span class="o">=</span><span class="s">&quot;Deaths from heart failure&quot;</span><span class="p">,</span>
-             main <span class="o">=</span><span class="s">&quot;Nationwide 30-day death rates from heart failure\n and performance of selected hospital&quot;</span><span class="p">,</span>cex.lab<span class="o">=</span><span class="m">1</span><span class="p">,</span>cex.axis<span class="o">=</span><span class="m">1</span><span class="p">,</span>
-             col<span class="o">=</span><span class="kp">sample</span><span class="p">(</span>color<span class="p">,</span><span class="m">1</span><span class="p">,</span>replace<span class="o">=</span><span class="bp">T</span><span class="p">),</span>border<span class="o">=</span><span class="s">&#39;white&#39;</span><span class="p">,</span>cex.main<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
-    abline<span class="p">(</span>v<span class="o">=</span><span class="kp">as.numeric</span><span class="p">(</span>v_value<span class="p">()[</span><span class="m">7</span><span class="p">]),</span>col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span>lwd<span class="o">=</span><span class="m">2</span><span class="p">)</span>
-    text<span class="p">(</span><span class="m">1.25</span><span class="o">*</span><span class="kp">mean</span><span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>data<span class="p">[,</span> <span class="m">7</span><span class="p">]),</span>na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span> <span class="m">600</span><span class="p">,</span> hosp<span class="p">(),</span> col <span class="o">=</span> <span class="s">&quot;#660066&quot;</span><span class="p">,</span>cex<span class="o">=</span><span class="m">1</span><span class="p">)</span>
-  <span class="p">}</span>
-     
     
-<span class="kr">else</span> <span class="kr">if</span><span class="p">(</span>outcome<span class="p">()</span><span class="o">==</span><span class="s">&quot;pneumonia&quot;</span><span class="p">){</span>
-  
-        hist<span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>data<span class="p">[,</span> <span class="m">8</span><span class="p">]),</span>xlab<span class="o">=</span><span class="s">&quot;Deaths from pneumonia&quot;</span><span class="p">,</span>
-    main <span class="o">=</span><span class="s">&quot;Nationwide 30-day death rates from pneumonia\n and performance of selected hospital&quot;</span><span class="p">,</span>cex.lab<span class="o">=</span><span class="m">1</span><span class="p">,</span>cex.axis<span class="o">=</span><span class="m">1</span><span class="p">,</span>
-    col<span class="o">=</span><span class="kp">sample</span><span class="p">(</span>color<span class="p">,</span><span class="m">1</span><span class="p">,</span>replace<span class="o">=</span><span class="bp">T</span><span class="p">),</span>border<span class="o">=</span><span class="s">&#39;white&#39;</span><span class="p">,</span>cex.main<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
-  abline<span class="p">(</span>v<span class="o">=</span><span class="kp">as.numeric</span><span class="p">(</span>v_value<span class="p">()[</span><span class="m">8</span><span class="p">]),</span>col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span>lwd<span class="o">=</span><span class="m">2</span><span class="p">)</span>
-  text<span class="p">(</span><span class="m">1.25</span><span class="o">*</span><span class="kp">mean</span><span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>data<span class="p">[,</span> <span class="m">8</span><span class="p">]),</span>na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span> <span class="m">500</span><span class="p">,</span> hosp<span class="p">(),</span> col <span class="o">=</span> <span class="s">&quot;#660066&quot;</span><span class="p">,</span>cex<span class="o">=</span><span class="m">1</span><span class="p">)</span>
-      <span class="p">}</span>
+    <span class="kr">else</span> <span class="kr">if</span><span class="p">(</span>outcome<span class="p">()</span><span class="o">==</span><span class="s">&quot;heart failure&quot;</span><span class="p">){</span>
       
+      hist<span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data<span class="p">[,</span> <span class="m">7</span><span class="p">]),</span>xlab<span class="o">=</span><span class="s">&quot;Deaths from heart failure&quot;</span><span class="p">,</span>
+           main <span class="o">=</span><span class="s">&quot;Nationwide 30-day death rates from heart failure\n and performance of selected hospital&quot;</span><span class="p">,</span>cex.lab<span class="o">=</span><span class="m">1</span><span class="p">,</span>cex.axis<span class="o">=</span><span class="m">1</span><span class="p">,</span>
+           col<span class="o">=</span><span class="kp">sample</span><span class="p">(</span>color<span class="p">,</span><span class="m">1</span><span class="p">,</span>replace<span class="o">=</span><span class="bp">T</span><span class="p">),</span>border<span class="o">=</span><span class="s">&#39;white&#39;</span><span class="p">,</span>cex.main<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
+      abline<span class="p">(</span>v<span class="o">=</span>deaths<span class="p">(),</span>col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span>lwd<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+      text<span class="p">(</span><span class="m">1.25</span><span class="o">*</span><span class="kp">mean</span><span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data<span class="p">[,</span> <span class="m">7</span><span class="p">]),</span>na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span> <span class="m">600</span><span class="p">,</span> hospital<span class="p">(),</span> col <span class="o">=</span> <span class="s">&quot;#660066&quot;</span><span class="p">,</span>cex<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+      text<span class="p">(</span><span class="m">1.5</span><span class="o">*</span><span class="kp">mean</span><span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data<span class="p">[,</span> <span class="m">7</span><span class="p">]),</span>na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span> <span class="m">500</span><span class="p">,</span> <span class="kp">paste0</span><span class="p">(</span><span class="s">&quot;Rank in &quot;</span><span class="p">,</span>state<span class="p">(),</span><span class="s">&quot;: &quot;</span><span class="p">,</span> its_rank<span class="p">()),</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span>cex<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+      
+    <span class="p">}</span>
+    
+    
+    <span class="kr">else</span> <span class="kr">if</span><span class="p">(</span>outcome<span class="p">()</span><span class="o">==</span><span class="s">&quot;pneumonia&quot;</span><span class="p">){</span>
+      
+      hist<span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data<span class="p">[,</span> <span class="m">8</span><span class="p">]),</span>xlab<span class="o">=</span><span class="s">&quot;Deaths from pneumonia&quot;</span><span class="p">,</span>
+           main <span class="o">=</span><span class="s">&quot;Nationwide 30-day death rates from pneumonia\n and performance of selected hospital&quot;</span><span class="p">,</span>cex.lab<span class="o">=</span><span class="m">1</span><span class="p">,</span>cex.axis<span class="o">=</span><span class="m">1</span><span class="p">,</span>
+           col<span class="o">=</span><span class="kp">sample</span><span class="p">(</span>color<span class="p">,</span><span class="m">1</span><span class="p">,</span>replace<span class="o">=</span><span class="bp">T</span><span class="p">),</span>border<span class="o">=</span><span class="s">&#39;white&#39;</span><span class="p">,</span>cex.main<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
+      abline<span class="p">(</span>v<span class="o">=</span>deaths<span class="p">(),</span>col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span>lwd<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+      text<span class="p">(</span><span class="m">1.25</span><span class="o">*</span><span class="kp">mean</span><span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data<span class="p">[,</span> <span class="m">8</span><span class="p">]),</span>na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span> <span class="m">500</span><span class="p">,</span> hospital<span class="p">(),</span> col <span class="o">=</span> <span class="s">&quot;#660066&quot;</span><span class="p">,</span>cex<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+      
+      text<span class="p">(</span><span class="m">1.5</span><span class="o">*</span><span class="kp">mean</span><span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data<span class="p">[,</span> <span class="m">7</span><span class="p">]),</span>na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span> <span class="m">400</span><span class="p">,</span> <span class="kp">paste0</span><span class="p">(</span><span class="s">&quot;Rank in &quot;</span><span class="p">,</span>state<span class="p">(),</span><span class="s">&quot;: &quot;</span><span class="p">,</span> its_rank<span class="p">()),</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span>cex<span class="o">=</span><span class="m">1</span><span class="p">)</span>
       
     <span class="p">}</span>
   <span class="p">})</span>
-  
 <span class="p">})</span>
 </pre></div>
 
