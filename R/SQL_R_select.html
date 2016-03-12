@@ -254,10 +254,13 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Currently, I am working with the <a href="http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm"  target="_blank">FDA adverse events data</a>. These data sets are ideal for a data scientist or for any data enthusiast to work with because they contain almost any kind of data messiness: missing values, duplicates, compatibility problems of data sets created during different time periods, variable names and number of variables changing over time (e.g., sex in one dataset, gender in other dataset, if_cod in one dataset and if_code in other dataset, etc.), among others.</p>
+<p>Currently, I am working with the <a href="http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm"  target="_blank">FDA adverse events data</a>. These data sets are ideal for a data scientist or for any data enthusiast to work with because 
+they contain almost any kind of data messiness: missing values, duplicates, compatibility problems of data sets created during different time periods, 
+variable names and number of variables changing over time (e.g., sex in one dataset, gender in other dataset, if_cod in one dataset and if_code in other dataset), missing errors, etc.</p>
 <p>In this post, we will use FDA adverse events data, which are publically available.</p>
 <p>The FDA adverse events datasets can also be downloaded in csv format from the <a href="http://www.nber.org/data/fda-adverse-event-reporting-system-faers-data.html"  target="_blank">National Bureau of Economic Research</a>. Since, it is easier to automate the data download in R from the National Bureau of Economic Research, in this post, we will download various datasets from this website. I encourage you to try the <strong>R</strong> codes and download data from the website and explore the adverse events datasets.</p>
-<p>The adverse events datasets are created in quarterly temporal resolution and each quarter data includes demography information, drug/biologic information, adverse event, outcome and diagnosis, etc.</p>
+<p>The adverse events datasets are created in quarterly temporal resolution and each quarter data includes demography information, drug/biologic information, adverse event,
+ outcome and diagnosis, etc.</p>
 <p>Let's download some datasets and use SQL queries to join, sort and fiter the various data frames.</p>
 
 </div>
