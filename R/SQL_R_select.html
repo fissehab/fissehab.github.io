@@ -52,8 +52,10 @@
 .highlight .err { border: 1px solid #FF0000 } /* Error */
 .highlight .k { color: #008000; font-weight: bold } /* Keyword */
 .highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
 .highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
 .highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
 .highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
 .highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
 .highlight .gd { color: #A00000 } /* Generic.Deleted */
@@ -166,18 +168,25 @@ div#notebook {
     </script>
     <!-- End of mathjax configuration -->
 	
-		<title>Fisseha Berhane</title>
-     <link rel="stylesheet" type="text/css" href="../style5_new.css">
 	
-	</head>
-  
-<body>
+	
+	
+	
+		<style>
+div.prompt {display:none}
+</style>
+
+	
+	<title>Fisseha Berhane</title>
+    <link rel="stylesheet" type="text/css" href="../style3.css">
+  </head>
+  <body>
   
  <nav id="nav01"></nav>
  
     <header class="myheader">
        
-      <h1>Fisseha Berhane,<span class="phd">  PhD</span> </h1>
+        <h1>Fisseha Berhane,<span class="phd">  PhD</span> </h1>
    	  <h4>Data Scientist at <a class="myjhu" style="color:blue;text-decoration:none" 
 	  href="http://aurotechcorp.com/"  target="_blank">Aurotech</a> </h4>
             
@@ -213,1086 +222,2019 @@ div#notebook {
     </nav>
 	
 	</head>
- <main>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
 
+
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3  style="color:blue; text-align:center",  id="Performing-SQL-selects-on--R-data-frames">Performing SQL selects on <em style="color:red"> R</em> data frames<a class="anchor-link" href="#Performing-SQL-selects-on--R-data-frames">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For anyone who has SQL background and who wants to learn <strong>R</strong>, I guess the <strong>sqldf</strong> package is very useful because it enables us to use SQL commands in <strong>R</strong>. One who has basic SQL skills can manipulate data frames in R using their SQL skills.</p>
+<p>You can read more about <strong>sqldf</strong> package from <a href="https://cran.r-project.org/web/packages/sqldf/sqldf.pdf">cran</a>.</p>
+<p>In this post, we will see how to peform <strong>joins</strong> and other queries to retrieve, sort and filter data in <strong>R</strong> using <strong>SQL</strong>. We will also see how we can achieve the same tasks using non-SQL R commnads.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Currently, I am working with the <a href="http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm">FDA adverse events data</a>. These data sets are ideal for a data scientist or for any data enthusiast to work with because they contain almost any kind of data messiness: missing values, duplicates, compatibility problems of data sets created during different time periods, variable names and number of variables changing over time (e.g., sex in one dataset, gender in other dataset, if_cod in one dataset and if_code in other dataset, etc.), among others.</p>
+<p>In this post, we will use FDA adverse events data, which are publically available.</p>
+<p>The FDA adverse events datasets can also be downloaded in csv format from the <a href="http://www.nber.org/data/fda-adverse-event-reporting-system-faers-data.html">National Bureau of Economic Research</a>. Since, it is easier to automate the data download in R from the National Bureau of Economic Research, in this post, we will download various datasets from this website. I encourage you to try the <strong>R</strong> codes and download data from the website and explore the adverse events datasets.</p>
+<p>The adverse events datasets are created in quarterly temporal resolution and each quarter data includes demography information, drug/biologic information, adverse event, outcome and diagnosis, etc.</p>
+<p>Let's download some datasets and use SQL queries to join, sort and fiter the various data frames.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Load-R-Packages">Load R Packages<a class="anchor-link" href="#Load-R-Packages">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[145]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="kn">require</span><span class="p">(</span>downloader<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>dplyr<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>sqldf<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>data.table<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>compare<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>plotrix<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Basic-error-Handing-with-tryCatch()">Basic error Handing with tryCatch()<a class="anchor-link" href="#Basic-error-Handing-with-tryCatch()">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We will use the function below to download data. Since the data sets have quarterly time resolution, there are four data sets per year for each observation. So, the function below will automate the data dowlnoad. If the quartely data is not available on the website (not yet released), the function will give an error message that the dataset was not found.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>We are downloading zipped data and unzipping it.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>try.error <span class="o">=</span> <span class="kr">function</span><span class="p">(</span><span class="kp">url</span><span class="p">)</span>
+
+<span class="p">{</span>
+  try_error <span class="o">=</span> <span class="kp">tryCatch</span><span class="p">(</span>download<span class="p">(</span><span class="kp">url</span><span class="p">,</span>dest<span class="o">=</span><span class="s">&quot;data.zip&quot;</span><span class="p">),</span> error<span class="o">=</span><span class="kr">function</span><span class="p">(</span>e<span class="p">)</span> e<span class="p">)</span>
+
+  <span class="kr">if</span> <span class="p">(</span><span class="o">!</span><span class="kp">inherits</span><span class="p">(</span>try_error<span class="p">,</span> <span class="s">&quot;error&quot;</span><span class="p">)){</span>
+
+      download<span class="p">(</span><span class="kp">url</span><span class="p">,</span>dest<span class="o">=</span><span class="s">&quot;data.zip&quot;</span><span class="p">)</span>
+        unzip <span class="p">(</span><span class="s">&quot;data.zip&quot;</span><span class="p">)</span>
+      <span class="p">}</span>
+      
+    <span class="kr">else</span> <span class="kr">if</span> <span class="p">(</span><span class="kp">inherits</span><span class="p">(</span>try_error<span class="p">,</span> <span class="s">&quot;error&quot;</span><span class="p">)){</span>
+
+    <span class="kp">cat</span><span class="p">(</span><span class="kp">url</span><span class="p">,</span><span class="s">&quot;not found\n&quot;</span><span class="p">)</span>
+      <span class="p">}</span>
+      <span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Download-adverse-events-data">Download adverse events data<a class="anchor-link" href="#Download-adverse-events-data">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The FDA adverse events data is available since 2004. In this post, let's download data since 2013. We will check if there are data upto the present time and download what we can get.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><em style="color:red"> Sys.time()</em> gives the current date and time</li>
+<li>the function <em style="color:blue">year()</em> from the <strong>data.table</strong> package gets the year from the current date and time data that we obtain from the Sys.time() function</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>we are downloading demography, drug, diagnosis/indication, outcome and reaction (adeverse event) data.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>year_start<span class="o">=</span><span class="m">2013</span>
+year_last<span class="o">=</span>year<span class="p">(</span><span class="kp">Sys.time</span><span class="p">())</span>
+
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> year_start<span class="o">:</span>year_last<span class="p">){</span>
+            j<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)</span>
+            
+            <span class="kr">for</span> <span class="p">(</span>m <span class="kr">in</span> j<span class="p">){</span>
+            
+            url1<span class="o">&lt;-</span><span class="kp">paste0</span><span class="p">(</span><span class="s">&quot;http://www.nber.org/fda/faers/&quot;</span><span class="p">,</span>i<span class="p">,</span><span class="s">&quot;/demo&quot;</span><span class="p">,</span>i<span class="p">,</span><span class="s">&quot;q&quot;</span><span class="p">,</span>m<span class="p">,</span><span class="s">&quot;.csv.zip&quot;</span><span class="p">)</span>
+            url2<span class="o">&lt;-</span><span class="kp">paste0</span><span class="p">(</span><span class="s">&quot;http://www.nber.org/fda/faers/&quot;</span><span class="p">,</span>i<span class="p">,</span><span class="s">&quot;/drug&quot;</span><span class="p">,</span>i<span class="p">,</span><span class="s">&quot;q&quot;</span><span class="p">,</span>m<span class="p">,</span><span class="s">&quot;.csv.zip&quot;</span><span class="p">)</span>
+            url3<span class="o">&lt;-</span><span class="kp">paste0</span><span class="p">(</span><span class="s">&quot;http://www.nber.org/fda/faers/&quot;</span><span class="p">,</span>i<span class="p">,</span><span class="s">&quot;/reac&quot;</span><span class="p">,</span>i<span class="p">,</span><span class="s">&quot;q&quot;</span><span class="p">,</span>m<span class="p">,</span><span class="s">&quot;.csv.zip&quot;</span><span class="p">)</span>
+            url4<span class="o">&lt;-</span><span class="kp">paste0</span><span class="p">(</span><span class="s">&quot;http://www.nber.org/fda/faers/&quot;</span><span class="p">,</span>i<span class="p">,</span><span class="s">&quot;/outc&quot;</span><span class="p">,</span>i<span class="p">,</span><span class="s">&quot;q&quot;</span><span class="p">,</span>m<span class="p">,</span><span class="s">&quot;.csv.zip&quot;</span><span class="p">)</span>
+            url5<span class="o">&lt;-</span><span class="kp">paste0</span><span class="p">(</span><span class="s">&quot;http://www.nber.org/fda/faers/&quot;</span><span class="p">,</span>i<span class="p">,</span><span class="s">&quot;/indi&quot;</span><span class="p">,</span>i<span class="p">,</span><span class="s">&quot;q&quot;</span><span class="p">,</span>m<span class="p">,</span><span class="s">&quot;.csv.zip&quot;</span><span class="p">)</span>
+     
+           try.error<span class="p">(</span>url1<span class="p">)</span>
+           try.error<span class="p">(</span>url2<span class="p">)</span>
+           try.error<span class="p">(</span>url3<span class="p">)</span>
+           try.error<span class="p">(</span>url4<span class="p">)</span>
+           try.error<span class="p">(</span>url5<span class="p">)</span>     
+            <span class="p">}</span>
+        <span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>http://www.nber.org/fda/faers/2015/demo2015q4.csv.zip not found
+http://www.nber.org/fda/faers/2015/drug2015q4.csv.zip not found
+http://www.nber.org/fda/faers/2015/reac2015q4.csv.zip not found
+http://www.nber.org/fda/faers/2015/outc2015q4.csv.zip not found
+http://www.nber.org/fda/faers/2015/indi2015q4.csv.zip not found
+http://www.nber.org/fda/faers/2016/demo2016q1.csv.zip not found
+http://www.nber.org/fda/faers/2016/drug2016q1.csv.zip not found
+http://www.nber.org/fda/faers/2016/reac2016q1.csv.zip not found
+http://www.nber.org/fda/faers/2016/outc2016q1.csv.zip not found
+http://www.nber.org/fda/faers/2016/indi2016q1.csv.zip not found
+http://www.nber.org/fda/faers/2016/demo2016q2.csv.zip not found
+http://www.nber.org/fda/faers/2016/drug2016q2.csv.zip not found
+http://www.nber.org/fda/faers/2016/reac2016q2.csv.zip not found
+http://www.nber.org/fda/faers/2016/outc2016q2.csv.zip not found
+http://www.nber.org/fda/faers/2016/indi2016q2.csv.zip not found
+http://www.nber.org/fda/faers/2016/demo2016q3.csv.zip not found
+http://www.nber.org/fda/faers/2016/drug2016q3.csv.zip not found
+http://www.nber.org/fda/faers/2016/reac2016q3.csv.zip not found
+http://www.nber.org/fda/faers/2016/outc2016q3.csv.zip not found
+http://www.nber.org/fda/faers/2016/indi2016q3.csv.zip not found
+http://www.nber.org/fda/faers/2016/demo2016q4.csv.zip not found
+http://www.nber.org/fda/faers/2016/drug2016q4.csv.zip not found
+http://www.nber.org/fda/faers/2016/reac2016q4.csv.zip not found
+http://www.nber.org/fda/faers/2016/outc2016q4.csv.zip not found
+http://www.nber.org/fda/faers/2016/indi2016q4.csv.zip not found
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em style="color:red">From the error messages shown above, in the time of writing this post, we see that the database has adverse events data up to the third quarter of 2015.</em></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><strong>list.files() </strong> produce a character vector of the names of files in my working directory</li>
+<li>I am using regular expressions to select each categoy of dateset. Example, <strong>^demo.*.csv</strong> means all files that start with the word <strong>demo</strong> and end with <strong>.csv</strong>.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>filenames <span class="o">&lt;-</span> <span class="kp">list.files</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^demo.*.csv&quot;</span><span class="p">,</span> full.names<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="kp">cat</span><span class="p">(</span><span class="s">&#39;We have downloaded the following quarterly demography datasets&#39;</span><span class="p">)</span>
+filenames
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>We have downloaded the following quarterly demography datasets</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[18]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<ol class=list-inline>
+	<li>"./demo2012q1.csv"</li>
+	<li>"./demo2012q2.csv"</li>
+	<li>"./demo2012q3.csv"</li>
+	<li>"./demo2012q4.csv"</li>
+	<li>"./demo2013q1.csv"</li>
+	<li>"./demo2013q2.csv"</li>
+	<li>"./demo2013q3.csv"</li>
+	<li>"./demo2013q4.csv"</li>
+	<li>"./demo2014q1.csv"</li>
+	<li>"./demo2014q2.csv"</li>
+	<li>"./demo2014q3.csv"</li>
+	<li>"./demo2014q4.csv"</li>
+	<li>"./demo2015q1.csv"</li>
+	<li>"./demo2015q2.csv"</li>
+	<li>"./demo2015q3.csv"</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Now let's use <strong>fread function</strong> from the <strong>data.table</strong> Package and let's suppress any warnings to make our page pretty.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="kp">options</span><span class="p">(</span>warn<span class="o">=</span><span class="m">-1</span><span class="p">)</span> <span class="c1"># Disable any warnings for this session</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>In the line below, we are using <strong>fread</strong> to read all demography files uing <strong>lapply</strong> function.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>demo<span class="o">=</span><span class="kp">lapply</span><span class="p">(</span>filenames<span class="p">,</span>fread<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, let's change them to data frames and concatenate them to create one demography data</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>demo_all<span class="o">=</span><span class="kp">do.call</span><span class="p">(</span><span class="kp">rbind</span><span class="p">,</span><span class="kp">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>demo<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">)</span> select<span class="p">(</span><span class="kp">as.data.frame</span><span class="p">(</span>demo<span class="p">[</span>i<span class="p">]),</span>primaryid<span class="p">,</span>caseid<span class="p">,</span> age<span class="p">,</span>age_cod<span class="p">,</span>event_dt<span class="p">,</span>sex<span class="p">,</span>reporter_country<span class="p">)))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="kp">dim</span><span class="p">(</span>demo_all<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<ol class=list-inline>
+	<li>3554979</li>
+	<li>7</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>We see that our demography data has more than 3.5 million rows.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's see the variable names:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="kp">names</span><span class="p">(</span>demo_all<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[10]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<ol class=list-inline>
+	<li>"primaryid"</li>
+	<li>"caseid"</li>
+	<li>"age"</li>
+	<li>"age_cod"</li>
+	<li>"event_dt"</li>
+	<li>"sex"</li>
+	<li>"reporter_country"</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Now,-lets'-merge-all-drug-files">Now, lets' merge all drug files<a class="anchor-link" href="#Now,-lets'-merge-all-drug-files">&#182;</a></h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>filenames <span class="o">&lt;-</span> <span class="kp">list.files</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^drug.*.csv&quot;</span><span class="p">,</span> full.names<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="kp">cat</span><span class="p">(</span><span class="s">&#39;We have downloaded the following quarterly drug datasets:\n&#39;</span><span class="p">)</span>
+filenames
+
+drug<span class="o">=</span><span class="kp">lapply</span><span class="p">(</span>filenames<span class="p">,</span>fread<span class="p">)</span>
+
+<span class="kp">cat</span><span class="p">(</span><span class="s">&#39;\n&#39;</span><span class="p">)</span>
+<span class="kp">cat</span><span class="p">(</span><span class="s">&#39;Variable names:\n&#39;</span><span class="p">)</span>
+<span class="kp">names</span><span class="p">(</span>drug<span class="p">[[</span><span class="m">1</span><span class="p">]])</span>
+
+drug_all<span class="o">=</span><span class="kp">do.call</span><span class="p">(</span><span class="kp">rbind</span><span class="p">,</span><span class="kp">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>drug<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">)</span> select<span class="p">(</span><span class="kp">as.data.frame</span><span class="p">(</span>drug<span class="p">[</span>i<span class="p">]),</span>primaryid<span class="p">,</span>caseid<span class="p">,</span> drug_seq<span class="p">,</span>drugname<span class="p">,</span>route<span class="p">)))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>We have downloaded the following quarterly drug datasets:
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[21]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<ol class=list-inline>
+	<li>"./drug2012q1.csv"</li>
+	<li>"./drug2012q2.csv"</li>
+	<li>"./drug2012q3.csv"</li>
+	<li>"./drug2012q4.csv"</li>
+	<li>"./drug2013q1.csv"</li>
+	<li>"./drug2013q2.csv"</li>
+	<li>"./drug2013q3.csv"</li>
+	<li>"./drug2013q4.csv"</li>
+	<li>"./drug2014q1.csv"</li>
+	<li>"./drug2014q2.csv"</li>
+	<li>"./drug2014q3.csv"</li>
+	<li>"./drug2014q4.csv"</li>
+	<li>"./drug2015q1.csv"</li>
+	<li>"./drug2015q2.csv"</li>
+	<li>"./drug2015q3.csv"</li>
+</ol>
+
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+
+Variable names:
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[21]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<ol class=list-inline>
+	<li>"primaryid"</li>
+	<li>"drug_seq"</li>
+	<li>"role_cod"</li>
+	<li>"drugname"</li>
+	<li>"val_vbm"</li>
+	<li>"route"</li>
+	<li>"dose_vbm"</li>
+	<li>"dechal"</li>
+	<li>"rechal"</li>
+	<li>"lot_num"</li>
+	<li>"exp_dt"</li>
+	<li>"exp_dt_num"</li>
+	<li>"nda_num"</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Merge-all-diagnoses/indications-datasets">Merge all diagnoses/indications datasets<a class="anchor-link" href="#Merge-all-diagnoses/indications-datasets">&#182;</a></h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>filenames <span class="o">&lt;-</span> <span class="kp">list.files</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^indi.*.csv&quot;</span><span class="p">,</span> full.names<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+
+
+<span class="kp">cat</span><span class="p">(</span><span class="s">&#39;We have downloaded the following quarterly diagnoses/indications datasets:\n&#39;</span><span class="p">)</span>
+
+filenames
+
+indi<span class="o">=</span><span class="kp">lapply</span><span class="p">(</span>filenames<span class="p">,</span>fread<span class="p">)</span>
+
+<span class="kp">cat</span><span class="p">(</span><span class="s">&#39;\n&#39;</span><span class="p">)</span>
+<span class="kp">cat</span><span class="p">(</span><span class="s">&#39;Variable names:\n&#39;</span><span class="p">)</span>
+
+<span class="kp">names</span><span class="p">(</span>indi<span class="p">[[</span><span class="m">15</span><span class="p">]])</span>
+
+indi_all<span class="o">=</span><span class="kp">do.call</span><span class="p">(</span><span class="kp">rbind</span><span class="p">,</span><span class="kp">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>indi<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">)</span> select<span class="p">(</span><span class="kp">as.data.frame</span><span class="p">(</span>indi<span class="p">[</span>i<span class="p">]),</span>primaryid<span class="p">,</span>caseid<span class="p">,</span> indi_drug_seq<span class="p">,</span>indi_pt<span class="p">)))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>We have downloaded the following quarterly diagnoses/indications datasets:
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[22]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<ol class=list-inline>
+	<li>"./indi2012q1.csv"</li>
+	<li>"./indi2012q2.csv"</li>
+	<li>"./indi2012q3.csv"</li>
+	<li>"./indi2012q4.csv"</li>
+	<li>"./indi2013q1.csv"</li>
+	<li>"./indi2013q2.csv"</li>
+	<li>"./indi2013q3.csv"</li>
+	<li>"./indi2013q4.csv"</li>
+	<li>"./indi2014q1.csv"</li>
+	<li>"./indi2014q2.csv"</li>
+	<li>"./indi2014q3.csv"</li>
+	<li>"./indi2014q4.csv"</li>
+	<li>"./indi2015q1.csv"</li>
+	<li>"./indi2015q2.csv"</li>
+	<li>"./indi2015q3.csv"</li>
+</ol>
+
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+Variable names:
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[22]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<ol class=list-inline>
+	<li>"primaryid"</li>
+	<li>"caseid"</li>
+	<li>"indi_drug_seq"</li>
+	<li>"indi_pt"</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h6 id="Merge-patient-outcomes">Merge patient outcomes<a class="anchor-link" href="#Merge-patient-outcomes">&#182;</a></h6>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[137]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>filenames <span class="o">&lt;-</span> <span class="kp">list.files</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^outc.*.csv&quot;</span><span class="p">,</span> full.names<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+
+
+<span class="kp">cat</span><span class="p">(</span><span class="s">&#39;We have downloaded the following quarterly patient outcome datasets:\n&#39;</span><span class="p">)</span>
+
+
+filenames
+
+outc_all<span class="o">=</span><span class="kp">lapply</span><span class="p">(</span>filenames<span class="p">,</span>fread<span class="p">)</span>
+
+
+<span class="kp">cat</span><span class="p">(</span><span class="s">&#39;\n&#39;</span><span class="p">)</span>
+<span class="kp">cat</span><span class="p">(</span><span class="s">&#39;Variable names\n&#39;</span><span class="p">)</span>
+
+<span class="kp">names</span><span class="p">(</span>outc_all<span class="p">[[</span><span class="m">1</span><span class="p">]])</span>
+
+<span class="kp">names</span><span class="p">(</span>outc_all<span class="p">[[</span><span class="m">4</span><span class="p">]])</span>
+
+<span class="kp">colnames</span><span class="p">(</span>outc_all<span class="p">[[</span><span class="m">4</span><span class="p">]])</span><span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;primaryid&quot;</span><span class="p">,</span> <span class="s">&quot;caseid&quot;</span><span class="p">,</span> <span class="s">&quot;outc_cod&quot;</span><span class="p">)</span>
+outc_all<span class="o">=</span><span class="kp">do.call</span><span class="p">(</span><span class="kp">rbind</span><span class="p">,</span><span class="kp">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>outc_all<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">)</span> select<span class="p">(</span><span class="kp">as.data.frame</span><span class="p">(</span>outc_all<span class="p">[</span>i<span class="p">]),</span>primaryid<span class="p">,</span>outc_cod<span class="p">)))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>We have downloaded the following quarterly patient outcome datasets:
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[137]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<ol class=list-inline>
+	<li>"./outc2012q1.csv"</li>
+	<li>"./outc2012q2.csv"</li>
+	<li>"./outc2012q3.csv"</li>
+	<li>"./outc2012q4.csv"</li>
+	<li>"./outc2013q1.csv"</li>
+	<li>"./outc2013q2.csv"</li>
+	<li>"./outc2013q3.csv"</li>
+	<li>"./outc2013q4.csv"</li>
+	<li>"./outc2014q1.csv"</li>
+	<li>"./outc2014q2.csv"</li>
+	<li>"./outc2014q3.csv"</li>
+	<li>"./outc2014q4.csv"</li>
+	<li>"./outc2015q1.csv"</li>
+	<li>"./outc2015q2.csv"</li>
+	<li>"./outc2015q3.csv"</li>
+</ol>
+
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+Variable names
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[137]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<ol class=list-inline>
+	<li>"primaryid"</li>
+	<li>"outc_cod"</li>
+</ol>
+
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[137]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<ol class=list-inline>
+	<li>"primaryid"</li>
+	<li>"caseid"</li>
+	<li>"outc_code"</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h6 id="Finally,-merge-reaction-(adverse-event)-datasets">Finally, merge reaction (adverse event) datasets<a class="anchor-link" href="#Finally,-merge-reaction-(adverse-event)-datasets">&#182;</a></h6>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[142]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>filenames <span class="o">&lt;-</span> <span class="kp">list.files</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^reac.*.csv&quot;</span><span class="p">,</span> full.names<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+
+
+<span class="kp">cat</span><span class="p">(</span><span class="s">&#39;We have downloaded the following quarterly reaction (adverse event)  datasets:\n&#39;</span><span class="p">)</span>
+
+
+filenames
+
+reac<span class="o">=</span><span class="kp">lapply</span><span class="p">(</span>filenames<span class="p">,</span>fread<span class="p">)</span>
+
+<span class="kp">cat</span><span class="p">(</span><span class="s">&#39;\n&#39;</span><span class="p">)</span>
+<span class="kp">cat</span><span class="p">(</span><span class="s">&#39;Variable names:\n&#39;</span><span class="p">)</span>
+<span class="kp">names</span><span class="p">(</span>reac<span class="p">[[</span><span class="m">3</span><span class="p">]])</span>
+
+reac_all<span class="o">=</span><span class="kp">do.call</span><span class="p">(</span><span class="kp">rbind</span><span class="p">,</span><span class="kp">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>indi<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">)</span> select<span class="p">(</span><span class="kp">as.data.frame</span><span class="p">(</span>reac<span class="p">[</span>i<span class="p">]),</span>primaryid<span class="p">,</span>pt<span class="p">)))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>We have downloaded the following quarterly reaction (adverse event)  datasets:
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[142]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<ol class=list-inline>
+	<li>"./reac2012q1.csv"</li>
+	<li>"./reac2012q2.csv"</li>
+	<li>"./reac2012q3.csv"</li>
+	<li>"./reac2012q4.csv"</li>
+	<li>"./reac2013q1.csv"</li>
+	<li>"./reac2013q2.csv"</li>
+	<li>"./reac2013q3.csv"</li>
+	<li>"./reac2013q4.csv"</li>
+	<li>"./reac2014q1.csv"</li>
+	<li>"./reac2014q2.csv"</li>
+	<li>"./reac2014q3.csv"</li>
+	<li>"./reac2014q4.csv"</li>
+	<li>"./reac2015q1.csv"</li>
+	<li>"./reac2015q2.csv"</li>
+	<li>"./reac2015q3.csv"</li>
+</ol>
+
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+Variable names:
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[142]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<ol class=list-inline>
+	<li>"primaryid"</li>
+	<li>"pt"</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Let's-see-number-of-rows-from-each-data-type">Let's see number of rows from each data type<a class="anchor-link" href="#Let's-see-number-of-rows-from-each-data-type">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>all<span class="o">=</span><span class="kp">as.data.frame</span><span class="p">(</span><span class="kt">list</span><span class="p">(</span>Demography<span class="o">=</span><span class="kp">nrow</span><span class="p">(</span>demo_all<span class="p">),</span>Drug<span class="o">=</span><span class="kp">nrow</span><span class="p">(</span>drug_all<span class="p">),</span>
+                   Indications<span class="o">=</span><span class="kp">nrow</span><span class="p">(</span>indi_all<span class="p">),</span>Outcomes<span class="o">=</span><span class="kp">nrow</span><span class="p">(</span>outc_all<span class="p">),</span>
+                   Reactions<span class="o">=</span><span class="kp">nrow</span><span class="p">(</span>reac_all<span class="p">)))</span>
+
+<span class="kp">row.names</span><span class="p">(</span><span class="kp">all</span><span class="p">)</span><span class="o">=</span><span class="s">&#39;Number of rows&#39;</span>
+
+<span class="kp">all</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[25]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table>
+<thead><tr><th></th><th scope=col>Demography</th><th scope=col>Drug</th><th scope=col>Indications</th><th scope=col>Outcomes</th><th scope=col>Reactions</th></tr></thead>
+<tbody>
+	<tr><th scope=row>Number of rows</th><td>3554979</td><td>11674179</td><td>7232323</td><td>2658395</td><td>10962367</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><br/></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="SQL-queries">SQL queries<a class="anchor-link" href="#SQL-queries">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><em>Keep in mind that sqldf uses SQLite</em></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="COUNT">COUNT<a class="anchor-link" href="#COUNT">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="c1">#SQL</span>
+
+sqldf<span class="p">(</span><span class="s">&quot;SELECT COUNT(primaryid)as &#39;Number of rows of Demography data&#39;</span>
+<span class="s">FROM demo_all;&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[50]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table>
+<thead><tr><th></th><th scope=col>Number of rows of Demography data</th></tr></thead>
+<tbody>
+	<tr><th scope=row>1</th><td>3554979</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="c1"># R</span>
+
+<span class="kp">nrow</span><span class="p">(</span>demo_all<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[51]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+3554979
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><br/></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="LIMIT">LIMIT<a class="anchor-link" href="#LIMIT">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="c1">#  SQL</span>
+sqldf<span class="p">(</span><span class="s">&quot;SELECT *</span>
+<span class="s">FROM demo_all </span>
+<span class="s">LIMIT 6;&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[52]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table>
+<thead><tr><th></th><th scope=col>primaryid</th><th scope=col>caseid</th><th scope=col>age</th><th scope=col>age_cod</th><th scope=col>event_dt</th><th scope=col>sex</th><th scope=col>reporter_country</th></tr></thead>
+<tbody>
+	<tr><th scope=row>1</th><td>7805388</td><td>8586792</td><td>84</td><td>YR</td><td>20100622</td><td>F</td><td>UNITED STATES</td></tr>
+	<tr><th scope=row>2</th><td>7810716</td><td>8531413</td><td>65</td><td>YR</td><td>20110101</td><td>F</td><td>UNITED STATES</td></tr>
+	<tr><th scope=row>3</th><td>7811037</td><td>8191030</td><td>80</td><td>YR</td><td>20110101</td><td>M</td><td>BRAZIL</td></tr>
+	<tr><th scope=row>4</th><td>7817874</td><td>8170739</td><td>68</td><td>YR</td><td>20101002</td><td>M</td><td>FRANCE</td></tr>
+	<tr><th scope=row>5</th><td>7822357</td><td>8533342</td><td>4</td><td>YR</td><td>NA</td><td>M</td><td>UNITED KINGDOM</td></tr>
+	<tr><th scope=row>6</th><td>7831542</td><td>8536954</td><td>84</td><td>YR</td><td>NA</td><td>F</td><td>BRAZIL</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="c1">#R</span>
+
+<span class="kp">head</span><span class="p">(</span>demo_all<span class="p">,</span><span class="m">6</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[53]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table>
+<thead><tr><th></th><th scope=col>primaryid</th><th scope=col>caseid</th><th scope=col>age</th><th scope=col>age_cod</th><th scope=col>event_dt</th><th scope=col>sex</th><th scope=col>reporter_country</th></tr></thead>
+<tbody>
+	<tr><th scope=row>1</th><td>7805388</td><td>8586792</td><td>84</td><td>YR</td><td>20100622</td><td>F</td><td>UNITED STATES</td></tr>
+	<tr><th scope=row>2</th><td>7810716</td><td>8531413</td><td>65</td><td>YR</td><td>20110101</td><td>F</td><td>UNITED STATES</td></tr>
+	<tr><th scope=row>3</th><td>7811037</td><td>8191030</td><td>80</td><td>YR</td><td>20110101</td><td>M</td><td>BRAZIL</td></tr>
+	<tr><th scope=row>4</th><td>7817874</td><td>8170739</td><td>68</td><td>YR</td><td>20101002</td><td>M</td><td>FRANCE</td></tr>
+	<tr><th scope=row>5</th><td>7822357</td><td>8533342</td><td>4</td><td>YR</td><td>NA</td><td>M</td><td>UNITED KINGDOM</td></tr>
+	<tr><th scope=row>6</th><td>7831542</td><td>8536954</td><td>84</td><td>YR</td><td>NA</td><td>F</td><td>BRAZIL</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>R1<span class="o">=</span><span class="kp">head</span><span class="p">(</span>demo_all<span class="p">,</span><span class="m">6</span><span class="p">)</span>
+
+SQL1 <span class="o">=</span>sqldf<span class="p">(</span><span class="s">&quot;SELECT *</span>
+<span class="s">FROM demo_all </span>
+<span class="s">LIMIT 6;&quot;</span><span class="p">)</span>
+
+<span class="kp">all.equal</span><span class="p">(</span>R1<span class="p">,</span>SQL1<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[45]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+TRUE
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><br/></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Where">Where<a class="anchor-link" href="#Where">&#182;</a></h4>
+</div>
+</div>
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>SQL2<span class="o">=</span>sqldf<span class="p">(</span><span class="s">&quot;SELECT *</span>
+<span class="s">FROM demo_all WHERE sex =&#39;F&#39;;&quot;</span><span class="p">)</span>
+
+R2 <span class="o">=</span> filter<span class="p">(</span>demo_all<span class="p">,</span> sex<span class="o">==</span><span class="s">&quot;F&quot;</span><span class="p">)</span>
+
+
+<span class="kp">identical</span><span class="p">(</span>SQL2<span class="p">,</span> R2<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[68]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+TRUE
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><br/></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[96]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>SQL3<span class="o">=</span>sqldf<span class="p">(</span><span class="s">&quot;SELECT *</span>
+<span class="s">FROM demo_all WHERE age BETWEEN 20 AND 25;&quot;</span><span class="p">)</span>
+
+R3 <span class="o">=</span> filter<span class="p">(</span>demo_all<span class="p">,</span> age <span class="o">&gt;=</span> <span class="m">20</span> <span class="o">&amp;</span> age <span class="o">&lt;=</span> <span class="m">25</span><span class="p">)</span>
+
+<span class="kp">identical</span><span class="p">(</span>SQL3<span class="p">,</span> R3<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[96]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+TRUE
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+<div class="cell border-box-sizing code_cell rendered">
+
+
+
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><br/></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="GROUP-and-ORDER-BY">GROUP and ORDER BY<a class="anchor-link" href="#GROUP-and-ORDER-BY">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[102]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="c1">#SQL</span>
+
+sqldf<span class="p">(</span><span class="s">&quot;SELECT sex, COUNT(primaryid) as Total</span>
+<span class="s">FROM demo_all</span>
+<span class="s">WHERE sex IN (&#39;F&#39;,&#39;M&#39;,&#39;NS&#39;,&#39;UNK&#39;)</span>
+<span class="s">GROUP BY sex</span>
+<span class="s">ORDER BY Total DESC ;&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[102]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table>
+<thead><tr><th></th><th scope=col>sex</th><th scope=col>Total</th></tr></thead>
+<tbody>
+	<tr><th scope=row>1</th><td>F</td><td>1993938</td></tr>
+	<tr><th scope=row>2</th><td>M</td><td>1229345</td></tr>
+	<tr><th scope=row>3</th><td>NS</td><td>107342</td></tr>
+	<tr><th scope=row>4</th><td>UNK</td><td>1331</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[104]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="c1"># R</span>
+
+demo_all<span class="o">%&gt;%</span>filter<span class="p">(</span>sex <span class="o">%in%</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;F&#39;</span><span class="p">,</span><span class="s">&#39;M&#39;</span><span class="p">,</span><span class="s">&#39;NS&#39;</span><span class="p">,</span><span class="s">&#39;UNK&#39;</span><span class="p">))</span><span class="o">%&gt;%</span>group_by<span class="p">(</span>sex<span class="p">)</span> <span class="o">%&gt;%</span>
+        summarise<span class="p">(</span>Total <span class="o">=</span> n<span class="p">())</span><span class="o">%&gt;%</span>arrange<span class="p">(</span>desc<span class="p">(</span>Total<span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[104]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table>
+<thead><tr><th></th><th scope=col>sex</th><th scope=col>Total</th></tr></thead>
+<tbody>
+	<tr><th scope=row>1</th><td>F</td><td>1993938</td></tr>
+	<tr><th scope=row>2</th><td>M</td><td>1229345</td></tr>
+	<tr><th scope=row>3</th><td>NS</td><td>107342</td></tr>
+	<tr><th scope=row>4</th><td>UNK</td><td>1331</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>SQL3 <span class="o">=</span> sqldf<span class="p">(</span><span class="s">&quot;SELECT sex, COUNT(primaryid) as Total</span>
+<span class="s">FROM demo_all</span>
+<span class="s">GROUP BY sex</span>
+<span class="s">ORDER BY Total DESC ;&quot;</span><span class="p">)</span>
+
+R3 <span class="o">=</span> demo_all<span class="o">%&gt;%</span>group_by<span class="p">(</span>sex<span class="p">)</span> <span class="o">%&gt;%</span>
+        summarise<span class="p">(</span>Total <span class="o">=</span> n<span class="p">())</span><span class="o">%&gt;%</span>arrange<span class="p">(</span>desc<span class="p">(</span>Total<span class="p">))</span>
+
+compare<span class="p">(</span>SQL3<span class="p">,</span>R3<span class="p">,</span> allowAll<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[48]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>TRUE
+  dropped attributes</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[146]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>SQL<span class="o">=</span>sqldf<span class="p">(</span><span class="s">&quot;SELECT sex, COUNT(primaryid) as Total</span>
+<span class="s">FROM demo_all</span>
+<span class="s">WHERE sex IN (&#39;F&#39;,&#39;M&#39;,&#39;NS&#39;,&#39;UNK&#39;)</span>
+<span class="s">GROUP BY sex</span>
+<span class="s">ORDER BY Total DESC ;&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[147]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>SQL<span class="o">$</span>Total<span class="o">=</span><span class="kp">as.numeric</span><span class="p">(</span>SQL<span class="o">$</span>Total<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[153]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>pie3D<span class="p">(</span>SQL<span class="o">$</span>Total<span class="p">,</span> labels <span class="o">=</span> SQL<span class="o">$</span>sex<span class="p">,</span>explode<span class="o">=</span><span class="m">0.1</span><span class="p">,</span>col<span class="o">=</span>rainbow<span class="p">(</span><span class="m">4</span><span class="p">),</span>
+   main<span class="o">=</span><span class="s">&quot;Percentage by Gender (with sample sizes)&quot;</span><span class="p">,</span>cex.lab<span class="o">=</span><span class="m">0.5</span><span class="p">,</span> cex.axis<span class="o">=</span><span class="m">0.5</span><span class="p">,</span> cex.main<span class="o">=</span><span class="m">1</span><span class="p">,</span>labelcex<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><br/></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Inner-Join">Inner Join<a class="anchor-link" href="#Inner-Join">&#182;</a></h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h6 id="Let's-join-drug-data-and-indication-data-based-on-primary-id-and-drug-sequence">Let's join drug data and indication data based on primary id and drug sequence<a class="anchor-link" href="#Let's-join-drug-data-and-indication-data-based-on-primary-id-and-drug-sequence">&#182;</a></h6>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First, let's check the variable names to see how to merge the two datasets.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="kp">names</span><span class="p">(</span>indi_all<span class="p">)</span>
+<span class="kp">names</span><span class="p">(</span>drug_all<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[58]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<ol class=list-inline>
+	<li>"primaryid"</li>
+	<li>"indi_drug_seq"</li>
+	<li>"indi_pt"</li>
+</ol>
+
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[58]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<ol class=list-inline>
+	<li>"primaryid"</li>
+	<li>"drug_seq"</li>
+	<li>"drugname"</li>
+	<li>"route"</li>
+</ol>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="kp">names</span><span class="p">(</span>indi_all<span class="p">)</span><span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;primaryid&quot;</span><span class="p">,</span> <span class="s">&quot;drug_seq&quot;</span><span class="p">,</span> <span class="s">&quot;indi_pt&quot;</span> <span class="p">)</span> <span class="c1"># so as to have the same name (drug_seq)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Inner-join">Inner join<a class="anchor-link" href="#Inner-join">&#182;</a></h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>R4<span class="o">=</span> <span class="kp">merge</span><span class="p">(</span>drug_all<span class="p">,</span>indi_all<span class="p">,</span> by <span class="o">=</span> <span class="kp">intersect</span><span class="p">(</span><span class="kp">names</span><span class="p">(</span>drug_all<span class="p">),</span> <span class="kp">names</span><span class="p">(</span>indi_all<span class="p">)))</span>
+
+R4<span class="o">=</span>arrange<span class="p">(</span>R3<span class="p">,</span> primaryid<span class="p">,</span>drug_seq<span class="p">,</span>drugname<span class="p">,</span>indi_pt<span class="p">)</span>
+
+
+SQL4<span class="o">=</span> sqldf<span class="p">(</span><span class="s">&quot;SELECT d.primaryid as primaryid, d.drug_seq as drug_seq, d.drugname as drugname,</span>
+<span class="s">                       d.route as route,i.indi_pt as indi_pt</span>
+<span class="s">                       FROM drug_all d</span>
+<span class="s">                       INNER JOIN indi_all i</span>
+<span class="s">                      ON d.primaryid= i.primaryid AND d.drug_seq=i.drug_seq</span>
+<span class="s">                      ORDER BY primaryid,drug_seq,drugname, i.indi_pt&quot;</span><span class="p">)</span>
+
+
+compare<span class="p">(</span>R4<span class="p">,</span>SQL4<span class="p">,</span>allowAll<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[64]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>TRUE
+  sorted
+  renamed rows
+  dropped row names</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[139]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>R5 <span class="o">=</span> <span class="kp">merge</span><span class="p">(</span>reac_all<span class="p">,</span>outc_all<span class="p">,</span>by<span class="o">=</span><span class="kp">intersect</span><span class="p">(</span><span class="kp">names</span><span class="p">(</span>reac_all<span class="p">),</span> <span class="kp">names</span><span class="p">(</span>outc_all<span class="p">)))</span>
+
+
+
+SQL5 <span class="o">=</span>reac_outc_new4<span class="o">=</span>sqldf<span class="p">(</span><span class="s">&quot;SELECT r.*, o.outc_cod as outc_cod</span>
+<span class="s">                     FROM reac_all r </span>
+<span class="s">                     INNER JOIN outc_all o</span>
+<span class="s">                     ON r.primaryid=o.primaryid</span>
+<span class="s">                     ORDER BY r.primaryid,r.pt,o.outc_cod&quot;</span><span class="p">)</span>
+
+
+compare<span class="p">(</span>R5<span class="p">,</span>SQL5<span class="p">,</span>allowAll <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>  <span class="c1">#TRUE</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[139]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>TRUE
+  sorted
+  renamed rows
+  dropped row names</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><br/></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><br/></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[187]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>ggplot<span class="p">(</span>sqldf<span class="p">(</span><span class="s">&#39;SELECT age, sex</span>
+<span class="s">             FROM demo_all</span>
+<span class="s">             WHERE age between 0 AND 100 AND sex IN (&quot;F&quot;,&quot;M&quot;)</span>
+<span class="s">             LIMIT 10000;&#39;</span><span class="p">),</span> aes<span class="p">(</span>x<span class="o">=</span>age<span class="p">,</span> fill <span class="o">=</span> sex<span class="p">))</span><span class="o">+</span> geom_density<span class="p">(</span>alpha <span class="o">=</span> <span class="m">0.6</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[167]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>ggplot<span class="p">(</span>sqldf<span class="p">(</span><span class="s">&quot;SELECT d.age as age, o.outc_cod as outcome</span>
+<span class="s">                     FROM demo_all d</span>
+<span class="s">                     INNER JOIN outc_all o</span>
+<span class="s">                     ON d.primaryid=o.primaryid</span>
+<span class="s">                     WHERE d.age BETWEEN 20 AND 100</span>
+<span class="s">                     LIMIT 20000;&quot;</span><span class="p">),</span>aes<span class="p">(</span>x<span class="o">=</span>age<span class="p">,</span> fill <span class="o">=</span> outcome<span class="p">))</span><span class="o">+</span> geom_density<span class="p">(</span>alpha <span class="o">=</span> <span class="m">0.6</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[190]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>ggplot<span class="p">(</span>sqldf<span class="p">(</span><span class="s">&quot;SELECT de.sex as sex, dr.route as route</span>
+<span class="s">                     FROM demo_all de</span>
+<span class="s">                     INNER JOIN drug_all dr</span>
+<span class="s">                     ON de.primaryid=dr.primaryid</span>
+<span class="s">                     WHERE de.sex IN (&#39;M&#39;,&#39;F&#39;) AND dr.route IN (&#39;ORAL&#39;,&#39;INTRAVENOUS&#39;,&#39;TOPICAL&#39;)</span>
+<span class="s">                     LIMIT 200000;&quot;</span><span class="p">),</span>aes<span class="p">(</span>x<span class="o">=</span>route<span class="p">,</span> fill <span class="o">=</span> sex<span class="p">))</span><span class="o">+</span> geom_bar<span class="p">(</span>alpha<span class="o">=</span><span class="m">0.6</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[205]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>ggplot<span class="p">(</span>sqldf<span class="p">(</span><span class="s">&quot;SELECT d.sex as sex, o.outc_cod as outcome</span>
+<span class="s">                     FROM demo_all d</span>
+<span class="s">                     INNER JOIN outc_all o</span>
+<span class="s">                     ON d.primaryid=o.primaryid</span>
+<span class="s">                     WHERE d.age BETWEEN 20 AND 100 AND sex IN (&#39;F&#39;,&#39;M&#39;)</span>
+<span class="s">                     LIMIT 20000;&quot;</span><span class="p">),</span>aes<span class="p">(</span>x<span class="o">=</span>outcome<span class="p">,</span>fill<span class="o">=</span>sex<span class="p">))</span><span class="o">+</span> geom_bar<span class="p">(</span>alpha <span class="o">=</span> <span class="m">0.6</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><br/></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[193]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>demo1<span class="o">=</span> demo_all<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">20000</span><span class="p">,]</span>
+demo2<span class="o">=</span>demo_all<span class="p">[</span><span class="m">20001</span><span class="o">:</span><span class="m">40000</span><span class="p">,]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="UNION-ALL">UNION ALL<a class="anchor-link" href="#UNION-ALL">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[196]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>R6 <span class="o">&lt;-</span> <span class="kp">rbind</span><span class="p">(</span>demo1<span class="p">,</span> demo2<span class="p">)</span>
+SQL6 <span class="o">&lt;-</span> sqldf<span class="p">(</span><span class="s">&quot;SELECT  * FROM demo1 UNION ALL SELECT * FROM demo2;&quot;</span><span class="p">)</span>
+compare<span class="p">(</span>R6<span class="p">,</span>SQL6<span class="p">,</span> allowAll <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[196]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>TRUE</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="INTERSECT">INTERSECT<a class="anchor-link" href="#INTERSECT">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[200]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>R7 <span class="o">&lt;-</span> semi_join<span class="p">(</span>demo1<span class="p">,</span> demo2<span class="p">)</span>
+SQL7 <span class="o">&lt;-</span> sqldf<span class="p">(</span><span class="s">&quot;SELECT  * FROM demo1 INTERSECT SELECT * FROM demo2;&quot;</span><span class="p">)</span>
+compare<span class="p">(</span>R7<span class="p">,</span>SQL7<span class="p">,</span> allowAll <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[200]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>TRUE</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><br/></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="EXCEPT">EXCEPT<a class="anchor-link" href="#EXCEPT">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[201]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>R8 <span class="o">&lt;-</span> anti_join<span class="p">(</span>demo1<span class="p">,</span> demo2<span class="p">)</span>
+SQL8 <span class="o">&lt;-</span> sqldf<span class="p">(</span><span class="s">&quot;SELECT  * FROM demo1 EXCEPT SELECT * FROM demo2;&quot;</span><span class="p">)</span>
+compare<span class="p">(</span>R8<span class="p">,</span>SQL8<span class="p">,</span> allowAll <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[201]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>TRUE
+  </pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
   
-  
-  <br/>
+        <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../myjs.js"></script>
+</div>
 
-  <h4 style="color:black"> <strong>Data Analysis  and Machine Learning with R</strong> </h4>
- 
-    <hr style="color:#F5F5F0"/>
-<section> 
+</div>
+    </div>
+  </div>
 
- <h4  style="color:blue"><strong><a    class="mysub"  style=" text-decoration:none;color:blue" 
- href="donald.html"  target="_blank">Sentiment Analysis of Donald Trump's views on Muslims using R and Tableau
-</a></strong></h4>
-       
-	 <p style="text-align:left">In this post, we will focus on how to integrate R and Tableau for text mining, 
-	 sentiment analysis and visualization. 
-	 Using these tools together enables us to answer detailed questions... 
-	 
-	<span> <a style="text-decoration:none;color:red" href ="donald.html"  target="_blank">more</span></a></p>
-	
-	
-<a href="donald.html"  target="_blank"><img style="margin:0px auto;display:block"  
-src="../figures/R_Twitter_Tableau.png", height="200" width="500"/></a>
-  
-</section>
-  
-   <hr style="color:#F5F5F0"/>
-<br/>
-
-
-
-
-<section> 
-
- <h4  style="color:blue"><strong><a    class="mysub"  style=" text-decoration:none;color:blue" 
- href="SQL_R_select.html"  target="_blank">Performing SQL selects on R data frames
-</a></strong></h4>
-       
-	 <p style="text-align:left">For anyone who has SQL background and who wants to learn R, 
-	 I guess the sqldf package is very useful because it enables us to use SQL commands in R. 
-	 One who has basic SQL skills can manipulate data frames in R using their SQL skills... 
-	 
-	<span> <a style="text-decoration:none;color:red" href ="SQL_R_select.html"  target="_blank">more</span></a></p>
-	
-	
-<a href="SQL_R_select.html"  target="_blank"><img style="margin:0px auto;display:block"  
-src="../figures/SQL_R.png", height="333" width="500"/></a>
-  
-</section>
-  
-   <hr style="color:#F5F5F0"/>
-<br/>
-
-
-
-
- <section>
- 
-<h4 style="color:blue"><strong>Semi-automated rainfall prediction models for any geographic region using <span> <a style ="text-decoration:none;color:red" href ="http://shiny.rstudio.com/" target="_blank"> R (Shiny)</a></span></strong></h4>
-		
- <p style="color:#003300;text-align:justify"> Here, I used <a style ="text-decoration:none" href= "http://shiny.rstudio.com/" target="_blank">shiny</a>, an R package that makes it easy to build interactive web applications (apps) straight from R, <span style="color:blue">HTML</span>, <span style="color:red">CSS</span> and  <span style="color:blue">JavaScript</span>
-to develop semi-automated machine learning models to predict rainfall over a region the user selects.
-
-   The user can extract predictand and predictors by drawing a polygon over a 
-	region. Then, the user can select some or all of the machine learning algorithms provided.
-	Provided models include <a  style="text-decoration:none" href="https://en.wikipedia.org/wiki/Linear_regression"  target="_blank"> Linear regression models (GLM, SGLM)</a>, <a  style ="text-decoration:none"  href ="https://en.wikipedia.org/wiki/Decision_tree_learning"  target="_blank">Tree-based ensemble models (Random Forest and Boosting)</a>, 
-	<a  style ="text-decoration:none" href ="https://en.wikipedia.org/wiki/Support_vector_machine"  target="_blank">Support vector Machines</a>,<a style="text-decoration:none" href ="https://en.wikipedia.org/wiki/Artificial_neural_network" target="_blank"> Artificial Neural Network</a>, and other non-linear models (<a style="text-decoration:none" href ="https://en.wikipedia.org/wiki/Generalized_additive_model"  target="_blank">GAM, SGAM</a>, <a style ="text-decoration:none "  href ="https://en.wikipedia.org/wiki/Multivariate_adaptive_regression_splines"  target="_blank"> MARS</a>). 
-	Finally, the user can download the analysis steps they used, such as the region they selected, the time period they specified, the predictand and predictors they chose and preprocessing options they used, and the model results in PDF or HTML format. A quick demo is shown in the video below.</p>
-
-	 <span style="width:200px;display:inline-block"></span><p style="text-align:center"> Server.R and ui.R codes are on  <a style=" font-size:20px;color:red; text-decoration:none" href="https://github.com/fissehab/Shiny_prediction_project" target="_blank">GitHub</a></p>
-	    <br/>  
-   <iframe style="margin:0px auto;display:block"  width="560" height="315" src="https://www.youtube.com/embed/9ZQDfXFegXg" frameborder="0" allowfullscreen></iframe>
-		 
-</section>
-
-
-
-
- 
-  <hr style="color:#F5F5F0"/>
-  <br/>
-  
-   <section>	
-			<h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="R_Python_ml.html" target="_blank"><strong>Supervised Machine Learning with R and Python</strong></a></h4>
-			     
-<p style="color:#003300;text-align:justify"> Here I show how to build various machine learning models in Python and R. The models include linear regression, 
-logistic regression, tree-based models (bagging and random forest) and support vector machines (SVM)...
-  <a style="text-decoration:none;color:red" href ="R_Python_ml.html"  target="_blank">more</a></p>
-
-
-</section>
-
-
-
-    <hr style="color:#F5F5F0"/>
-	
-
-  <br/>
-	  
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="webscrapping_2_US_population.html"  target="_blank">
-								 <strong>Web scraping with R using rvest: Population of U.S. states and territories</a></strong></h4>
-							
-							<p style="text-align:justify">In this post, we will use the <strong>rvest</strong> web scraping R package to scrape US population data from <a href="https://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population">Wikipedia</a> and use <strong>ggplo2</strong> to visualize the population data by state... <a  style="text-decoration:none;color:red" href ="webscrapping_2_US_population.html"  target="_blank">more.</a></p>
-
-<a href="webscrapping_2_US_population.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/population.png", height="400" width="800"/></a>
-
-</section>	
-
-
-
-
-
-
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
    
-   <section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="Hospital_Rankings.html"  target="_blank">
-								 <strong>US Hospital Ranking Shiny App</a></strong></h4>
-							
-							<p style="text-align:justify">
-
-
-
-This is my shiny app that helps to see the performances of various US hospitals in heart attack, heart failure and pneumonia. 
-We can select a state and outcome and see the rank of a hospital in that state and compare its performance with all hospitals across the nation.... <a  style="text-decoration:none;color:red" href ="Hospital_Rankings.html"  target="_blank">more.</a> </p>
-
-		
-<a href="Hospital_Rankings.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/hospital_ranking1.PNG", height="330" width="800"/></a>
-
-
-</section>
-
-
-
-
-
-
-
-
-  <hr style="color:#F5F5F0"/>
-  <br/>
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="https://fisseha.shinyapps.io/my_shiny"  target="_blank">
-								 <strong>How Many Live on How Much, and Where with <span style="color:red"><strong>Shiny</strong></span></a></strong></h4>
-							
-							<p style="text-align:justify"> This is a shiny app that shows world population by income. The income data can be downloaded from <a  style="text-decoration:none"  href="http://www.pewglobal.org/wp-content/themes/pew-global/interactive-global-class.csv",target="_blank">
-							here</a> and the shape file can be downloaded from <a  style="text-decoration:none"  href="http://www.pewglobal.org/wp-content/lib/js/world-geo.json",target="_blank">here</a>. 
-							     
-								<span style="color:green">  The ui.R and server.R codes are available <a style="color:blue;text-decoration:none" href="income.html"  target="_blank">here</a></span>
-								 <br/>
-
-<a href="https://fisseha.shinyapps.io/my_shiny"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/income.png", height="500" width="646"/></a>
-
-</section>
-
-	
-	<hr style="color:#F5F5F0"/>
-	<br/>
-	
-    <section>	
-			<h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="regression_models.html"  target="_blank"><strong>Using linear and non-linear regression models to predict global temperature</strong></a></h4>
-			     
-<p style="color:#003300;text-align:justify"> 	In this project, the performances of <span style="color:#B2246B">support vector machines, neural network, boosting, classification and regression trees, random forest and 
-linear models, such as generalized linear model, lasso, ridge regression and elastic net</span>, 
-in predicitng average global temperature anomaly are compared... 
- 
-  <a style="text-decoration:none;color:red" href ="regression_models.html"  target="_blank">more</a></p>
-<a href="regression_models.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/all_models.png", height="350" width="525"/></a>
-  
-
-</section>
-
-    <hr style="color:#F5F5F0"/>
-	<br/>
-	
- 
-<section>
-
-  <h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="ensemble_trees.html"  target="_blank"><strong>Ensemble Machine Learning Techniques for Human Activity Recognition</strong></a></h4>
-   
-  <p style="color:#003300; text-align:justify"> In this project, <span> <a style="text-decoration:none" href="(https://en.wikipedia.org/wiki/Ensemble_learning" target="_blank"> ensemble tree-based predictive models</a></span> 
-  that determine the manner an exercise is done are built. The models considered are <span style="color:purple"> Random Forest, 
-  Adaptive Boosting and Bagged Adaptive Boosting...
-  </span> <a style="text-decoration:none;color:red" href ="ensemble_trees.html"  target="_blank">more</a></p>
-  <br/>
-  
-  
-   
-     <a href="ensemble_trees.html" target="_blank"><img style="margin:0px auto;display:block" src="../figures/pml.PNG" alt =" No image to show" height='300' width='300'/></a>
-   
-   
-   <a style ="text-decoration:none;text-align:center; color:skyblue" href="http://perceptual.mpi-inf.mpg.de/files/2013/03/velloso13_ah.pdf
-"  target="_blank"><span><h4 > Velloso et al. (2013)</h4></span></a>
-  
-
-</section>
-
-
- <hr style="color:#F5F5F0"/>
- <br/>
-
-   <section>	
-			<h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="ggplot_python_R.html"  target="_blank"><strong>ggplot in R and Python</strong></a></h4>
-			   
-<p style="color:#003300;text-align:justify"> The grammar of graphics package <strong>(ggplot2)</strong> 
-is the best data visualization library in R. The concept of grammar of graphics is 
-also implemented in Python with the library <strong>ggplot</strong> 
-and it has similar commands to <strong>ggplot2</strong>...
-  <a style="text-decoration:none;color:red" href ="ggplot_python_R.html"  target="_blank">more</a></p>
-
-  <a href="ggplot_python_R.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/ggplot2_PR.png", height="394" width="525"/></a>
-
-
-</section>
-
-
- <hr style="color:#F5F5F0"/>
- <br/>
- 
- 
-<section> 
-
-  <h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="R_netcdf_correlation.html"  target="_blank"> <strong>Correlation map of climate variables</strong></a></h4>
-       
-  <p style="color:#003300;text-align:justify"> To understand physical mechanisms and to develop statistical rainfall prediction models, correlation analysis is 
-used as a first step. Here, I show how to use R to generate correlation map between rainfall and 
-sea surface temperature... 
- <a style=" text-decoration:none;color:red" href ="R_netcdf_correlation.html"  target="_blank">more</a></p>
-  
-   <br/>
- <a href="R_netcdf_correlation.html"  target="_blank"> <img style="margin:0px auto;display:block" src="../figures/correlation.png", height="240" width="680"/></a>
-   
-
-
-</section>
-
-
-      <hr style="color:#F5F5F0"/>
-	  <br/>
-  
-   
- <section>   
-	<h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="PA1_template.html"  target="_blank"> <strong>Reproducible Research with R</a></strong></h4>
-	
-<p style="color:#003300;text-align:justify">It is now possible to collect a large amount of data about personal movement using activity monitoring
-devices such as a Fitbit <a style="color:green;text-decoration:none" href="http://www.fitbit.com"  target="_blank"> (http://www.fitbit.com)</a>, Nike Fuelband <a style="color:green;text-decoration:none" href=
-"http://www.nike.com/us/en_us/c/nikeplusfuelband"  target="_blank"> (http://www.nike.com/us/en_us/c/nikeplusfuelband)</a>,
-or Jawbone Up <a  style="color:green; text-decoration:none" href="https://jawbone.com/up"  target="_blank"> (https://jawbone.com/up)</a>. These type of devices are part of the “quantified self”
-movement – a group of enthusiasts who take measurements about themselves regularly to improve their
-health, to find patterns in their behavior, or because they are tech...    
- <a style="text-decoration:none;color:red" href ="PA1_template.html"  target="_blank">more</a></p>
-
-</section>
-
-     <hr style="color:#F5F5F0"/>
-	 <br/>
-  
- <section>	
-		<h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="reading_from_web.html"  target="_blank"><strong> Downloading data from the web using R</a></strong></h4>
-               
-<p style="color:#003300;text-align:justify">There are different ways that we can download and read data into R.
- Some examples are shown... <a style="text-decoration:none;color:red" href ="reading_from_web.html" target="_blank">more</a></p>
- 
-</section>
-
-     <hr style="color:#F5F5F0"/>
-	 <br/>
- 
- <section>	
-			<h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="google_scholar_R.html"  target="_blank"><strong>Google scholar scraping with R</a></strong></h4>
-			   
-<p style="color:#003300;text-align:justify"> In this post, I will show how to scrape google scholar account. 
-Particularly, we will use the <strong>'rvest'</strong> R package to scrape the google scholar account 
-of my advisor. We will see his coauthors, how many times they are cited and thier affilations...
- 
-  <a style="text-decoration:none;color:red" href ="google_scholar_R.html"  target="_blank">more</a></p>
-<a href="google_scholar_R.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/scholaR.png", height="200" width="460"/></a>
-  
-
-</section>
- 
-     <hr style="color:#F5F5F0"/>
-	 <br/>
-
- <section>	
-			<h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="shiny/index.html"  target="_blank"> <strong>Slidify presentation of a Shiny App</a></strong></h4>
-			   
-<p style="color:#003300;text-align:justify"> Slidify helps to create data-centric presentations.
-It allows embedded code chunks and mathematical formulas to be rendered correctly. Final products are HTML files, which can be viewed with 
-any web browser and shared easily.</p>
-<br/>
-<p>Shiny is an R package that makes it easy to build interactive web applications straight from R. Here I have developed
- a shiny app that calculates the area average rainfall 
-and temperature climatologies and trend over any region selected by the user over Africa
-<a style="text-decoration:none;color:blue" href ="shiny/index.html"  target="_blank">(see presentation).</a></p>
-
-<a href="shiny/index.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/unnamed-chunk-1-1.png", height="300" width="400"/></a>
- 
-
-</section>
-
-     <hr style="color:#F5F5F0"/>
-    <br/>
-
- <section>
-	
-	<h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="R_netcdf_composite.html"  target="_blank"><strong> Composite analysis to capture non-linear relationships</a></strong></h4>
-			
-<p style="color:#003300;text-align:justify"> Though correlation is able to capture linear relationships, 
-since it does not handle non-linear relationships, composite analysis is also widely used to understand 
-physical mechanisms and to develop statistical rainfall prediction models. 
-Here, I show how to use R to generate composites of rainfall based on sea surface temperature...
- <a style="text-decoration:none;color:red" href ="R_netcdf_composite.html"  target="_blank">more.</a></p>
-
-
-<a href="R_netcdf_composite.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/composite.png", height="250" width="600"/></a>
-   
- </section>
- 
-     <hr style="color:#F5F5F0"/>
-	 <br/>
-   
- 
- <section>
-	
-			<h4><a   class="mysub"   style=" text-decoration:none;color:blue"  href="harmful_events.html"  target="_blank"> <strong>Most Harmful Storms and Weather Events In The United States </a></strong></h4>
-			                   <br/>
-<p style="color:#003300;text-align:justify"> This report seeks to investigate storms and other weather events that cause the highest
- number of fatalities and injuries. 
-Moreover, it shows which events have the greatest economic consequences...
- <a style="text-decoration:none;color:red" href ="harmful_events.html"   target="_blank">more.</a></p>
-
-<a href="harmful_events.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/harmfulstorms.PNG", height="300" width="600"/></a>
-   
- </section>
-
-      <hr style="color:#F5F5F0"/>
-     <br/>
-
-  <section>
- 			<h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="hospital_rank.html"  target="_blank"> <strong>Hospital Rankings In The United States </a></strong></h4>
-			           
-<p style="color:#003300;text-align:justify"> Here, I compare the performance of hospitals in the USA using data that come from the Hospital 
-Compare web site (<a style="text-decoration:none" href="http://hospitalcompare.hhs.gov"  target="_blank">http://hospitalcompare.hhs.gov</a>) run by the U.S.
- Department of Health and Human Services. Hospital rankings are performed on state-wide and nation-wise basis considering 
- different outcomes... <a style="text-decoration:none;color:red" href ="hospital_rank.html"  target="_blank">more.</a></p>
-
-<a href="hospital_rank.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/md_best.PNG", height="150" width="300"/></a>
-
- </section>
- 
-      <hr style="color:#F5F5F0"/>
-	  <br/>
-   
- 
- <section>
- 			<h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="fuel_efficiency.html"  target="_blank"> <strong>Car Fuel Efficiency and Transmission Type </a></strong></h4>
-			   
-<p style="color:#003300;text-align:justify"> In this analysis, the relationship between a set of variables and miles per gallon (MPG) is explored using the <mark>mtcars</mark> dataset. 
-Particularly, the MPG difference between automatic and manual transmissions is evaluated and quantified using
- multivariate linear regression models... <a style="text-decoration:none;color:red" href ="fuel_efficiency.html"  target="_blank">more.</a></p>
-<br/>
-<a href="fuel_efficiency.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/car_efficieny.PNG", height="300" width="300"/></a>
-
- </section>
- 
-  <hr style="color:#F5F5F0"/>
-  <br/>
-   
-
- <section>
- 			<h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="re_tidy_data.html"  target="_blank"> <strong>The Role of Regular Expressions in Creating a Tidy Data </a></strong></h4>
-			 
-<p style="color:#003300;text-align:justify">In this analysis, let's prepare a tidy data that can be used for later analysis 
-employing regular expressions in R and demonstrate the strength of regular expressions...
- <a  style="text-decoration:none;color:red   "href ="re_tidy_data.html"  target="_blank">more.</a></p>
- 
- </section>
- 
-     <hr style="color:#F5F5F0"/>
-	 <br/>
-   
- <section>
- 
- 			<h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="companies.html"  target="_blank"><strong>World's Biggest Companies </a></strong></h4>
-			    
-<p style="color:#003300;text-align:justify"> Let's visualize the distribution of the world's biggest companies using 
-the Forbes2000 data from HSAUR2 package... <a  style="text-decoration:none;color:red" href ="companies.html"  target="_blank">more.</a></p>
-
-<a href="companies.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/companies.png", height="300" width="600"/></a>
-
- </section>
-      <hr style="color:#F5F5F0"/>
-	  <br/>
-	  
-
- <section>	  
-	   			<h4><a   class="mysub"   style=" text-decoration:none;color:blue"  href="distributions_R.html"  target="_blank"><strong>Approximating distributions </a></strong></h4>
-			      
-<p style="color:#003300;text-align:justify"> Here, let's see the approximation of some distributions by other
- distributions, when certain criteria are met, through simulations... <a  style="text-decoration:none;color:red" href ="distributions_R.html"  target="_blank">more.</a></p>
-
-  </section>
-      <hr style="color:#F5F5F0"/>
-	  <br/>
-	  
-	  
- <section>	  
-	  	   			<h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="earnings.html"  target="_blank"><strong>Predicting Earnings from census data </a></strong></h4>
-			                    
-<p style="color:#003300;text-align:justify">In this problem, we are going to use census information about an individual to predict how much a person earns 
--- in particular, whether the person earns more than $50,000 per year... <a  style="text-decoration:none;color:red" href ="earnings.html"  target="_blank">more.</a></p>
-
-<a href="earnings.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/earnings.png", height="400" width="400"/></a>
-
- </section>
-
-    <hr style="color:#F5F5F0"/>
-	<br/>
-   
-
- <section>  
-   	  	   			<h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="letter.html"  target="_blank"><strong>Letter Recognition </a></strong></h4>
-			                      <br/>
-<p style="color:#003300;text-align:justify">This is letter recognition exercise using tree-based models... <a  style="text-decoration:none;color:red" href ="letter.html"  target="_blank">more.</a></p>
-
-
- </section>
- 
-      <hr style="color:#F5F5F0"/>
-	  <br/>
-	  
- <section>  
-	     	  	   			<h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="http://fisseha.shinyapps.io/dataproducts_project"  target="_blank">
-							<strong>Quick overview of climate  trends using <strong><mark style="background-color:yellow">Shiny</mark></strong> </a></strong></h4>
-			                          
-<p style="color:#003300;text-align:justify">Global climate is changing and this change is apparent across a wide range of observations.
-The impacts of climate change on rainfall and temperature varies from region to region. Shiny, which is an R package that makes it easy to build interactive web applications (apps) straight from R,
-can be used to see the trends of different climate variables over different parts of the world very quickly. Here, I developed a Shiny App that displays the 
-trends of temperature and rainfall over any selected region over Africa. This app can be used as a starting point in studying impacts of, adaptation to and mitigation of climate change over a region. The app is available on
- <a  style="text-decoration:none;color:red" href ="http://fisseha.shinyapps.io/dataproducts_project"  target="_blank">RStudio.</a></p>
-
-<a href="earnings.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/trend.png", height="400" width="400"/></a>
-
- </section>
- 
-      <hr style="color:#F5F5F0"/>
-	  <br/>
-	  
- <section>
-   
-   <h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="dates.html"  target="_blank">
-							<strong>Working with Dates and Times in R using Power Consumption Data</strong></a></h4>
-							 
-							<p style="color:#003300;text-align:justify">Here data from <a  style="text-decoration:none" href="http://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption"  target="_blank">the UC Irvine Machine Learning Repository</a>, a popular repository for machine learning datasets, 
-							is used to show how to work with dates in R... <a  style="text-decoration:none;color:red" href ="dates.html"  target="_blank">more.</a></p>
-
-<a href="dates.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/plot4.png", height="480" width="480"/></a>
-
- </section>
-
-      <hr style="color:#F5F5F0"/>	
-	  <br/>
-
- <section>	  
-   
-    <h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="textanalytics.html"  target="_blank">
-							<strong>Text Analytics with R</strong></a></h4>
-							   
-							<p >This lab is on text analytics with R using logistic regression and regression trees... <a  style="text-decoration:none;color:red" href ="textanalytics.html"  target="_blank">more.</a></p>
-
-
- </section>
- 
-      <hr style="color:#F5F5F0"/>	
-	  <br/>
-	  
- <section>
-	  
-	      <h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="ggplot2-election.html"  target="_blank">
-							<strong>Visualizing election predictions using ggplot2</strong></a></h4>
-							               
-							<p>Here, ggplot2 is used to visualize US presidential election predictions... 
-							<a  style="text-decoration:none;color:red" href ="ggplot2-election.html"  target="_blank">more.</a></p>
-
-<a href="ggplot2-election.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/election.png", height="450" width="750"/></a>
-
-</section>
-
-      <hr style="color:#F5F5F0"/>
-	  <br/>
-	  
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="us_murder.html"  target="_blank">
-							<strong>Visualizing murder rates by state in the US with ggplot2</a></strong></h4>
-							  
-							<p>Let's visualize murder rate by state in the US using ggplot2... <a  style="text-decoration:none;color:red" href ="us_murder.html"  target="_blank">more.</a></p>
-
-<a href="us_murder.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/murder.png", height="450" width="750"/></a>
-
-</section>
-	 
-	 
-	 
-	       <hr style="color:#F5F5F0"/>
-		   <br/>
-	  
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="CLT.html"  target="_blank">
-								 <strong>Using simulation to demosntrate the Central Limit Theorem</a></strong></h4>
-							  
-							<p style="text-align:justify">The central limit theorem (CLT) states that the arithmetic mean of a sufficiently large number of iterates of independent random variables, each with a well-defined expected value and well-defined variance, will be approximately normally distributed, regardless of the underlying distribution <a href="https://en.wikipedia.org/wiki/Central_limit_theorem"  target="_blank">(Wikipedia)</a>. Here, I demonstrate this theorem using simulations... <a  style="text-decoration:none;color:red" href ="CLT.html"  target="_blank">more.</a></p>
-
-<a href="CLT.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/clt.png", height="300" width="450"/></a>
-
-</section>
-
-	       <hr style="color:#F5F5F0"/>
-		   <br/>
-	  
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="inference.html"  target="_blank">
-								 <strong>The Effect of Vitamin C on Tooth Growth in Guinea Pigs</a></strong></h4>
-							
-							<pstyle="text-align:justify">In this analysis, inferential statistics is employed to investigate if the length of odontoblasts (cells responsible for tooth growth) in guinea pigs is influenced by the dose levels of vitamin C (0.5, 1, and 2 mg/day). Moreover, the impacts of two delivery methods (orange juice or ascorbic acid) on the length of odontoblasts are studied... <a  style="text-decoration:none;color:red" href ="inference.html"  target="_blank">more.</a></p>
-
-<a href="inference.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/inference.png", height="300" width="450"/></a>
-
-</section>
-	
-	       <hr style="color:#F5F5F0"/>
-		   <br/>
-	  
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="EPA_R.html"  target="_blank">
-								 <strong>Exploratory Analysis of Fine Particulate Matter</a></strong></h4>
-							
-							<p style="text-align:justify">In this analysis, the trend of fine particulate matter over time, by source, in the United States and over specific cities is investigated... <a  style="text-decoration:none;color:red" href ="EPA_R.html"  target="_blank">more.</a></p>
-
-<a href="EPA_R.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/bal_los.png", height="350" width="540"/></a>
-
-</section>
-
-  <hr style="color:#F5F5F0"/>
-  <br/>
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="demo.html"  target="_blank">
-								 <strong>Spatial distribution of Food and Drug Administration's adverse events reports data</a></strong></h4>
-							
-							<p style="text-align:justify; color:black"> This post shows how to download the quartley FDA's adverse events reports data, concatenate them and do some analysis  using the <span style="color:red">dplyr</span> package and display them by 
-							country and gender using <span style="color:blue">ggplot2</span>... <a  style="text-decoration:none;color:red" href ="demo.html"  target="_blank">more.</a> </p>
-
-						 <br/>
-						 
-<a href="demo.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/demo.png", height="260" width="700"/></a>
-
-</section>
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
-<section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="FEARS_Outcome.html"  target="_blank">
-								 <strong>Visualizing outcomes of drug related adverse events </a></strong></h4>
-							
-							<p style="text-align:justify"> How many of the drug related adverse events in the FDA database resulted in deaths, 
-disabilities, hopspitalization, etc? Here we will download various datasets and join them... <a  style="text-decoration:none;color:red" href ="FEARS_Outcome.html"  target="_blank">more.</a> </p>
-
-						 <br/>
-						 
-<a href="FEARS_Outcome.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/outcome.png", height="260" width="700"/></a>
-
-</section>
-
-
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
-<section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="webscraping.html"  target="_blank">
-								 <strong>Web scraping with R using rvest: List of countries by proven oil reserves</a></strong></h4>
-							
-							<p style="text-align:justify"> In this post, let's see how to scrape information from the web using the rvest R package.
-							Specifically, we will scrape the "List of countries by proven oil reserves" table from wikipedia... <a  style="text-decoration:none;color:red" href ="webscraping.html"  target="_blank">more.</a> </p>
-
-						 <br/>
-						 
-<a href="webscraping.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/oil_reserves.png", height="319" width="700"/></a>
-  <span style="width:200px;display:inline-block"></span> <a  style="text-align:center; text-decoration:none;color:green">Wikipedia</a>
-
-</section>
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
-<section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="common_words.html"  target="_blank">
-								 <strong>Web Scraping and Natural Language Processing: most commonly used words in a journal paper</a></strong></h4>
-							
-							<p style="text-align:justify"> I am practicing web scrapping, regular expressions and natural language processing in R. 
-							In this post, I will find the most commonly used words in one of my published papers... <a  style="text-decoration:none;color:red" href ="common_words.html"  target="_blank">more.</a> </p>
-
-		
-<a href="common_words.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/webnplregex.png", height="300" width="500"/></a>
-  
-</section>
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
-   
-   <section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="twitter.html"  target="_blank">
-								 <strong>Text Mining, Scraping and Sentiment Analysis with R: <span style="color:red">Russia this week</span></a></strong></h4>
-							
-							<p style="text-align:justify">In this post, I am scraping twitter to understand what has been being said about Russia and its relations with the middle east. Particularly, we will see the sentiment of posts from November 24-29, 2015. For this excercise, we will consider posts in English... <a  style="text-decoration:none;color:red" href ="twitter.html"  target="_blank">more.</a> </p>
-
-		
-<a href="twitter.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/R_twitter.png", height="270" width="500"/></a>
-  
-</section>
-
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
-   
-   
-   <section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="top_hits.html"  target="_blank">
-								 <strong>Top searches associated with each nation with R</a></strong></h4>
-							
-							<p style="text-align:justify">In this post, we will get top searches associated with each nation.
-							In doing so, first, we will scrape the list of world countries from <href a ="https://en.wikipedia.org/wiki/Member_states_of_the_United_Nations" >wikipedia</a>... <a  style="text-decoration:none;color:red" href ="top_hits.html"  target="_blank">more.</a> </p>
-
-		
-<a href="top_hits.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/india.png", height="400" width="400"/></a>
-  
-</section>
-
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
-   
-   <section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="gtrends_shiny.html"  target="_blank">
-								 <strong>Google Trends Analytics using Shiny</a></strong></h4>
-							
-							<p style="text-align:justify">In this post, I will show how we can use Shiny to analyse Google Trends data and 
-							create a dashboard. Shiny is an R package that makes it easy to build interactive web apps straight from R. 
-							For a nice look and feel, we will use the shinydashboard package.... <a  style="text-decoration:none;color:red" href ="gtrends_shiny.html"  target="_blank">more.</a> </p>
-
-		
-<a href="gtrends_shiny.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/shiny1.PNG", height="290" width="700"/></a>
-
-
-</section>
-
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
-   
-   <section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="world_cities.html"  target="_blank">
-								 <strong>Visualizing world cities using R</a></strong></h4>
-							
-							<p style="text-align:justify">
-
-In this post, we will create a world map that shows world cities using <strong>ggplot2</strong>.
- We will get the cities and their attributies from <a style="text-decoration:none" href=https://en.wikipedia.org/wiki/List_of_cities_by_latitude">Wikipedia</a>. After we get the world cities data from Wikipedia,
- we will use the string manipulation packages <strong>stringi</strong> and <strong>stringr</strong>
-.... <a  style="text-decoration:none;color:red" href ="world_cities.html"  target="_blank">more.</a> </p>
-
-		
-<a href="world_cities.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/world_cities.png", height="350" width="700"/></a>
-
-
-</section>
-
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
-   
-   <section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="install_load_many_packages_R.html"  target="_blank">
-								 <strong>Installing and loading many R packages at once</a></strong></h4>
-							
-							<p style="text-align:justify">
-
-I like Jupyter notebook because it enables me to use <strong>R</strong>, <strong>Python</strong> and <strong>Matlab</strong> on the same session. 
-Recently, I was trying to insall other kernels and for unknown reason my Jupyter notebook crushed. 
-Then, I uninstalled Anaconda and reinstalled it. The problem, I have lost all <strong>R packages</strong> I installed over time
-.... <a  style="text-decoration:none;color:red" href ="install_load_many_packages_R.html"  target="_blank">more.</a> </p>
-
-		
-<a href="install_load_many_packages_R.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/install.png", height="256" width="256"/></a>
-
-
-</section>
-
-
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
-   
-   <section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="text_clustering.html"  target="_blank">
-								 <strong>Document Clustering</a></strong></h4>
-							
-							<p style="text-align:justify">
-
-
-
-Clustering is a non-supervised learning technique which has wide applications. Some examples where clustering is commonly applied are market segmentation, social network analytics, and astronomical data analysis.
-
-This post is on document clustering or text clustering, which is a very popular application of clustering algorithms. We will see K-means clustering and Hierarchical clustering.... <a  style="text-decoration:none;color:red" href ="install_load_many_packages_R.html"  target="_blank">more.</a> </p>
-
-		
-<a href="text_clustering.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/iraq.png", height="360" width="600"/></a>
-
-
-</section>
-
-
-
-  <hr style="color:#F5F5F0"/>
-  <br/>
-<section>
-
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="https://fisseha.shinyapps.io/drug_events"  target="_blank">
-								 <strong>A Shiny Dashboard of Adverse Drug Event Reports</a></strong></h4>
-							
-							<p style="text-align:justify"> This is a shiny dashboard developed using<a  style="text-decoration:none"  href="https://open.fda.gov/",target="_blank">
-							openFDA</a> data. The data is in <span style="color:red">JSON</span> format. The R library <span style="color:blue">jsonlite</span> is used to access the data from the openFDA website and change it to data frame. The user can select one , a couple or all types of events.</p>
-							     
-								<span style="color:green">  The ui.R and server.R codes are available <a style="color:blue;text-decoration:none" href="drug_adverse_event.html"  target="_blank">here</a></span>
-								 <br/>
-
-<a href="https://fisseha.shinyapps.io/drug_events"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/shiny_drugeffects.PNG", height="250" width="646"/></a>
-
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- <hr/>
-
-
-
-     <!-- <hr style="color:#F5F5F0"/> -->
- 
-	 
-	 <br/>
-	  <br/>
- </main>
- 
-  
-
-  
-  <aside>
-   <section>
-	
-			
-			 <p style="font-size:16px;color:blue"><mark, style="background-color: #CCFFFF">Data Science Resources</mark></p>
-
-                  <hr/>
-				
-					  				     <p >
-							<a  class="ds"   
-							href="http://www.ngdata.com/top-data-science-resources/"  target="_blank">Free Data Science eBooks</a>
-			           </p>
-				   		
-				  			  				     <p >
-							<a  class="ds"   
-							href="http://datascienceplus.com/about-us/"  target="_blank">DataScience+</a>
-			           </p>
-					   
-					   
-				  
-				  			  				     <p >
-							<a  class="ds"   
-							href="http://www.topitbooks.com/?s=spark"  target="_blank">top it books</a>
-			           </p>
-				  
-				  
-				    				     <p >
-							<a  class="ds"   
-							href="http://www.learndatasci.com/free-books"  target="_blank">learndatasci.com 's free-ebook list </a>
-			                              </p>
-				  
-				  			  				     <p >
-							<a  class="ds"   
-							href="http://www.wzchen.com/data-science-books/"  target="_blank">16 Free Data Science Books</a>
-			           </p>
-					   		
-				  
-				  			  				     <p >
-							<a  class="ds"  href="http://blog.echen.me/"  target="_blank">Edwin Chen's blog</a>
-			           </p>
-					   		
-							
-						<p >
-							<a  class="ds"  href=" https://blog.rjmetrics.com/category/data-science/"  target="_blank">TheDataPoint</a>
-			           </p>
-				  
-				  
-				 
-			
-				  			  				     <p >
-							<a   class="ds"  
-							href="http://datasciencereport.com/2014/10/09/23-top-us-schools-offering-a-masters-programs-in-data-science/?utm_content=buffer640f5&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer#.VYwzR0bSyUH"  target="_blank">Data Science Report</a>
-			           </p>
-					   		
-			  				     <p >
-							<a  class="ds"   
-							href="http://amunategui.github.io/"  target="_blank">Data Exploration and Machine Learning</a>
-			           </p>
-					   			
-				  
-				  				     <p >
-							<a  class="ds"  
-							href="http://blog.revolutionanalytics.com/"  target="_blank">Revolutions</a>
-			           </p>
-					   
-			 	  				     <p >
-							<a  class="ds"  
-							href="http://www.datasciencecentral.com/m/blogpost?id=6448529%3ABlogPost%3A294841"  target="_blank">DS central</a>
-			           </p>
-					   
-			 				  
-				  				     <p >
-							<a class="ds"   
-							href="http://www.r-statistics.com/2012/03/do-more-with-dates-and-times-in-r-with-lubridate-1-1-0/"  target="_blank">R-statistics blog</a>
-			           </p>
-					   
-					   
-			 		 <p >
-							<a  class="ds"  
-							href="http://www.datasciencecentral.com/group/research/forum/topics/awesome-data-science-repository?xg_source=activity?utm_source=marketo&utm_medium=email&utm_campaign=DA-NL-203&mkt_tok=3RkMMJWWfF9wsRoksqrPZKXonjHpfsX84%2B8rUKC1lMI%2F0ER3fOvrPUfGjI4CTMJlI%2BSLDwEYGJlv6SgFTLHGMbdlwLgJWBg%3D"  target="_blank">Data Science Central</a>
-			           </p>
-					   
-					 
-					   
-				     <p >
-							<a  class="ds"   
-							href="http://www.r-bloggers.com/"  target="_blank">R-bloggers</a>
-			           </p>
-					   
-				     <p >
-							<a  class="ds"   
-							href="http://jtleek.com/"  target="_blank">jtleek</a>
-			           </p>
-									   
-				     <p >
-							<a  class="ds"   
-							href="http://blog.mikiobraun.de/"  target="_blank">ML blog</a>
-			           </p>
-
-								     <p >
-							<a  class="ds"  
-							href="http://blog.dato.com/"  target="_blank">Dato blog</a>
-			           </p>
-   
-
-					   
-											     <p >
-							<a  class="ds"   
-							href="http://datasciencemasters.org/"  target="_blank">Data Science Masters</a>
-			           </p>
-					  
-
-											     <p >
-							<a  class="ds"  
-							href="http://blog.yhathq.com/"  target="_blank">Yhat</a>
-			           </p>
-					   					  
-					   
-					   
-				     <p >
-							<a  class="ds"  
-							href="http://garrettgman.github.io/"  target="_blank">Data Science with R</a>
-			           </p>
-
-					   
-					   
-				     <p >
-							<a  class="ds"  
-							href="http://cs109.github.io/2014/"  target="_blank">Data science Harvard</a>
-			           </p>
-			 
-                          <p >
-							<a  class="ds"   
-							href="http://datasciencespecialization.github.io/"  target="_blank">JHU coursera Data Science GitHub</a>
-			           </p>
-			 
-			 
-			                         <p >
-							<a  class="ds"  
-							href="http://www.datawrangling.com/"  target="_blank">Data Wrangling</a>
-			                        </p>
-			 
-			 			 
-						                          <p >
-							<a  class="ds"  
-							href="http://flowingdata.com/category/statistics"  target="_blank">FlowingDATA</a>
-			                        </p>
-									
-								 
-						                          <p >
-							<a  class="ds"   
-							href="http://101.datascience.community/"  target="_blank">Data Science Community</a>
-			                        </p>
-							
-
-			                          <p >
-							<a  class="ds"  
-							href="http://columbiadatascience.com/"  target="_blank">Columbia Data Science</a>
-			                        </p>
-
-									
-                          <p >
-							<a  class="ds"  
-							href="http://www.hadoop360.com/blog/big-data-seven-meta-resources-for-best-practices-lessons-learned-"   target="_blank">Hadoop360</a>
-			           </p>
-			 
-		  			 
-                          <p >
-							<a  class="ds"   
-							href="https://www.goodreads.com/shelf/show/data-science"   target="_blank">  Data science books</a>
-			           </p>
-			 
-			 
-			 				  				     <p >
-							<a  class="ds"  
-							href="http://www.rstudio.com/resources/webinars/?mkt_tok=3RkMMJWWfF9wsRonvqnLZKXonjHpfsX77estWaK1lMI%2F0ER3fOvrPUfGjI4ARMJkI%2BSLDwEYGJlv6SgFTbDMMa541LgKWxc%3D"  target="_blank">Rstudio Webinars and Videos</a>
-			           </p>
-					   
-			 
-			 
-		  			 
-                          <p >
-							<a  class="ds"  
-							href="http://adv-r.had.co.nz/"   target="_blank"> Advanced R</a>
-			           </p>
-			 
-		  			 
-                          <p >
-							<a  class="ds"  
-							href="http://garrettgman.github.io/"  target="_blank">Data Science with R</a>
-			           </p>
-			 
-		  			 
-                          <p >
-							<a  class="ds"  
-							href="http://machinelearningmastery.com/best-machine-learning-resources-for-getting-started/"  target="_blank">Machine Learning Mastery</a>
-			           </p>
-			 
-		  			 
-                          <p >
-							<a  class="ds"  
-							href="http://www.mastersindatascience.org/blog/7-must-read-books-for-the-budding-data-scientist/"  target="_blank">Master's in Data science</a>
-			           </p>
-			 
-		  			 
-                          <p >
-							<a  class="ds"   
-							href="https://archive.ics.uci.edu/ml/datasets.html"  target="_blank">UCI ML Repository</a>
-			           </p>
-			 
-		
-		  		  			 
-                          <p >
-							<a   class="ds"  
-							<a href ="https://www.youtube.com/watch?v=mbyG85GZ0PI&list=PLD63A284B7615313A"  target="_blank">Caltech's Machine Learning Course</a>
-			           </p>
-			 
-			 		  			 
-                          <p >
-							<a   class="ds"  
-							<a href="https://github.com/zero323/ds-capstone-survival-guide"  target="_blank">JHU Data Science Capstone</a>
-			           </p>
-			 
-			 		  			 
-                          <p >
-							<a  class="ds"  
-							<a href="http://simplystatistics.org/"  target="_blank">simplystatistics.org</a>
-			           </p>
-			 
-			 
-			 		  			 
-                          <p >
-							<a  class="ds"  
-							<a href="https://github.com/bayandin/awesome-awesomeness"  target="_blank">awesomeness</a>
-			           </p>
-			 
-			 
-			 		  			 
-                          <p >
-							<a  class="ds"  
-							<a href="http://www.analyticsvidhya.com/blog/"  target="_blank">analyticsvidhya</a>
-			           </p>
-			 
-		
-			 		  			 
-                          <p >
-							<a  class="ds"   
-							<a href="http://allendowney.blogspot.com/"  target="_blank">A blog by Allen Downey</a>
-			           </p>
-					   
-					                             <p >
-							<a   class="ds"  
-							<a href="http://www.mmds.org/"  target="_blank">Mining of Massive Datasets</a>
-			           </p>
-					   
-					   
-					   
-					     <p >
-							<a   class="ds"  
-							<a href="http://www.springer.com/statistics?SGWID=0-10128-0-0-0"  target="_blank">Statistics publications from Springer</a>
-			           </p>
-					   
-					   
-					        <p >
-							<a   class="ds"  
-							<a href="http://www.datacommunitydc.org/"  target="_blank">DC data science community</a>
-			           </p>
-			 
-			 
-			 	   
-					        <p >
-							<a   class="ds"  
-							<a href="https://github.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition"  target="_blank">mining popular social websites </a>
-			           </p>
-			 
-			   
-					        <p >
-							<a   class="ds"  
-							<a href="https://jessesw.com/"  target="_blank">Jesse Steinweg-Woods  </a>
-			           </p>
-					   
-					        <p >
-							<a   class="ds"  
-							<a href="http://blog.danielemaasit.com/2015/07/26/installing-and-starting-sparkr-locally-on-windows-8-1-and-rstudio/#comments"  target="_blank">Emaasit's Blog</a>
-			           </p>
-					   
-					   
-					   	        <p >
-							<a   class="ds"  
-							<a href="http://www.boozallen.com/consulting/strategic-innovation/nextgen-analytics-data-science"  target="_blank">Booz Allen Hamilton data science  </a>
-			           </p>
-			 
-			 
-			 
-	           </section>  
-			   
-			   
-			   <section>
-			   <h1 style="color:blue">Data sources</h1>
-			  <a style="text-decoration:none" href="http://www.smartdatacollective.com/bernardmarr/235366/big-data-20-free-big-data-sources-everyone-should-know"   target="_blank">   Big Data: 20 Free Big Data Sources Everyone Should Know</a>
-			   
-			   </section>
-			   
-			   <br/>
-			    <br/>
-				<h4 style="color:green; text-align:justify">Any data science resource that should be added to the list? Please add a link in the comment section below</h4>
-				 
-				 <br/>
-				  <br/>
-			   
-			    <div id="disqus_thread"></div>
+   <div id="disqus_thread"></div>
 <script type="text/javascript">
 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 var disqus_shortname = 'httpdatascienceenthusiastcom'; // required: replace example with your forum shortname
@@ -1306,20 +2248,8 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
- 
 
-    </aside>
-	
-	<footer>
-	<p style ="text-align:center">&copy; 2015 Berhane</p>
-    </footer>
-			<br/>
-		<br/>
-	<script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="../myjs.js"></script>
-	
-	   <script id="dsq-count-scr" src="//httpdatascienceenthusiastcom.disqus.com/count.js" async></script> 
 
- </body>		
-</html> 
-	
+  
+</body>
+</html>
