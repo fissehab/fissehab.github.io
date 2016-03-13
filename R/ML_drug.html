@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>Dr. Fisseha Berhane</title>
+<title>Machine Learning for Drug Adverse Event Discovery</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -52,8 +52,10 @@
 .highlight .err { border: 1px solid #FF0000 } /* Error */
 .highlight .k { color: #008000; font-weight: bold } /* Keyword */
 .highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
 .highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
 .highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
 .highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
 .highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
 .highlight .gd { color: #A00000 } /* Generic.Deleted */
@@ -166,18 +168,23 @@ div#notebook {
     </script>
     <!-- End of mathjax configuration -->
 	
-		<title>Fisseha Berhane</title>
-     <link rel="stylesheet" type="text/css" href="../style5_new.css">
 	
-	</head>
-  
-<body>
+		
+		<style>
+div.prompt {display:none}
+</style>
+
+	
+	<title>Fisseha Berhane</title>
+    <link rel="stylesheet" type="text/css" href="../style3.css">
+  </head>
+  <body>
   
  <nav id="nav01"></nav>
  
     <header class="myheader">
        
-      <h1>Fisseha Berhane,<span class="phd">  PhD</span> </h1>
+        <h1>Fisseha Berhane,<span class="phd">  PhD</span> </h1>
    	  <h4>Data Scientist at <a class="myjhu" style="color:blue;text-decoration:none" 
 	  href="http://aurotechcorp.com/"  target="_blank">Aurotech</a> </h4>
             
@@ -212,1106 +219,801 @@ div#notebook {
 	 </ul>
     </nav>
 	
+	
+	
 	</head>
- <main>
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3  style="color:blue; text-align:center"   id="Machine-Learning-for-Drug-Adverse-Event-Discovery">Machine Learning for Drug Adverse Event Discovery<a class="anchor-link" href="#Machine-Learning-for-Drug-Adverse-Event-Discovery">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can use unsupervised machine learning to identify which drugs are associated with which adverse events. Specifically, machine learning can help us to create clusters based on gender, age, outcome of adverse event, route drug was administered, purpose the drug was used for, body mass index, etc. This can help for quickly discovering hidden associations between drugs and adverse events.</p>
+<p>Clustering is a non-supervised learning technique which has wide applications. Some examples where clustering is commonly applied are market segmentation, social network analytics, and astronomical data analysis. Clustering is grouping of data into sub-groups so that objects within a cluster have high similarity in comparison to other objects in that cluster, but are very dissimilar to objects in other classes.</p>
+<p>In this post, we will see how we can use hierarchical clustering to identify drug adverse events.</p>
+<p>You can read about hierarchical clustering from <a href="https://en.wikipedia.org/wiki/Hierarchical_clustering">Wikipedia</a>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For clustering, each pattern is represented as a vector in multidimensional space and a distance measure is
+used to find the dissimilarity between the instances.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Install-Packages">Install Packages<a class="anchor-link" href="#Install-Packages">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="kn">library</span><span class="p">(</span>dplyr<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>caret<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>dendextend<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>stringi<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Data">Data<a class="anchor-link" href="#Data">&#182;</a></h4><p>Let's create fake drug adverse event data where we can visually identify the clusters and see if our machine learning algorithm can identify the clusters. If we have millions of rows of adverse event data, clustering can help us to summarize the data and get insights quickly.</p>
+<p>Let's assume a drug AAA results in adverse events shown below. We will see in wich group (cluster) the drug results in what kind of reactions (adverse events).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the table shown below, I have created four clusters:
+<em></p>
+<ul>
+<li><em style="color:red"> Route=ORAL, Age=60s, Sex=M, Outc_code=OT, Indi_pt=RHEUMATOID ARTHRITIS and Pt=VASCULITIC RASH + some noise</em></li>
+<li><em style="color:blue">Route=TOPICAL, Age=early 20s, Sex=F, Outc_code=HO, Indi_pt=URINARY TRACT INFECTION and Pt=VOMITING + some noise</em></li>
+<li><em style="color:green">Route=INTRAVENOUS, Age=about 5, Sex=F, Outc_code=LT, Indi_pt=TONSILLITIS and Pt=VOMITING + some noise</em></li>
+<li><em style="color:purple">Route=OPHTHALMIC, Age=early 50s, Sex=F, Outc_code=DE, Indi_pt=Senile osteoporosis and Pt=Sepsis + some noise</em></li>
+</ul>
+<p>&lt;/em&gt;</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>mydata<span class="o">=</span>read.csv<span class="p">(</span><span class="s">&quot;my_data.csv&quot;</span><span class="p">,</span>stringsAsFactors <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+<span class="kp">names</span><span class="p">(</span>mydata<span class="p">)</span><span class="o">=</span>stri_trans_totitle<span class="p">(</span><span class="kp">names</span><span class="p">(</span>mydata<span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>mydata
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[69]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table>
+<thead><tr><th></th><th scope=col>Route</th><th scope=col>Age</th><th scope=col>Sex</th><th scope=col>Outc_cod</th><th scope=col>Indi_pt</th><th scope=col>Pt</th></tr></thead>
+<tbody>
+	<tr><th scope=row>1</th><td>ORAL</td><td>63</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>2</th><td>ORAL</td><td>66</td><td>F</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>3</th><td>ORAL</td><td>66</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>4</th><td>ORAL</td><td>57</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>5</th><td>ORAL</td><td>66</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>6</th><td>ORAL</td><td>66</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>7</th><td>ORAL</td><td>64</td><td>M</td><td>HO</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>8</th><td>ORAL</td><td>56</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>9</th><td>ORAL</td><td>66</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>10</th><td>ORAL</td><td>66</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>11</th><td>ORAL</td><td>52</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>12</th><td>ORAL</td><td>66</td><td>F</td><td>LT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>13</th><td>ORAL</td><td>59</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>14</th><td>ORAL</td><td>61</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>15</th><td>ORAL</td><td>66</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>16</th><td>ORAL</td><td>66</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>17</th><td>ORAL</td><td>48</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>18</th><td>ORAL</td><td>60</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>19</th><td>ORAL</td><td>62</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>20</th><td>ORAL</td><td>60</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td></tr>
+	<tr><th scope=row>21</th><td>ORAL</td><td>18</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td></tr>
+	<tr><th scope=row>22</th><td>TOPICAL</td><td>15</td><td>F</td><td>OT</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td></tr>
+	<tr><th scope=row>23</th><td>TOPICAL</td><td>14</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td></tr>
+	<tr><th scope=row>24</th><td>TOPICAL</td><td>17</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td></tr>
+	<tr><th scope=row>25</th><td>TOPICAL</td><td>17</td><td>M</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td></tr>
+	<tr><th scope=row>26</th><td>TOPICAL</td><td>17</td><td>F</td><td>LT</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td></tr>
+	<tr><th scope=row>27</th><td>TOPICAL</td><td>18</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td></tr>
+	<tr><th scope=row>28</th><td>TOPICAL</td><td>17</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td></tr>
+	<tr><th scope=row>29</th><td>TOPICAL</td><td>24</td><td>M</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td></tr>
+	<tr><th scope=row>30</th><td>TOPICAL</td><td>17</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td></tr>
+	<tr><th scope=row>31</th><td>TOPICAL</td><td>20</td><td>F</td><td>OT</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td></tr>
+	<tr><th scope=row>32</th><td>TOPICAL</td><td>17</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td></tr>
+	<tr><th scope=row>33</th><td>TOPICAL</td><td>17</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td></tr>
+	<tr><th scope=row>34</th><td>INTRAVENOUS</td><td>5</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td></tr>
+	<tr><th scope=row>35</th><td>INTRAVENOUS</td><td>6</td><td>M</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td></tr>
+	<tr><th scope=row>36</th><td>INTRAVENOUS</td><td>7</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td></tr>
+	<tr><th scope=row>37</th><td>INTRAVENOUS</td><td>8</td><td>F</td><td>HO</td><td>TONSILLITIS</td><td>VOMITING</td></tr>
+	<tr><th scope=row>38</th><td>INTRAVENOUS</td><td>5</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td></tr>
+	<tr><th scope=row>39</th><td>INTRAVENOUS</td><td>4</td><td>M</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td></tr>
+	<tr><th scope=row>40</th><td>INTRAVENOUS</td><td>6</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td></tr>
+	<tr><th scope=row>41</th><td>INTRAVENOUS</td><td>7</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td></tr>
+	<tr><th scope=row>42</th><td>INTRAVENOUS</td><td>8</td><td>F</td><td>OT</td><td>TONSILLITIS</td><td>VOMITING</td></tr>
+	<tr><th scope=row>43</th><td>INTRAVENOUS</td><td>5</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td></tr>
+	<tr><th scope=row>44</th><td>INTRAVENOUS</td><td>4</td><td>M</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td></tr>
+	<tr><th scope=row>45</th><td>INTRAVENOUS</td><td>7</td><td>F</td><td>OT</td><td>TONSILLITIS</td><td>VOMITING</td></tr>
+	<tr><th scope=row>46</th><td>INTRAVENOUS</td><td>5</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td></tr>
+	<tr><th scope=row>47</th><td>INTRAVENOUS</td><td>6</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td></tr>
+	<tr><th scope=row>48</th><td>INTRAVENOUS</td><td>4</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td></tr>
+	<tr><th scope=row>49</th><td>OPHTHALMIC</td><td>45</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>50</th><td>OPHTHALMIC</td><td>43</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>51</th><td>OPHTHALMIC</td><td>44</td><td>F</td><td>LT</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>52</th><td>OPHTHALMIC</td><td>42</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>53</th><td>ORAL</td><td>40</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>54</th><td>OPHTHALMIC</td><td>45</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>55</th><td>OPHTHALMIC</td><td>48</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>56</th><td>OPHTHALMIC</td><td>40</td><td>F</td><td>HO</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>57</th><td>OPHTHALMIC</td><td>42</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>58</th><td>ORAL</td><td>45</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>59</th><td>OPHTHALMIC</td><td>44</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>60</th><td>OPHTHALMIC</td><td>43</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>61</th><td>OPHTHALMIC</td><td>45</td><td>F</td><td>OT</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>62</th><td>OPHTHALMIC</td><td>46</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>63</th><td>OPHTHALMIC</td><td>47</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>64</th><td>OPHTHALMIC</td><td>45</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>65</th><td>OPHTHALMIC</td><td>48</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>66</th><td>OPHTHALMIC</td><td>49</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>67</th><td>OPHTHALMIC</td><td>45</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>68</th><td>OPHTHALMIC</td><td>44</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>69</th><td>OPHTHALMIC</td><td>43</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>70</th><td>OPHTHALMIC</td><td>45</td><td>F</td><td>OT</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>71</th><td>OPHTHALMIC</td><td>46</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+	<tr><th scope=row>72</th><td>OPHTHALMIC</td><td>47</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><br/></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Hierarchical-Clustering">Hierarchical Clustering<a class="anchor-link" href="#Hierarchical-Clustering">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To perfom hierarchical clustering, we need to change the text to numeric values so that we can calculate distances.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Since age is numeric, we will remove it from the rest of the variables and change the character variables to multidimensional numeric space.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>age<span class="o">=</span>mydata<span class="o">$</span>Age
+mydata<span class="o">=</span>select<span class="p">(</span>mydata<span class="p">,</span><span class="o">-</span>Age<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Create-a-Matrix">Create a Matrix<a class="anchor-link" href="#Create-a-Matrix">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The code below changes each attribute of every observation into a column and populates zeros. Next, we will change some of the zero entries into ones where there are observations. Let's use <strong>head</strong> to see how it looks like.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>y<span class="o">=</span> setNames<span class="p">(</span>mydata<span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">,</span> <span class="kp">length</span><span class="p">(</span>mydata<span class="p">)))</span>
+
+col_names<span class="o">=</span><span class="kt">c</span><span class="p">()</span>
+<span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="kp">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="kp">ncol</span><span class="p">(</span>y<span class="p">))){</span>
+  col_names<span class="o">=</span><span class="kt">c</span><span class="p">(</span>col_names<span class="p">,</span><span class="kp">unique</span><span class="p">(</span>y<span class="p">[</span>i<span class="p">]))</span>
+<span class="p">}</span>
+
+col_names<span class="o">=</span> <span class="kp">as.vector</span><span class="p">(</span><span class="kp">unlist</span><span class="p">(</span>col_names<span class="p">))</span>
+
+my_matrix<span class="o">=</span> <span class="kt">data.frame</span><span class="p">(</span><span class="kt">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> nrow <span class="o">=</span> <span class="kp">nrow</span><span class="p">(</span>mydata<span class="p">),</span> ncol <span class="o">=</span> <span class="kp">length</span><span class="p">(</span>col_names<span class="p">)))</span>
+
+<span class="kp">colnames</span><span class="p">(</span>my_matrix<span class="p">)</span><span class="o">=</span>col_names
+<span class="kp">head</span><span class="p">(</span>my_matrix<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[71]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table>
+<thead><tr><th></th><th scope=col>ORAL</th><th scope=col>TOPICAL</th><th scope=col>INTRAVENOUS</th><th scope=col>OPHTHALMIC</th><th scope=col>M</th><th scope=col>F</th><th scope=col>OT</th><th scope=col>HO</th><th scope=col>LT</th><th scope=col>DE</th><th scope=col>RHEUMATOID ARTHRITIS</th><th scope=col>URINARY TRACT INFECTION</th><th scope=col>TONSILLITIS</th><th scope=col>Senile osteoporosis</th><th scope=col>VASCULITIC RASH</th><th scope=col>VOMITING</th><th scope=col>Sepsis</th></tr></thead>
+<tbody>
+	<tr><th scope=row>1</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>2</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>3</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>4</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>5</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>6</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, let's put one to entry which is observed in each adverse event.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="kp">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="kp">nrow</span><span class="p">(</span>mydata<span class="p">))){</span>
+  <span class="kr">for</span><span class="p">(</span>j <span class="kr">in</span> <span class="kp">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="kp">ncol</span><span class="p">(</span>mydata<span class="p">)))</span>
+  <span class="p">{</span>
+    my_matrix<span class="p">[</span>i<span class="p">,</span><span class="kp">which</span><span class="p">(</span>mydata<span class="p">[</span>i<span class="p">,</span>j<span class="p">]</span><span class="o">==</span><span class="kp">colnames</span><span class="p">(</span>my_matrix<span class="p">))]</span><span class="o">=</span><span class="m">1</span>
+  <span class="p">}}</span>
+
+my_matrix
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[72]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table>
+<thead><tr><th></th><th scope=col>ORAL</th><th scope=col>TOPICAL</th><th scope=col>INTRAVENOUS</th><th scope=col>OPHTHALMIC</th><th scope=col>M</th><th scope=col>F</th><th scope=col>OT</th><th scope=col>HO</th><th scope=col>LT</th><th scope=col>DE</th><th scope=col>RHEUMATOID ARTHRITIS</th><th scope=col>URINARY TRACT INFECTION</th><th scope=col>TONSILLITIS</th><th scope=col>Senile osteoporosis</th><th scope=col>VASCULITIC RASH</th><th scope=col>VOMITING</th><th scope=col>Sepsis</th></tr></thead>
+<tbody>
+	<tr><th scope=row>1</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>2</th><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>3</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>4</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>5</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>6</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>7</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>8</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>9</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>10</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>11</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>12</th><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>13</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>14</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>15</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>16</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>17</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>18</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>19</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>20</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>21</th><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>22</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>23</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>24</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>25</th><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>26</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>27</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>28</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>29</th><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>30</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>31</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>32</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>33</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>34</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>35</th><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>36</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>37</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>38</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>39</th><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>40</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>41</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>42</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>43</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>44</th><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>45</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>46</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>47</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>48</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>49</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>50</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>51</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>52</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>53</th><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>54</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>55</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>56</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>57</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>58</th><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>59</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>60</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>61</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>62</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>63</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>64</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>65</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>66</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>67</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>68</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>69</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>70</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>71</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>72</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, since we have created numeric matrix from the string values, let's add <strong>age</strong> and normalize the matrix so that entries with large values will not skew our results.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>my_matrix<span class="o">$</span>Age<span class="o">=</span>age
+
+preproc <span class="o">=</span> preProcess<span class="p">(</span>my_matrix<span class="p">)</span>
+my_matrixNorm <span class="o">=</span> <span class="kp">as.matrix</span><span class="p">(</span>predict<span class="p">(</span>preproc<span class="p">,</span> my_matrix<span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Next,-let's-calculate-distance-and-apply-hierarchical-clustering-and-plot-the-dendogram">Next, let's calculate distance and apply hierarchical clustering and plot the dendogram<a class="anchor-link" href="#Next,-let's-calculate-distance-and-apply-hierarchical-clustering-and-plot-the-dendogram">&#182;</a></h5>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>distances <span class="o">=</span> dist<span class="p">(</span>my_matrixNorm<span class="p">,</span> method <span class="o">=</span> <span class="s">&quot;euclidean&quot;</span><span class="p">)</span>
+
+clusterdrug <span class="o">=</span> hclust<span class="p">(</span>distances<span class="p">,</span> method <span class="o">=</span> <span class="s">&quot;ward.D&quot;</span><span class="p">)</span> 
+
+plot<span class="p">(</span>clusterdrug<span class="p">,</span> cex<span class="o">=</span><span class="m">0.5</span><span class="p">,</span> labels <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0gAAANICAMAAADKOT/pAAAAM1BMVEX9/v0AAABMTUxnaGd7e3uLjIuZmpmmpqaxsrG7vLvFxsXOz87X2Nff4N/n6Ofu7+79/v1tTElJAAAAEXRSTlP/////////////////////ACWtmWIAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAACAASURBVHic7d2JeuK4EkDhkVlMwmLe/2kHm01GFTeIwlIV5//unXYSB1SenAEMof87Anjbf6UXAHhASIACQgIUEBKggJAABYQEKCAkQAEhAQoICVBASIACQgIUEBKggJAABYQEKCAkQAEhAQoICVBASIACQgIUEBKggJAABYQEKCAkQAEhAQoICVBASIACQgIUEBKggJAABYQEKCAkQAEhAQoICVBASIACQgIUEBKggJAABYQEKCAkQAEhAQoICVBASIp260UIzer3/FEI4d/fsv73LuFi2R6eX8pTVw49hKRndf2Rb3b9h0/8LO+aJ37cw9326bUQ0swISc0y+onfH5/6WX7qxz262LB7djGENDNC0nK6PWp+uuPx8HP6IV4dVUPq/+i2/f3GZ1dDSDMjJCX700/55THMfrHpty4/y9cf6WsPm/6Wa3gcdbmVGT7bNqG5PAY6feqwCO3tku9NLC537h72Pm5PF7nen/c5rJuw+Imu/HpZ2/Xpg/X1zuHh9NFS2O23v3+6OF92/8WfRVicbgZ/mrB8+tbwKxGSkjaEn/FnxJAOzfXUQRzS9bPXx1aL4evjyznZnkoQ9m7vdyePu8ul36/8clnXO56r49Rut7unu/Nnzx8f2tfuV34jQlJy+pF7OKkmhnS6ITjdGHXLPrt7SNe6msuOYdhrfDkn3ennXd67N5wAbO4fjy7rdiLkXNIfu53ulS674T8Kq/iim7hBiAhJSUgelIghhXNvlyQuXzv//HbnyIYbgk6+5GEz2bvZDoH2e/2eP9o29ysfLut0WxZOD+C6TRjuHV52+33cbXH5r8FtrafP9g/5FvvhD+1j5gkhKXkypP5H9/ZA5fq1081Fd/7wckOwFS7ntinu3Z33Wl2+d3u/8uHj9fWOZzvccl13+33YbXyV93t4O3FARAhJyZMhbS53w7YPu0T31sIlFOGSh81k72iv2773S+7iP4+H4QvNH7v1O/y2yzC6sIc5ICIkJYvL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"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>From the dendrogram shown above, we see that four distinct clusters can be created from the fake data we created.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>dend <span class="o">&lt;-</span> as.dendrogram<span class="p">(</span>clusterdrug<span class="p">)</span> 
+
+<span class="c1"># Color the branches based on the clusters:</span>
+dend <span class="o">&lt;-</span> color_branches<span class="p">(</span>dend<span class="p">,</span> k<span class="o">=</span><span class="m">4</span><span class="p">)</span> <span class="c1">#, groupLabels=iris_species)</span>
+
+<span class="c1"># We hang the dendrogram a bit:</span>
+dend <span class="o">&lt;-</span> hang.dendrogram<span class="p">(</span>dend<span class="p">,</span>hang_height<span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="c1"># reduce the size of the labels:</span>
+<span class="c1"># dend &lt;- assign_values_to_leaves_nodePar(dend, 0.5, &quot;lab.cex&quot;)</span>
+dend <span class="o">&lt;-</span> set<span class="p">(</span>dend<span class="p">,</span> <span class="s">&quot;labels_cex&quot;</span><span class="p">,</span> <span class="m">0.5</span><span class="p">)</span>
+
+plot<span class="p">(</span>dend<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0gAAANICAMAAADKOT/pAAAAP1BMVEX9/v0AAAAAloFMTUxnaGd2fwB4Zth7e3uLjIuZmpmmpqaxsrG7vLvFxsXMR2vOz87X2Nff4N/n6Ofu7+79/v2/9nrHAAAAFXRSTlP//////////////////////////wAr2X3qAAAACXBIWXMAABJ0AAASdAHeZh94AAAa8ElEQVR4nO3di1rbSLaA0aMxPRDoDDe//7OehDSWVL4V5e1il3utrycRpizJsn5sSyLzf1vgYv/33SsAt0BIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEEBIEOBfEtL/8pky+u7naVz/lpC+ewXGIKRmQmImpGZCYiakZkJiJqRmQmImpGZCYiakZkJiJqRmQmImpGZCYiakZkJiJqRmQmImpGZCYiakZkJiJqRmQmImpGZCYiakZkJiJqRmQmImpGZCYiakZkJiJqRmQmImpGZCYiakZkJiJqRmQmImpGZCYiakZkJiJqRmQmImpGZCYiakZkJiJqRmQmImpGZCYiakZkJiJqRmQmImpGZCYiakZkJiJqRmQmImpGZCYiakZkJiJqRmQmImpGZCYiakZkJiJqRmQmImpGZCYiakZkJiJqRmQmImpGZCYiakZkJiJqRmQmImpGZCYiakZkJiJqRmQmImpGZCYiakZkJiJqRmQmImpGZCYiakZkJiJqRmQmImpGZCYiakZkJiJqRm7SG9PD1Mvz08vgSuz5UIqYqQmrWG9H43ze5DV+kahFRFSM1aQ3qcNj9fP6benjfTY9wKXYeQqgipWWtIm+l1N/06bWJW5nqEVEVIzVpDmqZjX6QkpCrpn8e8vCIxE1KzCz4jPb99TPmMdDuE1Kz58Pf94qjd3XvkKl2DkKoIqdkF55EeP84jbR6enEe6FUJq5soGZkJqJiRmQmrmEqFx/HV109V99za8GpcIjeOv716Bywmp5BKh/oSUmBOy4xBSYle6RCjb+2Ih5ZBhX7iODq9IGTaekHLIsC9cR4dLhDJsPCHlkGFfuI4Olwhl2HhCyiHDvnAdHS4RyrDxhJRDhn3hOjpc2ZBh4wkphwz7wnUIaRxCSkxI4xBSYkIah5ASE9I4hJRY+5UN1RcvZNh4Qsohw75wHa0h/S2k7oSUWPNbu9dN7S9PZNh4Qsohw75wHe2fkV5rf3kiw8YTUg4Z9oXruOBgw9+L61ZPybDxhJRDhn3hOhy1G4eQEhPSOISUmJDGIaTEhDQOISUmpHEIKTEhjUNIiQlpHEJKTEjjEFJiQhqHkBIT0jiElJiQxiGkxIQ0DiElJqRxCCkxIY1DSIkJaRxCSkxI4xBSYkIah5ASE9I4hJSYkMYhpMSENA4hJSakcQgpMSGNQ0iJCWkcQkpMSOMQUmJCGoeQEhPSOISUmJDGIaTEhDQOISUmpHEIKTEhjUNIiQlpHEJKTEjjEFJiQhqHkBIT0jiElJiQxiGkxIQ0DiElJqRxCCkxIY1DSIkJaRxCSkxI4xBSYkIah5ASE9I4hJSYkMYhpMSENA4hJSakcQgpMSGNQ0iJCWkcQkpMSOMQUmJCGoeQEhPSOISUmJDGIaTEhDQOISUmpHEIKTEhjUNIiQlpHEJKTEjjEFJiQhqHkBIT0jiElJiQxiGkxIQ0DiElJqRxCCkxIY1DSIkJaRxCSkxI4xBSYkIah5ASE9I4hJSYkMYhpMSENA4hJSakcQgpMSGNQ0iJCWkcQkpMSOMQUmJCGoeQEhPSOISUmJDGIaTE2kN6eXqYfnt4fDk9MMPGE1IOGfaF62gN6f1umt2fHJph4wkphwz7wnW0hvQ4bX6+fky9PW+mx1NDM2w8IeWQYV+4jtaQNtPrbvp12pwammHjCSmHDPvCdbSGNE3Hvtgf2riISELKIcO+cB1ekcYhpMQu+Iz0/PYx5TNSL0JKrPnw9/3iqN3d+6mRGTaekHLIsC9cxwXnkR4/ziNtHp6cR+pDSIm5smEcQkrsSiFNS9dZxJcIKYcM+8J1NIf09mPaPG23f99Nm5OHGnJsPCHlkGFfuI7mS4Q2v19r/n5yiVA/Qkqs/fD3r9ehx8304337/ujwdxdCSqz9hOzvP6fp48C3E7JdCCmxyy4R+udAgkuEuhBSYpe+Iv3+890rUhdCSuzSz0iP7/9MH5dh4wkphwz7wnU4ajcOISXmPNI4hJSYS4TGIaTEhDQOISUmpHEIKTEhjUNIiQlpHEJKTEjjEFJiQhqHkBIT0jiElJiQxiGkxIQ0DiElJqRxCCkxIY1DSIkJaRxCSkxI4xBSYkIah5ASE9I4hJSYkMYhpMSENA4hJSakcQgpMSGNQ0iJCWkcQkpMSOMQUmJCGoeQEhPSOISUmJDGIaTEhDQOISUmpHEIKTEhjUNIiQlpHEJKTEjjEFJiQhqHkBIT0jiElJiQxiGkxIQ0DiElJqRxCCkxIY1DSIkJaRxCSkxI4xBSYkIah5ASE9I4hJSYkMYhpMSENA4hJSakcQgpMSGNQ0iJCWkcQkpMSOMQUmJCGoeQEhPSOISUmJDGIaTEhDQOISUmpHEIKTEhjUNIiQlpHEJKTEjjEFJiQhqHkBIT0jiElJiQxiGkxIQ0DiElJqRxCCkxIY1DSIkJaRxCSkxI4xBSYkIah5ASE9I4hJSYkMYhpMSENA4hJSakcQgpMSGNQ0iJCWkcQkpMSOMQUmJCGoeQEhPSOISUmJDGIaTEhDQOISUmpHEIKTEhjUNIiQlpHEJKTEjjEFJiQhqHkBJrD+nl6WH67eHx5fTADBtPSDlk2BeuozWk97tpdn9yaIaNJ6QcMuwL19Ea0uO0+fn6MfX2vJkeTw3NsPGElEOGfeE6WkPaTK+76ddpc2poho0npBwy7AvX0RrSNB37Yn9o4yIiCSmHDPvCdXhFGoeQErvgM9Lz28eUz0i9CCmx5sPf94ujdnfvp0Zm2HhCyiHDvnAdF5xHevw4j7R5eHIeqQ8hJebKhnEIKbErhTQtXWcRXyKkHDLsC9fRHNL74+9DdU9303T/8/TIDBtPSDlk2BeuozWkt82vV5r3jUuEOhJSYq0h/Zge3n/98ePtV1M/HP7uQkiJtV/Z8P7PH7/e5Tkh24WQErvoEqHNtPji+NDGRUQSUg4Z9oXraH9r97rdPv25Tuj99IekDBtPSDlk2BeuozWk12nz+Lp92Pwq6fluej41NMPGE1IOGfaF62g+/P28mU8UPZ0cmWHjCSmHDPvCdVxwQvbnj4/fkn14ejs9LsPGE1IOGfaF63CJ0DiElJiQxiGkxIQ0DiElJqRxCCkxIY1DSIkJaRxCSkxI4xBSYkIax3eE9J9Y/w32DVvkCCGN41tC+oZl1hNSb0JqJKRKQhqHkEpC6k1IjYRUSUjjEFJJSL0JqZGQKglpHEIqCak3ITUSUiUhjUNIJSH1JqRGQqokpHEIqSSk3oTUSEiVhDQOIZWE1JuQGgmpkpDGIaSSkHoTUiMhVRLSOIRUElJvQmokpEpCGoeQSkLqTUiNhFRJSOMQUklIvQmpkZAqCWkcQioJqTchNRJSJSGNQ0glIfUmpEZCqiSkcQipJKTehNRISJWENA4hlYTUm5AaCamSkMYhpJKQehNSIyFVEtI4hFQSUm9CaiSkSkIah5BKQupNSI2EVElI4xBSSUi9CamRkCoJaRxCKgmpNyE1ElIlIY1DSCUh9SakRkKqJKRxCKkkpN6E1EhIlYQ0DiGVhNSbkBoJqZKQxiGkkpB6E1IjIVUS0jiEVBJSb0JqJKRKQhqHkEpC6k1IjYRUSUjjEFJJSL0JqZGQKglpHEIqCak3ITUSUiUhjUNIJSH1JqRGQqokpHEIqSSk3oTUSEiVhDQOIZWE1JuQGgmpkpDGIaSSkHoTUiMhVRLSOIRUElJvQmokpEpCGoeQSkLqTUiNhFRJSOMQUklIvQmpkZAqCWkcQioJqTchNRJSpfaQXp4ept8eHl9ODxRSECGVbiCk97tpdn9yqJCCCKl0AyE9Tpufrx9Tb8+b6fHUUCEFEVLpBkLaTK+76ddpc2qokIIIqXQDIU3TsS/2hzYuIpKQGgmpklekcQipdAMh/fqM9Pz2MeUzUi9CKt1ASNv7xVG7u/dTI4UUREilWwhp+/L4cR5p8/DkPFIfQirdREjVhBRESKXbD2laus4ivkRIjYRU6fKQzoYipCBCKgmpNyE1ElKl9hOy1e/ehBRESKUbCOllI6TehFS6gZC27w/T/ccZWW/tehFS6RZC2m5/TtPPrZD6EVLpNkLavt1PD+9C6kZIpRsJabt9mjbPQupFSKWbCWn7enf+hKuQggipdDshbbc/hNSLkEq3FNJ5QgoipJKQehNSIyFVEtI4hFQSUm9CaiSkSkIah5BKQupNSI2EVElI4xBSSUi9CamRkCoJaRxCKgmpNyE1ElIlIY1DSCUh9SakRkKqJKRxCKkkpN6E1EhIlYQ0DiGVhNSbkBoJqZKQxiGkkpB6E1IjIVUS0jiEVBJSb0JqJKRKQhqHkEpC6k1IjYRUSUjjEFJJSL0JqZGQKglpHEIqCak3ITUSUiUhjUNIJSH1JqRGQqokpHEIqSSk3oTUSEiVhDQOIZWE1JuQGgmpkpDGIaSSkHoTUiMhVRLSOIRUElJvQmokpEpCGoeQSkLqTUiNhFRJSOMQUklIvQmpkZAqCWkcQioJqTchNRJSJSGNQ0glIfUmpEZCqiSkcQipJKTehNRISJWENA4hlYTUm5AaCamSkMYhpJKQehNSIyFVEtI4hFQSUm9CaiSkSkIah5BKQupNSI2EVElI4xBSSUi9CamRkCoJaRxCKgmpNyE1ElIlIY1DSCUh9SakRkKqJKRxCKkkpN6E1EhIlYQ0DiGVhNSbkBoJqZKQxiGkkpB6E1IjIVUS0jiEVBJSb0JqJKRKQhqHkEpC6k1IjYRUSUjjEFJJSL0JqZGQKglpHEIqCak3ITUSUiUhjUNIJSH1JqRGQqokpHEIqSSk3oTUSEiVhDQOIZVuIqSXp4fpt4fHl9MDhRRESKUbCOn9bprdnxwqpCBCKt1ASI/T5ufrx9Tb82Z6PDVUSEGEVLqBkDbT6276ddqcGiqkIEIq3UBI03Tsi/2hjYuIJKRGQqrkFWkcQirdQEi/PiM9v31M+YzUi5BKNxDS9n5x1O7u/dRIIQURUukWQtq+PH6cR9o8PDmP1IeQSjcRUjUhBRFS6fZDmpaus4gvEVIjIVVqDun9xzTdP/+Zdvi7CyGVbiCk982fC+0+vhBSF0Iq3UBIj9Pfv2r6e/NxmZ2QuhBS6QZC2vzJ421z9yakToRUuoGQPtt5v78XUidCKt1ASHfT50nYu3sh9SGk0g2E9Pf045+pt+leSF0IqXQDIW0fd/U8nzlVJKQgQirdQkjb14fPqbcfQupBSKWbCKmakIIIqSSk3oTUSEiVhDQOIZWE1JuQGgmpkpDGIaSSkHoTUiMhVRLSOIRUElJvQmokpEpCGoeQSkLqTUiNhFRJSOMQUklIvQmpkZAqCWkcQioJqTchNRJSJSGNQ0glIfUmpEZCqiSk7v7q7oKVFVIlIXXX/YVFSB0IqTshhRFSb0JqJKRKQupOSGGE1JuQGgmpkpC6E1IYIfUmpEZCqiSk7oRU678Beq2rkLoTUq2ACoQUS0iNhFRJSN0JqZaQVoS0JqRaQloR0pqQaglpRUhrQqolpBUhrQmplpBWhLQmpFpCWhHSmpBqCWlFSGtCqtVUwTdd5iCk7oRUqy2k4PlVElJ3QqolpJXIkP7XW+C6fxJSLSGthIYUOK/vWl7mkP5T4XorWhLSipDWUocUMiSKkFaEtCakWkJaEdKakGoJaUVIa0KqJaQVIa0JqZaQVoS0JqRaQloR0pqQaglpRUhrPUJq/f+mOFbJ95xSEtKKkNa6hNS4+KMhfWl0FCGtCGlNSLWEtCKkNSHVEtKKkNaEVEtIK0JaE1ItIa0IaU1ItYS0IqQ1IdUS0oqQ1oRUS0grQloTUi0hrQhpTUi1hLQipDUh1RLSipDWhFRLSCtCWhNSLSGtCGlNSLWEtCKkteFD6vb7FEJaEdLa8CF9+duthLQipDUh1RLSipDWhFRLSCtDhnTFfwFcSLWEtDJmSNdb6veEVPePNwiplZC6L/WbQqpaDyG1ElL3pQ4e0vRH1d0uFBZSh//jPiF1X2rKkM6cFlrecuD5TB/S5bM9R0jdl5ozpKNf7N0yYEgBsz1HSN2XmjKkldMhVd0hhJBWBgypWOWbC+nMP7sqpK8T0iHFh+nbC+n0upx5a/d724x1sCFgtucI6ZDpn91luzwzGzXzBCGdcTKk6fO/k3cIIaSVMUP6TGm3RCH98ef1aKSQyh1QSN/1GSlWxpCm1bvZsyFthzqPVJ71EtJ3HbWLlTCkabv63FNx+HuokIrwhSSk9mXEhXRA+pBWKd14SP+Lc93Hc6lEIX2+o/sXhHTpbM9JFFLYAoV0OqTd1XJzP+vL524spJDZniOk06Z5V9sGvUv99pB2D6N4Idq5tZCmafUhSUiVAkOa9v67XMaQpht/a7d67oRUKTakP7vbobMnjb4/pJ3Pd3TFriakrxPSSbsDPofOnjRKFNKn4sfE7YW0FVLNPa94FG930uTA2ZNG3x7StN3OL0Tzm7rpVkMqPwkmC+nl6eHjncHD48vpgdcP6Wpz/ooD/yjCxdpX5tQtu49Gi89I2+3tvrULme05rSG9302z+5ND/y0hZZrlV0NaE9LXtYb0OG1+vn5MvT1vpsdTQ/uHdIU3eof+pYK1C/b6+Feqc+eRtuX7uhUhfV1rSJvpdTf9Om1ODb1mSIfz2J/V5UmVjyLwjdmXEzx9h8MrsPpi+jyyMO0didz/hxuO/1MOQf8I+H+/7OTczi+vZSXPaQ1p9cN5/yf1tHRyRl+48udAAgcm9seUtzS9XM2P4ngxNVV95QWnZuyBe5UTh8s64j97EzV3+pLPe30lmbYxeyta12KLDq9Ip51q4vyQIG0z/qv4O2riwtkcXc8Oxwv3Mzwx8em/QRPnv3NFF3xGen77mDr7GQluX/Ph7/vFe7e798hVgvFccB7p8eM80ubh6cx5JLh9Ha5sYGS7o+Tb8weO/s1uI6Tp6BcV44ewv8bHHsPudwaKXx6oXE55Zmlx9ra8bPerC7jW2N099kPv90R/d0hTeXpw/sE3X5o8rfeM+VTi7jfUPrfgfMB9/1mex5ZDFhPnf+iWa7xc823Z9GIJn7+vcOxhfo6Z5gUtV3xa3nv/ltXGWf9XboDTD267e0jFL//thXRgGccf74mtvv/8Hhi7F8m8d+xWZ35Witks12/xAE9vii/65pD2r1b550Th/MQtvzOtx+624rTdbfDt7rqxvT1iu5zboV1ut+yvrPGB9Vss8sASptWilhPTao+ZJxZrPN9775Yj/602wPlHt9y881qcDmmxose26PGtfuj53R+7jGT1YBYLn9Z/Lh/F3vrtf/NCNxPSdvnjZu8p2c7z2x+y/7R/ZY0P/MheLPJAP8dD+pzb7ofCtB42rZe//6CK+S1vqX10iw35edv0eXPxzm65pL0tWjzM41t9//k9NPbgM75e+Opfn1jtTcs1ntbzC5MmpFUG6x1r7zsH3sgXc1w/K7sxy818dJerDWn1vmT33B97trfb5cti8a3lmNXY+Z3N+iHs3bJ+vLt5HVyb0w/v/Jjl2OXSjjzebbnGx0M6PvZUSHNKy/1m/qt4cAf3oIt9+2ek3dvYxQ+++UfMtLphu9uAJ35ZdTG7YjMurzBbze9rn5EOrPFi/1vdfVrdOi1X4sBnpD9/TMs77z2o3ffLWyo++dc8ukP32q16sVL7K3rw8U7lGpefkfaf3wNjz35GWn6nmM16TVfPWZjvDokvOtv54udtQzfLbM4fvKhYn3Mru/q7am77g4/96DyY2VcW9QVDhzR/9Nw/QNM4w+3ZLbx3nHE+6rT3luHkLfv32h2hKA5V7YYsj2Icnc1u958nqnf5/Wx285xnXo7dr+/wxHrw54M58CQen83+4ANHdvYO/u3WOHp/Wfjuz0jHN0zV3fcmzi+q5rk4uchiRz2w5+7ezJy45ejEySHbz3cnZ2dzYH4VW3WZzWJrFB/ZToz90n+r/60mzt3pxL32xxZrvD30rYt99yvSfgpfeYBfutNU/L0/sds1Ts6lYsdfHSM4cktDSPOOfWI2ey+XeytxbhutjxLs77eHxlYUtRuzWqX57+KGoxWtBy/vtV6PechylYt7hxk7pKZFnQ7p3M62f9TuUEife9jxW6a9e63eJx4OaTsfqTg2m+38OXqaDq/W2Y206LZm7H59x/b19Vrs1vNzQQcOpxYT+4OXszk6drHK5b2jfHdIuSyex+Njdu88p/Ko4rTbr4ux+7fM+/uhW4rvLN7sLv4+NptjK3y1n1AH6js8UXy1LR/U7mDd8dnsD9774XBo7PzNI3e6mJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAggJAgwP8DZy+NNq+BBB0AAAAASUVORK5CYII="
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Number-of-Observations-in-Each-Cluster">Number of Observations in Each Cluster<a class="anchor-link" href="#Number-of-Observations-in-Each-Cluster">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>observationsH<span class="o">=</span><span class="kt">c</span><span class="p">()</span>
+
+<span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="kp">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">)){</span>
+  
+  observationsH<span class="o">=</span><span class="kt">c</span><span class="p">(</span>observationsH<span class="p">,</span><span class="kp">length</span><span class="p">(</span><span class="kp">subset</span><span class="p">(</span>clusterfish<span class="p">,</span> clusterGroups<span class="o">==</span>i<span class="p">)))</span>
+<span class="p">}</span>
+observationsH <span class="o">=</span><span class="kp">as.data.frame</span><span class="p">(</span><span class="kt">list</span><span class="p">(</span>cluster<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">),</span>Number_of_observations<span class="o">=</span>observationsH<span class="p">))</span>
+observationsH
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[76]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table>
+<thead><tr><th></th><th scope=col>cluster</th><th scope=col>Number_of_observations</th></tr></thead>
+<tbody>
+	<tr><th scope=row>1</th><td>1</td><td>20</td></tr>
+	<tr><th scope=row>2</th><td>2</td><td>13</td></tr>
+	<tr><th scope=row>3</th><td>3</td><td>15</td></tr>
+	<tr><th scope=row>4</th><td>4</td><td>24</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Calculate-column-average-for-each-cluster">Calculate column average for each cluster<a class="anchor-link" href="#Calculate-column-average-for-each-cluster">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>z<span class="o">=</span><span class="kp">do.call</span><span class="p">(</span><span class="kp">cbind</span><span class="p">,</span><span class="kp">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">)</span> <span class="kp">round</span><span class="p">(</span><span class="kp">colMeans</span><span class="p">(</span><span class="kp">subset</span><span class="p">(</span>my_matrix<span class="p">,</span>clusterGroups<span class="o">==</span>i<span class="p">)),</span><span class="m">2</span><span class="p">)))</span>
+<span class="kp">colnames</span><span class="p">(</span>z<span class="p">)</span><span class="o">=</span><span class="kp">paste0</span><span class="p">(</span><span class="s">&#39;cluster&#39;</span><span class="p">,</span><span class="kp">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">))</span>
+z
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[77]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table>
+<thead><tr><th></th><th scope=col>cluster1</th><th scope=col>cluster2</th><th scope=col>cluster3</th><th scope=col>cluster4</th></tr></thead>
+<tbody>
+	<tr><th scope=row>ORAL</th><td>1.00</td><td>0.08</td><td>0.00</td><td>0.08</td></tr>
+	<tr><th scope=row>TOPICAL</th><td>0.00</td><td>0.92</td><td>0.00</td><td>0.00</td></tr>
+	<tr><th scope=row>INTRAVENOUS</th><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>OPHTHALMIC</th><td>0.00</td><td>0.00</td><td>0.00</td><td>0.92</td></tr>
+	<tr><th scope=row>M</th><td>0.90</td><td>0.15</td><td>0.20</td><td>0.00</td></tr>
+	<tr><th scope=row>F</th><td>0.10</td><td>0.85</td><td>0.80</td><td>1.00</td></tr>
+	<tr><th scope=row>OT</th><td>0.90</td><td>0.15</td><td>0.13</td><td>0.08</td></tr>
+	<tr><th scope=row>HO</th><td>0.05</td><td>0.77</td><td>0.07</td><td>0.04</td></tr>
+	<tr><th scope=row>LT</th><td>0.05</td><td>0.08</td><td>0.80</td><td>0.04</td></tr>
+	<tr><th scope=row>DE</th><td>0.00</td><td>0.00</td><td>0.00</td><td>0.83</td></tr>
+	<tr><th scope=row>RHEUMATOID ARTHRITIS</th><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>URINARY TRACT INFECTION</th><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>TONSILLITIS</th><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>Senile osteoporosis</th><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>VASCULITIC RASH</th><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>VOMITING</th><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>Sepsis</th><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>Age</th><td>61.80</td><td>17.54</td><td> 5.80</td><td>44.62</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="What-is-the-most-common-observation-in-each-cluster?">What is the most common observation in each cluster?<a class="anchor-link" href="#What-is-the-most-common-observation-in-each-cluster?">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>Age<span class="o">=</span>z<span class="p">[</span><span class="kp">nrow</span><span class="p">(</span>z<span class="p">),]</span>
+z<span class="o">=</span>z<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="p">(</span><span class="kp">nrow</span><span class="p">(</span>z<span class="p">)</span><span class="m">-1</span><span class="p">),]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>my_result<span class="o">=</span><span class="kt">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span>ncol<span class="o">=</span><span class="m">4</span><span class="p">,</span>nrow<span class="o">=</span><span class="kp">ncol</span><span class="p">(</span>mydata<span class="p">))</span>
+<span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="kp">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">)){</span>
+    <span class="kr">for</span><span class="p">(</span>j <span class="kr">in</span> <span class="kp">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="kp">ncol</span><span class="p">(</span>mydata<span class="p">))){</span>
+q <span class="o">=</span> <span class="kp">names</span><span class="p">(</span>mydata<span class="p">)[</span>j<span class="p">]</span>
+q <span class="o">=</span> <span class="kp">as.vector</span><span class="p">(</span><span class="kp">as.matrix</span><span class="p">(</span><span class="kp">unique</span><span class="p">(</span>mydata<span class="p">[</span><span class="kp">q</span><span class="p">])))</span>
+my_result<span class="p">[</span>j<span class="p">,</span>i<span class="p">]</span><span class="o">=</span><span class="kp">names</span><span class="p">(</span><span class="kp">sort</span><span class="p">(</span>z<span class="p">[</span><span class="kp">q</span><span class="p">,</span>i<span class="p">],</span>decreasing <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)[</span><span class="m">1</span><span class="p">])</span>
+    <span class="p">}}</span>
+
+<span class="kp">colnames</span><span class="p">(</span>my_result<span class="p">)</span><span class="o">=</span><span class="kp">paste0</span><span class="p">(</span><span class="s">&#39;Cluster&#39;</span><span class="p">,</span><span class="kp">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">))</span>
+<span class="kp">rownames</span><span class="p">(</span>my_result<span class="p">)</span><span class="o">=</span><span class="kp">names</span><span class="p">(</span>mydata<span class="p">)</span>
+my_result<span class="o">=</span><span class="kp">rbind</span><span class="p">(</span>Age<span class="p">,</span>my_result<span class="p">)</span>
+my_result <span class="o">&lt;-</span> <span class="kp">cbind</span><span class="p">(</span>Attribute <span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;Age&quot;</span><span class="p">,</span><span class="s">&quot;Route&quot;</span><span class="p">,</span><span class="s">&quot;Sex&quot;</span><span class="p">,</span><span class="s">&quot;Outcome Code&quot;</span><span class="p">,</span><span class="s">&quot;Indication preferred term&quot;</span><span class="p">,</span><span class="s">&quot;Adverse event&quot;</span><span class="p">),</span> my_result<span class="p">)</span>
+<span class="kp">rownames</span><span class="p">(</span>my_result<span class="p">)</span> <span class="o">&lt;-</span> <span class="kc">NULL</span>
+
+my_result
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[80]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table>
+<thead><tr><th scope=col>Attribute</th><th scope=col>cluster1</th><th scope=col>cluster2</th><th scope=col>cluster3</th><th scope=col>cluster4</th></tr></thead>
+<tbody>
+	<tr><td>Age  </td><td>61.8 </td><td>17.54</td><td>5.8  </td><td>44.62</td></tr>
+	<tr><td>Route      </td><td>ORAL       </td><td>TOPICAL    </td><td>INTRAVENOUS</td><td>OPHTHALMIC </td></tr>
+	<tr><td>Sex</td><td>M  </td><td>F  </td><td>F  </td><td>F  </td></tr>
+	<tr><td>Outcome Code</td><td>OT          </td><td>HO          </td><td>LT          </td><td>DE          </td></tr>
+	<tr><td>Indication preferred term</td><td>RHEUMATOID ARTHRITIS     </td><td>URINARY TRACT INFECTION  </td><td>TONSILLITIS              </td><td>Senile osteoporosis      </td></tr>
+	<tr><td>Adverse event  </td><td>VASCULITIC RASH</td><td>VOMITING       </td><td>VOMITING       </td><td>Sepsis         </td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We see that we have created the clusters using hierarchical clustering. From cluster 1, for male in the 60s, the drug results in vasculitic rash when taken for rheumatoid arthritis. We can interpret the other clusters similarly. Remember, this data is not real data. It is fake data made to show the application of clustering for drug adverse event study.</p>
+<p>From, this short post, we see that clustering can be used for knowledge discovery in drug adverse event reactions. Specially in cases where the data has millions of observations, where we cannot get any insight visually, clustering becomes handy for summarizing our data, for getting statistical insights and for discovering new knowledge.</p>
+
+</div>
+</div>
+</div>
+    </div>
+  </div>
   
   
-  <br/>
+        <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../myjs.js"></script>
+</div>
 
-  <h4 style="color:black"> <strong>Data Analysis  and Machine Learning with R</strong> </h4>
- 
-    <hr style="color:#F5F5F0"/>
-<section> 
+</div>
+    </div>
+  </div>
 
- <h4  style="color:blue"><strong><a    class="mysub"  style=" text-decoration:none;color:blue" 
- href="donald.html"  target="_blank">Sentiment Analysis of Donald Trump's views on Muslims using R and Tableau
-</a></strong></h4>
-       
-	 <p style="text-align:left">In this post, we will focus on how to integrate R and Tableau for text mining, 
-	 sentiment analysis and visualization. 
-	 Using these tools together enables us to answer detailed questions... 
-	 
-	<span> <a style="text-decoration:none;color:red" href ="donald.html"  target="_blank">more</span></a></p>
-	
-	
-<a href="donald.html"  target="_blank"><img style="margin:0px auto;display:block"  
-src="../figures/R_Twitter_Tableau.png", height="200" width="500"/></a>
-  
-</section>
-  
-   <hr style="color:#F5F5F0"/>
-<br/>
-
-
-
-
-<section> 
-
- <h4  style="color:blue"><strong><a    class="mysub"  style=" text-decoration:none;color:blue" 
- href="SQL_R_select.html"  target="_blank">Performing SQL selects on R data frames
-</a></strong></h4>
-       
-	 <p style="text-align:left">For anyone who has SQL background and who wants to learn R, 
-	 I guess the sqldf package is very useful because it enables us to use SQL commands in R. 
-	 One who has basic SQL skills can manipulate data frames in R using their SQL skills... 
-	 
-	<span> <a style="text-decoration:none;color:red" href ="SQL_R_select.html"  target="_blank">more</span></a></p>
-	
-	
-<a href="SQL_R_select.html"  target="_blank"><img style="margin:0px auto;display:block"  
-src="../figures/SQL_R.png", height="400" width="600"/></a>
-  
-</section>
-  
-   <hr style="color:#F5F5F0"/>
-<br/>
-
-
-<section> 
-
- <h4  style="color:blue"><strong><a    class="mysub"  style=" text-decoration:none;color:blue" 
- href="ML_drug.html"  target="_blank">Machine Learning for Drug Adverse Event Discovery
-</a></strong></h4>
-       
-	 <p style="text-align:left">Clustering can be used for knowledge discovery in drug adverse event reactions. 
-	 Specially in cases where the data has millions of observations, where we cannot get any insight visually, clustering becomes handy for summarizing our data,
-	 for getting statistical insights and for discovering new knowledge... 
-	 
-	<span> <a style="text-decoration:none;color:red" href ="ML_drug.html"  target="_blank">more</span></a></p>
-	
-	
-<a href="ML_drug.html"  target="_blank"><img style="margin:0px auto;display:block"  
-src="../figures/dendogram_drug.PNG", height="337" width="600"/></a>
-  
-</section>
-  
-   <hr style="color:#F5F5F0"/>
-<br/>
-
- <section>
- 
-<h4 style="color:blue"><strong>Semi-automated rainfall prediction models for any geographic region using <span> <a style ="text-decoration:none;color:red" href ="http://shiny.rstudio.com/" target="_blank"> R (Shiny)</a></span></strong></h4>
-		
- <p style="color:#003300;text-align:justify"> Here, I used <a style ="text-decoration:none" href= "http://shiny.rstudio.com/" target="_blank">shiny</a>, an R package that makes it easy to build interactive web applications (apps) straight from R, <span style="color:blue">HTML</span>, <span style="color:red">CSS</span> and  <span style="color:blue">JavaScript</span>
-to develop semi-automated machine learning models to predict rainfall over a region the user selects.
-
-   The user can extract predictand and predictors by drawing a polygon over a 
-	region. Then, the user can select some or all of the machine learning algorithms provided.
-	Provided models include <a  style="text-decoration:none" href="https://en.wikipedia.org/wiki/Linear_regression"  target="_blank"> Linear regression models (GLM, SGLM)</a>, <a  style ="text-decoration:none"  href ="https://en.wikipedia.org/wiki/Decision_tree_learning"  target="_blank">Tree-based ensemble models (Random Forest and Boosting)</a>, 
-	<a  style ="text-decoration:none" href ="https://en.wikipedia.org/wiki/Support_vector_machine"  target="_blank">Support vector Machines</a>,<a style="text-decoration:none" href ="https://en.wikipedia.org/wiki/Artificial_neural_network" target="_blank"> Artificial Neural Network</a>, and other non-linear models (<a style="text-decoration:none" href ="https://en.wikipedia.org/wiki/Generalized_additive_model"  target="_blank">GAM, SGAM</a>, <a style ="text-decoration:none "  href ="https://en.wikipedia.org/wiki/Multivariate_adaptive_regression_splines"  target="_blank"> MARS</a>). 
-	Finally, the user can download the analysis steps they used, such as the region they selected, the time period they specified, the predictand and predictors they chose and preprocessing options they used, and the model results in PDF or HTML format. A quick demo is shown in the video below.</p>
-
-	 <span style="width:200px;display:inline-block"></span><p style="text-align:center"> Server.R and ui.R codes are on  <a style=" font-size:20px;color:red; text-decoration:none" href="https://github.com/fissehab/Shiny_prediction_project" target="_blank">GitHub</a></p>
-	    <br/>  
-   <iframe style="margin:0px auto;display:block"  width="560" height="315" src="https://www.youtube.com/embed/9ZQDfXFegXg" frameborder="0" allowfullscreen></iframe>
-		 
-</section>
-
-
-
-
- 
-  <hr style="color:#F5F5F0"/>
-  <br/>
-  
-   <section>	
-			<h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="R_Python_ml.html" target="_blank"><strong>Supervised Machine Learning with R and Python</strong></a></h4>
-			     
-<p style="color:#003300;text-align:justify"> Here I show how to build various machine learning models in Python and R. The models include linear regression, 
-logistic regression, tree-based models (bagging and random forest) and support vector machines (SVM)...
-  <a style="text-decoration:none;color:red" href ="R_Python_ml.html"  target="_blank">more</a></p>
-
-
-</section>
-
-
-
-    <hr style="color:#F5F5F0"/>
-	
-
-  <br/>
-	  
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="webscrapping_2_US_population.html"  target="_blank">
-								 <strong>Web scraping with R using rvest: Population of U.S. states and territories</a></strong></h4>
-							
-							<p style="text-align:justify">In this post, we will use the <strong>rvest</strong> web scraping R package to scrape US population data from <a href="https://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population">Wikipedia</a> and use <strong>ggplo2</strong> to visualize the population data by state... <a  style="text-decoration:none;color:red" href ="webscrapping_2_US_population.html"  target="_blank">more.</a></p>
-
-<a href="webscrapping_2_US_population.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/population.png", height="400" width="800"/></a>
-
-</section>	
-
-
-
-
-
-
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
    
-   <section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="Hospital_Rankings.html"  target="_blank">
-								 <strong>US Hospital Ranking Shiny App</a></strong></h4>
-							
-							<p style="text-align:justify">
-
-
-
-This is my shiny app that helps to see the performances of various US hospitals in heart attack, heart failure and pneumonia. 
-We can select a state and outcome and see the rank of a hospital in that state and compare its performance with all hospitals across the nation.... <a  style="text-decoration:none;color:red" href ="Hospital_Rankings.html"  target="_blank">more.</a> </p>
-
-		
-<a href="Hospital_Rankings.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/hospital_ranking1.PNG", height="330" width="800"/></a>
-
-
-</section>
-
-
-
-
-
-
-
-
-  <hr style="color:#F5F5F0"/>
-  <br/>
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="https://fisseha.shinyapps.io/my_shiny"  target="_blank">
-								 <strong>How Many Live on How Much, and Where with <span style="color:red"><strong>Shiny</strong></span></a></strong></h4>
-							
-							<p style="text-align:justify"> This is a shiny app that shows world population by income. The income data can be downloaded from <a  style="text-decoration:none"  href="http://www.pewglobal.org/wp-content/themes/pew-global/interactive-global-class.csv",target="_blank">
-							here</a> and the shape file can be downloaded from <a  style="text-decoration:none"  href="http://www.pewglobal.org/wp-content/lib/js/world-geo.json",target="_blank">here</a>. 
-							     
-								<span style="color:green">  The ui.R and server.R codes are available <a style="color:blue;text-decoration:none" href="income.html"  target="_blank">here</a></span>
-								 <br/>
-
-<a href="https://fisseha.shinyapps.io/my_shiny"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/income.png", height="500" width="646"/></a>
-
-</section>
-
-	
-	<hr style="color:#F5F5F0"/>
-	<br/>
-	
-    <section>	
-			<h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="regression_models.html"  target="_blank"><strong>Using linear and non-linear regression models to predict global temperature</strong></a></h4>
-			     
-<p style="color:#003300;text-align:justify"> 	In this project, the performances of <span style="color:#B2246B">support vector machines, neural network, boosting, classification and regression trees, random forest and 
-linear models, such as generalized linear model, lasso, ridge regression and elastic net</span>, 
-in predicitng average global temperature anomaly are compared... 
- 
-  <a style="text-decoration:none;color:red" href ="regression_models.html"  target="_blank">more</a></p>
-<a href="regression_models.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/all_models.png", height="350" width="525"/></a>
-  
-
-</section>
-
-    <hr style="color:#F5F5F0"/>
-	<br/>
-	
- 
-<section>
-
-  <h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="ensemble_trees.html"  target="_blank"><strong>Ensemble Machine Learning Techniques for Human Activity Recognition</strong></a></h4>
-   
-  <p style="color:#003300; text-align:justify"> In this project, <span> <a style="text-decoration:none" href="(https://en.wikipedia.org/wiki/Ensemble_learning" target="_blank"> ensemble tree-based predictive models</a></span> 
-  that determine the manner an exercise is done are built. The models considered are <span style="color:purple"> Random Forest, 
-  Adaptive Boosting and Bagged Adaptive Boosting...
-  </span> <a style="text-decoration:none;color:red" href ="ensemble_trees.html"  target="_blank">more</a></p>
-  <br/>
-  
-  
-   
-     <a href="ensemble_trees.html" target="_blank"><img style="margin:0px auto;display:block" src="../figures/pml.PNG" alt =" No image to show" height='300' width='300'/></a>
-   
-   
-   <a style ="text-decoration:none;text-align:center; color:skyblue" href="http://perceptual.mpi-inf.mpg.de/files/2013/03/velloso13_ah.pdf
-"  target="_blank"><span><h4 > Velloso et al. (2013)</h4></span></a>
-  
-
-</section>
-
-
- <hr style="color:#F5F5F0"/>
- <br/>
-
-   <section>	
-			<h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="ggplot_python_R.html"  target="_blank"><strong>ggplot in R and Python</strong></a></h4>
-			   
-<p style="color:#003300;text-align:justify"> The grammar of graphics package <strong>(ggplot2)</strong> 
-is the best data visualization library in R. The concept of grammar of graphics is 
-also implemented in Python with the library <strong>ggplot</strong> 
-and it has similar commands to <strong>ggplot2</strong>...
-  <a style="text-decoration:none;color:red" href ="ggplot_python_R.html"  target="_blank">more</a></p>
-
-  <a href="ggplot_python_R.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/ggplot2_PR.png", height="394" width="525"/></a>
-
-
-</section>
-
-
- <hr style="color:#F5F5F0"/>
- <br/>
- 
- 
-<section> 
-
-  <h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="R_netcdf_correlation.html"  target="_blank"> <strong>Correlation map of climate variables</strong></a></h4>
-       
-  <p style="color:#003300;text-align:justify"> To understand physical mechanisms and to develop statistical rainfall prediction models, correlation analysis is 
-used as a first step. Here, I show how to use R to generate correlation map between rainfall and 
-sea surface temperature... 
- <a style=" text-decoration:none;color:red" href ="R_netcdf_correlation.html"  target="_blank">more</a></p>
-  
-   <br/>
- <a href="R_netcdf_correlation.html"  target="_blank"> <img style="margin:0px auto;display:block" src="../figures/correlation.png", height="240" width="680"/></a>
-   
-
-
-</section>
-
-
-      <hr style="color:#F5F5F0"/>
-	  <br/>
-  
-   
- <section>   
-	<h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="PA1_template.html"  target="_blank"> <strong>Reproducible Research with R</a></strong></h4>
-	
-<p style="color:#003300;text-align:justify">It is now possible to collect a large amount of data about personal movement using activity monitoring
-devices such as a Fitbit <a style="color:green;text-decoration:none" href="http://www.fitbit.com"  target="_blank"> (http://www.fitbit.com)</a>, Nike Fuelband <a style="color:green;text-decoration:none" href=
-"http://www.nike.com/us/en_us/c/nikeplusfuelband"  target="_blank"> (http://www.nike.com/us/en_us/c/nikeplusfuelband)</a>,
-or Jawbone Up <a  style="color:green; text-decoration:none" href="https://jawbone.com/up"  target="_blank"> (https://jawbone.com/up)</a>. These type of devices are part of the “quantified self”
-movement – a group of enthusiasts who take measurements about themselves regularly to improve their
-health, to find patterns in their behavior, or because they are tech...    
- <a style="text-decoration:none;color:red" href ="PA1_template.html"  target="_blank">more</a></p>
-
-</section>
-
-     <hr style="color:#F5F5F0"/>
-	 <br/>
-  
- <section>	
-		<h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="reading_from_web.html"  target="_blank"><strong> Downloading data from the web using R</a></strong></h4>
-               
-<p style="color:#003300;text-align:justify">There are different ways that we can download and read data into R.
- Some examples are shown... <a style="text-decoration:none;color:red" href ="reading_from_web.html" target="_blank">more</a></p>
- 
-</section>
-
-     <hr style="color:#F5F5F0"/>
-	 <br/>
- 
- <section>	
-			<h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="google_scholar_R.html"  target="_blank"><strong>Google scholar scraping with R</a></strong></h4>
-			   
-<p style="color:#003300;text-align:justify"> In this post, I will show how to scrape google scholar account. 
-Particularly, we will use the <strong>'rvest'</strong> R package to scrape the google scholar account 
-of my advisor. We will see his coauthors, how many times they are cited and thier affilations...
- 
-  <a style="text-decoration:none;color:red" href ="google_scholar_R.html"  target="_blank">more</a></p>
-<a href="google_scholar_R.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/scholaR.png", height="200" width="460"/></a>
-  
-
-</section>
- 
-     <hr style="color:#F5F5F0"/>
-	 <br/>
-
- <section>	
-			<h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="shiny/index.html"  target="_blank"> <strong>Slidify presentation of a Shiny App</a></strong></h4>
-			   
-<p style="color:#003300;text-align:justify"> Slidify helps to create data-centric presentations.
-It allows embedded code chunks and mathematical formulas to be rendered correctly. Final products are HTML files, which can be viewed with 
-any web browser and shared easily.</p>
-<br/>
-<p>Shiny is an R package that makes it easy to build interactive web applications straight from R. Here I have developed
- a shiny app that calculates the area average rainfall 
-and temperature climatologies and trend over any region selected by the user over Africa
-<a style="text-decoration:none;color:blue" href ="shiny/index.html"  target="_blank">(see presentation).</a></p>
-
-<a href="shiny/index.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/unnamed-chunk-1-1.png", height="300" width="400"/></a>
- 
-
-</section>
-
-     <hr style="color:#F5F5F0"/>
-    <br/>
-
- <section>
-	
-	<h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="R_netcdf_composite.html"  target="_blank"><strong> Composite analysis to capture non-linear relationships</a></strong></h4>
-			
-<p style="color:#003300;text-align:justify"> Though correlation is able to capture linear relationships, 
-since it does not handle non-linear relationships, composite analysis is also widely used to understand 
-physical mechanisms and to develop statistical rainfall prediction models. 
-Here, I show how to use R to generate composites of rainfall based on sea surface temperature...
- <a style="text-decoration:none;color:red" href ="R_netcdf_composite.html"  target="_blank">more.</a></p>
-
-
-<a href="R_netcdf_composite.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/composite.png", height="250" width="600"/></a>
-   
- </section>
- 
-     <hr style="color:#F5F5F0"/>
-	 <br/>
-   
- 
- <section>
-	
-			<h4><a   class="mysub"   style=" text-decoration:none;color:blue"  href="harmful_events.html"  target="_blank"> <strong>Most Harmful Storms and Weather Events In The United States </a></strong></h4>
-			                   <br/>
-<p style="color:#003300;text-align:justify"> This report seeks to investigate storms and other weather events that cause the highest
- number of fatalities and injuries. 
-Moreover, it shows which events have the greatest economic consequences...
- <a style="text-decoration:none;color:red" href ="harmful_events.html"   target="_blank">more.</a></p>
-
-<a href="harmful_events.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/harmfulstorms.PNG", height="300" width="600"/></a>
-   
- </section>
-
-      <hr style="color:#F5F5F0"/>
-     <br/>
-
-  <section>
- 			<h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="hospital_rank.html"  target="_blank"> <strong>Hospital Rankings In The United States </a></strong></h4>
-			           
-<p style="color:#003300;text-align:justify"> Here, I compare the performance of hospitals in the USA using data that come from the Hospital 
-Compare web site (<a style="text-decoration:none" href="http://hospitalcompare.hhs.gov"  target="_blank">http://hospitalcompare.hhs.gov</a>) run by the U.S.
- Department of Health and Human Services. Hospital rankings are performed on state-wide and nation-wise basis considering 
- different outcomes... <a style="text-decoration:none;color:red" href ="hospital_rank.html"  target="_blank">more.</a></p>
-
-<a href="hospital_rank.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/md_best.PNG", height="150" width="300"/></a>
-
- </section>
- 
-      <hr style="color:#F5F5F0"/>
-	  <br/>
-   
- 
- <section>
- 			<h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="fuel_efficiency.html"  target="_blank"> <strong>Car Fuel Efficiency and Transmission Type </a></strong></h4>
-			   
-<p style="color:#003300;text-align:justify"> In this analysis, the relationship between a set of variables and miles per gallon (MPG) is explored using the <mark>mtcars</mark> dataset. 
-Particularly, the MPG difference between automatic and manual transmissions is evaluated and quantified using
- multivariate linear regression models... <a style="text-decoration:none;color:red" href ="fuel_efficiency.html"  target="_blank">more.</a></p>
-<br/>
-<a href="fuel_efficiency.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/car_efficieny.PNG", height="300" width="300"/></a>
-
- </section>
- 
-  <hr style="color:#F5F5F0"/>
-  <br/>
-   
-
- <section>
- 			<h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="re_tidy_data.html"  target="_blank"> <strong>The Role of Regular Expressions in Creating a Tidy Data </a></strong></h4>
-			 
-<p style="color:#003300;text-align:justify">In this analysis, let's prepare a tidy data that can be used for later analysis 
-employing regular expressions in R and demonstrate the strength of regular expressions...
- <a  style="text-decoration:none;color:red   "href ="re_tidy_data.html"  target="_blank">more.</a></p>
- 
- </section>
- 
-     <hr style="color:#F5F5F0"/>
-	 <br/>
-   
- <section>
- 
- 			<h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="companies.html"  target="_blank"><strong>World's Biggest Companies </a></strong></h4>
-			    
-<p style="color:#003300;text-align:justify"> Let's visualize the distribution of the world's biggest companies using 
-the Forbes2000 data from HSAUR2 package... <a  style="text-decoration:none;color:red" href ="companies.html"  target="_blank">more.</a></p>
-
-<a href="companies.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/companies.png", height="300" width="600"/></a>
-
- </section>
-      <hr style="color:#F5F5F0"/>
-	  <br/>
-	  
-
- <section>	  
-	   			<h4><a   class="mysub"   style=" text-decoration:none;color:blue"  href="distributions_R.html"  target="_blank"><strong>Approximating distributions </a></strong></h4>
-			      
-<p style="color:#003300;text-align:justify"> Here, let's see the approximation of some distributions by other
- distributions, when certain criteria are met, through simulations... <a  style="text-decoration:none;color:red" href ="distributions_R.html"  target="_blank">more.</a></p>
-
-  </section>
-      <hr style="color:#F5F5F0"/>
-	  <br/>
-	  
-	  
- <section>	  
-	  	   			<h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="earnings.html"  target="_blank"><strong>Predicting Earnings from census data </a></strong></h4>
-			                    
-<p style="color:#003300;text-align:justify">In this problem, we are going to use census information about an individual to predict how much a person earns 
--- in particular, whether the person earns more than $50,000 per year... <a  style="text-decoration:none;color:red" href ="earnings.html"  target="_blank">more.</a></p>
-
-<a href="earnings.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/earnings.png", height="400" width="400"/></a>
-
- </section>
-
-    <hr style="color:#F5F5F0"/>
-	<br/>
-   
-
- <section>  
-   	  	   			<h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="letter.html"  target="_blank"><strong>Letter Recognition </a></strong></h4>
-			                      <br/>
-<p style="color:#003300;text-align:justify">This is letter recognition exercise using tree-based models... <a  style="text-decoration:none;color:red" href ="letter.html"  target="_blank">more.</a></p>
-
-
- </section>
- 
-      <hr style="color:#F5F5F0"/>
-	  <br/>
-	  
- <section>  
-	     	  	   			<h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="http://fisseha.shinyapps.io/dataproducts_project"  target="_blank">
-							<strong>Quick overview of climate  trends using <strong><mark style="background-color:yellow">Shiny</mark></strong> </a></strong></h4>
-			                          
-<p style="color:#003300;text-align:justify">Global climate is changing and this change is apparent across a wide range of observations.
-The impacts of climate change on rainfall and temperature varies from region to region. Shiny, which is an R package that makes it easy to build interactive web applications (apps) straight from R,
-can be used to see the trends of different climate variables over different parts of the world very quickly. Here, I developed a Shiny App that displays the 
-trends of temperature and rainfall over any selected region over Africa. This app can be used as a starting point in studying impacts of, adaptation to and mitigation of climate change over a region. The app is available on
- <a  style="text-decoration:none;color:red" href ="http://fisseha.shinyapps.io/dataproducts_project"  target="_blank">RStudio.</a></p>
-
-<a href="earnings.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/trend.png", height="400" width="400"/></a>
-
- </section>
- 
-      <hr style="color:#F5F5F0"/>
-	  <br/>
-	  
- <section>
-   
-   <h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="dates.html"  target="_blank">
-							<strong>Working with Dates and Times in R using Power Consumption Data</strong></a></h4>
-							 
-							<p style="color:#003300;text-align:justify">Here data from <a  style="text-decoration:none" href="http://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption"  target="_blank">the UC Irvine Machine Learning Repository</a>, a popular repository for machine learning datasets, 
-							is used to show how to work with dates in R... <a  style="text-decoration:none;color:red" href ="dates.html"  target="_blank">more.</a></p>
-
-<a href="dates.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/plot4.png", height="480" width="480"/></a>
-
- </section>
-
-      <hr style="color:#F5F5F0"/>	
-	  <br/>
-
- <section>	  
-   
-    <h4><a    class="mysub"  style=" text-decoration:none;color:blue" href="textanalytics.html"  target="_blank">
-							<strong>Text Analytics with R</strong></a></h4>
-							   
-							<p >This lab is on text analytics with R using logistic regression and regression trees... <a  style="text-decoration:none;color:red" href ="textanalytics.html"  target="_blank">more.</a></p>
-
-
- </section>
- 
-      <hr style="color:#F5F5F0"/>	
-	  <br/>
-	  
- <section>
-	  
-	      <h4><a   class="mysub"   style=" text-decoration:none;color:blue" href="ggplot2-election.html"  target="_blank">
-							<strong>Visualizing election predictions using ggplot2</strong></a></h4>
-							               
-							<p>Here, ggplot2 is used to visualize US presidential election predictions... 
-							<a  style="text-decoration:none;color:red" href ="ggplot2-election.html"  target="_blank">more.</a></p>
-
-<a href="ggplot2-election.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/election.png", height="450" width="750"/></a>
-
-</section>
-
-      <hr style="color:#F5F5F0"/>
-	  <br/>
-	  
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="us_murder.html"  target="_blank">
-							<strong>Visualizing murder rates by state in the US with ggplot2</a></strong></h4>
-							  
-							<p>Let's visualize murder rate by state in the US using ggplot2... <a  style="text-decoration:none;color:red" href ="us_murder.html"  target="_blank">more.</a></p>
-
-<a href="us_murder.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/murder.png", height="450" width="750"/></a>
-
-</section>
-	 
-	 
-	 
-	       <hr style="color:#F5F5F0"/>
-		   <br/>
-	  
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="CLT.html"  target="_blank">
-								 <strong>Using simulation to demosntrate the Central Limit Theorem</a></strong></h4>
-							  
-							<p style="text-align:justify">The central limit theorem (CLT) states that the arithmetic mean of a sufficiently large number of iterates of independent random variables, each with a well-defined expected value and well-defined variance, will be approximately normally distributed, regardless of the underlying distribution <a href="https://en.wikipedia.org/wiki/Central_limit_theorem"  target="_blank">(Wikipedia)</a>. Here, I demonstrate this theorem using simulations... <a  style="text-decoration:none;color:red" href ="CLT.html"  target="_blank">more.</a></p>
-
-<a href="CLT.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/clt.png", height="300" width="450"/></a>
-
-</section>
-
-	       <hr style="color:#F5F5F0"/>
-		   <br/>
-	  
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="inference.html"  target="_blank">
-								 <strong>The Effect of Vitamin C on Tooth Growth in Guinea Pigs</a></strong></h4>
-							
-							<pstyle="text-align:justify">In this analysis, inferential statistics is employed to investigate if the length of odontoblasts (cells responsible for tooth growth) in guinea pigs is influenced by the dose levels of vitamin C (0.5, 1, and 2 mg/day). Moreover, the impacts of two delivery methods (orange juice or ascorbic acid) on the length of odontoblasts are studied... <a  style="text-decoration:none;color:red" href ="inference.html"  target="_blank">more.</a></p>
-
-<a href="inference.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/inference.png", height="300" width="450"/></a>
-
-</section>
-	
-	       <hr style="color:#F5F5F0"/>
-		   <br/>
-	  
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="EPA_R.html"  target="_blank">
-								 <strong>Exploratory Analysis of Fine Particulate Matter</a></strong></h4>
-							
-							<p style="text-align:justify">In this analysis, the trend of fine particulate matter over time, by source, in the United States and over specific cities is investigated... <a  style="text-decoration:none;color:red" href ="EPA_R.html"  target="_blank">more.</a></p>
-
-<a href="EPA_R.html"  target="_blank"><img style="margin:0px auto;display:block" src="../figures/bal_los.png", height="350" width="540"/></a>
-
-</section>
-
-  <hr style="color:#F5F5F0"/>
-  <br/>
-<section>
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="demo.html"  target="_blank">
-								 <strong>Spatial distribution of Food and Drug Administration's adverse events reports data</a></strong></h4>
-							
-							<p style="text-align:justify; color:black"> This post shows how to download the quartley FDA's adverse events reports data, concatenate them and do some analysis  using the <span style="color:red">dplyr</span> package and display them by 
-							country and gender using <span style="color:blue">ggplot2</span>... <a  style="text-decoration:none;color:red" href ="demo.html"  target="_blank">more.</a> </p>
-
-						 <br/>
-						 
-<a href="demo.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/demo.png", height="260" width="700"/></a>
-
-</section>
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
-<section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="FEARS_Outcome.html"  target="_blank">
-								 <strong>Visualizing outcomes of drug related adverse events </a></strong></h4>
-							
-							<p style="text-align:justify"> How many of the drug related adverse events in the FDA database resulted in deaths, 
-disabilities, hopspitalization, etc? Here we will download various datasets and join them... <a  style="text-decoration:none;color:red" href ="FEARS_Outcome.html"  target="_blank">more.</a> </p>
-
-						 <br/>
-						 
-<a href="FEARS_Outcome.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/outcome.png", height="260" width="700"/></a>
-
-</section>
-
-
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
-<section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="webscraping.html"  target="_blank">
-								 <strong>Web scraping with R using rvest: List of countries by proven oil reserves</a></strong></h4>
-							
-							<p style="text-align:justify"> In this post, let's see how to scrape information from the web using the rvest R package.
-							Specifically, we will scrape the "List of countries by proven oil reserves" table from wikipedia... <a  style="text-decoration:none;color:red" href ="webscraping.html"  target="_blank">more.</a> </p>
-
-						 <br/>
-						 
-<a href="webscraping.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/oil_reserves.png", height="319" width="700"/></a>
-  <span style="width:200px;display:inline-block"></span> <a  style="text-align:center; text-decoration:none;color:green">Wikipedia</a>
-
-</section>
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
-<section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="common_words.html"  target="_blank">
-								 <strong>Web Scraping and Natural Language Processing: most commonly used words in a journal paper</a></strong></h4>
-							
-							<p style="text-align:justify"> I am practicing web scrapping, regular expressions and natural language processing in R. 
-							In this post, I will find the most commonly used words in one of my published papers... <a  style="text-decoration:none;color:red" href ="common_words.html"  target="_blank">more.</a> </p>
-
-		
-<a href="common_words.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/webnplregex.png", height="300" width="500"/></a>
-  
-</section>
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
-   
-   <section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="twitter.html"  target="_blank">
-								 <strong>Text Mining, Scraping and Sentiment Analysis with R: <span style="color:red">Russia this week</span></a></strong></h4>
-							
-							<p style="text-align:justify">In this post, I am scraping twitter to understand what has been being said about Russia and its relations with the middle east. Particularly, we will see the sentiment of posts from November 24-29, 2015. For this excercise, we will consider posts in English... <a  style="text-decoration:none;color:red" href ="twitter.html"  target="_blank">more.</a> </p>
-
-		
-<a href="twitter.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/R_twitter.png", height="270" width="500"/></a>
-  
-</section>
-
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
-   
-   
-   <section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="top_hits.html"  target="_blank">
-								 <strong>Top searches associated with each nation with R</a></strong></h4>
-							
-							<p style="text-align:justify">In this post, we will get top searches associated with each nation.
-							In doing so, first, we will scrape the list of world countries from <href a ="https://en.wikipedia.org/wiki/Member_states_of_the_United_Nations" >wikipedia</a>... <a  style="text-decoration:none;color:red" href ="top_hits.html"  target="_blank">more.</a> </p>
-
-		
-<a href="top_hits.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/india.png", height="400" width="400"/></a>
-  
-</section>
-
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
-   
-   <section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="gtrends_shiny.html"  target="_blank">
-								 <strong>Google Trends Analytics using Shiny</a></strong></h4>
-							
-							<p style="text-align:justify">In this post, I will show how we can use Shiny to analyse Google Trends data and 
-							create a dashboard. Shiny is an R package that makes it easy to build interactive web apps straight from R. 
-							For a nice look and feel, we will use the shinydashboard package.... <a  style="text-decoration:none;color:red" href ="gtrends_shiny.html"  target="_blank">more.</a> </p>
-
-		
-<a href="gtrends_shiny.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/shiny1.PNG", height="290" width="700"/></a>
-
-
-</section>
-
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
-   
-   <section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="world_cities.html"  target="_blank">
-								 <strong>Visualizing world cities using R</a></strong></h4>
-							
-							<p style="text-align:justify">
-
-In this post, we will create a world map that shows world cities using <strong>ggplot2</strong>.
- We will get the cities and their attributies from <a style="text-decoration:none" href=https://en.wikipedia.org/wiki/List_of_cities_by_latitude">Wikipedia</a>. After we get the world cities data from Wikipedia,
- we will use the string manipulation packages <strong>stringi</strong> and <strong>stringr</strong>
-.... <a  style="text-decoration:none;color:red" href ="world_cities.html"  target="_blank">more.</a> </p>
-
-		
-<a href="world_cities.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/world_cities.png", height="350" width="700"/></a>
-
-
-</section>
-
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
-   
-   <section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="install_load_many_packages_R.html"  target="_blank">
-								 <strong>Installing and loading many R packages at once</a></strong></h4>
-							
-							<p style="text-align:justify">
-
-I like Jupyter notebook because it enables me to use <strong>R</strong>, <strong>Python</strong> and <strong>Matlab</strong> on the same session. 
-Recently, I was trying to insall other kernels and for unknown reason my Jupyter notebook crushed. 
-Then, I uninstalled Anaconda and reinstalled it. The problem, I have lost all <strong>R packages</strong> I installed over time
-.... <a  style="text-decoration:none;color:red" href ="install_load_many_packages_R.html"  target="_blank">more.</a> </p>
-
-		
-<a href="install_load_many_packages_R.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/install.png", height="256" width="256"/></a>
-
-
-</section>
-
-
-
-   <hr style="color:#F5F5F0"/>
-   <br/>
-   
-   <section>
-	        <h4><a   class="mysub"  style="text-decoration:none;color:blue"  href="text_clustering.html"  target="_blank">
-								 <strong>Document Clustering</a></strong></h4>
-							
-							<p style="text-align:justify">
-
-
-
-Clustering is a non-supervised learning technique which has wide applications. Some examples where clustering is commonly applied are market segmentation, social network analytics, and astronomical data analysis.
-
-This post is on document clustering or text clustering, which is a very popular application of clustering algorithms. We will see K-means clustering and Hierarchical clustering.... <a  style="text-decoration:none;color:red" href ="install_load_many_packages_R.html"  target="_blank">more.</a> </p>
-
-		
-<a href="text_clustering.html"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/iraq.png", height="360" width="600"/></a>
-
-
-</section>
-
-
-
-  <hr style="color:#F5F5F0"/>
-  <br/>
-<section>
-
-	        <h4><a   class="mysub"  style=" text-decoration:none;color:blue" href="https://fisseha.shinyapps.io/drug_events"  target="_blank">
-								 <strong>A Shiny Dashboard of Adverse Drug Event Reports</a></strong></h4>
-							
-							<p style="text-align:justify"> This is a shiny dashboard developed using<a  style="text-decoration:none"  href="https://open.fda.gov/",target="_blank">
-							openFDA</a> data. The data is in <span style="color:red">JSON</span> format. The R library <span style="color:blue">jsonlite</span> is used to access the data from the openFDA website and change it to data frame. The user can select one , a couple or all types of events.</p>
-							     
-								<span style="color:green">  The ui.R and server.R codes are available <a style="color:blue;text-decoration:none" href="drug_adverse_event.html"  target="_blank">here</a></span>
-								 <br/>
-
-<a href="https://fisseha.shinyapps.io/drug_events"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/shiny_drugeffects.PNG", height="250" width="646"/></a>
-
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- <hr/>
-
-
-
-     <!-- <hr style="color:#F5F5F0"/> -->
- 
-	 
-	 <br/>
-	  <br/>
- </main>
- 
-  
-
-  
-  <aside>
-   <section>
-	
-			
-			 <p style="font-size:16px;color:blue"><mark, style="background-color: #CCFFFF">Data Science Resources</mark></p>
-
-                  <hr/>
-				
-					  				     <p >
-							<a  class="ds"   
-							href="http://www.ngdata.com/top-data-science-resources/"  target="_blank">Free Data Science eBooks</a>
-			           </p>
-				   		
-				  			  				     <p >
-							<a  class="ds"   
-							href="http://datascienceplus.com/about-us/"  target="_blank">DataScience+</a>
-			           </p>
-					   
-					   
-				  
-				  			  				     <p >
-							<a  class="ds"   
-							href="http://www.topitbooks.com/?s=spark"  target="_blank">top it books</a>
-			           </p>
-				  
-				  
-				    				     <p >
-							<a  class="ds"   
-							href="http://www.learndatasci.com/free-books"  target="_blank">learndatasci.com 's free-ebook list </a>
-			                              </p>
-				  
-				  			  				     <p >
-							<a  class="ds"   
-							href="http://www.wzchen.com/data-science-books/"  target="_blank">16 Free Data Science Books</a>
-			           </p>
-					   		
-				  
-				  			  				     <p >
-							<a  class="ds"  href="http://blog.echen.me/"  target="_blank">Edwin Chen's blog</a>
-			           </p>
-					   		
-							
-						<p >
-							<a  class="ds"  href=" https://blog.rjmetrics.com/category/data-science/"  target="_blank">TheDataPoint</a>
-			           </p>
-				  
-				  
-				 
-			
-				  			  				     <p >
-							<a   class="ds"  
-							href="http://datasciencereport.com/2014/10/09/23-top-us-schools-offering-a-masters-programs-in-data-science/?utm_content=buffer640f5&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer#.VYwzR0bSyUH"  target="_blank">Data Science Report</a>
-			           </p>
-					   		
-			  				     <p >
-							<a  class="ds"   
-							href="http://amunategui.github.io/"  target="_blank">Data Exploration and Machine Learning</a>
-			           </p>
-					   			
-				  
-				  				     <p >
-							<a  class="ds"  
-							href="http://blog.revolutionanalytics.com/"  target="_blank">Revolutions</a>
-			           </p>
-					   
-			 	  				     <p >
-							<a  class="ds"  
-							href="http://www.datasciencecentral.com/m/blogpost?id=6448529%3ABlogPost%3A294841"  target="_blank">DS central</a>
-			           </p>
-					   
-			 				  
-				  				     <p >
-							<a class="ds"   
-							href="http://www.r-statistics.com/2012/03/do-more-with-dates-and-times-in-r-with-lubridate-1-1-0/"  target="_blank">R-statistics blog</a>
-			           </p>
-					   
-					   
-			 		 <p >
-							<a  class="ds"  
-							href="http://www.datasciencecentral.com/group/research/forum/topics/awesome-data-science-repository?xg_source=activity?utm_source=marketo&utm_medium=email&utm_campaign=DA-NL-203&mkt_tok=3RkMMJWWfF9wsRoksqrPZKXonjHpfsX84%2B8rUKC1lMI%2F0ER3fOvrPUfGjI4CTMJlI%2BSLDwEYGJlv6SgFTLHGMbdlwLgJWBg%3D"  target="_blank">Data Science Central</a>
-			           </p>
-					   
-					 
-					   
-				     <p >
-							<a  class="ds"   
-							href="http://www.r-bloggers.com/"  target="_blank">R-bloggers</a>
-			           </p>
-					   
-				     <p >
-							<a  class="ds"   
-							href="http://jtleek.com/"  target="_blank">jtleek</a>
-			           </p>
-									   
-				     <p >
-							<a  class="ds"   
-							href="http://blog.mikiobraun.de/"  target="_blank">ML blog</a>
-			           </p>
-
-								     <p >
-							<a  class="ds"  
-							href="http://blog.dato.com/"  target="_blank">Dato blog</a>
-			           </p>
-   
-
-					   
-											     <p >
-							<a  class="ds"   
-							href="http://datasciencemasters.org/"  target="_blank">Data Science Masters</a>
-			           </p>
-					  
-
-											     <p >
-							<a  class="ds"  
-							href="http://blog.yhathq.com/"  target="_blank">Yhat</a>
-			           </p>
-					   					  
-					   
-					   
-				     <p >
-							<a  class="ds"  
-							href="http://garrettgman.github.io/"  target="_blank">Data Science with R</a>
-			           </p>
-
-					   
-					   
-				     <p >
-							<a  class="ds"  
-							href="http://cs109.github.io/2014/"  target="_blank">Data science Harvard</a>
-			           </p>
-			 
-                          <p >
-							<a  class="ds"   
-							href="http://datasciencespecialization.github.io/"  target="_blank">JHU coursera Data Science GitHub</a>
-			           </p>
-			 
-			 
-			                         <p >
-							<a  class="ds"  
-							href="http://www.datawrangling.com/"  target="_blank">Data Wrangling</a>
-			                        </p>
-			 
-			 			 
-						                          <p >
-							<a  class="ds"  
-							href="http://flowingdata.com/category/statistics"  target="_blank">FlowingDATA</a>
-			                        </p>
-									
-								 
-						                          <p >
-							<a  class="ds"   
-							href="http://101.datascience.community/"  target="_blank">Data Science Community</a>
-			                        </p>
-							
-
-			                          <p >
-							<a  class="ds"  
-							href="http://columbiadatascience.com/"  target="_blank">Columbia Data Science</a>
-			                        </p>
-
-									
-                          <p >
-							<a  class="ds"  
-							href="http://www.hadoop360.com/blog/big-data-seven-meta-resources-for-best-practices-lessons-learned-"   target="_blank">Hadoop360</a>
-			           </p>
-			 
-		  			 
-                          <p >
-							<a  class="ds"   
-							href="https://www.goodreads.com/shelf/show/data-science"   target="_blank">  Data science books</a>
-			           </p>
-			 
-			 
-			 				  				     <p >
-							<a  class="ds"  
-							href="http://www.rstudio.com/resources/webinars/?mkt_tok=3RkMMJWWfF9wsRonvqnLZKXonjHpfsX77estWaK1lMI%2F0ER3fOvrPUfGjI4ARMJkI%2BSLDwEYGJlv6SgFTbDMMa541LgKWxc%3D"  target="_blank">Rstudio Webinars and Videos</a>
-			           </p>
-					   
-			 
-			 
-		  			 
-                          <p >
-							<a  class="ds"  
-							href="http://adv-r.had.co.nz/"   target="_blank"> Advanced R</a>
-			           </p>
-			 
-		  			 
-                          <p >
-							<a  class="ds"  
-							href="http://garrettgman.github.io/"  target="_blank">Data Science with R</a>
-			           </p>
-			 
-		  			 
-                          <p >
-							<a  class="ds"  
-							href="http://machinelearningmastery.com/best-machine-learning-resources-for-getting-started/"  target="_blank">Machine Learning Mastery</a>
-			           </p>
-			 
-		  			 
-                          <p >
-							<a  class="ds"  
-							href="http://www.mastersindatascience.org/blog/7-must-read-books-for-the-budding-data-scientist/"  target="_blank">Master's in Data science</a>
-			           </p>
-			 
-		  			 
-                          <p >
-							<a  class="ds"   
-							href="https://archive.ics.uci.edu/ml/datasets.html"  target="_blank">UCI ML Repository</a>
-			           </p>
-			 
-		
-		  		  			 
-                          <p >
-							<a   class="ds"  
-							<a href ="https://www.youtube.com/watch?v=mbyG85GZ0PI&list=PLD63A284B7615313A"  target="_blank">Caltech's Machine Learning Course</a>
-			           </p>
-			 
-			 		  			 
-                          <p >
-							<a   class="ds"  
-							<a href="https://github.com/zero323/ds-capstone-survival-guide"  target="_blank">JHU Data Science Capstone</a>
-			           </p>
-			 
-			 		  			 
-                          <p >
-							<a  class="ds"  
-							<a href="http://simplystatistics.org/"  target="_blank">simplystatistics.org</a>
-			           </p>
-			 
-			 
-			 		  			 
-                          <p >
-							<a  class="ds"  
-							<a href="https://github.com/bayandin/awesome-awesomeness"  target="_blank">awesomeness</a>
-			           </p>
-			 
-			 
-			 		  			 
-                          <p >
-							<a  class="ds"  
-							<a href="http://www.analyticsvidhya.com/blog/"  target="_blank">analyticsvidhya</a>
-			           </p>
-			 
-		
-			 		  			 
-                          <p >
-							<a  class="ds"   
-							<a href="http://allendowney.blogspot.com/"  target="_blank">A blog by Allen Downey</a>
-			           </p>
-					   
-					                             <p >
-							<a   class="ds"  
-							<a href="http://www.mmds.org/"  target="_blank">Mining of Massive Datasets</a>
-			           </p>
-					   
-					   
-					   
-					     <p >
-							<a   class="ds"  
-							<a href="http://www.springer.com/statistics?SGWID=0-10128-0-0-0"  target="_blank">Statistics publications from Springer</a>
-			           </p>
-					   
-					   
-					        <p >
-							<a   class="ds"  
-							<a href="http://www.datacommunitydc.org/"  target="_blank">DC data science community</a>
-			           </p>
-			 
-			 
-			 	   
-					        <p >
-							<a   class="ds"  
-							<a href="https://github.com/ptwobrussell/Mining-the-Social-Web-2nd-Edition"  target="_blank">mining popular social websites </a>
-			           </p>
-			 
-			   
-					        <p >
-							<a   class="ds"  
-							<a href="https://jessesw.com/"  target="_blank">Jesse Steinweg-Woods  </a>
-			           </p>
-					   
-					        <p >
-							<a   class="ds"  
-							<a href="http://blog.danielemaasit.com/2015/07/26/installing-and-starting-sparkr-locally-on-windows-8-1-and-rstudio/#comments"  target="_blank">Emaasit's Blog</a>
-			           </p>
-					   
-					   
-					   	        <p >
-							<a   class="ds"  
-							<a href="http://www.boozallen.com/consulting/strategic-innovation/nextgen-analytics-data-science"  target="_blank">Booz Allen Hamilton data science  </a>
-			           </p>
-			 
-			 
-			 
-	           </section>  
-			   
-			   
-			   <section>
-			   <h1 style="color:blue">Data sources</h1>
-			  <a style="text-decoration:none" href="http://www.smartdatacollective.com/bernardmarr/235366/big-data-20-free-big-data-sources-everyone-should-know"   target="_blank">   Big Data: 20 Free Big Data Sources Everyone Should Know</a>
-			   
-			   </section>
-			   
-			   <br/>
-			    <br/>
-				<h4 style="color:green; text-align:justify">Any data science resource that should be added to the list? Please add a link in the comment section below</h4>
-				 
-				 <br/>
-				  <br/>
-			   
-			    <div id="disqus_thread"></div>
+   <div id="disqus_thread"></div>
 <script type="text/javascript">
 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 var disqus_shortname = 'httpdatascienceenthusiastcom'; // required: replace example with your forum shortname
@@ -1325,20 +1027,9 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
- 
 
-    </aside>
-	
-	<footer>
-	<p style ="text-align:center">&copy; 2015 Berhane</p>
-    </footer>
-			<br/>
-		<br/>
-	<script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="../myjs.js"></script>
-	
-	   <script id="dsq-count-scr" src="//httpdatascienceenthusiastcom.disqus.com/count.js" async></script> 
 
- </body>		
-</html> 
-	
+
+  
+</body>
+</html>
