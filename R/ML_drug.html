@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>Machine Learning for Drug Adverse Event Discovery</title>
+<title>Dr. Fisseha Berhane</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -166,10 +166,10 @@ div#notebook {
         }
     });
     </script>
-    <!-- End of mathjax configuration -->
+    <!-- End of mathjax configuration --></head>
 	
 	
-		
+	
 		<style>
 div.prompt {display:none}
 </style>
@@ -221,17 +221,15 @@ div.prompt {display:none}
 	
 	
 	
-	</head>
-<body>
-  <div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
+	
+	
 
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3  style="color:blue; text-align:center"   id="Machine-Learning-for-Drug-Adverse-Event-Discovery">Machine Learning for Drug Adverse Event Discovery<a class="anchor-link" href="#Machine-Learning-for-Drug-Adverse-Event-Discovery">&#182;</a></h3>
+<h3 style="color:blue;text-align:center"  id="Machine-Learning-for-Drug-Adverse-Event-Discovery">Machine Learning for Drug Adverse Event Discovery<a class="anchor-link" href="#Machine-Learning-for-Drug-Adverse-Event-Discovery">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -270,7 +268,7 @@ used to find the dissimilarity between the instances.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span class="kn">library</span><span class="p">(</span>dplyr<span class="p">)</span>
@@ -290,7 +288,7 @@ used to find the dissimilarity between the instances.</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Data">Data<a class="anchor-link" href="#Data">&#182;</a></h4><p>Let's create fake drug adverse event data where we can visually identify the clusters and see if our machine learning algorithm can identify the clusters. If we have millions of rows of adverse event data, clustering can help us to summarize the data and get insights quickly.</p>
-<p>Let's assume a drug AAA results in adverse events shown below. We will see in which group (cluster) the drug results in what kind of reactions (adverse events).</p>
+<p>Let's assume a drug AAA results in adverse events shown below. We will see in wich group (cluster) the drug results in what kind of reactions (adverse events).</p>
 
 </div>
 </div>
@@ -308,20 +306,42 @@ used to find the dissimilarity between the instances.</p>
 <li><em style="color:green">Route=INTRAVENOUS, Age=about 5, Sex=F, Outc_code=LT, Indi_pt=TONSILLITIS and Pt=VOMITING + some noise</em></li>
 <li><em style="color:purple">Route=OPHTHALMIC, Age=early 50s, Sex=F, Outc_code=DE, Indi_pt=Senile osteoporosis and Pt=Sepsis + some noise</em></li>
 </ul>
-
+<p>&lt;/em&gt;</p>
 
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>mydata<span class="o">=</span>read.csv<span class="p">(</span><span class="s">&quot;my_data.csv&quot;</span><span class="p">,</span>stringsAsFactors <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+<span class="kp">names</span><span class="p">(</span>mydata<span class="p">)</span><span class="o">=</span>stri_trans_totitle<span class="p">(</span><span class="kp">names</span><span class="p">(</span>mydata<span class="p">))</span>
+</pre></div>
 
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>mydata
+</pre></div>
+
+</div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[69]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[64]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <table>
@@ -453,7 +473,7 @@ used to find the dissimilarity between the instances.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>age<span class="o">=</span>mydata<span class="o">$</span>Age
@@ -474,33 +494,25 @@ mydata<span class="o">=</span>select<span class="p">(</span>mydata<span class="p
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The code below changes each attribute of every observation into a column and populates zeros. Next, we will change some of the zero entries into ones where there are observations. Let's use <strong>head</strong> to see how it looks like.</p>
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>my_matrix <span class="o">=</span> <span class="kp">as.data.frame</span><span class="p">(</span><span class="kp">do.call</span><span class="p">(</span><span class="kp">cbind</span><span class="p">,</span> <span class="kp">lapply</span><span class="p">(</span>mydata<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="kp">table</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">nrow</span><span class="p">(</span>mydata<span class="p">),</span> x<span class="p">))))</span>
+</pre></div>
 
 </div>
 </div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>y<span class="o">=</span> setNames<span class="p">(</span>mydata<span class="p">,</span> <span class="kp">rep</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">,</span> <span class="kp">length</span><span class="p">(</span>mydata<span class="p">)))</span>
-
-col_names<span class="o">=</span><span class="kt">c</span><span class="p">()</span>
-<span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="kp">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="kp">ncol</span><span class="p">(</span>y<span class="p">))){</span>
-  col_names<span class="o">=</span><span class="kt">c</span><span class="p">(</span>col_names<span class="p">,</span><span class="kp">unique</span><span class="p">(</span>y<span class="p">[</span>i<span class="p">]))</span>
-<span class="p">}</span>
-
-col_names<span class="o">=</span> <span class="kp">as.vector</span><span class="p">(</span><span class="kp">unlist</span><span class="p">(</span>col_names<span class="p">))</span>
-
-my_matrix<span class="o">=</span> <span class="kt">data.frame</span><span class="p">(</span><span class="kt">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> nrow <span class="o">=</span> <span class="kp">nrow</span><span class="p">(</span>mydata<span class="p">),</span> ncol <span class="o">=</span> <span class="kp">length</span><span class="p">(</span>col_names<span class="p">)))</span>
-
-<span class="kp">colnames</span><span class="p">(</span>my_matrix<span class="p">)</span><span class="o">=</span>col_names
+<div class=" highlight hl-r"><pre>my_matrix<span class="o">$</span>Age<span class="o">=</span>age
 <span class="kp">head</span><span class="p">(</span>my_matrix<span class="p">)</span>
 </pre></div>
 
@@ -512,18 +524,18 @@ my_matrix<span class="o">=</span> <span class="kt">data.frame</span><span class=
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[71]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[13]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <table>
-<thead><tr><th></th><th scope=col>ORAL</th><th scope=col>TOPICAL</th><th scope=col>INTRAVENOUS</th><th scope=col>OPHTHALMIC</th><th scope=col>M</th><th scope=col>F</th><th scope=col>OT</th><th scope=col>HO</th><th scope=col>LT</th><th scope=col>DE</th><th scope=col>RHEUMATOID ARTHRITIS</th><th scope=col>URINARY TRACT INFECTION</th><th scope=col>TONSILLITIS</th><th scope=col>Senile osteoporosis</th><th scope=col>VASCULITIC RASH</th><th scope=col>VOMITING</th><th scope=col>Sepsis</th></tr></thead>
+<thead><tr><th></th><th scope=col>INTRAVENOUS</th><th scope=col>OPHTHALMIC</th><th scope=col>ORAL</th><th scope=col>TOPICAL</th><th scope=col>F</th><th scope=col>M</th><th scope=col>DE</th><th scope=col>HO</th><th scope=col>LT</th><th scope=col>OT</th><th scope=col>RHEUMATOID ARTHRITIS</th><th scope=col>Senile osteoporosis</th><th scope=col>TONSILLITIS</th><th scope=col>URINARY TRACT INFECTION</th><th scope=col>Sepsis</th><th scope=col>VASCULITIC RASH</th><th scope=col>VOMITING</th><th scope=col>Age</th></tr></thead>
 <tbody>
-	<tr><th scope=row>1</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>2</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>3</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>4</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>5</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>6</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>1</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>63</td></tr>
+	<tr><th scope=row>2</th><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>66</td></tr>
+	<tr><th scope=row>3</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>66</td></tr>
+	<tr><th scope=row>4</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>57</td></tr>
+	<tr><th scope=row>5</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>66</td></tr>
+	<tr><th scope=row>6</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>66</td></tr>
 </tbody>
 </table>
 
@@ -540,140 +552,20 @@ my_matrix<span class="o">=</span> <span class="kt">data.frame</span><span class=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, let's put one to attributes which are observed in each adverse event.</p>
+<ul>
+<li>We need to normalize our variables</li>
+<li>using caret package.</li>
+</ul>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="kp">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="kp">nrow</span><span class="p">(</span>mydata<span class="p">))){</span>
-  <span class="kr">for</span><span class="p">(</span>j <span class="kr">in</span> <span class="kp">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="kp">ncol</span><span class="p">(</span>mydata<span class="p">)))</span>
-  <span class="p">{</span>
-    my_matrix<span class="p">[</span>i<span class="p">,</span><span class="kp">which</span><span class="p">(</span>mydata<span class="p">[</span>i<span class="p">,</span>j<span class="p">]</span><span class="o">==</span><span class="kp">colnames</span><span class="p">(</span>my_matrix<span class="p">))]</span><span class="o">=</span><span class="m">1</span>
-  <span class="p">}}</span>
-
-my_matrix
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[72]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<table>
-<thead><tr><th></th><th scope=col>ORAL</th><th scope=col>TOPICAL</th><th scope=col>INTRAVENOUS</th><th scope=col>OPHTHALMIC</th><th scope=col>M</th><th scope=col>F</th><th scope=col>OT</th><th scope=col>HO</th><th scope=col>LT</th><th scope=col>DE</th><th scope=col>RHEUMATOID ARTHRITIS</th><th scope=col>URINARY TRACT INFECTION</th><th scope=col>TONSILLITIS</th><th scope=col>Senile osteoporosis</th><th scope=col>VASCULITIC RASH</th><th scope=col>VOMITING</th><th scope=col>Sepsis</th></tr></thead>
-<tbody>
-	<tr><th scope=row>1</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>2</th><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>3</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>4</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>5</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>6</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>7</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>8</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>9</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>10</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>11</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>12</th><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>13</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>14</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>15</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>16</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>17</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>18</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>19</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>20</th><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>21</th><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>22</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>23</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>24</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>25</th><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>26</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>27</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>28</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>29</th><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>30</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>31</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>32</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>33</th><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>34</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>35</th><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>36</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>37</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>38</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>39</th><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>40</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>41</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>42</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>43</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>44</th><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>45</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>46</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>47</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>48</th><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>49</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>50</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>51</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>52</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>53</th><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>54</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>55</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>56</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>57</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>58</th><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>59</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>60</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>61</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>62</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>63</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>64</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>65</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>66</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>67</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>68</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>69</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>70</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>71</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-	<tr><th scope=row>72</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
-</tbody>
-</table>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, since we have created numeric matrix from the string values, let's add <strong>age</strong> and normalize the matrix so that entries with large values will not skew our results.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[73]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>my_matrix<span class="o">$</span>Age<span class="o">=</span>age
-
-preproc <span class="o">=</span> preProcess<span class="p">(</span>my_matrix<span class="p">)</span>
+<div class=" highlight hl-r"><pre>preproc <span class="o">=</span> preProcess<span class="p">(</span>my_matrix<span class="p">)</span>
 my_matrixNorm <span class="o">=</span> <span class="kp">as.matrix</span><span class="p">(</span>predict<span class="p">(</span>preproc<span class="p">,</span> my_matrix<span class="p">))</span>
 </pre></div>
 
@@ -687,20 +579,20 @@ my_matrixNorm <span class="o">=</span> <span class="kp">as.matrix</span><span cl
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h5 id="Next,-let's-calculate-distance-and-apply-hierarchical-clustering-and-plot-the-dendogram">Next, let's calculate distance and apply hierarchical clustering and plot the dendrogram<a class="anchor-link" href="#Next,-let's-calculate-distance-and-apply-hierarchical-clustering-and-plot-the-dendogram">&#182;</a></h5>
+<h5 id="Next,-let's-calculate-distance-and-apply-hierarchical-clustering-and-plot-the-dendogram">Next, let's calculate distance and apply hierarchical clustering and plot the dendogram<a class="anchor-link" href="#Next,-let's-calculate-distance-and-apply-hierarchical-clustering-and-plot-the-dendogram">&#182;</a></h5>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>distances <span class="o">=</span> dist<span class="p">(</span>my_matrixNorm<span class="p">,</span> method <span class="o">=</span> <span class="s">&quot;euclidean&quot;</span><span class="p">)</span>
 
 clusterdrug <span class="o">=</span> hclust<span class="p">(</span>distances<span class="p">,</span> method <span class="o">=</span> <span class="s">&quot;ward.D&quot;</span><span class="p">)</span> 
 
-plot<span class="p">(</span>clusterdrug<span class="p">,</span> cex<span class="o">=</span><span class="m">0.5</span><span class="p">,</span> labels <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+plot<span class="p">(</span>clusterdrug<span class="p">,</span> cex<span class="o">=</span><span class="m">0.5</span><span class="p">,</span> labels <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span>cex<span class="o">=</span><span class="m">0.5</span><span class="p">,</span>xlab <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span> sub <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span>cex<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -714,9 +606,8 @@ plot<span class="p">(</span>clusterdrug<span class="p">,</span> cex<span class="
 <div class="output_area"><div class="prompt"></div>
 
 
-
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAtAAAAJYCAMAAAB8aiEbAAAAM1BMVEX9/v0AAABMTUxnaGd7e3uLjIuZmpmmpqaxsrG7vLvFxsXOz87X2Nff4N/n6Ofu7+79/v1tTElJAAAAEXRSTlP/////////////////////ACWtmWIAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAABoASURBVHic7Z2Leqo4FEYnXERFxfd/2uEiSmyCBEyOe7PWN3MKGsJPu0pDguG/O4Ai/vvXAQC+CUKDKhAaVIHQoAqEBlUgNKgCoUEVCA2qQGhQBUKDKhAaVIHQoAqEBlUgNKgCoUEVCA2qQGhQBUKDKhAaVIHQoAqEBlUgNKgCoUEVCA2qQGhQBUKDKhAaVIHQoAqEBlUgNKgCoUEVCA2qQGhQBUKDKhAaVIHQoAqEBlUgNKgCoUEVCA2qQGhQBUK/cTnkxmTleVgzxnze5PC5iHlQVLflURbtHGwQ2qYc1csu3eoCpy7ZAu3Mi3pxFoReAUJbFBPzrvdFTi3SblKtuSwNg9ArQOgp7fk5OzX3++3UylTevyp096Wpu/bM0jQIvQKEnnBtbXu0ca/5sVt6ODWqNXp57M7kfTv7cdbtX60ykz3ayO1Lt9xUz5pfbuaPRsdb6XvdVnm4DmVuh8zkp8nOx7rqQ7tyGBstt3atcBQ7d+2mfKi7e/OUm7z9s3DKTLH4r4NYEHpCZczJfsUp9C0bL/GmQo+vjm3vvH/frqelbo10lK5ezZz75VH7a+ePusYGUXmfK/ZsNl2GV4f1WxXW3pEKQk9of/RvnRBOodsTY3tybopO/5fQo+XZo6DpS9n1tDStd+7SHX2HSfZat+p6XrAORnuKta2loul/Octp1dn0d0ExCD3B/Gm0OoU2g/cPNR/vDR41g+z9ibFx19wv/imd1f0vSlfqPKzV2WvnfV3tud20DfzmaPpWy6PY+b1Y/vitfGZtX+0uCfJr/+Xb37NfA6EnLBS6U+jZkB3fa0+fzbD6ODHWjnqei87SzVCqfGxbv3berx/GBlHVn8nHYue3YvYuXy2Pi/MA1YHQExYKfXw0D+q3IpNWhHkI66i5X/xTelLqWfZVczP9er/1b2SeYl2Bc1UYq7K341AMQk/IH1dlL5xC36tRRrsjZNKifTfntT40VNylvUK/1TH+TjiL3c/536oRepcs7OVorTwPXQfF67XMcsUv9NDL4S79UejnGTpznqH71a4Jkh9OV4SGy6sf+vLeD90M77+EqA+WMqXVhPULXfTl3KWN1YY+v1lYfmxD9++OHd0IDa+Rwq6ZPBkpbM+GVX/XRr+aPxu1YwO4GTodLv2XyWn7ybh+KYeN3KWHr6e/3Rf9u55eDuP+K8IZGtqmxKRvd9pAPlhN3tas4tZfG3bjct0m49ceV3fCpM08nD+dpV+/PpO9vep63Wji6a4eS1WvTj+E3jfNU5p80pnb9yuYYTivWx0vCvuRwMNjoX68WE22e/Lus7v04+tjCLD8Y+EY7jCtongrdhl/IftfFoTeO/Uh6y6qHi3c0YBrd9vE+fXXv7f4cQFZPgxrqrYtUlp9eU9Gm4tq7FpzlR6//rlJwwr37ALvQ9V/inUvZ4frrW80ITQIowm4f28HILRUzDBsfi12cINGAAgtlclnEZZ/CEY/CC2V502sk9uuAaHl0hy7fpDswPl5CkKDKhAaVIHQoAqEBlUgNKgCoUEVCA2qQGhQBUKDKhAaVIHQoAqEBlUgNKgCoUEVCA2qQGhQBUKDKhAaVIHQoAqEBlUgNKgCoUEVCA2qQGhQBUKDKhAaVIHQoAqEBlUgNKgCoUEVCA2qQGhQBUKDKhAaVJFAaPWPxoMfAqFBFQgNqkBoUAVCgyoQGlSB0KAKhAZVIDSoAqFBFQgNqkBoUAVCgyoQGlShSmizU5J9gwWgS+hke/opdnrYbhBaPjs9bDcILZ+dHrYbhJbPTg/bDULLZ6eH7Qah5bPTw3aD0PLZ6WG7QWj57PSw3SC0fHZ62G4QWj47PWw3CC2fnR62G4SWz04P2w1Cy2enh+0GoeWz08N2g9Dy2elhu0Fo+ez0sN0gtHx2ethuEFo+Oz1sNwgtn50ethuEls9OD9sNQstnp4ftBqHls9PDdoPQ8tnpYbtBaPns9LDdrBf6ciz7WU7K6jJfEKEjs9PDdrNW6CafzNxTzBZF6Mjs9LDdrBW6Mtn52i/d6sxUc0UROjI7PWw3a4XOzPW5fDXZXFGEjsxOD9vNWqGtGQLnpwtE6Mjs9LDdcIaWz04P282GNnR965doQ/9rdnrYblZ32xWTXo68mSuJ0JHZ6WG72dAPXfX90Fl5pB/637LTw3bDSKF8dnrYbhBaPjs9bDcMfctnp4fthqFv+ez0sN0w9J2cyI/E+gr/+nu0HgZWkiMgpYCIPiINff+bX3cZPwcBKQVE9MEZOjkCUgqI6IOh7+QISCkgog+GvpMjIKWAiD4Y+k6OgJQCIvpgpDA5AlIKiOgDoZMjIKWAiD4QOjkCUgqI6AOhkyMgpYCIPhA6OQJSCojoY/1I4eLBQIS2EZBSQEQfa4U+IfRaBKQUENHH6ibHNZu/afQFQtsISCkgoo/1bejr/ID3C4S2EZBSQEQfGy4KT5P7k+ZAaBsBKQVE9EEvR3IEpBQQ0QdCJ0dASgERfSB0cgSkFBDRB0InR0BKARF9IHRyBKQUENEHQidHQEoBEX0gdHIEpBQQ0QdCJ0dASgERfSB0cgSkFBDRB0InR0BKARF9IHRyBKQUENEHQidHQEoBEX0gdHIEpBQQ0QdCJ0dASgERfSB0cgSkFBDRB0InR0BKARF9IHRyBKQUENEHQidHQEoBEX0gdHIEpBQQ0QdCJ0dASgERfSB0cgSkFBDRB0InR0BKARF9IHRyBKQUENEHQidHQEoBEX0gdHIEpBQQ0QdCJ0dASgERfSB0cgSkFBDRB0InR0BKARF9IHRyBKQUENHHhucUHvvnFJqy4jmFQQhIKSCij7VCN/lk/v75qc8R2kZASgERfWx41vd5mB6aZ30HIiClgIg+1gqdTWY7v5psrihC2whIKSCij/VPwfKt/C26chfhyPg5CEgpIKIPztDJEZBSQEQfG9rQ9a1fog0diICUAiL6WN1tV0x6OfJmriRC2whIKSCijw390FXfD52VR/qhgxCQUkBEH4wUJkdASgERfUQSevFzk7+712R72oKAlAIi+lgt9O1gsuP9fspN9uGJsghtIyClgIg+Vg99Z92593Rk6DsYASkFRPSxvtuuPS9XmTk096ai2y4EASkFRPSxfmCl+9eYvsOOgZUQBKQUENHHtqHvxwUfQ98hCEgpIKKPrWfo7t+GM3QIAlIKiOhjaxu6ah7LfhDaRkBKARF90MuRHAEpBUT0QT90cgSkFBDRB0PfyRGQUkBEHwidHAEpBUT0gdDJEZBSQEQfCJ0cASkFRPSB0MkRkFJARB8InRwBKQVE9IHQyRGQUkBEHwidHAEpBUT0gdDJEZBSQEQfCJ0cASkFRPSB0MkRkFJARB8InRwBKQVE9IHQyRGQUkBEHwidHAEpBUT0gdDJEZBSQEQfCJ0cASkFRPSB0MkRkFJARB8InRwBKQVE9IHQyRGQUkBEHwidHAEpBUT0gdDJEZBSQEQfCJ0cASkFRPSB0MkRkFJARB8InRwBKQVE9IHQyRGQUkBEHwidHAEpBUT0gdDJEZBSQEQfCJ0cASkFRPSB0MkRkFJARB8InRwBKQVE9IHQyRGQUkBEHwidHAEpBUT0gdDJEZBSQEQfCJ0cASkFRPSB0MkRkFJARB/rhb4cy/6JQWV1mS+I0DYCUgqI6GP1U7By84KnYIUgIKWAiD7WP6cwO1/7pVud8ZzCEASkFBDRx/onyV6fy1eeJBuCgJQCIvrY9qxv18rfoit3EY6Mn4OAlAIi+uAMnRwBKQVE9LGhDV3f+iXa0IEISCkgoo/V3XbFpJcjb+ZKIrSNgJQCIvrY0A9d9f3QWXmkHzoIASkFRPQxFfp5bZfNtolDQWgbASkFRPThEvo232uxBDNla2XL95psT1sQkFJARB+j0LWlYP55w6bqTuPH3JjiPF8SoW0EpBQQ0cfzDD0dys4/tIpbbll75m0yhr7DEZBSQEQfzjb0Ag6mbNp/DrfW7QPddiEISCkgoo/1I4XN45+29cHASggCUgqI6GPT0HdmJiv+oit3EY6Mn4OAlAIi+rCEPuWLOyYO3dD3cRj/buYb0QhtIyClgIg+pkIfA3rariarrvcya42uc1PPFUVoGwEpBUT0MRU6M6flG9bZS//jbEmEtome0vwCsQ/Sx9pejpbzoW+hlMfbfDmEtokvdOwdLOAnhK7M7E1Ga0FoG4SOiXVRWBafR1TCQWgbhI7JKHTEFhBC2yB0TBA6OQgdEyaaSQ5CxwShk4PQMbG77Z4Us7cbhYHQNggdE4/QZv5+oyAQ2gahY2I1OQ5ZN4ZdZ+ZyL+dvCQ0BoW0QOib2wMow18bVFPdmyadWloHQNggdE+fQd7fwva47hLZB6JjYNyeNZ+gMoeOB0DGxmxxjG7q6nz98UDAAhLZB6JhYF4XjbEhFd4IOuJV0HoS2QeiY2AMrdTcZUtmdpj/c4xwCQtsgdEwYKUwOQscEoZOD0DF53W1njRR+cxcIbYPQMUHo5CB0TGhyJAehY4LQyUHomPzttrvfyw8f4w4EoW0QOiZ/B1baMNlXjUZoG4SOyVTokymaTuiTOXxzFwhtg9AxsW9OaoZ7kujliAlCx+T99lGEjg5Cx2QqdP44Q1+/d3N/B0LbIHRMHG3oOmjSxs8gtA1Cx8SeCux1++gXQWgbhI6J6/bRD0+1CgWhbRA6JowUJgehY4LQyUHomCB0chA6Jsw+mhyEjsl6oS/HoVOkrD7Mko7QNggdE7vJsfzU3EwfpcyjkUNA6JisFboy2XmYlubWz+MxA0LbIHRM1go9zrLUceXRyCEgdEzWCm2V5NHIISB0TDhDJwehY7KhDV0Pn2uhDR0IQsdkrdDPefA68tkHdiK0DULHZEM/dNX3Q2flkX7oIBA6JowUJgehYxLpXo5ovx3ze022py0gdEy2C/1RWIS2QeiYIHRyEDoma4UOaHMjtA1Cx2St0JcMoVeC0DFZ3eRoSlP0Iys0OQJB6JhsaEOfjek+TovQgSB0TLZcFN4KUzYIHQpCx2RbL8fRZDVCB4LQMdnYbXfNPw+cILQNQsdkcz/0AaEDQeiYMI1BchA6JgidHISOCUInB6FjgtDJQeiYIHRyEDomCJ0chI4JQicHoWOC0MlB6JggdHIQOiYInRyEjglCJwehY4LQyUHomCB0chA6JgidHISOCUInB6FjgtDJQeiYIHRyEDomCJ0chI4JQicHoWOC0MlB6JggdHIQOiYInRyEjglCJwehY4LQyUHomCB0chA6JgidHISOCUInB6FjgtDJQeiYIHRyEDomCJ0chI4JQicHoWOC0MlB6JggdHIQOibrhb4cy/4RhWV1mS+I0DYIHZO1Qjf55LGbxWxRhLZB6JisFboy2fnaL93qzFRzRRHaBqFjslbozFyfy1eTzRVFaBuEjsn6h9f7Vv4WXbmLcH7hJ/kZhI4JZ+jkIHRMNrSh6/7Z9bShQ0HomKzutismvRx5M1cSoW0QOiYb+qGrvh86K4/0QweB0DFhpDA5CB2TSEKbKXF24dprsj1tAaFjslro5mBMUQ/LdNuFgNAxWT30nQ03cvQrCB0CQsdkfbfdqbX6lPW3cSB0CAgdk/UDK/2XW5bfEDoMhI7J1qHvpigQOgyEjslaoXMzDqbkBUIHgdAxWSv0yRweSzdTIHQICB2T1d121dPi+kNXM0LbIHRM1g+sXMtx6XZA6AAQOiYMfScHoWOC0MlB6JggdHIQOiYInRyEjglCb99rZMIDRTjIUBBa1p4S7hWhg0DoX98rQgeB0L++V4QOAqF/fa8IHQRC//pef1fodJe5ASD0r+/1h4VOvN0iEPrX94rQQSD0r+8VoYNA6F/fK0IHgdC/vlclQqe6QEToX9+rFqG/UMcSflvo1R1DKbuP/r3QSQ5zVbKPhfcm9PdSxKv9B4TeWsE6EDrlpulqR+gNhRH6iyD0NhA65abpakfoDYUR+ov8sNBhl3fO1+NfHSJ0yk3T1R5F6KA9uYVevPlaEDrlpulqR+gNhRH6iyD0NhA65abpakfoDYUR+osg9DYQOuWm6WpH6A2FEfqL7EboSN13CJ1y03S1CxB6WTWhIHTKTdPVjtAbCiP0d/jmH2CE3lAYob+D/6e9qa6v8a7gfCMYoV8gtAihvat+zX9d6Eg3mSC0cKEDCzlWV7NR6JUVfQChhQn9dlJD6Df2LfRX/uYlFtp+BaHf2LnQ39gPQq8qjNDfBKG/AEI73tvG1kwIvQWEDntvW82LtkToLSgT+nIs+7NkWV3mCyL05joRejFrhW7yyV/+YrboV4X+UgNkudAbG0Ur20YIvZa1QlcmO1/7pVudmWqu6HeFfltdaVCA0KEBvyI5Qq9lrdCZuT6XryabK/o1od9U8K0uUcitxXoZlxm7MJs37oLk7tXZ/bu/2Usyz+Ku4u+BLIuxmLVCWwE+/IDd24d/c95/iM5VXyE7y3wVb7tdtvq2g9lC8zW+hQpIHrS66Hv+obDnuztfxVy2zSQ4QzsJszFg9TeqINTKKjazoQ1d3/qlj21oJ4K+x79Ro9ZQvyL0vZj84cmb4M0FfY9/o0atoX5G6Pul6vuhs/L4oR/aiaDv8W/UqDXU7wi9DUHf49+oUWsohBbxYyLUyio2g9BRqiDUyio2g9BRqiDUyio2g9BRqiDUyio2g9BRqiDUyio2g9BRqiDUyio2g9BRqiDUyio2g9BRqiDUyio2g9BRqiDUyio2g9BRqiDUyio2g9BRqvitUHfnuz95XJtB6ChV/Faou/PdnzyuzexU6Ngpfsudu/PdnzyuzSB0lBS/5c7d+e5PHtdmEDpKimTHNXsgPy20O/lmEDpKCoReGgqhdy60G4Qe2bfQ7lAIHRoKoRF6bRWzyREaoR2hEDo0FEIj9NoqZpMjNEI7QiF0aCiERui1VcwmR2iEdoRC6NBQCI3Qa6uYTY7QooT+QhUShJ4P9QX+0dlDt9AAUUBoUAVCgyoQGlSB0KAKhAZVIDSoAqFBFQgNqkBoUAVCgyoQGlSB0KAKhAZVIDSoAqFBFQgNqkBoUAVCgyoQGlSB0KAKhAZVIDSoAqFBFQgNqkBoUAVCgyoQGlSB0KAKhAZVIDSoAqFBFQgNqkBoUAVCgyoQGlSB0KAKhAZVIDSoAqFBFQgNqkBoUAVCgyoQGlSB0KAKhAZVIDSoAqFBFQgNqkBoUAVCgyoQGlSB0KAKhAZVIDSoAqFBFQgNqkBoUAVCgyoQGlSB0KAKhAZVIDSoAqFBFQgNqkBoUAVCgyoQGlSB0KAKhAZVIDSoAqFBFQgNqkBoUAVCgyoQGlSB0KAKhAZVIDSoAqFBFQgNqkBoUAVCgyoQGlSB0KAKhAZVIDSoAqFBFQgNqkBoUAVCgyoQGlSB0KAKhAZVIDSoAqFBFQgNqkBoUAVCx8SY4f8J9T+KshcQOiZ/hc6Nryx8BYSOifmj799X4KsgdEwQOjkIHYkqM9WryVEXxhR1t2KG9dKYrOrKGXMrTXYctylu/dIpN9mpXxq3hGUgdByKztxyFPrUi2xOo9DHYb0zuhW7WzyO22RNu1T2bxf3yZawDISOwtlk1/s1G4XOzLV7LR+bHMacu3XTLxZNq23erbdLh87yultqClNPt4RFIHQUSnO5d2KasadjbDRM29APoS+PxX6bxmTdUneabkw53RIWgdBReHg7Cl21zY/rdfLG/VYfi4fQ04Lj1g+mW8IiEDoKb0Lfj11DObs93yhGYT8J/doSFoHQUXgXum1+VPmrDX0w+am+zQg9reuxJSwCoaNQ9k3fy19PX/7e34UuJm3ot4YzvdeLQego1HYvRz70avRn6K710F0JXt/b0Keub6Pqejn6PpJ2vZxuCYtA6Dj0PcmHUejz0CS+dIJ2p+DKPF+YnLJf/dBDE7trOb+2hEUgdCSOf0cKOysveSd024huV+uhX64rPfzbdWk8RwrNoV98bgmLQGhQBUKDKhAaVIHQoAqEBlUgNKgCoUEVCA2qQGhQBUIH4LpHyHvfkH1/UV32hV2bh9x5NCk7jInnVTOppuTTAAgdQIjQ9gQcN9Pcb00rdPN2Z/NWoR/3Sj+qaczub5xG6ABChLZfL6rujqMyL/tPvtrFVgvd/Xsr+hrHaqrCs+FuQOgAVgt97j8keD2Yw6Wxi5Vl99+aBONi3t08PVbTdHeb7hqEDqB1qHqfQ+Ptrv33CTgG8v7EWWenPx95rar2v4s59O8P7x7MxZq3o8m7u/JeE328wtyHrQ6Parq1Yu93TiN0AP1MG8MkGc97l22h3yfgGLgM82ocD/fD0Vlx9vhg1qBwZs/bUfYLr4k+nmGGr4119/9p77dOI3QArjk0bKHfJ+AYqMyHz20f+5ZCf+9/u/Xxz7wd1kQfzzDvCx3X4ZdivyB0AK45NGyh3RNwFKb5W9mUW3dld2lPwNeu8NhTMZm3YzrRx/sOLKGb96vOvYHQAfg+of16/e8EHO/Lbjrl2/N4e3K+DUa+zdvx9sVatGvf++dpETqAz0L/mYBjst0cdatylt/z/NH6eJ+3Y0bom31ORmhYzAKh3ybgmG43X3V+aVu/Vdel0Tjm7ZgR+my3mhEaFuOaQ+Mp9MUl+cDHNnTXVjm0ze+6/fcw7sgSejLRhxWm64ee9mvQhv7XASThmkNjmHbj1E0W6piAY6D63JfWqmr6TsBe3D/zdkwn+rDCPEYKJ/XQywFLcc2h8ex97vuI3yfgGLiYo6Mem2G6r2LY6M+8HdOJPp4xJvdyPDnSDw2LmbaVxzk0xkvBw2SkcDIBx0BeOOqxOfan1uPjBPs+b8d9MtGHJXTxNlLDSOG/DrAL6re74KJduN12P500QiehsFq250Os/XC3HUIn4Wb1cwTcXhcG90MjdCLqaCflKYe9NzgQGpSB0KAKhAZV/A+Fdl21+06/RgAAAABJRU5ErkJggg=="
+<img src="data:image/png;base64,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"
 >
 </div>
 
@@ -738,7 +629,7 @@ plot<span class="p">(</span>clusterdrug<span class="p">,</span> cex<span class="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>dend <span class="o">&lt;-</span> as.dendrogram<span class="p">(</span>clusterdrug<span class="p">)</span> 
@@ -777,9 +668,6 @@ plot<span class="p">(</span>dend<span class="p">)</span>
 </div>
 
 </div>
-
-
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -791,10 +679,10 @@ plot<span class="p">(</span>dend<span class="p">)</span>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>clusterGroups <span class="o">=</span> cutree<span class="p">(</span>clusterkos<span class="p">,</span> k <span class="o">=</span> <span class="m">4</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre>clusterGroups <span class="o">=</span> cutree<span class="p">(</span>clusterdrug<span class="p">,</span> k <span class="o">=</span> <span class="m">4</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -802,9 +690,124 @@ plot<span class="p">(</span>dend<span class="p">)</span>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>add the clusterGroups column</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>mydata<span class="o">$</span>cluster<span class="o">=</span>clusterGroups
+mydata
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt output_prompt">Out[19]:</div>
 
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table>
+<thead><tr><th></th><th scope=col>Route</th><th scope=col>Sex</th><th scope=col>Outc_cod</th><th scope=col>Indi_pt</th><th scope=col>Pt</th><th scope=col>cluster</th></tr></thead>
+<tbody>
+	<tr><th scope=row>1</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>2</th><td>ORAL</td><td>F</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>3</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>4</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>5</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>6</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>7</th><td>ORAL</td><td>M</td><td>HO</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>8</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>9</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>10</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>11</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>12</th><td>ORAL</td><td>F</td><td>LT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>13</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>14</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>15</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>16</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>17</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>18</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>19</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>20</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td></tr>
+	<tr><th scope=row>21</th><td>ORAL</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td></tr>
+	<tr><th scope=row>22</th><td>TOPICAL</td><td>F</td><td>OT</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td></tr>
+	<tr><th scope=row>23</th><td>TOPICAL</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td></tr>
+	<tr><th scope=row>24</th><td>TOPICAL</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td></tr>
+	<tr><th scope=row>25</th><td>TOPICAL</td><td>M</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td></tr>
+	<tr><th scope=row>26</th><td>TOPICAL</td><td>F</td><td>LT</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td></tr>
+	<tr><th scope=row>27</th><td>TOPICAL</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td></tr>
+	<tr><th scope=row>28</th><td>TOPICAL</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td></tr>
+	<tr><th scope=row>29</th><td>TOPICAL</td><td>M</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td></tr>
+	<tr><th scope=row>30</th><td>TOPICAL</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td></tr>
+	<tr><th scope=row>31</th><td>TOPICAL</td><td>F</td><td>OT</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td></tr>
+	<tr><th scope=row>32</th><td>TOPICAL</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td></tr>
+	<tr><th scope=row>33</th><td>TOPICAL</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td></tr>
+	<tr><th scope=row>34</th><td>INTRAVENOUS</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td></tr>
+	<tr><th scope=row>35</th><td>INTRAVENOUS</td><td>M</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td></tr>
+	<tr><th scope=row>36</th><td>INTRAVENOUS</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td></tr>
+	<tr><th scope=row>37</th><td>INTRAVENOUS</td><td>F</td><td>HO</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td></tr>
+	<tr><th scope=row>38</th><td>INTRAVENOUS</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td></tr>
+	<tr><th scope=row>39</th><td>INTRAVENOUS</td><td>M</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td></tr>
+	<tr><th scope=row>40</th><td>INTRAVENOUS</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td></tr>
+	<tr><th scope=row>41</th><td>INTRAVENOUS</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td></tr>
+	<tr><th scope=row>42</th><td>INTRAVENOUS</td><td>F</td><td>OT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td></tr>
+	<tr><th scope=row>43</th><td>INTRAVENOUS</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td></tr>
+	<tr><th scope=row>44</th><td>INTRAVENOUS</td><td>M</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td></tr>
+	<tr><th scope=row>45</th><td>INTRAVENOUS</td><td>F</td><td>OT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td></tr>
+	<tr><th scope=row>46</th><td>INTRAVENOUS</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td></tr>
+	<tr><th scope=row>47</th><td>INTRAVENOUS</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td></tr>
+	<tr><th scope=row>48</th><td>INTRAVENOUS</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td></tr>
+	<tr><th scope=row>49</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>50</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>51</th><td>OPHTHALMIC</td><td>F</td><td>LT</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>52</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>53</th><td>ORAL</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>54</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>55</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>56</th><td>OPHTHALMIC</td><td>F</td><td>HO</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>57</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>58</th><td>ORAL</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>59</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>60</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>61</th><td>OPHTHALMIC</td><td>F</td><td>OT</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>62</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>63</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>64</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>65</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>66</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>67</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>68</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>69</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>70</th><td>OPHTHALMIC</td><td>F</td><td>OT</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>71</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+	<tr><th scope=row>72</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -816,14 +819,14 @@ plot<span class="p">(</span>dend<span class="p">)</span>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>observationsH<span class="o">=</span><span class="kt">c</span><span class="p">()</span>
 
 <span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="kp">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">4</span><span class="p">)){</span>
   
-  observationsH<span class="o">=</span><span class="kt">c</span><span class="p">(</span>observationsH<span class="p">,</span><span class="kp">length</span><span class="p">(</span><span class="kp">subset</span><span class="p">(</span>clusterfish<span class="p">,</span> clusterGroups<span class="o">==</span>i<span class="p">)))</span>
+  observationsH<span class="o">=</span><span class="kt">c</span><span class="p">(</span>observationsH<span class="p">,</span><span class="kp">length</span><span class="p">(</span><span class="kp">subset</span><span class="p">(</span>clusterdrug<span class="p">,</span> clusterGroups<span class="o">==</span>i<span class="p">)))</span>
 <span class="p">}</span>
 observationsH <span class="o">=</span><span class="kp">as.data.frame</span><span class="p">(</span><span class="kt">list</span><span class="p">(</span>cluster<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">),</span>Number_of_observations<span class="o">=</span>observationsH<span class="p">))</span>
 observationsH
@@ -837,7 +840,7 @@ observationsH
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[76]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[20]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <table>
@@ -869,7 +872,7 @@ observationsH
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>z<span class="o">=</span><span class="kp">do.call</span><span class="p">(</span><span class="kp">cbind</span><span class="p">,</span><span class="kp">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">,</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">)</span> <span class="kp">round</span><span class="p">(</span><span class="kp">colMeans</span><span class="p">(</span><span class="kp">subset</span><span class="p">(</span>my_matrix<span class="p">,</span>clusterGroups<span class="o">==</span>i<span class="p">)),</span><span class="m">2</span><span class="p">)))</span>
@@ -885,30 +888,221 @@ z
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[77]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[21]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <table>
 <thead><tr><th></th><th scope=col>cluster1</th><th scope=col>cluster2</th><th scope=col>cluster3</th><th scope=col>cluster4</th></tr></thead>
 <tbody>
-	<tr><th scope=row>ORAL</th><td>1.00</td><td>0.08</td><td>0.00</td><td>0.08</td></tr>
-	<tr><th scope=row>TOPICAL</th><td>0.00</td><td>0.92</td><td>0.00</td><td>0.00</td></tr>
 	<tr><th scope=row>INTRAVENOUS</th><td>0</td><td>0</td><td>1</td><td>0</td></tr>
 	<tr><th scope=row>OPHTHALMIC</th><td>0.00</td><td>0.00</td><td>0.00</td><td>0.92</td></tr>
-	<tr><th scope=row>M</th><td>0.90</td><td>0.15</td><td>0.20</td><td>0.00</td></tr>
+	<tr><th scope=row>ORAL</th><td>1.00</td><td>0.08</td><td>0.00</td><td>0.08</td></tr>
+	<tr><th scope=row>TOPICAL</th><td>0.00</td><td>0.92</td><td>0.00</td><td>0.00</td></tr>
 	<tr><th scope=row>F</th><td>0.10</td><td>0.85</td><td>0.80</td><td>1.00</td></tr>
-	<tr><th scope=row>OT</th><td>0.90</td><td>0.15</td><td>0.13</td><td>0.08</td></tr>
+	<tr><th scope=row>M</th><td>0.90</td><td>0.15</td><td>0.20</td><td>0.00</td></tr>
+	<tr><th scope=row>DE</th><td>0.00</td><td>0.00</td><td>0.00</td><td>0.83</td></tr>
 	<tr><th scope=row>HO</th><td>0.05</td><td>0.77</td><td>0.07</td><td>0.04</td></tr>
 	<tr><th scope=row>LT</th><td>0.05</td><td>0.08</td><td>0.80</td><td>0.04</td></tr>
-	<tr><th scope=row>DE</th><td>0.00</td><td>0.00</td><td>0.00</td><td>0.83</td></tr>
+	<tr><th scope=row>OT</th><td>0.90</td><td>0.15</td><td>0.13</td><td>0.08</td></tr>
 	<tr><th scope=row>RHEUMATOID ARTHRITIS</th><td>1</td><td>0</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>URINARY TRACT INFECTION</th><td>0</td><td>1</td><td>0</td><td>0</td></tr>
-	<tr><th scope=row>TONSILLITIS</th><td>0</td><td>0</td><td>1</td><td>0</td></tr>
 	<tr><th scope=row>Senile osteoporosis</th><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+	<tr><th scope=row>TONSILLITIS</th><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+	<tr><th scope=row>URINARY TRACT INFECTION</th><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+	<tr><th scope=row>Sepsis</th><td>0</td><td>0</td><td>0</td><td>1</td></tr>
 	<tr><th scope=row>VASCULITIC RASH</th><td>1</td><td>0</td><td>0</td><td>0</td></tr>
 	<tr><th scope=row>VOMITING</th><td>0</td><td>1</td><td>1</td><td>0</td></tr>
-	<tr><th scope=row>Sepsis</th><td>0</td><td>0</td><td>0</td><td>1</td></tr>
 	<tr><th scope=row>Age</th><td>61.80</td><td>17.54</td><td> 5.80</td><td>44.62</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Try-other-clustering-techniques">Try other clustering techniques<a class="anchor-link" href="#Try-other-clustering-techniques">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>distances <span class="o">=</span> dist<span class="p">(</span>my_matrixNorm<span class="p">,</span> method <span class="o">=</span> <span class="s">&quot;canberra&quot;</span><span class="p">)</span>
+
+clusterdrug <span class="o">=</span> hclust<span class="p">(</span>distances<span class="p">,</span> method <span class="o">=</span> <span class="s">&quot;mcquitty&quot;</span><span class="p">)</span> 
+
+plot<span class="p">(</span>clusterdrug<span class="p">,</span> cex<span class="o">=</span><span class="m">0.5</span><span class="p">,</span> labels <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span>cex<span class="o">=</span><span class="m">0.5</span><span class="p">,</span>xlab <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span> sub <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span>cex<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>dend <span class="o">&lt;-</span> as.dendrogram<span class="p">(</span>clusterdrug<span class="p">)</span> 
+
+<span class="c1"># Color the branches based on the clusters:</span>
+dend <span class="o">&lt;-</span> color_branches<span class="p">(</span>dend<span class="p">,</span> k<span class="o">=</span><span class="m">4</span><span class="p">)</span> <span class="c1">#, groupLabels=iris_species)</span>
+
+<span class="c1"># We hang the dendrogram a bit:</span>
+dend <span class="o">&lt;-</span> hang.dendrogram<span class="p">(</span>dend<span class="p">,</span>hang_height<span class="o">=</span><span class="m">0.1</span><span class="p">)</span>
+<span class="c1"># reduce the size of the labels:</span>
+<span class="c1"># dend &lt;- assign_values_to_leaves_nodePar(dend, 0.5, &quot;lab.cex&quot;)</span>
+dend <span class="o">&lt;-</span> set<span class="p">(</span>dend<span class="p">,</span> <span class="s">&quot;labels_cex&quot;</span><span class="p">,</span> <span class="m">0.5</span><span class="p">)</span>
+
+plot<span class="p">(</span>dend<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre>clusterGroups2 <span class="o">=</span> cutree<span class="p">(</span>clusterdrug<span class="p">,</span> k <span class="o">=</span> <span class="m">4</span><span class="p">)</span>
+mydata<span class="o">$</span>cluster2<span class="o">=</span>clusterGroups2
+mydata
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[26]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table>
+<thead><tr><th></th><th scope=col>Route</th><th scope=col>Sex</th><th scope=col>Outc_cod</th><th scope=col>Indi_pt</th><th scope=col>Pt</th><th scope=col>cluster</th><th scope=col>cluster2</th></tr></thead>
+<tbody>
+	<tr><th scope=row>1</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>2</th><td>ORAL</td><td>F</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>3</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>4</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>5</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>6</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>7</th><td>ORAL</td><td>M</td><td>HO</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>8</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>9</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>10</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>11</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>12</th><td>ORAL</td><td>F</td><td>LT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>13</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>14</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>15</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>16</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>17</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>18</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>19</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>20</th><td>ORAL</td><td>M</td><td>OT</td><td>RHEUMATOID ARTHRITIS</td><td>VASCULITIC RASH</td><td>1</td><td>1</td></tr>
+	<tr><th scope=row>21</th><td>ORAL</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td><td>2</td></tr>
+	<tr><th scope=row>22</th><td>TOPICAL</td><td>F</td><td>OT</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td><td>2</td></tr>
+	<tr><th scope=row>23</th><td>TOPICAL</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td><td>2</td></tr>
+	<tr><th scope=row>24</th><td>TOPICAL</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td><td>2</td></tr>
+	<tr><th scope=row>25</th><td>TOPICAL</td><td>M</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td><td>2</td></tr>
+	<tr><th scope=row>26</th><td>TOPICAL</td><td>F</td><td>LT</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td><td>2</td></tr>
+	<tr><th scope=row>27</th><td>TOPICAL</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td><td>2</td></tr>
+	<tr><th scope=row>28</th><td>TOPICAL</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td><td>2</td></tr>
+	<tr><th scope=row>29</th><td>TOPICAL</td><td>M</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td><td>2</td></tr>
+	<tr><th scope=row>30</th><td>TOPICAL</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td><td>2</td></tr>
+	<tr><th scope=row>31</th><td>TOPICAL</td><td>F</td><td>OT</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td><td>2</td></tr>
+	<tr><th scope=row>32</th><td>TOPICAL</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td><td>2</td></tr>
+	<tr><th scope=row>33</th><td>TOPICAL</td><td>F</td><td>HO</td><td>URINARY TRACT INFECTION</td><td>VOMITING</td><td>2</td><td>2</td></tr>
+	<tr><th scope=row>34</th><td>INTRAVENOUS</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td><td>3</td></tr>
+	<tr><th scope=row>35</th><td>INTRAVENOUS</td><td>M</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td><td>3</td></tr>
+	<tr><th scope=row>36</th><td>INTRAVENOUS</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td><td>3</td></tr>
+	<tr><th scope=row>37</th><td>INTRAVENOUS</td><td>F</td><td>HO</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td><td>3</td></tr>
+	<tr><th scope=row>38</th><td>INTRAVENOUS</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td><td>3</td></tr>
+	<tr><th scope=row>39</th><td>INTRAVENOUS</td><td>M</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td><td>3</td></tr>
+	<tr><th scope=row>40</th><td>INTRAVENOUS</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td><td>3</td></tr>
+	<tr><th scope=row>41</th><td>INTRAVENOUS</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td><td>3</td></tr>
+	<tr><th scope=row>42</th><td>INTRAVENOUS</td><td>F</td><td>OT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td><td>3</td></tr>
+	<tr><th scope=row>43</th><td>INTRAVENOUS</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td><td>3</td></tr>
+	<tr><th scope=row>44</th><td>INTRAVENOUS</td><td>M</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td><td>3</td></tr>
+	<tr><th scope=row>45</th><td>INTRAVENOUS</td><td>F</td><td>OT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td><td>3</td></tr>
+	<tr><th scope=row>46</th><td>INTRAVENOUS</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td><td>3</td></tr>
+	<tr><th scope=row>47</th><td>INTRAVENOUS</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td><td>3</td></tr>
+	<tr><th scope=row>48</th><td>INTRAVENOUS</td><td>F</td><td>LT</td><td>TONSILLITIS</td><td>VOMITING</td><td>3</td><td>3</td></tr>
+	<tr><th scope=row>49</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>50</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>51</th><td>OPHTHALMIC</td><td>F</td><td>LT</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>52</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>53</th><td>ORAL</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>54</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>55</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>56</th><td>OPHTHALMIC</td><td>F</td><td>HO</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>57</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>58</th><td>ORAL</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>59</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>60</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>61</th><td>OPHTHALMIC</td><td>F</td><td>OT</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>62</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>63</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>64</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>65</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>66</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>67</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>68</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>69</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>70</th><td>OPHTHALMIC</td><td>F</td><td>OT</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>71</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
+	<tr><th scope=row>72</th><td>OPHTHALMIC</td><td>F</td><td>DE</td><td>Senile osteoporosis</td><td>Sepsis</td><td>4</td><td>4</td></tr>
 </tbody>
 </table>
 
@@ -931,7 +1125,7 @@ z
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>Age<span class="o">=</span>z<span class="p">[</span><span class="kp">nrow</span><span class="p">(</span>z<span class="p">),]</span>
@@ -945,7 +1139,7 @@ z<span class="o">=</span>z<span class="p">[</span><span class="m">1</span><span 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="prompt input_prompt">In&nbsp;[75]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>my_result<span class="o">=</span><span class="kt">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span>ncol<span class="o">=</span><span class="m">4</span><span class="p">,</span>nrow<span class="o">=</span><span class="kp">ncol</span><span class="p">(</span>mydata<span class="p">))</span>
@@ -973,7 +1167,7 @@ my_result
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[80]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[75]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <table>
@@ -1002,8 +1196,17 @@ my_result
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We see that we have created the clusters using hierarchical clustering. From cluster 1, for male in the 60s, the drug results in vasculitic rash when taken for rheumatoid arthritis. We can interpret the other clusters similarly. Remember, this data is not real data. It is fake data made to show the application of clustering for drug adverse event study.</p>
-<p>From this short post, we see that clustering can be used for knowledge discovery in drug adverse event reactions. 
-Specially in cases where the data has millions of observations, where we cannot get any insight visually, clustering becomes handy for summarizing our data, for getting statistical insights and for discovering new knowledge.</p>
+<p>From, this short post, we see that clustering can be used for knowledge discovery in drug adverse event reactions. Specially in cases where the data has millions of observations, where we cannot get any insight visually, clustering becomes handy for summarizing our data, for getting statistical insights and for discovering new knowledge.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Though both techniques give the same results, it is important to note that one could be more appropriate than the other based on the application. We also see that the dendrograms are somewhat different which could lead us to decide on different number of clusters.</p>
 
 </div>
 </div>
@@ -1011,17 +1214,7 @@ Specially in cases where the data has millions of observations, where we cannot 
     </div>
   </div>
   
-  
-        <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="../myjs.js"></script>
-</div>
-
-</div>
-    </div>
-  </div>
-
-   
-   <div id="disqus_thread"></div>
+     <div id="disqus_thread"></div>
 <script type="text/javascript">
 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 var disqus_shortname = 'httpdatascienceenthusiastcom'; // required: replace example with your forum shortname
