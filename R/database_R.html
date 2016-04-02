@@ -1264,54 +1264,8 @@ The pipeline %&gt;% takes the output from the left-hand side of the pipe as the 
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[91]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre>demography<span class="o">%&gt;%</span>group_by<span class="p">(</span>Country<span class="o">=</span> occr_country<span class="p">)</span><span class="o">%&gt;%</span> <span class="c1">#grouped by country</span>
-           summarize<span class="p">(</span>Total<span class="o">=</span>n<span class="p">())</span><span class="o">%&gt;%</span>    <span class="c1"># found the count for each country</span>
-           arrange<span class="p">(</span>desc<span class="p">(</span>Total<span class="p">))</span><span class="o">%&gt;%</span>    <span class="c1"># sorted them in descending order</span>
-           filter<span class="p">(</span>Country<span class="o">!=</span><span class="s">&#39;&#39;</span><span class="p">)</span><span class="o">%&gt;%</span>     <span class="c1"># removed reports that does not have country information</span>
-           <span class="kp">head</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>                   <span class="c1"># took the top ten</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[91]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<table>
-<thead><tr><th></th><th scope=col>Country</th><th scope=col>Total</th></tr></thead>
-<tbody>
-	<tr><th scope=row>1</th><td>US</td><td>2048277</td></tr>
-	<tr><th scope=row>2</th><td>GB</td><td>99110</td></tr>
-	<tr><th scope=row>3</th><td>JP</td><td>85637</td></tr>
-	<tr><th scope=row>4</th><td>CA</td><td>66550</td></tr>
-	<tr><th scope=row>5</th><td>FR</td><td>64356</td></tr>
-	<tr><th scope=row>6</th><td>DE</td><td>57362</td></tr>
-	<tr><th scope=row>7</th><td>IT</td><td>40124</td></tr>
-	<tr><th scope=row>8</th><td>BR</td><td>38051</td></tr>
-	<tr><th scope=row>9</th><td>AU</td><td>23818</td></tr>
-	<tr><th scope=row>10</th><td>NL</td><td>23528</td></tr>
-</tbody>
-</table>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
