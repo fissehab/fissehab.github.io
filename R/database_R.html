@@ -224,6 +224,7 @@ div.prompt {display:none}
 	 </ul>
     </nav>
 	
+	
 	</head>
 <body>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
@@ -234,8 +235,8 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 style="color:blue; text-align:center", id="Working-with-databases-in-R">
-Working with databases in<em style="color:red"> R</em><a class="anchor-link" href="#Working-with-databases-in-R">&#182;</a></h2>
+<h2  style="color:blue; text-align:center", id="Working-with-databases-in-R">Working with databases in<em style="color:red"> R</em><a class="anchor-link" 
+href="#Working-with-databases-in-R">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -251,6 +252,7 @@ Working with databases in<em style="color:red"> R</em><a class="anchor-link" hre
 <br/>
 <br/>
 
+
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -262,6 +264,9 @@ Working with databases in<em style="color:red"> R</em><a class="anchor-link" hre
 </div>
 </div>
 </div>
+
+
+
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -296,11 +301,14 @@ Working with databases in<em style="color:red"> R</em><a class="anchor-link" hre
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span class="kn">library</span><span class="p">(</span>dplyr<span class="p">)</span>
 <span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>data.table<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>plotly<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>compare<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -319,7 +327,7 @@ Working with databases in<em style="color:red"> R</em><a class="anchor-link" hre
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[110]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>year_start<span class="o">=</span><span class="m">2013</span>
@@ -388,11 +396,9 @@ year_last<span class="o">=</span><span class="m">2015</span>
     <div class="input_area">
 <div class=" highlight hl-r"><pre>filenames <span class="o">&lt;-</span> <span class="kp">list.files</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^demo.*.csv&quot;</span><span class="p">,</span> full.names<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
 
-demo<span class="o">=</span><span class="kp">lapply</span><span class="p">(</span>filenames<span class="p">,</span>fread<span class="p">)</span>
-
-demography<span class="o">=</span><span class="kp">do.call</span><span class="p">(</span><span class="kp">rbind</span><span class="p">,</span><span class="kp">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>demo<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">)</span> 
-            select<span class="p">(</span><span class="kp">as.data.frame</span><span class="p">(</span>demo<span class="p">[</span>i<span class="p">]),</span>primaryid<span class="p">,</span>caseid<span class="p">,</span> 
-             age<span class="p">,</span>age_cod<span class="p">,</span>event_dt<span class="p">,</span>sex<span class="p">,</span>wt<span class="p">,</span>wt_cod<span class="p">,</span> occr_country<span class="p">)))</span>
+demography <span class="o">=</span> rbindlist<span class="p">(</span><span class="kp">lapply</span><span class="p">(</span>filenames<span class="p">,</span> fread<span class="p">,</span>
+        select<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;primaryid&quot;</span><span class="p">,</span><span class="s">&quot;caseid&quot;</span><span class="p">,</span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="s">&quot;age_cod&quot;</span><span class="p">,</span><span class="s">&quot;event_dt&quot;</span><span class="p">,</span>
+         <span class="s">&quot;sex&quot;</span><span class="p">,</span><span class="s">&quot;wt&quot;</span><span class="p">,</span><span class="s">&quot;wt_cod&quot;</span><span class="p">,</span><span class="s">&quot;occr_country&quot;</span><span class="p">),</span>data.table<span class="o">=</span><span class="kc">FALSE</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -402,7 +408,7 @@ demography<span class="o">=</span><span class="kp">do.call</span><span class="p"
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[112]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>str<span class="p">(</span>demography<span class="p">)</span>
@@ -418,16 +424,17 @@ demography<span class="o">=</span><span class="kp">do.call</span><span class="p"
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>&apos;data.frame&apos;:	3037542 obs. of  9 variables:
+<pre>Classes &apos;data.table&apos; and &apos;data.frame&apos;:	3037542 obs. of  9 variables:
  $ primaryid   : int  30375293 30936912 32481334 35865322 37005182 37108102 37820163 38283002 38346784 40096383 ...
  $ caseid      : int  3037529 3093691 3248133 3586532 3700518 3710810 3782016 3828300 3834678 4009638 ...
+ $ event_dt    : int  199706 199610 1996 20000627 200101 20010810 20120409 NA 20020615 20030619 ...
  $ age         : chr  &quot;44&quot; &quot;38&quot; &quot;28&quot; &quot;45&quot; ...
  $ age_cod     : chr  &quot;YR&quot; &quot;YR&quot; &quot;YR&quot; &quot;YR&quot; ...
- $ event_dt    : int  199706 199610 1996 20000627 200101 20010810 20120409 NA 20020615 20030619 ...
  $ sex         : chr  &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;M&quot; ...
  $ wt          : num  56 56 54 NA NA 80 102 NA NA 87.3 ...
  $ wt_cod      : chr  &quot;KG&quot; &quot;KG&quot; &quot;KG&quot; &quot;&quot; ...
  $ occr_country: chr  &quot;US&quot; &quot;US&quot; &quot;US&quot; &quot;AR&quot; ...
+ - attr(*, &quot;.internal.selfref&quot;)=&lt;externalptr&gt; 
 </pre>
 </div>
 </div>
@@ -464,11 +471,9 @@ demography<span class="o">=</span><span class="kp">do.call</span><span class="p"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>filenames <span class="o">&lt;-</span> <span class="kp">list.files</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^drug.*.csv&quot;</span><span class="p">,</span> full.names<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
-
-drug_list<span class="o">=</span><span class="kp">lapply</span><span class="p">(</span>filenames<span class="p">,</span>fread<span class="p">)</span>
-
-drug<span class="o">=</span><span class="kp">do.call</span><span class="p">(</span><span class="kp">rbind</span><span class="p">,</span><span class="kp">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>drug_list<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">)</span> 
-            select<span class="p">(</span><span class="kp">as.data.frame</span><span class="p">(</span>drug_list<span class="p">[</span>i<span class="p">]),</span>primaryid<span class="p">,</span>drug_seq<span class="p">,</span>drugname<span class="p">,</span>route<span class="p">)))</span>
+drug <span class="o">=</span> rbindlist<span class="p">(</span><span class="kp">lapply</span><span class="p">(</span>filenames<span class="p">,</span> fread<span class="p">,</span>
+        select<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;primaryid&quot;</span><span class="p">,</span><span class="s">&quot;drug_seq&quot;</span><span class="p">,</span><span class="s">&quot;drugname&quot;</span><span class="p">,</span><span class="s">&quot;route&quot;</span>
+         <span class="p">),</span>data.table<span class="o">=</span><span class="kc">FALSE</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -478,7 +483,7 @@ drug<span class="o">=</span><span class="kp">do.call</span><span class="p">(</sp
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>str<span class="p">(</span>drug<span class="p">)</span>
@@ -494,11 +499,11 @@ drug<span class="o">=</span><span class="kp">do.call</span><span class="p">(</sp
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>&apos;data.frame&apos;:	9989450 obs. of  4 variables:
- $ primaryid: chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
- $ drug_seq : chr  &quot;&quot; &quot;&quot; &quot;20140601&quot; &quot;U&quot; ...
- $ drugname : chr  &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; ...
- $ route    : chr  &quot;&quot; &quot;21060&quot; &quot;&quot; &quot;76273&quot; ...
+<pre>&apos;data.frame&apos;:	10026718 obs. of  4 variables:
+ $ primaryid: int  30375293 30375293 30375293 30375293 30375293 30375293 30375293 30375293 30936912 30936912 ...
+ $ drug_seq : int  1 2 3 4 5 6 7 8 1 2 ...
+ $ drugname : chr  &quot;AVONEX&quot; &quot;AVONEX&quot; &quot;ZANAFLEX&quot; &quot;STEROID (NOS)&quot; ...
+ $ route    : chr  &quot;INTRAMUSCULAR&quot; &quot;INTRAMUSCULAR&quot; &quot;&quot; &quot;&quot; ...
 </pre>
 </div>
 </div>
@@ -531,15 +536,13 @@ drug<span class="o">=</span><span class="kp">do.call</span><span class="p">(</sp
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>filenames <span class="o">&lt;-</span> <span class="kp">list.files</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^indi.*.csv&quot;</span><span class="p">,</span> full.names<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
-
-indi<span class="o">=</span><span class="kp">lapply</span><span class="p">(</span>filenames<span class="p">,</span>fread<span class="p">)</span>
-
-indication<span class="o">=</span><span class="kp">do.call</span><span class="p">(</span><span class="kp">rbind</span><span class="p">,</span><span class="kp">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>indi<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">)</span> 
-            select<span class="p">(</span><span class="kp">as.data.frame</span><span class="p">(</span>indi<span class="p">[</span>i<span class="p">]),</span>primaryid<span class="p">,</span>indi_drug_seq<span class="p">,</span>indi_pt<span class="p">)))</span>
+indication <span class="o">=</span> rbindlist<span class="p">(</span><span class="kp">lapply</span><span class="p">(</span>filenames<span class="p">,</span> fread<span class="p">,</span>
+        select<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;primaryid&quot;</span><span class="p">,</span><span class="s">&quot;indi_drug_seq&quot;</span><span class="p">,</span><span class="s">&quot;indi_pt&quot;</span>
+         <span class="p">),</span>data.table<span class="o">=</span><span class="kc">FALSE</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -549,7 +552,7 @@ indication<span class="o">=</span><span class="kp">do.call</span><span class="p"
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>str<span class="p">(</span>indication<span class="p">)</span>
@@ -565,10 +568,10 @@ indication<span class="o">=</span><span class="kp">do.call</span><span class="p"
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>&apos;data.frame&apos;:	6383312 obs. of  3 variables:
- $ primaryid    : int  8480348 8480354 8480355 8480357 8480358 8480358 8480358 8480359 8480360 8480361 ...
- $ indi_drug_seq: int  1020135312 1020135329 1020135331 1020135333 1020135334 1020135337 1020135338 1020135339 1020135340 1020135341 ...
- $ indi_pt      : chr  &quot;CONTRACEPTION&quot; &quot;SCHIZOPHRENIA&quot; &quot;ANXIETY&quot; &quot;SCHIZOPHRENIA&quot; ...
+<pre>&apos;data.frame&apos;:	6395157 obs. of  3 variables:
+ $ primaryid    : int  30375293 30375293 30375293 30375293 30375293 30375293 30375293 30375293 30936912 30936912 ...
+ $ indi_drug_seq: int  1 2 3 4 5 6 7 8 1 2 ...
+ $ indi_pt      : chr  &quot;Multiple sclerosis&quot; &quot;Multiple sclerosis&quot; &quot;Muscle spasticity&quot; &quot;Arthritis&quot; ...
 </pre>
 </div>
 </div>
@@ -601,15 +604,12 @@ indication<span class="o">=</span><span class="kp">do.call</span><span class="p"
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[116]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>filenames <span class="o">&lt;-</span> <span class="kp">list.files</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^outc.*.csv&quot;</span><span class="p">,</span> full.names<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
-
-outc<span class="o">=</span><span class="kp">lapply</span><span class="p">(</span>filenames<span class="p">,</span>fread<span class="p">)</span>
-
-outcome<span class="o">=</span><span class="kp">do.call</span><span class="p">(</span><span class="kp">rbind</span><span class="p">,</span><span class="kp">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>outc<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">)</span> 
-            select<span class="p">(</span><span class="kp">as.data.frame</span><span class="p">(</span>outc<span class="p">[</span>i<span class="p">]),</span>primaryid<span class="p">,</span>outc_cod<span class="p">)))</span>
+outcome <span class="o">=</span> rbindlist<span class="p">(</span><span class="kp">lapply</span><span class="p">(</span>filenames<span class="p">,</span> fread<span class="p">,</span>
+        select<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;primaryid&quot;</span><span class="p">,</span><span class="s">&quot;outc_cod&quot;</span><span class="p">),</span>data.table<span class="o">=</span><span class="kc">FALSE</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -619,7 +619,7 @@ outcome<span class="o">=</span><span class="kp">do.call</span><span class="p">(<
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[118]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>str<span class="p">(</span>outcome<span class="p">)</span>
@@ -635,9 +635,9 @@ outcome<span class="o">=</span><span class="kp">do.call</span><span class="p">(<
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>&apos;data.frame&apos;:	2453953 obs. of  2 variables:
- $ primaryid: int  8480347 8480348 8480350 8480351 8480352 8480353 8480353 8480354 8480355 8480356 ...
- $ outc_cod : chr  &quot;OT&quot; &quot;HO&quot; &quot;HO&quot; &quot;HO&quot; ...
+<pre>&apos;data.frame&apos;:	2138932 obs. of  2 variables:
+ $ primaryid: int  30375293 30936912 32481334 35865322 35865322 37005182 37108102 37820163 38283002 38346784 ...
+ $ outc_cod : chr  &quot;HO&quot; &quot;HO&quot; &quot;HO&quot; &quot;DE&quot; ...
 </pre>
 </div>
 </div>
@@ -651,7 +651,7 @@ outcome<span class="o">=</span><span class="kp">do.call</span><span class="p">(<
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The outcome has about 2.25 million rows and the variables are primaryid and outcome code (outc_cod).</p>
+<p>The outcome data has more than two million rows and the variables are primaryid and outcome code (outc_cod).</p>
 
 </div>
 </div>
@@ -670,15 +670,12 @@ outcome<span class="o">=</span><span class="kp">do.call</span><span class="p">(<
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[115]:</div>
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>filenames <span class="o">&lt;-</span> <span class="kp">list.files</span><span class="p">(</span>pattern<span class="o">=</span><span class="s">&quot;^reac.*.csv&quot;</span><span class="p">,</span> full.names<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
-
-reac<span class="o">=</span><span class="kp">lapply</span><span class="p">(</span>filenames<span class="p">,</span>fread<span class="p">)</span>
-
-reaction<span class="o">=</span><span class="kp">do.call</span><span class="p">(</span><span class="kp">rbind</span><span class="p">,</span><span class="kp">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>reac<span class="p">),</span> <span class="kr">function</span><span class="p">(</span>i<span class="p">)</span> 
-            select<span class="p">(</span><span class="kp">as.data.frame</span><span class="p">(</span>reac<span class="p">[</span>i<span class="p">]),</span>primaryid<span class="p">,</span>pt<span class="p">)))</span>
+reaction <span class="o">=</span> rbindlist<span class="p">(</span><span class="kp">lapply</span><span class="p">(</span>filenames<span class="p">,</span> fread<span class="p">,</span>
+           select<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;primaryid&quot;</span><span class="p">,</span><span class="s">&quot;pt&quot;</span><span class="p">),</span>data.table<span class="o">=</span><span class="kc">FALSE</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -688,7 +685,7 @@ reaction<span class="o">=</span><span class="kp">do.call</span><span class="p">(
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>str<span class="p">(</span>reaction<span class="p">)</span>
@@ -704,9 +701,9 @@ reaction<span class="o">=</span><span class="kp">do.call</span><span class="p">(
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>&apos;data.frame&apos;:	9288270 obs. of  2 variables:
- $ primaryid: int  8480347 8480348 8480349 8480350 8480350 8480350 8480350 8480350 8480350 8480351 ...
- $ pt       : chr  &quot;ANAEMIA HAEMOLYTIC AUTOIMMUNE&quot; &quot;OPTIC NEUROPATHY&quot; &quot;DYSPNOEA&quot; &quot;DEPRESSED MOOD&quot; ...
+<pre>&apos;data.frame&apos;:	9014747 obs. of  2 variables:
+ $ primaryid: int  30375293 30375293 30375293 30375293 30375293 30375293 30375293 30375293 30375293 30375293 ...
+ $ pt       : chr  &quot;Amenorrhoea&quot; &quot;Asthenia&quot; &quot;Bladder disorder&quot; &quot;Blood pressure increased&quot; ...
 </pre>
 </div>
 </div>
@@ -814,7 +811,7 @@ copy_to<span class="p">(</span>my_database<span class="p">,</span>outcome<span c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>my_db <span class="o">&lt;-</span> src_sqlite<span class="p">(</span><span class="s">&quot;adverse_events&quot;</span><span class="p">,</span> create <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
@@ -840,7 +837,7 @@ copy_to<span class="p">(</span>my_database<span class="p">,</span>outcome<span c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>src_tbls<span class="p">(</span>my_db<span class="p">)</span>
@@ -854,7 +851,7 @@ copy_to<span class="p">(</span>my_database<span class="p">,</span>outcome<span c
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[45]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[17]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <ol class=list-inline>
@@ -893,10 +890,9 @@ copy_to<span class="p">(</span>my_database<span class="p">,</span>outcome<span c
 </div>
 </div>
 </div>
-
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[119]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>demography <span class="o">=</span> tbl<span class="p">(</span>my_db<span class="p">,</span><span class="s">&quot;demography&quot;</span> <span class="p">)</span>
@@ -909,7 +905,7 @@ copy_to<span class="p">(</span>my_database<span class="p">,</span>outcome<span c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[120]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span class="kp">class</span><span class="p">(</span>demography<span class="p">)</span>
@@ -923,7 +919,7 @@ copy_to<span class="p">(</span>my_database<span class="p">,</span>outcome<span c
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[120]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[19]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <ol class=list-inline>
@@ -942,7 +938,7 @@ copy_to<span class="p">(</span>my_database<span class="p">,</span>outcome<span c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span class="kp">head</span><span class="p">(</span>demography<span class="p">,</span><span class="m">3</span><span class="p">)</span>
@@ -956,7 +952,7 @@ copy_to<span class="p">(</span>my_database<span class="p">,</span>outcome<span c
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[79]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[20]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <table>
@@ -978,7 +974,7 @@ copy_to<span class="p">(</span>my_database<span class="p">,</span>outcome<span c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>US <span class="o">=</span> filter<span class="p">(</span>demography<span class="p">,</span> occr_country<span class="o">==</span><span class="s">&#39;US&#39;</span><span class="p">)</span>  <span class="c1"># Filtering demography of patients from the US</span>
@@ -1001,7 +997,7 @@ copy_to<span class="p">(</span>my_database<span class="p">,</span>outcome<span c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>US<span class="o">$</span>query
@@ -1015,7 +1011,7 @@ copy_to<span class="p">(</span>my_database<span class="p">,</span>outcome<span c
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[82]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[22]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1043,7 +1039,7 @@ WHERE &quot;occr_country&quot; = &apos;US&apos;
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>explain<span class="p">(</span>US<span class="p">)</span>
@@ -1088,7 +1084,7 @@ WHERE &quot;occr_country&quot; = &apos;US&apos;
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[84]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>drug <span class="o">=</span> tbl<span class="p">(</span>my_db<span class="p">,</span><span class="s">&quot;drug&quot;</span> <span class="p">)</span>
@@ -1124,7 +1120,7 @@ reaction <span class="o">=</span> tbl<span class="p">(</span>my_db<span class="p
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[85]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span class="kp">head</span><span class="p">(</span>indication<span class="p">,</span><span class="m">3</span><span class="p">)</span>
@@ -1138,7 +1134,7 @@ reaction <span class="o">=</span> tbl<span class="p">(</span>my_db<span class="p
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[85]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[25]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <table>
@@ -1160,7 +1156,7 @@ reaction <span class="o">=</span> tbl<span class="p">(</span>my_db<span class="p
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span class="kp">tail</span><span class="p">(</span>indication<span class="p">,</span><span class="m">3</span><span class="p">)</span>
@@ -1221,13 +1217,14 @@ The pipeline %&gt;% takes the output from the left-hand side of the pipe as the 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[90]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>demography<span class="o">%&gt;%</span>group_by<span class="p">(</span>Country<span class="o">=</span> occr_country<span class="p">)</span><span class="o">%&gt;%</span> 
-           summarize<span class="p">(</span>Total<span class="o">=</span>n<span class="p">())</span><span class="o">%&gt;%</span>      
-           arrange<span class="p">(</span>desc<span class="p">(</span>Total<span class="p">))</span><span class="o">%&gt;%</span>       
-           filter<span class="p">(</span>Country<span class="o">!=</span><span class="s">&#39;&#39;</span><span class="p">)</span><span class="o">%&gt;%</span> <span class="kp">head</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre>demography<span class="o">%&gt;%</span>group_by<span class="p">(</span>Country<span class="o">=</span> occr_country<span class="p">)</span><span class="o">%&gt;%</span> <span class="c1">#grouped by country</span>
+           summarize<span class="p">(</span>Total<span class="o">=</span>n<span class="p">())</span><span class="o">%&gt;%</span>    <span class="c1"># found the count for each country</span>
+           arrange<span class="p">(</span>desc<span class="p">(</span>Total<span class="p">))</span><span class="o">%&gt;%</span>    <span class="c1"># sorted them in descending order</span>
+           filter<span class="p">(</span>Country<span class="o">!=</span><span class="s">&#39;&#39;</span><span class="p">)</span><span class="o">%&gt;%</span>     <span class="c1"># removed reports that does not have country information</span>
+           <span class="kp">head</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>                   <span class="c1"># took the top ten</span>
 </pre></div>
 
 </div>
@@ -1238,7 +1235,7 @@ The pipeline %&gt;% takes the output from the left-hand side of the pipe as the 
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[90]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[27]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <table>
@@ -1264,8 +1261,7 @@ The pipeline %&gt;% takes the output from the left-hand side of the pipe as the 
 </div>
 </div>
 
-
-
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -1278,7 +1274,7 @@ The pipeline %&gt;% takes the output from the left-hand side of the pipe as the 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[96]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>demography<span class="o">%&gt;%</span>group_by<span class="p">(</span>Country<span class="o">=</span> occr_country<span class="p">)</span><span class="o">%&gt;%</span> <span class="c1">#grouped by country</span>
@@ -1286,6 +1282,7 @@ The pipeline %&gt;% takes the output from the left-hand side of the pipe as the 
            arrange<span class="p">(</span>desc<span class="p">(</span>Total<span class="p">))</span><span class="o">%&gt;%</span>    <span class="c1"># sorted them in descending order</span>
            filter<span class="p">(</span>Country<span class="o">!=</span><span class="s">&#39;&#39;</span><span class="p">)</span><span class="o">%&gt;%</span>     <span class="c1"># removed reports that does not have country information</span>
            <span class="kp">head</span><span class="p">(</span><span class="m">10</span><span class="p">)</span><span class="o">%&gt;%</span>                  <span class="c1"># took the top ten</span>
+           mutate<span class="p">(</span>Country <span class="o">=</span> <span class="kp">factor</span><span class="p">(</span>Country<span class="p">,</span>levels <span class="o">=</span> Country<span class="p">[</span><span class="kp">order</span><span class="p">(</span>Total<span class="p">,</span>decreasing <span class="o">=</span><span class="bp">F</span><span class="p">)]))</span><span class="o">%&gt;%</span>
           ggplot<span class="p">(</span>aes<span class="p">(</span>x<span class="o">=</span>Country<span class="p">,</span>y<span class="o">=</span>Total<span class="p">))</span><span class="o">+</span>geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&#39;identity&#39;</span><span class="p">,</span>color<span class="o">=</span><span class="s">&#39;skyblue&#39;</span><span class="p">,</span>fill<span class="o">=</span><span class="s">&#39;#b35900&#39;</span><span class="p">)</span><span class="o">+</span>
           xlab<span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">+</span>ggtitle<span class="p">(</span><span class="s">&#39;Top ten countries with highest number of adverse event reports&#39;</span><span class="p">)</span><span class="o">+</span>
           coord_flip<span class="p">()</span><span class="o">+</span>ylab<span class="p">(</span><span class="s">&#39;Total number of reports&#39;</span><span class="p">)</span>
@@ -1303,7 +1300,7 @@ The pipeline %&gt;% takes the output from the left-hand side of the pipe as the 
 
 
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,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"
+<img src="data:image/png;base64,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"
 >
 </div>
 
@@ -1365,7 +1362,7 @@ The pipeline %&gt;% takes the output from the left-hand side of the pipe as the 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong> What are the top 5 most common outcomes?</strong></p>
+<p><strong> What are the top 5 most common outcome?</strong></p>
 
 </div>
 </div>
@@ -1687,16 +1684,9 @@ The pipeline %&gt;% takes the output from the left-hand side of the pipe as the 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>
-
-In this post, we saw how to use the dplyr package to create a database and upload data to the database. We also saw how to perform various analytics by querying data from 
-the database. Working with databases in R has huge advantage when our data is big where loading it to R is impossible or slows down our analytics. 
-If our data resides in a database, rather than loading the whole data to R, we can work with subsets or aggregates of the data that we are interested in. 
-Further, if we have many data files, putting our data in a database, rather than in csv or other format, has better security and is easier to manage. 
-
-
-This is enough for this post. See you in my next post. You can read about dplyr two-table verbs <a href="https://cran.r-project.org/web/packages/dplyr/vignettes/two-table.html">here</a>.
-</p>
+<p>In this post, we saw how to use the dplyr package to create a database and upload data to the database. We also saw how to perform various analytics by querying data from the database.
+Working with databases in R has huge advantage when our data is big where loading it to R is impossible or slows down our analytics. If our data resides in a database, rather than loading the whole data to R, we can work with subsets or aggregates of the data that we are interested in. Further, if we have many data files, putting our data in a database, rather than in csv or other format, has better security and is easier to manage.</p>
+<p>This is enough for this post. See you in my next post. You can read about dplyr two-table verbs <a href="https://cran.r-project.org/web/packages/dplyr/vignettes/two-table.html">here</a>.</p>
 
 </div>
 </div>
@@ -1704,13 +1694,7 @@ This is enough for this post. See you in my next post. You can read about dplyr 
     </div>
   </div>
   
-  
-  
-  
-
-
-
-  <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="../myjs.js"></script>
 
   
@@ -1730,6 +1714,8 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+  
+  
   
 </body>
 </html>
