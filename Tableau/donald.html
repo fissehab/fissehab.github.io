@@ -494,7 +494,7 @@ general feeling of the tweets.</p>
 <span class="n">corpus</span><span class="o">=</span><span class="n">tm_map</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span><span class="n">tolower</span><span class="p">)</span>
 
 <span class="c"># Remove stopwords</span>
-<span class="n">corpus</span><span class="o">=</span><span class="n">tm_map</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span><span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">removeWords</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">c</span><span class="p">(</span><span class="s">&quot;india&quot;</span><span class="p">,</span><span class="s">&quot;chennai&quot;</span><span class="p">,</span><span class="n">stopwords</span><span class="p">())))</span>
+<span class="n">corpus</span><span class="o">=</span><span class="n">tm_map</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span><span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">removeWords</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">stopwords</span><span class="p">()))</span>
 
 <span class="c"># convert corpus to a Plain Text Document</span>
 <span class="n">corpus</span><span class="o">=</span><span class="n">tm_map</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span><span class="n">PlainTextDocument</span><span class="p">)</span>
