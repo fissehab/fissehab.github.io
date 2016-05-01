@@ -170,9 +170,6 @@ div#notebook {
 	
 	
 	
-	
-	
-	
 		<style>
 div.prompt {display:none}
 </style>
@@ -232,7 +229,7 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 style="color:blue; text-align:center"  id="US-Hospitals-Ranking-Shiny-aPP">US Hospitals Ranking Shiny App<a class="anchor-link" href="#US-Hospitals-Ranking-Shiny-aPP">&#182;</a></h3>
+<h2 style="color:blue; text-align:center"   id="PDF-Mining-with-R-using-Shiny">PDF Mining with R using Shiny<a class="anchor-link" href="#PDF-Mining-with-R-using-Shiny">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -241,28 +238,12 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This is my shiny app that helps to see the performances of various US hospitals in heart attack, heart failure and pneumonia. 
-The data is from the <a href="http://hospitalcompare.hhs.gov">Hospital Compare web site</a>, which is run by the U.S. Department of Health and Human Services. 
-You can download the data <a href="../data/outcome-of-care-measures-of-Medicare-certfied hospitals.csv">here</a>.</p>
-<p><a href="http://shiny.rstudio.com/">Shiny</a> is an R package that makes it easy to build interactive web apps straight from R. For a nice look and feel, 
-we will use the <a href="https://rstudio.github.io/shinydashboard/">shinydashboard package</a>.</p>
-<p>We are using 30-day mortality rates for heart attack, heart failure, and pneumonia for over 4,000 hospitals across the USA.</p>
 
-<p style="color:red"> I have deployed the app to <a href= "https://fishdata.shinyapps.io/hospital_ranking/"   target="_blank">Rstuio</a>, so you can give it a try.</p>
-<br/>
+<a href="https://fishdata.shinyapps.io/PDF_extraction_App/"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/wcloud1.PNG", height="365" width="1000"/></a>
 
-<p style="color:blue">You can the code on  <a href= "https://github.com/fissehab/ShinyApp_hospital_ranking" target="_blank">GitHub</a>.
 
 <br/>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can select a state and outcome and see the best hospitals in the state. Further, we can select a hospital from the drop down menu and see its rank in the state and compare its performance with all hospitals across the nation.</p>
+<p>A PDF document is not so great in terms of searching and indexing and it becomes an overwhelming task to search through many documents individually or compare two or more documents manually.</p>
 
 </div>
 </div>
@@ -272,13 +253,7 @@ we will use the <a href="https://rstudio.github.io/shinydashboard/">shinydashboa
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The screenshot below shows the top ten best hospitals in heart attack in MD. We also see that Johns Hopkins Hospital is the best hospital in the state and the vertical line shows average 30-day death rate in the hospital. The histogram is the average 30-day death rate from all hospitals in the USA.</p>
-<br/>
-<a href="https://fishdata.shinyapps.io/hospital_ranking/"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/hospital_ranking1.PNG", height="410" width="1000"/></a>
-
-
-
-<br/>
+<p>This application helps to get useful insights from PDF documents by creating visualizations and summarizations. It also enables searching, sorting and filtering. We can browse through lots of documents in a single click and get a summary and comparison of the documents instantly.</p>
 
 </div>
 </div>
@@ -288,22 +263,7 @@ we will use the <a href="https://rstudio.github.io/shinydashboard/">shinydashboa
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Similarly, the screenshot below shows top ten best hospitals in NY in pneumonia. In the histogram, we see that Jamaica Hospital Medical Center is ranked 114. When we change the state, the hospital drop down menu in the left shows all hospitals in the selected state. Then, we can select any hospital from the drop down menu to see what its rank is and where in the histogram the average 30-day death rate in the hospital lies.</p>
-
-<br/>
-<a href="https://fishdata.shinyapps.io/hospital_ranking/"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/hospital_ranking2.PNG", height="410" width="1000"/></a>
-
-<br/>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Usually Shiny apps have at least two parts. A <strong>server.R</strong>, which is R script, and <strong>ui.R</strong>, which controls the look and feel of the user interface.</p>
-<p>My <strong>server.R</strong> and <strong>ui.R</strong> codes are given below. You can download them to the same folder and try the app.</p>
+<p>We can upload books, journals, surveys, ...</p>
 
 </div>
 </div>
@@ -313,7 +273,34 @@ we will use the <a href="https://rstudio.github.io/shinydashboard/">shinydashboa
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="ur.R">ur.R<a class="anchor-link" href="#ur.R">&#182;</a></h4>
+<p>You can try the app by clicking <a href="https://fishdata.shinyapps.io/PDF_extraction_App/">here</a>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+<a href="https://fishdata.shinyapps.io/PDF_extraction_App/"  target="_blank"><img style="margin:0px auto;display:block"  src="../figures/wcloud.PNG", height="400" width="1000"/></a>
+
+<br/>
+
+<p>Shiny apps have at least two parts. A server.R, which is R script, and ui.R, which controls the look and feel of the user interface.</p>
+<p>My server.R and ui.R codes are given below. They are also on <a href="https://github.com/fissehab/PDF_extraction_shinyApp">GitHub</a>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong> ui.R</strong></p>
+
 </div>
 </div>
 </div>
@@ -324,48 +311,127 @@ we will use the <a href="https://rstudio.github.io/shinydashboard/">shinydashboa
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span class="kn">library</span><span class="p">(</span>shiny<span class="p">)</span>
 <span class="kn">library</span><span class="p">(</span>shinydashboard<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>shinythemes<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>plotly<span class="p">)</span>
+dashboardPage<span class="p">(</span>skin<span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">,</span>
+              dashboardHeader<span class="p">(</span>title<span class="o">=</span><span class="s">&quot;PDF Extractor&quot;</span><span class="p">,</span>titleWidth<span class="o">=</span><span class="m">300</span><span class="p">),</span>
+              
+              dashboardSidebar<span class="p">(</span>width<span class="o">=</span><span class="m">250</span><span class="p">,</span>
+                               sidebarMenu<span class="p">(</span>
+                                 br<span class="p">(),</span>
+                                 menuItem<span class="p">(</span>tags<span class="o">$</span>em<span class="p">(</span><span class="s">&quot;Provide PDFs&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;font-size:150%&quot;</span><span class="p">),</span>icon<span class="o">=</span>icon<span class="p">(</span><span class="s">&quot;upload&quot;</span><span class="p">),</span>tabName<span class="o">=</span><span class="s">&quot;data&quot;</span><span class="p">),</span>
+                                 menuItem<span class="p">(</span>tags<span class="o">$</span>em<span class="p">(</span><span class="s">&quot;Summaries&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;font-size:150%&quot;</span><span class="p">),</span>icon<span class="o">=</span>icon<span class="p">(</span><span class="s">&quot;bar-chart-o&quot;</span><span class="p">),</span>tabName<span class="o">=</span><span class="s">&quot;summary&quot;</span><span class="p">),</span>
+                                 menuItem<span class="p">(</span>tags<span class="o">$</span>em<span class="p">(</span><span class="s">&quot;Search and Filter&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;font-size:150%&quot;</span><span class="p">),</span>icon<span class="o">=</span>icon<span class="p">(</span><span class="s">&quot;search&quot;</span><span class="p">),</span>tabName<span class="o">=</span><span class="s">&quot;search&quot;</span><span class="p">)</span>
+                                 
+                                 
+                                 
+                                 <span class="p">)</span>
+                                 <span class="p">),</span>
+              
+              dashboardBody<span class="p">(</span>
+                tabItems<span class="p">(</span>
+                  tabItem<span class="p">(</span>tabName<span class="o">=</span><span class="s">&quot;data&quot;</span><span class="p">,</span>
+                           
+                          
+                          br<span class="p">(),</span>
+                          br<span class="p">(),</span>
+                          tags<span class="o">$</span>h4<span class="p">(</span><span class="s">&quot;A PDF document is not so great in terms of searching and indexing</span>
+<span class="s">                                  and it becomes an overwhelming task to search through many documents </span>
+<span class="s">                                  individually or compare two or more documents manually.&quot;</span><span class="p">),</span>
+                        
 
-outcome_data<span class="o">=</span>read.csv<span class="p">(</span><span class="s">&quot;data/outcome-of-care-measures-of-Medicare-certfied hospitals.csv&quot;</span><span class="p">,</span>stringsAsFactors <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
-outcome_data<span class="o">=</span>outcome_data<span class="p">[</span>outcome_data<span class="p">[,</span><span class="m">6</span><span class="p">]</span><span class="o">!=</span><span class="s">&#39;Not Available&#39;</span><span class="p">,]</span>
-outcome_data<span class="o">=</span>outcome_data<span class="p">[</span>outcome_data<span class="p">[,</span><span class="m">7</span><span class="p">]</span><span class="o">!=</span><span class="s">&#39;Not Available&#39;</span><span class="p">,]</span>
-outcome_data<span class="o">=</span>outcome_data<span class="p">[</span>outcome_data<span class="p">[,</span><span class="m">8</span><span class="p">]</span><span class="o">!=</span><span class="s">&#39;Not Available&#39;</span><span class="p">,]</span>
 
+                      tags<span class="o">$</span>h4<span class="p">(</span><span class="s">&quot;This application helps to get useful insights from PDF documents </span>
+<span class="s">                           by creating visualizations and summarizations. It also enables searching, sorting and filtering. </span>
+<span class="s">                           We can browse through lots of documents in a single click and</span>
+<span class="s">                           get a summary and comparison of the documents in minutes.&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;color:#009900&quot;</span><span class="p">),</span>
 
-
-dashboardPage<span class="p">(</span>
-  dashboardHeader<span class="p">(</span>title<span class="o">=</span><span class="s">&quot;US Hospital Ranking&quot;</span><span class="p">),</span>
-  
-  dashboardSidebar<span class="p">(</span>width <span class="o">=</span> <span class="m">200</span><span class="p">,</span>
-                   selectInput<span class="p">(</span><span class="s">&quot;state&quot;</span><span class="p">,</span> 
-                               label <span class="o">=</span> em<span class="p">(</span><span class="s">&quot;Select State&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;text-align:center;color:#FFA319;font-size:100%&quot;</span><span class="p">),</span>
-                               <span class="kp">unique</span><span class="p">(</span>outcome_data<span class="o">$</span>State<span class="p">),</span>selected <span class="o">=</span> <span class="s">&#39;MD&#39;</span><span class="p">),</span> 
+                      tags<span class="o">$</span>h4<span class="p">(</span><span class="s">&quot;Upload PDF documents (books, journals, surveys,etc.) from disk and/or provide links of PDF documents. </span>
+<span class="s">                              Then go to the&quot;</span><span class="p">,</span> tags<span class="o">$</span>span<span class="p">(</span><span class="s">&quot;Summaries&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;color:red&quot;</span><span class="p">),</span> tags<span class="o">$</span>span<span class="p">(</span><span class="s">&quot;section in the sidebar to get summaries of the uploaded documents.</span>
+<span class="s">                              We can search one or more terms and see their distribution across the uploaded documents in </span>
+<span class="s">                              the&quot;</span> <span class="p">,</span> tags<span class="o">$</span>span<span class="p">(</span><span class="s">&quot;Search and Filter&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;color:red&quot;</span><span class="p">),</span> tags<span class="o">$</span>span<span class="p">(</span><span class="s">&quot;menu item. We can also filter to display words with certain frequency range only.&quot;</span><span class="p">))),</span>
+                      
+                      
+                          br<span class="p">(),</span>
+                          br<span class="p">(),</span>
+                          br<span class="p">(),</span>
+                          
+                          column<span class="p">(</span>width <span class="o">=</span> <span class="m">5</span><span class="p">,</span>
+                          textInput<span class="p">(</span><span class="s">&quot;link&quot;</span><span class="p">,</span> label <span class="o">=</span> p<span class="p">(</span><span class="s">&quot;Provide link(s) to your PDF document(s) separated by comma&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;text-align:center;color:#990099;font-size:110%&quot;</span><span class="p">),</span>
+                                    value <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">),</span>
+                          
+                                         br<span class="p">()</span>
+                          <span class="p">),</span>
+                          
+                          column<span class="p">(</span>width <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
+                                         
+                                    tags<span class="o">$</span>h3<span class="p">(</span><span class="s">&quot;And/Or&quot;</span><span class="p">,</span> style<span class="o">=</span><span class="s">&quot;text-align:center;color:blue;font-size:120%&quot;</span><span class="p">),</span>
+                          br<span class="p">()</span>
+                         
+                          <span class="p">),</span>
+                          column<span class="p">(</span>width <span class="o">=</span> <span class="m">4</span><span class="p">,</span>
+                          fileInput<span class="p">(</span><span class="s">&#39;file1&#39;</span><span class="p">,</span> em<span class="p">(</span><span class="s">&#39;Choose PDF File&#39;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;text-align:center;color:red;font-size:120%&quot;</span><span class="p">),</span>multiple <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>
+                                    accept<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;.pdf&#39;</span><span class="p">)),</span>
+                          
+                          br<span class="p">()</span>
+                          <span class="p">),</span>
+                          br<span class="p">()</span>
+                          
+                        <span class="p">),</span>
+                  
+                  
+                  tabItem<span class="p">(</span>tabName<span class="o">=</span><span class="s">&quot;summary&quot;</span><span class="p">,</span>
+                          fluidRow<span class="p">(</span>
+                            tabBox<span class="p">(</span>width<span class="o">=</span><span class="m">12</span><span class="p">,</span>
+                                   tabPanel<span class="p">(</span>tags<span class="o">$</span>em<span class="p">(</span><span class="s">&quot;Word Cloud&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;font-size:150%&quot;</span><span class="p">),</span>
         
-            selectInput<span class="p">(</span><span class="s">&quot;outcome&quot;</span><span class="p">,</span> 
-                               label <span class="o">=</span> em<span class="p">(</span><span class="s">&quot;Select Outcome&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;text-align:center;color:#FFA319;font-size:100%&quot;</span><span class="p">),</span>
-                               choices <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;heart failure&quot;</span><span class="p">,</span><span class="s">&quot;heart attack&quot;</span><span class="p">,</span><span class="s">&quot;pneumonia&quot;</span><span class="p">),</span>
-                               selected <span class="o">=</span> <span class="s">&quot;heart attack&quot;</span><span class="p">),</span>
-                   
-      selectInput<span class="p">(</span><span class="s">&#39;columns&#39;</span><span class="p">,</span>em<span class="p">(</span><span class="s">&#39;Choose Hospital&#39;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;text-align:center;color:#FFA319;font-size:100%&quot;</span><span class="p">),</span><span class="s">&quot;&quot;</span><span class="p">,</span>
-                  selectize <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span>selected <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="p">)</span>  
-    <span class="p">),</span>
-    
- 
-  dashboardBody<span class="p">(</span>   
-    
-    fluidRow<span class="p">(</span>
-      column<span class="p">(</span>width <span class="o">=</span> <span class="m">7</span><span class="p">,</span>
-  
-          plotOutput<span class="p">(</span><span class="s">&quot;myplot&quot;</span><span class="p">)),</span>
-     
-      
-      column<span class="p">(</span>width <span class="o">=</span> <span class="m">5</span><span class="p">,</span>
-    
-          h5<span class="p">(</span>strong<span class="p">(</span><span class="s">&quot;Best Hospitals in the State&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;text-align:right;color:darkblue;font-size:100%&quot;</span><span class="p">)),</span>
-          
-          div<span class="p">(</span>tableOutput<span class="p">(</span><span class="s">&quot;table1&quot;</span><span class="p">),</span> style <span class="o">=</span> <span class="s">&quot;font-size:80%&quot;</span><span class="p">,</span>collapsible <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)))</span>
-   
-    <span class="p">)</span>
-    <span class="p">)</span>
+                                            column<span class="p">(</span>width <span class="o">=</span> <span class="m">8</span><span class="p">,</span>
+                                          plotOutput<span class="p">(</span><span class="s">&quot;wordcloud&quot;</span><span class="p">)),</span>
+                                            
+                                          column<span class="p">(</span>width <span class="o">=</span> <span class="m">4</span><span class="p">,</span>
+                                                 br<span class="p">(),</span>
+                                          uiOutput<span class="p">(</span><span class="s">&quot;minfreq&quot;</span><span class="p">),</span>
+                                              br<span class="p">(),</span>
+                                            uiOutput<span class="p">(</span><span class="s">&quot;maxwords&quot;</span><span class="p">),</span>
+                                              br<span class="p">(),</span>
+                                          uiOutput<span class="p">(</span><span class="s">&quot;forEach&quot;</span><span class="p">))</span>
+                                            
+                                            <span class="p">),</span>
+                                   
+                                   
+                                  tabPanel<span class="p">(</span>tags<span class="o">$</span>em<span class="p">(</span><span class="s">&quot;Plotly Bar graph&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;font-size:150%&quot;</span><span class="p">),</span>
+                                            
+                                            plotlyOutput<span class="p">(</span><span class="s">&quot;myplot&quot;</span><span class="p">,</span>height <span class="o">=</span> <span class="s">&quot;700px&quot;</span><span class="p">),</span>
+                                           br<span class="p">(),</span>
+                                   
+                                              uiOutput<span class="p">(</span><span class="s">&quot;numwords&quot;</span><span class="p">)</span>
+                                           
+                                           <span class="p">)</span>
+                                   
+                                   
+                                            
+                                            
+                                            <span class="p">))),</span>
+             
+                  
+                  
+                  
+                  
+                  tabItem<span class="p">(</span>tabName<span class="o">=</span><span class="s">&quot;search&quot;</span><span class="p">,</span>
+                        
+                            
+                            DT<span class="o">::</span>dataTableOutput<span class="p">(</span><span class="s">&quot;DataTable&quot;</span><span class="p">),</span>
+                             br<span class="p">(),</span>
+                             uiOutput<span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">),</span>
+                            uiOutput<span class="p">(</span><span class="s">&#39;forsearch&#39;</span><span class="p">),</span>
+                            uiOutput<span class="p">(</span><span class="s">&#39;searchbutton&#39;</span><span class="p">),</span>
+                            plotlyOutput<span class="p">(</span><span class="s">&quot;searched&quot;</span><span class="p">,</span>height <span class="o">=</span> <span class="s">&#39;600px&#39;</span><span class="p">)</span>
+                          
+                            
+                            
+                                       
+                                       <span class="p">)</span>
+                          <span class="p">)))</span>
 </pre></div>
 
 </div>
@@ -388,151 +454,504 @@ dashboardPage<span class="p">(</span>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span class="kn">library</span><span class="p">(</span>shiny<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>pdftools<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>stringr<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>stringi<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>tm<span class="p">)</span>
 <span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span>
-<span class="kn">library</span><span class="p">(</span>dplyr<span class="p">)</span>    
-<span class="kn">library</span><span class="p">(</span>tidyr<span class="p">)</span>
-
-outcome_data<span class="o">=</span>read.csv<span class="p">(</span><span class="s">&quot;data/outcome-of-care-measures-of-Medicare-certfied hospitals.csv&quot;</span><span class="p">,</span>stringsAsFactors <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
-
-<span class="kp">names</span><span class="p">(</span>outcome_data<span class="p">)</span><span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;Hospital&#39;</span><span class="p">,</span><span class="s">&quot;Address&quot;</span><span class="p">,</span><span class="s">&quot;City&quot;</span><span class="p">,</span><span class="s">&quot;State&quot;</span><span class="p">,</span><span class="s">&quot;ZIP&quot;</span><span class="p">,</span><span class="s">&quot;heart attack&quot;</span><span class="p">,</span><span class="s">&quot;heart failure&quot;</span><span class="p">,</span><span class="s">&quot;pneumonia&quot;</span><span class="p">)</span>
-
-outcome_data<span class="o">=</span>outcome_data<span class="p">[</span>outcome_data<span class="p">[,</span><span class="m">6</span><span class="p">]</span><span class="o">!=</span><span class="s">&#39;Not Available&#39;</span><span class="p">,]</span>
-outcome_data<span class="o">=</span>outcome_data<span class="p">[</span>outcome_data<span class="p">[,</span><span class="m">7</span><span class="p">]</span><span class="o">!=</span><span class="s">&#39;Not Available&#39;</span><span class="p">,]</span>
-outcome_data<span class="o">=</span>outcome_data<span class="p">[</span>outcome_data<span class="p">[,</span><span class="m">8</span><span class="p">]</span><span class="o">!=</span><span class="s">&#39;Not Available&#39;</span><span class="p">,]</span>
-
-
-outcome_data1 <span class="o">&lt;-</span> outcome_data<span class="o">%&gt;%</span> gather<span class="p">(</span>Type<span class="p">,</span> Deaths<span class="p">,</span> <span class="o">-</span>Hospital<span class="p">,</span><span class="o">-</span>Address<span class="p">,</span><span class="o">-</span>City<span class="p">,</span><span class="o">-</span>State<span class="p">,</span><span class="o">-</span>ZIP<span class="p">)</span>
-outcome_data1<span class="o">$</span>Type<span class="o">=</span><span class="kp">as.factor</span><span class="p">(</span>outcome_data1<span class="o">$</span>Type<span class="p">)</span>
-outcome_data1<span class="o">$</span>Deaths<span class="o">=</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data1<span class="o">$</span>Deaths<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>dplyr<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>wordcloud<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>plotly<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>DT<span class="p">)</span>
 
 
 
+shinyServer<span class="p">(</span><span class="kr">function</span><span class="p">(</span>input<span class="p">,</span> output<span class="p">)</span> <span class="p">{</span>
 
-shinyServer<span class="p">(</span><span class="kr">function</span><span class="p">(</span>input<span class="p">,</span> output<span class="p">,</span> session<span class="p">)</span> <span class="p">{</span>
-
-
-  state<span class="o">&lt;-</span>reactive<span class="p">({</span>
-    input<span class="o">$</span>state
-  <span class="p">})</span>
+  <span class="kp">options</span><span class="p">(</span>shiny.maxRequestSize<span class="o">=</span><span class="m">800</span><span class="o">*</span><span class="m">1024</span><span class="o">^</span><span class="m">2</span><span class="p">)</span> 
   
 
-  
-  hospital<span class="o">&lt;-</span>reactive<span class="p">({</span>
-    input<span class="o">$</span>columns
-  <span class="p">})</span>
-  
-
-  
-  
-  
-  outvar<span class="o">=</span>reactive<span class="p">({</span>
-    mm<span class="o">=</span>outcome_data<span class="o">$</span>Hospital<span class="p">[</span>outcome_data<span class="o">$</span>State<span class="o">==</span>state<span class="p">()]</span>
-    <span class="kp">unique</span><span class="p">(</span>mm<span class="p">)</span>
-  <span class="p">})</span>
-  
-  
-  observe<span class="p">({</span>
+  mypdf1_list <span class="o">&lt;-</span> reactive<span class="p">({</span>
     
-    updateSelectInput<span class="p">(</span>session<span class="p">,</span><span class="s">&quot;columns&quot;</span><span class="p">,</span>
-                      choices<span class="o">=</span>outvar<span class="p">())</span>
-  <span class="p">})</span>
-  
-  
-  deaths<span class="o">&lt;-</span> reactive<span class="p">({</span>
+   
+        withProgress<span class="p">({</span>
+         
+          <span class="kr">if</span><span class="p">(</span><span class="kp">nchar</span><span class="p">(</span>input<span class="o">$</span>link<span class="p">)</span><span class="o">&gt;</span><span class="m">0</span><span class="p">){</span>
+            setProgress<span class="p">(</span>message <span class="o">=</span> <span class="s">&quot;Downloading Document...&quot;</span><span class="p">)</span>
+            
+
+                
+                address<span class="o">=</span><span class="kp">unlist</span><span class="p">(</span><span class="kp">strsplit</span><span class="p">(</span>input<span class="o">$</span>link<span class="p">,</span><span class="s">&quot;,&quot;</span><span class="p">))</span>
+              
+          
+            pdfs<span class="o">=</span><span class="kt">list</span><span class="p">()</span>
+            
+            <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>address<span class="p">)){</span>
+              pdfs<span class="p">[[</span>i<span class="p">]]</span><span class="o">=</span> pdf_text<span class="p">(</span>str_trim<span class="p">(</span>address<span class="p">[</span>i<span class="p">]))</span>
+            <span class="p">}</span>
+            
+            pdfs
+            
+               <span class="p">}</span><span class="kp">else</span><span class="p">(</span><span class="kr">return</span><span class="p">(</span><span class="kc">NULL</span><span class="p">))</span>
+          
+        <span class="p">})</span>
     
-    
-    m<span class="o">=</span>filter<span class="p">(</span>outcome_data1<span class="p">,</span> State<span class="o">==</span>state<span class="p">(),</span>Type<span class="o">==</span>outcome<span class="p">(),</span>Hospital<span class="o">==</span>hospital<span class="p">())</span>
-    
-    <span class="kp">as.numeric</span><span class="p">(</span>select<span class="p">(</span>m<span class="p">,</span>Deaths<span class="p">))</span>
-    
-    
-  <span class="p">})</span>
+    <span class="p">})</span>
+
+
   
   
 
-  
-  outcome<span class="o">&lt;-</span>reactive<span class="p">({</span>
-    input<span class="o">$</span>outcome
-  <span class="p">})</span>
-  
-
-  
-  best_in_this_state<span class="o">&lt;-</span>reactive<span class="p">({</span>
+mypdf2_list<span class="o">&lt;-</span>reactive<span class="p">({</span>
     
-    m<span class="o">=</span>filter<span class="p">(</span>outcome_data1<span class="p">,</span> State<span class="o">==</span>state<span class="p">(),</span>Type<span class="o">==</span>outcome<span class="p">())</span>
-    m<span class="o">=</span>arrange<span class="p">(</span>m<span class="p">,</span>Deaths<span class="p">,</span>Hospital<span class="p">)</span>
-    m<span class="o">=</span>select<span class="p">(</span>m<span class="p">,</span>Hospital<span class="p">,</span> City<span class="p">)</span>
-    m<span class="o">$</span>Rank<span class="o">=</span><span class="kp">rownames</span><span class="p">(</span>m<span class="p">)</span>
-    m<span class="o">=</span>select<span class="p">(</span>m<span class="p">,</span>Rank<span class="p">,</span>Hospital<span class="p">,</span>City<span class="p">)</span>
+    inFile <span class="o">&lt;-</span> input<span class="o">$</span>file1
     
-    <span class="kr">if</span><span class="p">(</span><span class="kp">nrow</span><span class="p">(</span>m<span class="p">)</span><span class="o">&gt;</span><span class="m">9</span><span class="p">){</span>
-      m<span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,]</span>
-    <span class="p">}</span> <span class="kr">else</span> <span class="p">{</span>m<span class="p">}</span>
-    
-  <span class="p">})</span>
-  
-  
-  its_rank<span class="o">&lt;-</span>reactive<span class="p">({</span>
-    
-    m<span class="o">=</span>filter<span class="p">(</span>outcome_data1<span class="p">,</span> State<span class="o">==</span>state<span class="p">(),</span>Type<span class="o">==</span>outcome<span class="p">())</span>
-    m<span class="o">=</span>arrange<span class="p">(</span>m<span class="p">,</span>Deaths<span class="p">,</span>Hospital<span class="p">)</span>
-    m<span class="o">=</span>select<span class="p">(</span>m<span class="p">,</span>Hospital<span class="p">)</span>
-    m<span class="o">$</span>Rank<span class="o">=</span><span class="kp">rownames</span><span class="p">(</span>m<span class="p">)</span>
-    m<span class="o">=</span>select<span class="p">(</span>m<span class="p">,</span>Rank<span class="p">,</span>Hospital<span class="p">)</span>
-    <span class="kp">as.numeric</span><span class="p">(</span>m<span class="o">$</span>Rank<span class="p">[</span>m<span class="o">$</span>Hospital<span class="o">==</span>hospital<span class="p">()])</span>
-  
-    
-  <span class="p">})</span>
-  
-  
-  
-  output<span class="o">$</span>table1 <span class="o">&lt;-</span> renderTable<span class="p">(</span>best_in_this_state<span class="p">(),</span>include.rownames<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
- 
-  color<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;#75a3a3&#39;</span><span class="p">,</span><span class="s">&#39;#999966&#39;</span><span class="p">,</span><span class="s">&#39;#79a6d2&#39;</span><span class="p">,</span><span class="s">&#39;#c68c53&#39;</span><span class="p">)</span>
-  
-
-    
-  
-  output<span class="o">$</span>myplot<span class="o">&lt;-</span>renderPlot<span class="p">({</span>
-    
-    <span class="kr">if</span><span class="p">(</span>outcome<span class="p">()</span><span class="o">==</span><span class="s">&quot;heart attack&quot;</span><span class="p">){</span>
+    <span class="kr">if</span> <span class="p">(</span><span class="kp">is.null</span><span class="p">(</span>inFile<span class="p">)){</span>
+      <span class="kr">return</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+    <span class="p">}</span><span class="kp">else</span><span class="p">{</span>
       
-      hist<span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data<span class="p">[,</span> <span class="m">6</span><span class="p">]),</span>xlab<span class="o">=</span><span class="s">&quot;Deaths from heart attack&quot;</span><span class="p">,</span>
-           main <span class="o">=</span><span class="s">&quot;Nationwide 30-day death rates from heart attack\n</span>
-<span class="s">           and performance of selected hospital&quot;</span><span class="p">,</span>cex.lab<span class="o">=</span><span class="m">1</span><span class="p">,</span>cex.axis<span class="o">=</span><span class="m">1</span><span class="p">,</span>
-           col<span class="o">=</span><span class="kp">sample</span><span class="p">(</span>color<span class="p">,</span><span class="m">1</span><span class="p">,</span>replace<span class="o">=</span><span class="bp">T</span><span class="p">),</span>border<span class="o">=</span><span class="s">&#39;white&#39;</span><span class="p">,</span>cex.main<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
-      abline<span class="p">(</span>v<span class="o">=</span>deaths<span class="p">(),</span>col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span>lwd<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+      withProgress<span class="p">({</span>
+        setProgress<span class="p">(</span>message <span class="o">=</span> <span class="s">&quot;Extracting Text...&quot;</span><span class="p">)</span>
+        
+      lst<span class="o">=</span><span class="kt">list</span><span class="p">()</span>
+      <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>inFile<span class="p">[,</span><span class="m">1</span><span class="p">])){</span>
+        lst<span class="p">[[</span>i<span class="p">]]</span> <span class="o">&lt;-</span> pdf_text<span class="p">(</span>inFile<span class="p">[[</span>i<span class="p">,</span> <span class="s">&#39;datapath&#39;</span><span class="p">]])</span>
+      <span class="p">}</span>
       
-      text<span class="p">(</span><span class="m">1.25</span><span class="o">*</span><span class="kp">mean</span><span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data<span class="p">[,</span> <span class="m">6</span><span class="p">]),</span>na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span> <span class="m">600</span><span class="p">,</span> hospital<span class="p">(),</span> col <span class="o">=</span> <span class="s">&quot;#660066&quot;</span><span class="p">,</span>
-           cex <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
-      text<span class="p">(</span><span class="kp">mean</span><span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data<span class="p">[,</span> <span class="m">7</span><span class="p">]),</span>na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span> <span class="m">500</span><span class="p">,</span> <span class="kp">paste0</span><span class="p">(</span><span class="s">&quot;Rank in &quot;</span><span class="p">,</span>state<span class="p">(),</span><span class="s">&quot;: &quot;</span><span class="p">,</span> its_rank<span class="p">()),</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span>cex<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+      lst
       
+      <span class="p">})</span>
     <span class="p">}</span>
     
-    <span class="kr">else</span> <span class="kr">if</span><span class="p">(</span>outcome<span class="p">()</span><span class="o">==</span><span class="s">&quot;heart failure&quot;</span><span class="p">){</span>
+  <span class="p">})</span>
+  
+
+
+
+
+documents<span class="o">&lt;-</span>reactive<span class="p">({</span>
+  
+  
+  inFile <span class="o">&lt;-</span> input<span class="o">$</span>file1
+  
+  <span class="kt">c</span><span class="p">(</span><span class="kp">unlist</span><span class="p">(</span><span class="kp">strsplit</span><span class="p">(</span>input<span class="o">$</span>link<span class="p">,</span><span class="s">&quot;,&quot;</span><span class="p">)),</span>inFile<span class="o">$</span>name<span class="p">)</span>
+  
+<span class="p">})</span>
+
+
+
+
+
+
+mymatrix<span class="o">&lt;-</span>reactive<span class="p">({</span>
+
+
+  withProgress<span class="p">({</span>
+    setProgress<span class="p">(</span>message <span class="o">=</span> <span class="s">&quot;Processing corpus...&quot;</span><span class="p">)</span>
+  
+  txt<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="kp">unlist</span><span class="p">(</span>mypdf1_list<span class="p">()),</span> <span class="kp">unlist</span><span class="p">(</span>mypdf2_list<span class="p">()))</span>
+
+  
+   <span class="kr">if</span><span class="p">(</span><span class="kp">is.null</span><span class="p">(</span>txt<span class="p">))</span>
+     
+     <span class="kr">return</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+    
+    <span class="c1"># Create corpus</span>
+    corpus<span class="o">=</span>Corpus<span class="p">(</span>VectorSource<span class="p">(</span>txt<span class="p">))</span>
+    <span class="c1"># Convert to lower-case</span>
+    corpus<span class="o">=</span>tm_map<span class="p">(</span>corpus<span class="p">,</span><span class="kp">tolower</span><span class="p">)</span>
+    corpus <span class="o">=</span> tm_map<span class="p">(</span>corpus<span class="p">,</span> PlainTextDocument<span class="p">)</span>
+    corpus <span class="o">=</span> tm_map<span class="p">(</span>corpus<span class="p">,</span> removePunctuation<span class="p">)</span>
+    
+    <span class="c1"># Remove stopwords</span>
+    corpus<span class="o">=</span>tm_map<span class="p">(</span>corpus<span class="p">,</span><span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> removeWords<span class="p">(</span>x<span class="p">,</span>stopwords<span class="p">(</span><span class="s">&quot;english&quot;</span><span class="p">)))</span>
+    
+    frequencies <span class="o">=</span> DocumentTermMatrix<span class="p">(</span>corpus<span class="p">)</span>
+   <span class="c1"># sparse = removeSparseTerms(frequencies,0.9)</span>
+    <span class="c1">#sparse =as.matrix(sparse)</span>
+    
+    sparse <span class="o">=</span><span class="kp">as.matrix</span><span class="p">(</span>frequencies<span class="p">)</span>
+    sparse<span class="o">=</span><span class="kp">apply</span><span class="p">(</span>sparse<span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="kp">sum</span><span class="p">)</span>
+    sparse<span class="o">=</span>sparse<span class="p">[</span><span class="kp">order</span><span class="p">(</span>sparse<span class="p">,</span>decreasing <span class="o">=</span> <span class="bp">T</span><span class="p">)]</span>
+    
+    Term<span class="o">=</span><span class="kp">names</span><span class="p">(</span>sparse<span class="p">)</span>
+    Frequency<span class="o">=</span><span class="kp">as.vector</span><span class="p">(</span>sparse<span class="p">)</span>
+    
+    sparse<span class="o">=</span><span class="kp">as.data.frame</span><span class="p">(</span><span class="kt">list</span><span class="p">(</span>Term<span class="o">=</span>Term<span class="p">,</span>Frequency<span class="o">=</span>Frequency<span class="p">))</span>
+    sparse<span class="o">$</span>Term <span class="o">=</span> stri_trans_totitle<span class="p">(</span>sparse<span class="o">$</span>Term<span class="p">)</span> 
+    sparse
+   
+  <span class="p">})</span>
+  <span class="p">})</span>
+
+
+
+
+output<span class="o">$</span>DataTable <span class="o">&lt;-</span>DT<span class="o">::</span>renderDataTable<span class="p">(</span>
+  
+  withProgress<span class="p">({</span>
+    setProgress<span class="p">(</span>message <span class="o">=</span> <span class="s">&quot;Preparing Table...&quot;</span><span class="p">)</span>
+    datatable<span class="p">(</span>
+      mydataTable<span class="p">(),</span> filter <span class="o">=</span> <span class="s">&#39;top&#39;</span><span class="p">,</span>  
+      options <span class="o">=</span> <span class="kt">list</span><span class="p">(</span>pageLength <span class="o">=</span> <span class="m">5</span><span class="p">,</span> autoWidth <span class="o">=</span> <span class="kc">TRUE</span><span class="p">),</span>
+      rownames<span class="o">=</span> <span class="kc">FALSE</span>
       
-      hist<span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data<span class="p">[,</span> <span class="m">7</span><span class="p">]),</span>xlab<span class="o">=</span><span class="s">&quot;Deaths from heart failure&quot;</span><span class="p">,</span>
-           main <span class="o">=</span><span class="s">&quot;Nationwide 30-day death rates from heart failure\n and performance of selected hospital&quot;</span><span class="p">,</span>cex.lab<span class="o">=</span><span class="m">1</span><span class="p">,</span>cex.axis<span class="o">=</span><span class="m">1</span><span class="p">,</span>
-           col<span class="o">=</span><span class="kp">sample</span><span class="p">(</span>color<span class="p">,</span><span class="m">1</span><span class="p">,</span>replace<span class="o">=</span><span class="bp">T</span><span class="p">),</span>border<span class="o">=</span><span class="s">&#39;white&#39;</span><span class="p">,</span>cex.main<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
-      abline<span class="p">(</span>v<span class="o">=</span>deaths<span class="p">(),</span>col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span>lwd<span class="o">=</span><span class="m">2</span><span class="p">)</span>
-      text<span class="p">(</span><span class="m">1.25</span><span class="o">*</span><span class="kp">mean</span><span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data<span class="p">[,</span> <span class="m">7</span><span class="p">]),</span>na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span> <span class="m">600</span><span class="p">,</span> hospital<span class="p">(),</span> col <span class="o">=</span> <span class="s">&quot;#660066&quot;</span><span class="p">,</span>cex<span class="o">=</span><span class="m">1</span><span class="p">)</span>
-      text<span class="p">(</span><span class="m">1.5</span><span class="o">*</span><span class="kp">mean</span><span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data<span class="p">[,</span> <span class="m">7</span><span class="p">]),</span>na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span> <span class="m">500</span><span class="p">,</span> <span class="kp">paste0</span><span class="p">(</span><span class="s">&quot;Rank in &quot;</span><span class="p">,</span>state<span class="p">(),</span><span class="s">&quot;: &quot;</span><span class="p">,</span> its_rank<span class="p">()),</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span>cex<span class="o">=</span><span class="m">1</span><span class="p">)</span>
-      
-    <span class="p">}</span>
+    <span class="p">)</span>
+  <span class="p">})</span>
+<span class="p">)</span>
+
+
+mydataTable<span class="o">&lt;-</span>reactive<span class="p">({</span>
+  
+  withProgress<span class="p">({</span>
+    setProgress<span class="p">(</span>message <span class="o">=</span> <span class="s">&quot;Computing...&quot;</span><span class="p">)</span>
+    <span class="kr">if</span><span class="p">(</span><span class="kp">is.null</span><span class="p">(</span>mymatrix<span class="p">()))</span>
+      <span class="kr">return</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+    
+    pdfs<span class="o">=</span><span class="kt">c</span><span class="p">(</span>mypdf1_list<span class="p">(),</span> mypdf2_list<span class="p">())</span>
     
     
-    <span class="kr">else</span> <span class="kr">if</span><span class="p">(</span>outcome<span class="p">()</span><span class="o">==</span><span class="s">&quot;pneumonia&quot;</span><span class="p">){</span>
+    
+    <span class="kr">if</span><span class="p">(</span><span class="kp">length</span><span class="p">(</span>pdfs<span class="p">)</span><span class="o">&gt;</span><span class="m">0</span><span class="p">){</span>
       
-      hist<span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data<span class="p">[,</span> <span class="m">8</span><span class="p">]),</span>xlab<span class="o">=</span><span class="s">&quot;Deaths from pneumonia&quot;</span><span class="p">,</span>
-           main <span class="o">=</span><span class="s">&quot;Nationwide 30-day death rates from pneumonia\n and performance of selected hospital&quot;</span><span class="p">,</span>cex.lab<span class="o">=</span><span class="m">1</span><span class="p">,</span>cex.axis<span class="o">=</span><span class="m">1</span><span class="p">,</span>
-           col<span class="o">=</span><span class="kp">sample</span><span class="p">(</span>color<span class="p">,</span><span class="m">1</span><span class="p">,</span>replace<span class="o">=</span><span class="bp">T</span><span class="p">),</span>border<span class="o">=</span><span class="s">&#39;white&#39;</span><span class="p">,</span>cex.main<span class="o">=</span><span class="m">1.2</span><span class="p">)</span>
-      abline<span class="p">(</span>v<span class="o">=</span>deaths<span class="p">(),</span>col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span>lwd<span class="o">=</span><span class="m">2</span><span class="p">)</span>
-      text<span class="p">(</span><span class="m">1.25</span><span class="o">*</span><span class="kp">mean</span><span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data<span class="p">[,</span> <span class="m">8</span><span class="p">]),</span>na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span> <span class="m">500</span><span class="p">,</span> hospital<span class="p">(),</span> col <span class="o">=</span> <span class="s">&quot;#660066&quot;</span><span class="p">,</span>cex<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+      documents<span class="o">=</span>documents<span class="p">()</span>
       
-      text<span class="p">(</span><span class="m">1.5</span><span class="o">*</span><span class="kp">mean</span><span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>outcome_data<span class="p">[,</span> <span class="m">7</span><span class="p">]),</span>na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span> <span class="m">400</span><span class="p">,</span> <span class="kp">paste0</span><span class="p">(</span><span class="s">&quot;Rank in &quot;</span><span class="p">,</span>state<span class="p">(),</span><span class="s">&quot;: &quot;</span><span class="p">,</span> its_rank<span class="p">()),</span> col <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span>cex<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+      mydata<span class="o">=</span><span class="kt">data.frame</span><span class="p">()</span>
+      
+      <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>pdfs<span class="p">)){</span>
+        
+        txt <span class="o">=</span> pdfs<span class="p">[[</span>i<span class="p">]]</span>
+        
+        <span class="c1"># Create corpus</span>
+        corpus<span class="o">=</span>Corpus<span class="p">(</span>VectorSource<span class="p">(</span>txt<span class="p">))</span>
+        <span class="c1"># Convert to lower-case</span>
+        corpus<span class="o">=</span>tm_map<span class="p">(</span>corpus<span class="p">,</span><span class="kp">tolower</span><span class="p">)</span>
+        corpus <span class="o">=</span> tm_map<span class="p">(</span>corpus<span class="p">,</span> PlainTextDocument<span class="p">)</span>
+        corpus <span class="o">=</span> tm_map<span class="p">(</span>corpus<span class="p">,</span> removePunctuation<span class="p">)</span>
+        
+        <span class="c1"># Remove stopwords</span>
+        corpus<span class="o">=</span>tm_map<span class="p">(</span>corpus<span class="p">,</span><span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> removeWords<span class="p">(</span>x<span class="p">,</span>stopwords<span class="p">(</span><span class="s">&quot;english&quot;</span><span class="p">)))</span>
+        
+        frequencies <span class="o">=</span> DocumentTermMatrix<span class="p">(</span>corpus<span class="p">)</span>
+        <span class="c1">#sparse = removeSparseTerms(frequencies,1)</span>
+        sparse <span class="o">=</span><span class="kp">as.matrix</span><span class="p">(</span>frequencies<span class="p">)</span>
+        sparse<span class="o">=</span><span class="kp">apply</span><span class="p">(</span>sparse<span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="kp">sum</span><span class="p">)</span>
+        sparse<span class="o">=</span>sparse<span class="p">[</span><span class="kp">order</span><span class="p">(</span>sparse<span class="p">,</span>decreasing <span class="o">=</span> <span class="bp">T</span><span class="p">)]</span>
+        
+        Term<span class="o">=</span><span class="kp">names</span><span class="p">(</span>sparse<span class="p">)</span>
+        Frequency<span class="o">=</span><span class="kp">as.vector</span><span class="p">(</span>sparse<span class="p">)</span>
+        
+        sparse<span class="o">=</span><span class="kp">as.data.frame</span><span class="p">(</span><span class="kt">list</span><span class="p">(</span>Term<span class="o">=</span>Term<span class="p">,</span>Frequency<span class="o">=</span>Frequency<span class="p">))</span>
+        sparse<span class="o">$</span>Term <span class="o">=</span> stri_trans_totitle<span class="p">(</span>sparse<span class="o">$</span>Term<span class="p">)</span> 
+        sparse<span class="o">$</span>Document<span class="o">=</span>documents<span class="p">[</span>i<span class="p">]</span>
+        mydata<span class="o">=</span><span class="kp">rbind</span><span class="p">(</span>mydata<span class="p">,</span>sparse<span class="p">)</span>
+        
+      <span class="p">}</span>
+      
+      mydata <span class="o">=</span> mydata<span class="o">%&gt;%</span>mutate<span class="p">(</span>Term <span class="o">=</span> <span class="kp">factor</span><span class="p">(</span>Term<span class="p">,</span>levels <span class="o">=</span> Term<span class="p">[</span><span class="kp">order</span><span class="p">(</span>Frequency<span class="p">,</span>decreasing <span class="o">=</span><span class="bp">T</span><span class="p">)]))</span>
+      
+      <span class="kr">if</span><span class="p">(</span><span class="kp">nrow</span><span class="p">(</span>mydata<span class="p">)</span><span class="o">&gt;</span><span class="m">7000</span><span class="p">){</span>
+        <span class="kp">head</span><span class="p">(</span>mydata<span class="p">,</span><span class="m">7000</span><span class="p">)</span>
+      <span class="p">}</span><span class="kp">else</span><span class="p">{</span>mydata<span class="p">}</span>
       
     <span class="p">}</span>
   <span class="p">})</span>
+<span class="p">})</span>
+
+
+  
+output<span class="o">$</span>wordcloud <span class="o">&lt;-</span> renderPlot<span class="p">({</span>
+  
+    <span class="kr">if</span><span class="p">(</span><span class="kp">is.null</span><span class="p">(</span>mymatrix<span class="p">()))</span>
+      <span class="kr">return</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+    
+      sparse<span class="o">=</span>mymatrix<span class="p">()</span>
+      
+    pal2 <span class="o">&lt;-</span> brewer.pal<span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="s">&quot;Dark2&quot;</span><span class="p">)</span>
+    
+    wordcloud<span class="p">(</span>sparse<span class="o">$</span>Term<span class="p">,</span>sparse<span class="o">$</span>Frequency<span class="p">,</span> min.freq<span class="o">=</span>input<span class="o">$</span>freq<span class="p">,</span> max.words<span class="o">=</span>input<span class="o">$</span><span class="kp">max</span><span class="p">,</span>
+              random.order<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>scale<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="m">0.5</span><span class="p">),</span>
+              rot.per<span class="o">=</span><span class="m">0.35</span><span class="p">,</span> use.r.layout<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> colors<span class="o">=</span>pal2<span class="p">)</span>
+    
+    
+    
+  
+  
+   <span class="kr">if</span><span class="p">(</span>input<span class="o">$</span>for_each<span class="o">==</span><span class="kc">TRUE</span><span class="p">){</span>
+      
+      
+      <span class="kr">if</span><span class="p">(</span><span class="kp">is.null</span><span class="p">(</span>mymatrix<span class="p">()))</span>
+        <span class="kr">return</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+      
+     pdfs<span class="o">=</span><span class="kt">c</span><span class="p">(</span>mypdf1_list<span class="p">(),</span> mypdf2_list<span class="p">())</span>
+      
+      
+      
+      <span class="kr">if</span><span class="p">(</span><span class="kp">length</span><span class="p">(</span>pdfs<span class="p">)</span><span class="o">&gt;</span><span class="m">0</span><span class="p">){</span>
+        
+        
+
+        
+        <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>pdfs<span class="p">)){</span>
+          
+          txt <span class="o">=</span> pdfs<span class="p">[[</span>i<span class="p">]]</span>
+          
+          <span class="c1"># Create corpus</span>
+          corpus<span class="o">=</span>Corpus<span class="p">(</span>VectorSource<span class="p">(</span>txt<span class="p">))</span>
+          <span class="c1"># Convert to lower-case</span>
+          corpus<span class="o">=</span>tm_map<span class="p">(</span>corpus<span class="p">,</span><span class="kp">tolower</span><span class="p">)</span>
+          corpus <span class="o">=</span> tm_map<span class="p">(</span>corpus<span class="p">,</span> PlainTextDocument<span class="p">)</span>
+          corpus <span class="o">=</span> tm_map<span class="p">(</span>corpus<span class="p">,</span> removePunctuation<span class="p">)</span>
+          
+          <span class="c1"># Remove stopwords</span>
+          corpus<span class="o">=</span>tm_map<span class="p">(</span>corpus<span class="p">,</span><span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> removeWords<span class="p">(</span>x<span class="p">,</span>stopwords<span class="p">(</span><span class="s">&quot;english&quot;</span><span class="p">)))</span>
+          
+          frequencies <span class="o">=</span> DocumentTermMatrix<span class="p">(</span>corpus<span class="p">)</span>
+          <span class="c1">#sparse = removeSparseTerms(frequencies,1)</span>
+          sparse <span class="o">=</span><span class="kp">as.matrix</span><span class="p">(</span>frequencies<span class="p">)</span>
+          sparse<span class="o">=</span><span class="kp">apply</span><span class="p">(</span>sparse<span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="kp">sum</span><span class="p">)</span>
+          sparse<span class="o">=</span>sparse<span class="p">[</span><span class="kp">order</span><span class="p">(</span>sparse<span class="p">,</span>decreasing <span class="o">=</span> <span class="bp">T</span><span class="p">)]</span>
+          
+          Term<span class="o">=</span><span class="kp">names</span><span class="p">(</span>sparse<span class="p">)</span>
+          Frequency<span class="o">=</span><span class="kp">as.vector</span><span class="p">(</span>sparse<span class="p">)</span>
+          
+          sparse<span class="o">=</span><span class="kp">as.data.frame</span><span class="p">(</span><span class="kt">list</span><span class="p">(</span>Term<span class="o">=</span>Term<span class="p">,</span>Frequency<span class="o">=</span>Frequency<span class="p">))</span>
+          sparse<span class="o">$</span>Term <span class="o">=</span> stri_trans_totitle<span class="p">(</span>sparse<span class="o">$</span>Term<span class="p">)</span> 
+          
+          
+          pal2 <span class="o">&lt;-</span> brewer.pal<span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="s">&quot;Dark2&quot;</span><span class="p">)</span>
+          
+          documents<span class="o">=</span>documents<span class="p">()</span>
+          
+          x11<span class="p">(</span>title <span class="o">=</span> documents<span class="p">[</span>i<span class="p">])</span>
+          
+        
+          wordcloud<span class="p">(</span>sparse<span class="o">$</span>Term<span class="p">,</span>sparse<span class="o">$</span>Frequency<span class="p">,</span> min.freq<span class="o">=</span>input<span class="o">$</span>freq<span class="p">,</span> max.words<span class="o">=</span>input<span class="o">$</span><span class="kp">max</span><span class="p">,</span>
+                    random.order<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span>scale<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="m">0.5</span><span class="p">),</span>
+                    rot.per<span class="o">=</span><span class="m">0.35</span><span class="p">,</span> use.r.layout<span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> colors<span class="o">=</span>pal2<span class="p">)</span>
+      
+        <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    
+  <span class="p">})</span>
+  
+
+toshow<span class="o">&lt;-</span>reactive<span class="p">({</span>
+  input<span class="o">$</span>show
+<span class="p">})</span>
+
+
+output<span class="o">$</span>myplot <span class="o">&lt;-</span> renderPlotly<span class="p">({</span>
+  
+  <span class="kr">if</span><span class="p">(</span><span class="kp">is.null</span><span class="p">(</span>mymatrix<span class="p">()))</span>
+    <span class="kr">return</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+  
+  maximum <span class="o">=</span>toshow<span class="p">()</span>
+  
+  sparse<span class="o">=</span>mymatrix<span class="p">()</span>
+  sparse<span class="o">=</span>sparse<span class="p">[</span><span class="m">1</span><span class="o">:</span>maximum<span class="p">,]</span>
+  
+  q<span class="o">=</span>sparse<span class="o">%&gt;%</span>mutate<span class="p">(</span>Term <span class="o">=</span> <span class="kp">factor</span><span class="p">(</span>Term<span class="p">,</span>levels <span class="o">=</span> Term<span class="p">[</span><span class="kp">order</span><span class="p">(</span>Frequency<span class="p">,</span>decreasing <span class="o">=</span><span class="bp">F</span><span class="p">)]))</span><span class="o">%&gt;%</span>
+    ggplot<span class="p">(</span>aes<span class="p">(</span>x<span class="o">=</span>Term<span class="p">,</span>y<span class="o">=</span>Frequency<span class="p">))</span><span class="o">+</span>geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&#39;identity&#39;</span><span class="p">,</span>color<span class="o">=</span><span class="s">&#39;#c2c2a3&#39;</span><span class="p">,</span>fill<span class="o">=</span><span class="s">&#39;#b35900&#39;</span><span class="p">)</span><span class="o">+</span>
+    xlab<span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">+</span>ggtitle<span class="p">(</span><span class="s">&#39;Most frequent words&#39;</span><span class="p">)</span><span class="o">+</span>theme<span class="p">(</span>plot.title <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">16</span><span class="p">,</span>colour<span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">))</span><span class="o">+</span>
+    coord_flip<span class="p">()</span><span class="c1"># +theme(axis.text.x = element_text(angle=-90))</span>
+  
+  
+  
+  p <span class="o">&lt;-</span> ggplotly<span class="p">(</span>q <span class="o">+</span> ylab<span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">)</span> <span class="o">+</span> xlab<span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">))</span>
+  x <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">(</span>
+    title <span class="o">=</span> <span class="s">&quot;Frequency&quot;</span>
+  <span class="p">)</span>
+  y <span class="o">&lt;-</span> <span class="kt">list</span><span class="p">(</span>
+    title <span class="o">=</span> <span class="s">&quot;&quot;</span>
+  <span class="p">)</span>
+  p <span class="o">%&gt;%</span> layout<span class="p">(</span>xaxis <span class="o">=</span> x<span class="p">,</span> yaxis <span class="o">=</span> y<span class="p">)</span>
+  
+
+  
+  
+<span class="p">})</span>
+  
+  
+  
+mysearch<span class="o">&lt;-</span>reactive<span class="p">({</span>
+  
+  input<span class="o">$</span><span class="kp">search</span>
+  isolate<span class="p">(</span>
+    stri_trans_totitle<span class="p">(</span>input<span class="o">$</span>searchText<span class="p">)</span>
+  <span class="p">)</span>
+  
+<span class="p">})</span>
+
+
+
+SearchMatrix<span class="o">&lt;-</span>reactive<span class="p">({</span>
+  
+  <span class="kr">if</span><span class="p">(</span><span class="kp">is.null</span><span class="p">(</span>mysearch<span class="p">()))</span>
+      <span class="kr">return</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+  
+  <span class="kr">if</span><span class="p">(</span><span class="kp">is.null</span><span class="p">(</span>mymatrix<span class="p">()))</span>
+    <span class="kr">return</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+  
+  pdfs<span class="o">=</span><span class="kt">c</span><span class="p">(</span>mypdf1_list<span class="p">(),</span> mypdf2_list<span class="p">())</span>
+  
+  
+  <span class="kr">if</span><span class="p">(</span><span class="kp">length</span><span class="p">(</span>pdfs<span class="p">)</span><span class="o">&gt;</span><span class="m">0</span><span class="p">){</span>
+    
+  
+    
+  mm<span class="o">=</span><span class="kt">data.frame</span><span class="p">()</span>
+  
+  <span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="kp">length</span><span class="p">(</span>pdfs<span class="p">)){</span>
+    
+    txt <span class="o">=</span> pdfs<span class="p">[[</span>i<span class="p">]]</span>
+    
+    <span class="c1"># Create corpus</span>
+    corpus<span class="o">=</span>Corpus<span class="p">(</span>VectorSource<span class="p">(</span>txt<span class="p">))</span>
+    <span class="c1"># Convert to lower-case</span>
+    corpus<span class="o">=</span>tm_map<span class="p">(</span>corpus<span class="p">,</span><span class="kp">tolower</span><span class="p">)</span>
+    corpus <span class="o">=</span> tm_map<span class="p">(</span>corpus<span class="p">,</span> PlainTextDocument<span class="p">)</span>
+    corpus <span class="o">=</span> tm_map<span class="p">(</span>corpus<span class="p">,</span> removePunctuation<span class="p">)</span>
+    
+    <span class="c1"># Remove stopwords</span>
+    corpus<span class="o">=</span>tm_map<span class="p">(</span>corpus<span class="p">,</span><span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> removeWords<span class="p">(</span>x<span class="p">,</span>stopwords<span class="p">(</span><span class="s">&quot;english&quot;</span><span class="p">)))</span>
+    
+    frequencies <span class="o">=</span> DocumentTermMatrix<span class="p">(</span>corpus<span class="p">)</span>
+    <span class="c1">#sparse = removeSparseTerms(frequencies,1)</span>
+    sparse <span class="o">=</span><span class="kp">as.matrix</span><span class="p">(</span>frequencies<span class="p">)</span>
+    sparse<span class="o">=</span><span class="kp">apply</span><span class="p">(</span>sparse<span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="kp">sum</span><span class="p">)</span>
+    sparse<span class="o">=</span>sparse<span class="p">[</span><span class="kp">order</span><span class="p">(</span>sparse<span class="p">,</span>decreasing <span class="o">=</span> <span class="bp">T</span><span class="p">)]</span>
+    
+    Term<span class="o">=</span><span class="kp">names</span><span class="p">(</span>sparse<span class="p">)</span>
+    Frequency<span class="o">=</span><span class="kp">as.vector</span><span class="p">(</span>sparse<span class="p">)</span>
+    
+    sparse<span class="o">=</span><span class="kp">as.data.frame</span><span class="p">(</span><span class="kt">list</span><span class="p">(</span>Term<span class="o">=</span>Term<span class="p">,</span>Frequency<span class="o">=</span>Frequency<span class="p">))</span>
+    sparse<span class="o">$</span>Term <span class="o">=</span> stri_trans_totitle<span class="p">(</span>sparse<span class="o">$</span>Term<span class="p">)</span> 
+    
+    <span class="kr">if</span><span class="p">(</span>stri_trans_totitle<span class="p">(</span>mysearch<span class="p">())</span><span class="o">%in%</span>sparse<span class="o">$</span>Term<span class="o">==</span><span class="kc">TRUE</span><span class="p">){</span>
+        total<span class="o">=</span> filter<span class="p">(</span>sparse<span class="p">,</span>Term<span class="o">==</span>stri_trans_totitle<span class="p">(</span>mysearch<span class="p">()))</span><span class="o">$</span>Frequency
+        <span class="p">}</span><span class="kp">else</span><span class="p">{</span>total<span class="o">=</span><span class="m">0</span><span class="p">}</span>
+    
+    mm<span class="o">=</span><span class="kp">rbind</span><span class="p">(</span>mm<span class="p">,</span>total<span class="p">)</span>
+    
+  <span class="p">}</span>
+  
+  Documents<span class="o">=</span>documents<span class="p">()</span>
+  <span class="kp">names</span><span class="p">(</span>mm<span class="p">)</span><span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;Frequency&#39;</span><span class="p">)</span>
+  
+  mm<span class="o">=</span><span class="kp">cbind</span><span class="p">(</span>Documents<span class="p">,</span>mm<span class="p">)</span>
+  mm
+  <span class="p">}</span>
+  
+<span class="p">})</span>
+
+
+
+output<span class="o">$</span>searched<span class="o">&lt;-</span>renderPlotly<span class="p">({</span>
+  
+  <span class="kr">if</span><span class="p">(</span><span class="kp">is.null</span><span class="p">(</span>SearchMatrix<span class="p">()))</span>
+    <span class="kr">return</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+
+  
+  <span class="kr">if</span><span class="p">(</span><span class="kp">is.na</span><span class="p">(</span>SearchMatrix<span class="p">()))</span>
+    <span class="kr">return</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+  
+  <span class="kr">if</span><span class="p">(</span><span class="kp">nchar</span><span class="p">(</span>SearchMatrix<span class="p">())</span><span class="o">==</span><span class="m">0</span><span class="p">)</span>
+    <span class="kr">return</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+  
+  mm<span class="o">=</span>SearchMatrix<span class="p">()</span>
+  
+  q<span class="o">=</span>mm<span class="o">%&gt;%</span>mutate<span class="p">(</span>Documents <span class="o">=</span> <span class="kp">factor</span><span class="p">(</span>Documents<span class="p">,</span>levels <span class="o">=</span> Documents<span class="p">[</span><span class="kp">order</span><span class="p">(</span>Frequency<span class="p">,</span>decreasing <span class="o">=</span><span class="bp">T</span><span class="p">)]))</span><span class="o">%&gt;%</span>
+    ggplot<span class="p">(</span>aes<span class="p">(</span>x<span class="o">=</span>Documents<span class="p">,</span>y<span class="o">=</span>Frequency<span class="p">))</span><span class="o">+</span>geom_bar<span class="p">(</span>stat<span class="o">=</span><span class="s">&#39;identity&#39;</span><span class="p">,</span>color<span class="o">=</span><span class="s">&#39;#c2c2a3&#39;</span><span class="p">,</span>fill<span class="o">=</span><span class="s">&#39;#999966&#39;</span><span class="p">,</span>width<span class="o">=</span><span class="m">.5</span><span class="p">)</span><span class="o">+</span>
+    xlab<span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">+</span>ggtitle<span class="p">(</span><span class="s">&#39;Search Term Frequency by Document&#39;</span><span class="p">)</span><span class="o">+</span>ylab<span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">)</span><span class="o">+</span>
+    theme<span class="p">(</span>axis.text.x <span class="o">=</span> element_text<span class="p">(</span>angle<span class="o">=</span><span class="m">-20</span><span class="p">))</span><span class="o">+</span>
+    theme<span class="p">(</span>plot.title <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">16</span><span class="p">,</span>colour<span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">))</span><span class="o">+</span>
+    theme<span class="p">(</span>axis.text.x <span class="o">=</span> element_text<span class="p">(</span>colour<span class="o">=</span><span class="s">&quot;#4d0000&quot;</span><span class="p">,</span>size<span class="o">=</span><span class="m">12</span><span class="p">))</span>
+  
+  
+  p <span class="o">=</span> ggplotly<span class="p">(</span><span class="kp">q</span><span class="p">)</span>
+  
+  
+  p
+  
+  
+<span class="p">})</span>
+
+
+output<span class="o">$</span>minfreq <span class="o">=</span> renderUI<span class="p">({</span>
+  
+  <span class="kr">if</span><span class="p">(</span><span class="kp">is.null</span><span class="p">(</span>mymatrix<span class="p">()))</span>
+    <span class="kr">return</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+  sliderInput<span class="p">(</span><span class="s">&quot;freq&quot;</span><span class="p">,</span>
+              em<span class="p">(</span><span class="s">&quot;Minimum Frequency:&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;color:black;font-size:100%&quot;</span><span class="p">),</span>
+              min <span class="o">=</span> <span class="m">1</span><span class="p">,</span>  max <span class="o">=</span> <span class="m">50</span><span class="p">,</span> value <span class="o">=</span> <span class="m">15</span><span class="p">)</span>
+<span class="p">})</span>
+
+
+output<span class="o">$</span>numwords <span class="o">=</span> renderUI<span class="p">({</span>
+  
+  <span class="kr">if</span><span class="p">(</span><span class="kp">is.null</span><span class="p">(</span>mymatrix<span class="p">()))</span>
+    <span class="kr">return</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+  
+  sliderInput<span class="p">(</span><span class="s">&quot;show&quot;</span><span class="p">,</span>
+              em<span class="p">(</span><span class="s">&quot;Number of Words to Display:&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;color:Blue;font-size:100%&quot;</span><span class="p">),</span>
+              min <span class="o">=</span> <span class="m">5</span><span class="p">,</span>  max <span class="o">=</span> <span class="m">50</span><span class="p">,</span> value <span class="o">=</span> <span class="m">25</span><span class="p">)</span>
+<span class="p">})</span>
+
+
+output<span class="o">$</span>maxwords <span class="o">=</span> renderUI<span class="p">({</span>
+  
+  <span class="kr">if</span><span class="p">(</span><span class="kp">is.null</span><span class="p">(</span>mymatrix<span class="p">()))</span>
+    <span class="kr">return</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+  sliderInput<span class="p">(</span><span class="s">&quot;max&quot;</span><span class="p">,</span>
+              em<span class="p">(</span><span class="s">&quot;Maximum Number of Words:&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;color:black;font-size:100%&quot;</span><span class="p">),</span>
+              min <span class="o">=</span> <span class="m">1</span><span class="p">,</span>  max <span class="o">=</span> <span class="m">300</span><span class="p">,</span>  value <span class="o">=</span> <span class="m">200</span><span class="p">)</span>
+<span class="p">})</span>
+
+
+output<span class="o">$</span>forEach <span class="o">=</span> renderUI<span class="p">({</span>
+  
+  <span class="kr">if</span><span class="p">(</span><span class="kp">is.null</span><span class="p">(</span>mymatrix<span class="p">()))</span>
+    <span class="kr">return</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+  checkboxInput<span class="p">(</span><span class="s">&quot;for_each&quot;</span><span class="p">,</span> label <span class="o">=</span> p<span class="p">(</span><span class="s">&quot;Create Word Cloud for Each Document&quot;</span><span class="p">,</span>style<span class="o">=</span><span class="s">&quot;color:#ff0000;font-size:120%&quot;</span> <span class="p">))</span>
+<span class="p">})</span>
+
+
+
+
+output<span class="o">$</span>forsearch <span class="o">=</span> renderUI<span class="p">({</span>
+  
+  <span class="kr">if</span><span class="p">(</span><span class="kp">is.null</span><span class="p">(</span>mymatrix<span class="p">()))</span>
+    <span class="kr">return</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+  sidebarSearchForm<span class="p">(</span>label <span class="o">=</span> <span class="s">&quot;Search...&quot;</span><span class="p">,</span> textId<span class="o">=</span><span class="s">&quot;searchText&quot;</span><span class="p">,</span> <span class="s">&quot;searchButton&quot;</span><span class="p">)</span>
+<span class="p">})</span>
+
+
+output<span class="o">$</span>text<span class="o">=</span> renderUI<span class="p">({</span>
+  
+  <span class="kr">if</span><span class="p">(</span><span class="o">!</span><span class="kp">is.null</span><span class="p">(</span>mymatrix<span class="p">())){</span>
+    
+  
+  p<span class="p">(</span><span class="s">&quot;Search a word and you will see a bar graph of its frequency across all documents&quot;</span><span class="p">,</span>
+    style<span class="o">=</span><span class="s">&quot;text-align:center;color:#990099;font-size:110%&quot;</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+
+
+
+output<span class="o">$</span>searchbutton <span class="o">=</span> renderUI<span class="p">({</span>
+  
+  <span class="kr">if</span><span class="p">(</span><span class="kp">is.null</span><span class="p">(</span>mymatrix<span class="p">()))</span>
+    <span class="kr">return</span><span class="p">(</span><span class="kc">NULL</span><span class="p">)</span>
+  actionButton<span class="p">(</span><span class="s">&quot;search&quot;</span><span class="p">,</span> <span class="s">&quot;Search&quot;</span><span class="p">)</span>
+<span class="p">})</span>
+
+
+
+
+
 <span class="p">})</span>
 </pre></div>
 
@@ -544,7 +963,7 @@ shinyServer<span class="p">(</span><span class="kr">function</span><span class="
     </div>
   </div>
   
-      <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="../myjs.js"></script>
 </div>
 
@@ -569,6 +988,6 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
-
+  
 </body>
 </html>
