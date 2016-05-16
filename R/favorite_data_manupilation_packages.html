@@ -1412,7 +1412,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="prompt input_prompt">In&nbsp;[102]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>from_dplyr <span class="o">=</span> arrange<span class="p">(</span>hospital_spending<span class="p">,</span> State<span class="p">)</span>
+<div class=" highlight hl-r"><pre>from_dplyr <span class="o">=</span> arrange<span class="p">(</span>hospital_spending<span class="p">,</span> desc<span class="p">(</span>State<span class="p">))</span>
 
 from_data_table <span class="o">=</span> setorder<span class="p">(</span>hospital_spending_DT<span class="p">,</span> <span class="o">-</span>State<span class="p">)</span>
 
@@ -1432,7 +1432,6 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 
 <div class="output_text output_subarea output_execute_result">
 <pre>TRUE
-  sorted
   renamed rows
   dropped row names
   dropped attributes</pre>
