@@ -331,9 +331,11 @@ and for dplyr <a href="https://cran.r-project.org/web/packages/dplyr/index.html"
 </div>
 </div>
 </div>
+
+
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[148]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span class="kn">library</span><span class="p">(</span>dplyr<span class="p">)</span>
@@ -364,8 +366,7 @@ and for dplyr <a href="https://cran.r-project.org/web/packages/dplyr/index.html"
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The data we will use here is from <a href="https://www.data.gov/"    target="_blank">DATA.GOV</a>. It is Medicare Hospital Spending by Claim and it can be downloaded from 
-<a href="https://catalog.data.gov/dataset/medicare-hospital-spending-by-claim-61b57"    target="_blank">here</a>.</p>
+<p>The data we will use here is from <a href="https://www.data.gov/">DATA.GOV</a>. It is Medicare Hospital Spending by Claim and it can be downloaded from <a href="https://catalog.data.gov/dataset/medicare-hospital-spending-by-claim-61b57">here</a>.</p>
 
 </div>
 </div>
@@ -385,17 +386,14 @@ and for dplyr <a href="https://cran.r-project.org/web/packages/dplyr/index.html"
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Since <em>JSON</em> is a very common data format used for asynchronous browser/server communication, it is good if you understand the 
-lines of code below used to get the data. You can get an introductory tutorial on how to use the jsonlite package to work with JSON data 
-<a href="https://cran.r-project.org/web/packages/jsonlite/vignettes/json-aaquickstart.html"   target="_blank">here</a>. However, 
-if you want to focus only on the data.table and dplyr commands, you can safely just run the codes in the two cells below and ignore the details.</p>
+<p>Since <em>JSON</em> is a very common data format used for asynchronous browser/server communication, it is good if you understand the lines of code below used to get the data. You can get an introductory tutorial on how to use the jsonlite package to work with JSON data <a href="https://cran.r-project.org/web/packages/jsonlite/vignettes/json-aaquickstart.html">here</a>. However, if you want to focus only on the data.table and dplyr commands, you can safely just run the codes in the two cells below and ignore the details.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[215]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>spending<span class="o">=</span>fromJSON<span class="p">(</span><span class="s">&quot;https://data.medicare.gov/api/views/nrth-mfg3/rows.json?accessType=DOWNLOAD&quot;</span><span class="p">)</span>
@@ -410,7 +408,7 @@ if you want to focus only on the data.table and dplyr commands, you can safely j
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[215]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <ol class=list-inline>
@@ -428,7 +426,7 @@ if you want to focus only on the data.table and dplyr commands, you can safely j
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[216]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>meta<span class="o">=</span>spending<span class="o">$</span>meta
@@ -444,7 +442,7 @@ hospital_spending<span class="o">=</span>select<span class="p">(</span>hospital_
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[217]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>glimpse<span class="p">(</span>hospital_spending<span class="p">)</span>
@@ -495,7 +493,7 @@ $ Measure.End.Date                    (fctr) 2014-12-31T00:00:00, 2014-12-3...
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[218]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>cols <span class="o">=</span> <span class="m">6</span><span class="o">:</span><span class="m">11</span><span class="p">;</span> <span class="c1"># These are the columns to be changed to numeric.</span>
@@ -519,11 +517,11 @@ hospital_spending<span class="p">[,</span>cols<span class="p">]</span> <span cla
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[150]:</div>
+<div class="prompt input_prompt">In&nbsp;[219]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>cols <span class="o">=</span> <span class="m">12</span><span class="o">:</span><span class="m">13</span><span class="p">;</span> <span class="c1"># These are the columns to be changed to dates.</span>
-hospital_spending<span class="p">[,</span>cols<span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">lapply</span><span class="p">(</span>hospital_spending<span class="p">[,</span>cols<span class="p">],</span> mdy<span class="p">)</span>
+hospital_spending<span class="p">[,</span>cols<span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">lapply</span><span class="p">(</span>hospital_spending<span class="p">[,</span>cols<span class="p">],</span> ymd_hms<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -543,7 +541,7 @@ hospital_spending<span class="p">[,</span>cols<span class="p">]</span> <span cla
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[151]:</div>
+<div class="prompt input_prompt">In&nbsp;[220]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span class="kp">sapply</span><span class="p">(</span>hospital_spending<span class="p">,</span><span class="kp">class</span><span class="p">)</span>
@@ -557,7 +555,7 @@ hospital_spending<span class="p">[,</span>cols<span class="p">]</span> <span cla
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[151]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[220]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <dl>
@@ -626,7 +624,7 @@ hospital_spending<span class="p">[,</span>cols<span class="p">]</span> <span cla
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[221]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>hospital_spending_DT <span class="o">=</span> data.table<span class="p">(</span>hospital_spending<span class="p">)</span>
@@ -639,7 +637,7 @@ hospital_spending<span class="p">[,</span>cols<span class="p">]</span> <span cla
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[157]:</div>
+<div class="prompt input_prompt">In&nbsp;[222]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span class="kp">class</span><span class="p">(</span>hospital_spending_DT<span class="p">)</span>
@@ -653,7 +651,7 @@ hospital_spending<span class="p">[,</span>cols<span class="p">]</span> <span cla
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[157]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[222]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <ol class=list-inline>
@@ -709,7 +707,7 @@ hospital_spending<span class="p">[,</span>cols<span class="p">]</span> <span cla
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="prompt input_prompt">In&nbsp;[193]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>from_dplyr <span class="o">=</span> select<span class="p">(</span>hospital_spending<span class="p">,</span> Hospital.Name<span class="p">)</span>
@@ -733,7 +731,7 @@ from_data_table <span class="o">=</span> hospital_spending_DT<span class="p">[,<
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="prompt input_prompt">In&nbsp;[194]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table<span class="p">,</span> allowAll<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
@@ -747,7 +745,7 @@ from_data_table <span class="o">=</span> hospital_spending_DT<span class="p">[,<
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[83]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[194]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -772,7 +770,7 @@ from_data_table <span class="o">=</span> hospital_spending_DT<span class="p">[,<
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[84]:</div>
+<div class="prompt input_prompt">In&nbsp;[195]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>from_dplyr <span class="o">=</span> select<span class="p">(</span>hospital_spending<span class="p">,</span> <span class="o">-</span>Hospital.Name<span class="p">)</span>
@@ -788,7 +786,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[84]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[195]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -812,12 +810,22 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We will use the copy() function, which deep copies the input object and therefore any subsequent update by reference operations performed on the copied object will not affect the original object.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[196]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>DT<span class="o">=</span>hospital_spending_DT
+<div class=" highlight hl-r"><pre>DT<span class="o">=</span>copy<span class="p">(</span>hospital_spending_DT<span class="p">)</span>
 DT<span class="o">=</span>DT<span class="p">[,</span>Hospital.Name<span class="o">:=</span><span class="kc">NULL</span><span class="p">]</span>
 <span class="s">&quot;Hospital.Name&quot;</span><span class="o">%in%</span><span class="kp">names</span><span class="p">(</span>DT<span class="p">)</span>
 </pre></div>
@@ -830,7 +838,7 @@ DT<span class="o">=</span>DT<span class="p">[,</span>Hospital.Name<span class="o
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[10]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[196]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 FALSE
@@ -854,10 +862,10 @@ FALSE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[197]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre>DT<span class="o">=</span>hospital_spending_DT
+<div class=" highlight hl-r"><pre>DT<span class="o">=</span>copy<span class="p">(</span>hospital_spending_DT<span class="p">)</span>
 DT<span class="o">=</span>DT<span class="p">[,</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;Hospital.Name&quot;</span><span class="p">,</span><span class="s">&quot;State&quot;</span><span class="p">,</span><span class="s">&quot;Measure.Start.Date&quot;</span><span class="p">,</span><span class="s">&quot;Measure.End.Date&quot;</span><span class="p">)</span><span class="o">:=</span><span class="kc">NULL</span><span class="p">]</span>
 <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Hospital.Name&quot;</span><span class="p">,</span><span class="s">&quot;State&quot;</span><span class="p">,</span><span class="s">&quot;Measure.Start.Date&quot;</span><span class="p">,</span><span class="s">&quot;Measure.End.Date&quot;</span><span class="p">)</span><span class="o">%in%</span><span class="kp">names</span><span class="p">(</span>DT<span class="p">)</span>
 </pre></div>
@@ -870,7 +878,7 @@ DT<span class="o">=</span>DT<span class="p">[,</span><span class="kt">c</span><s
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[11]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[197]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <ol class=list-inline>
@@ -909,7 +917,7 @@ DT<span class="o">=</span>DT<span class="p">[,</span><span class="kt">c</span><s
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[85]:</div>
+<div class="prompt input_prompt">In&nbsp;[198]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>from_dplyr <span class="o">=</span> select<span class="p">(</span>hospital_spending<span class="p">,</span> Hospital.Name<span class="p">,</span>State<span class="p">,</span>Measure.Start.Date<span class="p">,</span>Measure.End.Date<span class="p">)</span>
@@ -925,7 +933,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[85]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[198]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -960,7 +968,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="prompt input_prompt">In&nbsp;[199]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>from_dplyr <span class="o">=</span> select<span class="p">(</span>hospital_spending<span class="p">,</span> <span class="o">-</span><span class="kt">c</span><span class="p">(</span>Hospital.Name<span class="p">,</span>State<span class="p">,</span>Measure.Start.Date<span class="p">,</span>Measure.End.Date<span class="p">))</span>
@@ -976,7 +984,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[86]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[199]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1002,7 +1010,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="prompt input_prompt">In&nbsp;[200]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>from_dplyr <span class="o">=</span> select<span class="p">(</span>hospital_spending<span class="p">,</span>contains<span class="p">(</span><span class="s">&quot;Date&quot;</span><span class="p">))</span>
@@ -1018,7 +1026,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[87]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[200]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1034,7 +1042,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[88]:</div>
+<div class="prompt input_prompt">In&nbsp;[201]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span class="kp">names</span><span class="p">(</span>from_dplyr<span class="p">)</span>
@@ -1048,7 +1056,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[88]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[201]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <ol class=list-inline>
@@ -1075,7 +1083,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[167]:</div>
+<div class="prompt input_prompt">In&nbsp;[223]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>setnames<span class="p">(</span>hospital_spending_DT<span class="p">,</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;Hospital.Name&quot;</span><span class="p">,</span> <span class="s">&quot;Measure.Start.Date&quot;</span><span class="p">,</span><span class="s">&quot;Measure.End.Date&quot;</span><span class="p">),</span>
@@ -1091,7 +1099,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[167]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[223]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <ol class=list-inline>
@@ -1120,7 +1128,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[172]:</div>
+<div class="prompt input_prompt">In&nbsp;[203]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>hospital_spending <span class="o">=</span> rename<span class="p">(</span>hospital_spending<span class="p">,</span>Hospital<span class="o">=</span> Hospital.Name<span class="p">,</span> Start_Date<span class="o">=</span>Measure.Start.Date<span class="p">,</span>End_Date<span class="o">=</span>Measure.End.Date<span class="p">)</span>
@@ -1136,7 +1144,7 @@ compare<span class="p">(</span>hospital_spending<span class="p">,</span>hospital
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[172]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[203]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1180,7 +1188,7 @@ compare<span class="p">(</span>hospital_spending<span class="p">,</span>hospital
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[97]:</div>
+<div class="prompt input_prompt">In&nbsp;[204]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>from_dplyr <span class="o">=</span> filter<span class="p">(</span>hospital_spending<span class="p">,</span>State<span class="o">==</span><span class="s">&#39;CA&#39;</span><span class="p">)</span> <span class="c1"># selecting rows for California</span>
@@ -1196,7 +1204,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[97]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[204]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1221,7 +1229,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[98]:</div>
+<div class="prompt input_prompt">In&nbsp;[205]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>from_dplyr <span class="o">=</span> filter<span class="p">(</span>hospital_spending<span class="p">,</span>State<span class="o">==</span><span class="s">&#39;CA&#39;</span> <span class="o">&amp;</span> Claim.Type<span class="o">!=</span><span class="s">&quot;Hospice&quot;</span><span class="p">)</span> 
@@ -1237,7 +1245,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[98]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[205]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1253,7 +1261,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[99]:</div>
+<div class="prompt input_prompt">In&nbsp;[206]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>from_dplyr <span class="o">=</span> filter<span class="p">(</span>hospital_spending<span class="p">,</span>State <span class="o">%in%</span> <span class="kt">c</span><span class="p">(</span><span class="s">&#39;CA&#39;</span><span class="p">,</span><span class="s">&#39;MA&#39;</span><span class="p">,</span><span class="s">&quot;TX&quot;</span><span class="p">))</span> 
@@ -1269,7 +1277,7 @@ from_data_table <span class="o">=</span> hospital_spending_DT<span class="p">[</
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[99]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[206]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <ol class=list-inline>
@@ -1288,7 +1296,7 @@ from_data_table <span class="o">=</span> hospital_spending_DT<span class="p">[</
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[100]:</div>
+<div class="prompt input_prompt">In&nbsp;[207]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table<span class="p">,</span> allowAll<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
@@ -1302,7 +1310,7 @@ from_data_table <span class="o">=</span> hospital_spending_DT<span class="p">[</
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[100]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[207]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1366,7 +1374,7 @@ from_data_table <span class="o">=</span> hospital_spending_DT<span class="p">[</
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[101]:</div>
+<div class="prompt input_prompt">In&nbsp;[208]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>from_dplyr <span class="o">=</span> arrange<span class="p">(</span>hospital_spending<span class="p">,</span> State<span class="p">)</span>
@@ -1384,7 +1392,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[101]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[208]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1409,7 +1417,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[102]:</div>
+<div class="prompt input_prompt">In&nbsp;[209]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>from_dplyr <span class="o">=</span> arrange<span class="p">(</span>hospital_spending<span class="p">,</span> desc<span class="p">(</span>State<span class="p">))</span>
@@ -1427,13 +1435,11 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[102]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[209]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
 <pre>TRUE
-  renamed rows
-  dropped row names
   dropped attributes</pre>
 </div>
 
@@ -1464,7 +1470,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[105]:</div>
+<div class="prompt input_prompt">In&nbsp;[210]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>from_dplyr <span class="o">=</span> arrange<span class="p">(</span>hospital_spending<span class="p">,</span> State<span class="p">,</span>desc<span class="p">(</span>End_Date<span class="p">))</span>
@@ -1482,7 +1488,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[105]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[210]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1517,12 +1523,12 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[115]:</div>
+<div class="prompt input_prompt">In&nbsp;[172]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>from_dplyr <span class="o">=</span> mutate<span class="p">(</span>hospital_spending<span class="p">,</span> diff<span class="o">=</span>Avg.Spending.Per.Episode..State. <span class="o">-</span> Avg.Spending.Per.Episode..Nation.<span class="p">)</span>
 
-from_data_table <span class="o">=</span> hospital_spending_DT
+from_data_table <span class="o">=</span> copy<span class="p">(</span>hospital_spending_DT<span class="p">)</span>
 from_data_table <span class="o">=</span> from_data_table<span class="p">[,</span>diff <span class="o">:=</span> Avg.Spending.Per.Episode..State. <span class="o">-</span> Avg.Spending.Per.Episode..Nation.<span class="p">]</span>
 
 compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table<span class="p">,</span> allowAll<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
@@ -1536,7 +1542,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[115]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[172]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1555,15 +1561,15 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[116]:</div>
+<div class="prompt input_prompt">In&nbsp;[225]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>from_dplyr <span class="o">=</span> mutate<span class="p">(</span>hospital_spending<span class="p">,</span> diff1<span class="o">=</span>Avg.Spending.Per.Episode..State. <span class="o">-</span> Avg.Spending.Per.Episode..Nation.<span class="p">,</span>
-                                        diff2<span class="o">=</span>End_date<span class="o">-</span>Start_Date<span class="p">)</span>
+                                        diff2<span class="o">=</span>End_Date<span class="o">-</span>Start_Date<span class="p">)</span>
 
-from_data_table <span class="o">=</span> hospital_spending_DT
+from_data_table <span class="o">=</span> copy<span class="p">(</span>hospital_spending_DT<span class="p">)</span>
 from_data_table <span class="o">=</span> from_data_table<span class="p">[,</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;diff1&quot;</span><span class="p">,</span><span class="s">&quot;diff2&quot;</span><span class="p">)</span> <span class="o">:=</span> <span class="kt">list</span><span class="p">(</span>Avg.Spending.Per.Episode..State. <span class="o">-</span> Avg.Spending.Per.Episode..Nation.<span class="p">,</span>
-                                                             diff2<span class="o">=</span>End_date<span class="o">-</span>Start_Date<span class="p">)]</span>
+                                                             diff2<span class="o">=</span>End_Date<span class="o">-</span>Start_Date<span class="p">)]</span>
 
 compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table<span class="p">,</span> allowAll<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
 </pre></div>
@@ -1576,17 +1582,16 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[116]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[225]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
 <pre>TRUE
-  shortened comparison
-  sorted
-  renamed
-  renamed rows
-  dropped names
-  dropped row names
+  [Start_Date] No comparison available between &lt;POSIXct&gt; and &lt;POSIXct&gt;
+  [Start_Date] No comparison available between &lt;POSIXt&gt; and &lt;POSIXt&gt;
+  [End_Date] No comparison available between &lt;POSIXct&gt; and &lt;POSIXct&gt;
+  [End_Date] No comparison available between &lt;POSIXt&gt; and &lt;POSIXt&gt;
+  [diff2] No comparison available between &lt;difftime&gt; and &lt;difftime&gt;
   dropped attributes</pre>
 </div>
 
@@ -1617,7 +1622,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[159]:</div>
+<div class="prompt input_prompt">In&nbsp;[174]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>summarize<span class="p">(</span>hospital_spending<span class="p">,</span>mean<span class="o">=</span><span class="kp">mean</span><span class="p">(</span>Avg.Spending.Per.Episode..Nation.<span class="p">))</span>
@@ -1631,7 +1636,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[159]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[174]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <table>
@@ -1651,7 +1656,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[161]:</div>
+<div class="prompt input_prompt">In&nbsp;[175]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>hospital_spending_DT<span class="p">[,</span><span class="m">.</span><span class="p">(</span>mean<span class="o">=</span><span class="kp">mean</span><span class="p">(</span>Avg.Spending.Per.Episode..Nation.<span class="p">))]</span>
@@ -1665,7 +1670,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[161]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[175]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <table>
@@ -1685,7 +1690,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[162]:</div>
+<div class="prompt input_prompt">In&nbsp;[176]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>summarize<span class="p">(</span>hospital_spending<span class="p">,</span>mean<span class="o">=</span><span class="kp">mean</span><span class="p">(</span>Avg.Spending.Per.Episode..Nation.<span class="p">),</span>
@@ -1702,7 +1707,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[162]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[176]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <table>
@@ -1722,7 +1727,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[163]:</div>
+<div class="prompt input_prompt">In&nbsp;[177]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>hospital_spending_DT<span class="p">[,</span><span class="m">.</span><span class="p">(</span>mean<span class="o">=</span><span class="kp">mean</span><span class="p">(</span>Avg.Spending.Per.Episode..Nation.<span class="p">),</span>
@@ -1739,7 +1744,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[163]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[177]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <table>
@@ -1769,7 +1774,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[170]:</div>
+<div class="prompt input_prompt">In&nbsp;[178]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span class="kp">head</span><span class="p">(</span>hospital_spending_DT<span class="p">[,</span><span class="m">.</span><span class="p">(</span>mean<span class="o">=</span><span class="kp">mean</span><span class="p">(</span>Avg.Spending.Per.Episode..Hospital.<span class="p">)),</span>by<span class="o">=</span><span class="m">.</span><span class="p">(</span>Hospital<span class="p">)])</span>
@@ -1783,18 +1788,18 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[170]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[178]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <table>
 <thead><tr><th></th><th scope=col>Hospital</th><th scope=col>mean</th></tr></thead>
 <tbody>
-	<tr><th scope=row>1</th><td>SOUTHEAST ALABAMA MEDICAL CENTER</td><td>3621.455</td></tr>
-	<tr><th scope=row>2</th><td>MARSHALL MEDICAL CENTERS</td><td>3758.864</td></tr>
-	<tr><th scope=row>3</th><td>ELIZA COFFEE MEMORIAL HOSPITAL</td><td>4050.5</td></tr>
-	<tr><th scope=row>4</th><td>MIZELL MEMORIAL HOSPITAL</td><td>2763.273</td></tr>
-	<tr><th scope=row>5</th><td>CRENSHAW COMMUNITY HOSPITAL</td><td>4098.409</td></tr>
-	<tr><th scope=row>6</th><td>ST. VINCENT'S EAST</td><td>3947.909</td></tr>
+	<tr><th scope=row>1</th><td>PROVIDENCE ALASKA MEDICAL CENTER</td><td>3904.773</td></tr>
+	<tr><th scope=row>2</th><td>BARTLETT REGIONAL HOSPITAL</td><td>3939.409</td></tr>
+	<tr><th scope=row>3</th><td>MAT-SU REGIONAL MEDICAL CENTER</td><td>3633.182</td></tr>
+	<tr><th scope=row>4</th><td>MT EDGECUMBE HOSPITAL</td><td>1894.5</td></tr>
+	<tr><th scope=row>5</th><td>FAIRBANKS MEMORIAL HOSPITAL</td><td>3281.455</td></tr>
+	<tr><th scope=row>6</th><td>ALASKA REGIONAL HOSPITAL</td><td>3371.591</td></tr>
 </tbody>
 </table>
 
@@ -1808,7 +1813,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[176]:</div>
+<div class="prompt input_prompt">In&nbsp;[179]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>mygroup<span class="o">=</span> group_by<span class="p">(</span>hospital_spending<span class="p">,</span>Hospital<span class="p">)</span> 
@@ -1828,7 +1833,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[176]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[179]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1857,7 +1862,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[179]:</div>
+<div class="prompt input_prompt">In&nbsp;[180]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span class="kp">head</span><span class="p">(</span>hospital_spending_DT<span class="p">[,</span><span class="m">.</span><span class="p">(</span>mean<span class="o">=</span><span class="kp">mean</span><span class="p">(</span>Avg.Spending.Per.Episode..Hospital.<span class="p">)),</span>
@@ -1872,18 +1877,18 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[179]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[180]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <table>
 <thead><tr><th></th><th scope=col>Hospital</th><th scope=col>State</th><th scope=col>mean</th></tr></thead>
 <tbody>
-	<tr><th scope=row>1</th><td>SOUTHEAST ALABAMA MEDICAL CENTER</td><td>AL</td><td>3621.455</td></tr>
-	<tr><th scope=row>2</th><td>MARSHALL MEDICAL CENTERS</td><td>AL</td><td>3758.864</td></tr>
-	<tr><th scope=row>3</th><td>ELIZA COFFEE MEMORIAL HOSPITAL</td><td>AL</td><td>4050.5</td></tr>
-	<tr><th scope=row>4</th><td>MIZELL MEMORIAL HOSPITAL</td><td>AL</td><td>2763.273</td></tr>
-	<tr><th scope=row>5</th><td>CRENSHAW COMMUNITY HOSPITAL</td><td>AL</td><td>4098.409</td></tr>
-	<tr><th scope=row>6</th><td>ST. VINCENT'S EAST</td><td>AL</td><td>3947.909</td></tr>
+	<tr><th scope=row>1</th><td>PROVIDENCE ALASKA MEDICAL CENTER</td><td>AK</td><td>3904.773</td></tr>
+	<tr><th scope=row>2</th><td>BARTLETT REGIONAL HOSPITAL</td><td>AK</td><td>3939.409</td></tr>
+	<tr><th scope=row>3</th><td>MAT-SU REGIONAL MEDICAL CENTER</td><td>AK</td><td>3633.182</td></tr>
+	<tr><th scope=row>4</th><td>MT EDGECUMBE HOSPITAL</td><td>AK</td><td>1894.5</td></tr>
+	<tr><th scope=row>5</th><td>FAIRBANKS MEMORIAL HOSPITAL</td><td>AK</td><td>3281.455</td></tr>
+	<tr><th scope=row>6</th><td>ALASKA REGIONAL HOSPITAL</td><td>AK</td><td>3371.591</td></tr>
 </tbody>
 </table>
 
@@ -1897,7 +1902,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[178]:</div>
+<div class="prompt input_prompt">In&nbsp;[181]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>mygroup<span class="o">=</span> group_by<span class="p">(</span>hospital_spending<span class="p">,</span>Hospital<span class="p">,</span>State<span class="p">)</span>
@@ -1917,7 +1922,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[178]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[181]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1955,7 +1960,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[181]:</div>
+<div class="prompt input_prompt">In&nbsp;[182]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>from_dplyr<span class="o">=</span>hospital_spending<span class="o">%&gt;%</span>group_by<span class="p">(</span>Hospital<span class="p">,</span>State<span class="p">)</span><span class="o">%&gt;%</span>summarize<span class="p">(</span>mean<span class="o">=</span><span class="kp">mean</span><span class="p">(</span>Avg.Spending.Per.Episode..Hospital.<span class="p">))</span>
@@ -1974,7 +1979,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[181]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[182]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -1993,7 +1998,7 @@ compare<span class="p">(</span>from_dplyr<span class="p">,</span>from_data_table
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[241]:</div>
+<div class="prompt input_prompt">In&nbsp;[228]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>hospital_spending<span class="o">%&gt;%</span>group_by<span class="p">(</span>State<span class="p">)</span><span class="o">%&gt;%</span>summarize<span class="p">(</span>mean<span class="o">=</span><span class="kp">mean</span><span class="p">(</span>Avg.Spending.Per.Episode..Hospital.<span class="p">))</span><span class="o">%&gt;%</span>
@@ -2028,7 +2033,7 @@ arrange<span class="p">(</span>desc<span class="p">(</span><span class="kp">mean
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[240]:</div>
+<div class="prompt input_prompt">In&nbsp;[229]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>hospital_spending_DT<span class="p">[,</span><span class="m">.</span><span class="p">(</span>mean<span class="o">=</span><span class="kp">mean</span><span class="p">(</span>Avg.Spending.Per.Episode..Hospital.<span class="p">)),</span>
@@ -2075,15 +2080,15 @@ arrange<span class="p">(</span>desc<span class="p">(</span><span class="kp">mean
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this blog post, we saw how we can perform the same tasks using data.table and dplyr packages. Both packages have their strengths.
- While dplyr is more elegant and resembles natural language, data.table is succinct and we can do a lot with data.table in just a single line. 
- Further, data.table is, in some cases, faster (see benchmark <a href="https://github.com/Rdatatable/data.table/wiki/Benchmarks-%3A-Grouping"    target="_blank">here</a>) and it may be a go-to package when performance and memory are the constraints.</p>
+<p>In this blog post, we saw how we can perform the same tasks using data.table and dplyr packages. Both packages have their strengthes. While dplyr is more elegant and resembles natural language, data.table is succint and we can do a lot with data.table in just a single line. Further, data.table is in some cases faster (see benchmark <a href="https://github.com/Rdatatable/data.table/wiki/Benchmarks-%3A-Grouping">here</a>) and it may be a go-to package when performance and memory are the constraints.</p>
 
 </div>
 </div>
 </div>
     </div>
   </div>
+
+
   
   
   <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
