@@ -497,7 +497,9 @@ $ Measure.End.Date                    (fctr) 2014-12-31T00:00:00, 2014-12-3...
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre>cols <span class="o">=</span> <span class="m">6</span><span class="o">:</span><span class="m">11</span><span class="p">;</span> <span class="c1"># These are the columns to be changed to numeric.</span>
+hospital_spending<span class="p">[,</span>cols<span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">lapply</span><span class="p">(</span>hospital_spending<span class="p">[,</span>cols<span class="p">],</span> <span class="kp">as.character</span><span class="p">)</span>
 hospital_spending<span class="p">[,</span>cols<span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">lapply</span><span class="p">(</span>hospital_spending<span class="p">[,</span>cols<span class="p">],</span> <span class="kp">as.numeric</span><span class="p">)</span>
+
 </pre></div>
 
 </div>
