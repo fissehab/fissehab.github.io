@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>Explaining data lake to a non-data savy</title>
+<title>Explaining data lake to a non-data savvy</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -142,8 +142,15 @@ div#notebook {
 }
 </style>
 
+
+	<style>
+div.prompt {display:none}
+</style>
+
+
+
 <!-- Custom stylesheet, it must be in the same directory as the html file -->
-<link rel="stylesheet" href="../custom.css">
+<link rel="stylesheet" href="custom.css">
 
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
@@ -168,10 +175,9 @@ div#notebook {
     </script>
     <!-- End of mathjax configuration -->
 	
-	
-	
-			<title>Fisseha Berhane</title>
-    <link rel="stylesheet" type="text/css" href="../style8_new.css">
+		
+		<title>Fisseha Berhane</title>
+     <link rel="stylesheet" type="text/css" href="../style5_new.css">
 	
 	</head>
   
@@ -184,10 +190,8 @@ div#notebook {
       <h1>Fisseha Berhane,<span class="phd">  PhD</span> </h1>
    	  <h4>Data Scientist at <a class="myjhu" style="color:blue;text-decoration:none" 
 	  href="http://aurotechcorp.com/"  target="_blank">Aurotech</a> </h4>
-               
-	    
-	
-	
+            
+	         
 	    
 	 <p><img src="../figures/mobile.PNG" height="30" width="12"/> 443-970-2353</span> <span style="width:50px;display:inline-block"></span>
 	 <img src="../figures/emailimage.png" height="28" width="33"/>  fisseha@jhu.edu</span> <span style="width:50px;display:inline-block"></span>
@@ -207,16 +211,15 @@ div#notebook {
 		  <li><a  class="mybanner"  style="text-decoration:none" href="../projects.html">Projects</a></li>
 		  <li><a  class="mybanner"  style="text-decoration:none" href="../publications.html">Publications</a></li>
 		   <li><a  class="mybanner"  style="text-decoration:none"   href="../Python/pythonindex.html">Python & Spark</a></li>
-		  <li><a  class="mybanner"  style="text-decoration:none" href="../R/Rindex.html">R & SparkR</a></li>
+		  <li><a  class="mybanner"  style="text-decoration:none" href="Rindex.html">R & SparkR</a></li>
 	      <li><a  class="mybanner"  style="text-decoration:none" href="../certificates.html">Data Science Certificates & Skills</a></li>   
         <li><a  class="mybanner"  style="text-decoration:none" href="../Matlab/matlab.html">Matlab</a></li>   
 		<li><a  class="mybanner"  style="text-decoration:none" href="../Tableau/tableau.html">Tableau</a></li>  
-	  	  <li><a  class="mybanner"  style="text-decoration:none" href="../SQL/sql.html">SQL</a></li> 
-		  <li><a  class="mybanner"  style="text-decoration:none" href="hadoop.html">Hadoop</a></li> 
+	    <li><a  class="mybanner"  style="text-decoration:none" href="../SQL/sql.html">SQL</a></li> 
+		<li><a  class="mybanner"  style="text-decoration:none" href="hadoop.html">Hadoop</a></li> 
 	    <li><a  class="mybanner"  style="text-decoration:none" href="../Miscellaneous/miscellaneous.html">Miscellaneous</a></li> 
      
-     		
-
+     
      
 
 	 </ul>
@@ -232,7 +235,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 style="text-align:center; color:blue"  id="Explaining-data-lake-to-a-non-data-savy">Explaining data lake to a non-data savy<a class="anchor-link" href="#Explaining-data-lake-to-a-non-data-savy">&#182;</a></h3>
+<h3 style="text-align:center; color:blue"   id="Explaining-data-lake-to-a-non-data-savy">Explaining data lake to a non-data savvy<a class="anchor-link" href="#Explaining-data-lake-to-a-non-data-savy">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -241,7 +244,8 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>At <a href="http://aurotechcorp.com/">Aurotech</a>, my coworkers and I create data lakes for our customers and develop solutions to different business problems using data lake capabilities. When I mention data lake to my friends, they ask me what it is. In this post, I will describe, to a non-data savy, what a data lake is, what its uses are and how its infrastructure and platform are different from the traditional systems.</p>
+<p>At <a href="http://aurotechcorp.com/">Aurotech</a>, my coworkers and I create data lakes for our customers and develop solutions to different business problems using data 
+lake capabilities. When I mention data lake to my friends, they ask me what it is. In this post, I will describe, to a non-data savvy, what a data lake is, what its uses are and how its infrastructure and platform are different from the traditional systems.</p>
 
 </div>
 </div>
@@ -251,7 +255,16 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>More than 95% of world data was collectedin recent years. There are billions of devices that collect data of different kind, size and shape. As billions of people get connected to the internet, the amount of data generated daily is increasing tremendously. Massive data is collected from social media (e.g., Facebook, Twitter), weather(e.g., rainfall radar and other global weather networks), machine and sensosrs, online shopping websites and so on. To store and analyze the massive amount of data collected daily, big data infrastrures and platforms were created because the volume, velocity and variety of data collected requires fundamentally different infratsturecture and fundamentally different platform breaking traditional systems.</p>
+<p>More than 95% of the world data was collected in recent years. There are billions of devices that collect data of different kind, size and shape.
+ As billions of people get connected to the internet, the amount of data generated daily is increasing tremendously. 
+ Massive data is collected from social media (e.g., Facebook, Twitter), weather (e.g., rainfall radar and other global weather networks), 
+ machines and sensors, online shopping websites and so on. To store and analyze the massive amount of data collected daily, big data infrastructures and platforms were 
+ created because the volume, velocity and variety of data collected requires fundamentally different infrastructure and fundamentally different platform breaking traditional systems.</p>
+
+
+<img style="margin:0px auto;display:block"  
+src="../figures/data_boom.png", height="600" width="600"/>
+
 
 </div>
 </div>
@@ -261,7 +274,11 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Before speaking about a data lake, let's first talk about a natural lake. A natutal lake can have many tributary (rivers) that flow into it. The water from the different tributaries might have different quality and quantity. Some rivers could be clean and others cloud be dirty and muddy. The rivers might have different slopes. Some could have steep slope and rapid flow of water and others could have a gentle flow where the water flow is slow and more or less steady. Some rivers could flow through out the year while others might flow only in the rainy season. Some rivers may have regulated dams upstream and the flow could be periodic.</p>
+<p>Before speaking about a data lake, let's first talk about a natural lake. A natural lake can have many tributaries (rivers) that flow into it.
+ The water from the different tributaries might have different quality and quantity. Some rivers could be clean and others cloud be dirty and muddy. 
+ The rivers might have different slopes. Some could have steep slope and rapid flow of water and others could have a gentle flow 
+ where the water flow is slow and more or less steady. Some rivers could flow throughout the year while others might flow only in the rainy season. 
+ Some rivers may have regulated dams upstream and the flow could be periodic.</p>
 
 </div>
 </div>
@@ -271,25 +288,16 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-
-	 
 	 <br/>
 <img style="margin:0px auto;display:block"  
 src="../figures/datalake.jpg", height="400" width="800"/>
 
-
-<p>A data lake is analogous to a natural lake. Data lake helps us to strore massive amount of data and data of different type and shape cheaply. We can store data with well-define data model, unstructured  data such as social media posts and binary data such as imgages and videos. Similar to a natural lake, a data lake stores any type, size and shape of data.</p>
-<p>The other point of analogy is speed. A data lake can capture and store data coming with different speeds. Some data could be streaming data and analyzing the data on the fly could be important to extract valuable business insights instantly. A data lake helps us to ingest streaming data and do any type of data processing and complex analytics on it.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Further, a data lake provides cheap computing power designed for high-performance processing and analytics. The other interesting point about a data lake is the fact that it can scale up or down based on our needs. When we work with terabytes, petabytes or even exabytes of data, our data lake takes care of scalability isues and the same code works for data of various sizes. As we can swim and fish in a natural lake, we  can use a data lake for dicovering hidden insights, associations, patterns and make predictions.  We can also use it to propose new bussiness hypothesis.</p>
+<p>A data lake is analogous to a natural lake. Data lake helps us to store massive amount of data and data of different type and shape cheaply. 
+We can store data with well-define data model, unstructured  data such as social media posts and binary data such as images and videos. Similar to a natural lake, 
+a data lake stores any type of data.</p>
+<p>The other point of analogy is speed. A data lake can capture and store data coming with different speeds. Some data could be streaming data and analyzing the data on 
+the fly could be important to extract valuable business insights instantly. A data lake helps us to ingest streaming data and do any type 
+of data processing and complex analytics on it.</p>
 
 </div>
 </div>
@@ -299,7 +307,21 @@ src="../figures/datalake.jpg", height="400" width="800"/>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Interested to learn more? Visist Microsoft <a href="https://azure.microsoft.com/en-us/solutions/data-lake/">Azure Data Lake</a>. Also, Amazon gives webniars on building a data lake on AWS (e.g., <a href="https://www.youtube.com/watch?v=HR80j2VyVtA">this</a>.</p>
+<p>Further, a data lake provides cheap computing power designed for high-performance processing and analytics. The other interesting point about a data lake is the fact that it 
+can scale up or down based on our needs. When we work with terabytes, petabytes or even exabytes of data, our data lake takes care of scalability issues and the same 
+code works for data of various sizes. As we can swim and fish in a natural lake, we  can use a data lake for discovering hidden insights, associations, 
+patterns and make predictions.  We can also use it to propose new business hypothesis.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Interested to learn more? Visit Microsoft <a href="https://azure.microsoft.com/en-us/solutions/data-lake/">Azure Data Lake</a>. Also, Amazon gives webinars on 
+building a data lake on AWS (e.g., <a href="https://www.youtube.com/watch?v=HR80j2VyVtA">this)</a>.</p>
 
 </div>
 </div>
@@ -307,11 +329,19 @@ src="../figures/datalake.jpg", height="400" width="800"/>
     </div>
   </div>
   
-      <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
+  
+  
+  <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="../myjs.js"></script>
 	
 	
-		<div id="disqus_thread"></div>
+<br/>
+<br/>
+<br/>
+<br/>
+	
+
+	<div id="disqus_thread"></div>
 <script type="text/javascript">
 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 var disqus_shortname = 'httpdatascienceenthusiastcom'; // required: replace example with your forum shortname
@@ -326,7 +356,9 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
-
-
+  
+  
+  
+  
 </body>
 </html>
