@@ -64,7 +64,8 @@ height: 1px;
 
 .mynav{
 	background-color: #F0F5F5;
-	padding:0.5%
+	padding:0.5%;
+	line-height: 250%;
 }
 
 body {
