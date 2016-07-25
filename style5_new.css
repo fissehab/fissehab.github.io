@@ -38,7 +38,12 @@ height: 1px;
 	}
 
 .cv,.resume,.phd{
-		font-size:1.4em;
+		font-size:1.4em
+	}
+	
+.subscribe{
+		font-size:1.2em;
+		color:#ac00e6;
 	}
 	
 .phd{
