@@ -18,6 +18,15 @@ $(document).ready(function() {
   
   
   
+   $(".subsc").mouseenter(function() {
+    $(this).css("background-color","white");
+  });
+  $(".subsc").mouseleave(function() {
+    $(this).css("background-color","#53c68c");
+  })
+  
+  
+  
     $(".cv").mouseenter(function() {
     $(this).css("background-color","white");
   });
