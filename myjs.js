@@ -112,11 +112,20 @@ $(document).ready(function() {
     $(this).css("background-color","white");
   });
   
-                 $(".all").mouseenter(function() {
+    $(".all").mouseenter(function() {
     $(this).css("background-color","#CCFFFF");
   });
   $(".all").mouseleave(function() {
     $(this).css("background-color","#f0f0f0");
   });
+  
+  
+     $(".mydiploma").mouseenter(function() {
+    $(this).css("background-color","#ccd9ff");
+  });
+  $(".mydiploma").mouseleave(function() {
+    $(this).css("background-color","#f0f0f0");
+  });
+  
   
 });
