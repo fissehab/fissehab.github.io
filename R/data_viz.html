@@ -12127,11 +12127,9 @@ summary_stats_and_linear_fit
 <div class="prompt input_prompt">In&nbsp;[503]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>Anscombe<span class="o">&lt;-</span> ggplot<span class="p">(</span>all_data<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>x<span class="p">,</span>y<span class="o">=</span>y<span class="p">))</span> <span class="o">+</span>geom_point<span class="p">(</span>shape <span class="o">=</span> <span class="m">21</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> fill <span class="o">=</span> <span class="s">&quot;orange&quot;</span><span class="p">,</span> size <span class="o">=</span> <span class="m">3</span><span class="p">)</span><span class="o">+</span>
+<div class=" highlight hl-r"><pre><span></span> ggplot<span class="p">(</span>all_data<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>x<span class="p">,</span>y<span class="o">=</span>y<span class="p">))</span> <span class="o">+</span>geom_point<span class="p">(</span>shape <span class="o">=</span> <span class="m">21</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> fill <span class="o">=</span> <span class="s">&quot;orange&quot;</span><span class="p">,</span> size <span class="o">=</span> <span class="m">3</span><span class="p">)</span><span class="o">+</span>
     ggtitle<span class="p">(</span><span class="s">&quot;Anscombe&#39;s data sets&quot;</span><span class="p">)</span><span class="o">+</span>geom_smooth<span class="p">(</span>method <span class="o">=</span> <span class="s">&quot;lm&quot;</span><span class="p">,</span>se <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span>color<span class="o">=</span><span class="s">&#39;blue&#39;</span><span class="p">)</span> <span class="o">+</span> 
     facet_wrap<span class="p">(</span><span class="o">~</span>group<span class="p">,</span> scales<span class="o">=</span><span class="s">&quot;free&quot;</span><span class="p">)</span>
-    
-<span class="kp">print</span><span class="p">(</span>Anscombe<span class="p">)</span>
 </pre></div>
 
 </div>
