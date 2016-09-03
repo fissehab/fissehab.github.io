@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>Data Ingestion to a Hadoop Data Lake with Jupyter</title>
+<title>Analyzing and Visualizing big data in Hadoop using Tableau with Spark SQl</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11588,8 +11588,10 @@ ul.typeahead-list > li > a {
 .highlight .err { border: 1px solid #FF0000 } /* Error */
 .highlight .k { color: #008000; font-weight: bold } /* Keyword */
 .highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
 .highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
 .highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
 .highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
 .highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
 .highlight .gd { color: #A00000 } /* Generic.Deleted */
@@ -11597,11 +11599,11 @@ ul.typeahead-list > li > a {
 .highlight .gr { color: #FF0000 } /* Generic.Error */
 .highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
 .highlight .gi { color: #00A000 } /* Generic.Inserted */
-.highlight .go { color: #808080 } /* Generic.Output */
+.highlight .go { color: #888888 } /* Generic.Output */
 .highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
 .highlight .gs { font-weight: bold } /* Generic.Strong */
 .highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.highlight .gt { color: #0040D0 } /* Generic.Traceback */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
 .highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
 .highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
 .highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
@@ -11624,6 +11626,7 @@ ul.typeahead-list > li > a {
 .highlight .nv { color: #19177C } /* Name.Variable */
 .highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
 .highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
 .highlight .mf { color: #666666 } /* Literal.Number.Float */
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
@@ -11742,6 +11745,7 @@ div#notebook {
 	
 	
 	
+	
 					<style>
 div.prompt {display:none}
 </style>
@@ -11806,55 +11810,46 @@ div.prompt {display:none}
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<img style="margin:0px auto;display:block" src="../figures/Hadoop_Jupyter.png", height="250" width="500"/>
-
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1  style="color:blue; text-align:center", id="Data-Ingestion-to-a-Hadoop-Data-Lake-with-Jupyter">Data Ingestion to a Hadoop Data Lake with Jupyter<a class="anchor-link" href="#Data-Ingestion-to-a-Hadoop-Data-Lake-with-Jupyter">&#182;</a></h1>
+<h2  style="color:#996600; text-align:center", id="Integrating-Hadoop-and-BI-tools:-Analyzing-and-Visualizing-big-data-in-Tableau-with-Spark">Integrating Hadoop and BI tools: Analyzing and Visualizing big data in Tableau with Spark<a class="anchor-link" href="#Integrating-Hadoop-and-BI-tools:-Analyzing-and-Visualizing-big-data-in-Tableau-with-Spark">&#182;</a></h2>
+     <br/>
+	 <br/>
+	 <img style="margin:0px auto;display:block" src="../figures/tableau_spark_hadoop.png", height="480" width="500"/>
+
+
 </div>
 </div>
+
+
 </div>
+
+
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Jupyter is a web-based notebook which is used for data exploration, visualization, sharing and collaboration. It is an ideal environment for experimenting with different ideas and/or datasets. We can start with vague ideas and in Jupyter we can crystallize, after various experiments, our ideas for building our projects. It can also be used for staging data from a data lake to be used by BI and other tools. Jupyter supports more than 40 programming languages including Python, R, Scala, and Julia.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>In this blog post, we will see how to use Jupyter to download data from the web and ingest the data 
-to Hadoop Distributed File System (HDFS). Finally, we will explore our data in HDFS using Spark and create 
-simple visualization. We will use Bay Area Bike Share's trip data from 
-<a href="http://www.bayareabikeshare.com/open-data", target="_blank">
-this website</a>.</p>
-
-<p> If you don't have a Hadoop cluster, you can download and deploy the
- <a href="http://hortonworks.com/downloads/#sandbox", target="_blank"> Hortonworks Sandbox</a>. 
- It is a nice environment to practice the Hadoop ecosystem components and Spark. You can install Jupyter following <a href=
- "http://simnotes.github.io/blog/installing-jupyter-on-hdp-4/", target="_blank">this</a> tutorial.</p>
+<p>In the last four plus months, I have been working on interesting projects with Hadoop ecosystem and I will blog on 
+some of my experiences. This blog post is on how to integrate Hadoop with business inteligence tools such as Tableau, 
+and leverage the capabilities of Spark for querying data. Then, using Tableau will be painless for generating amazing 
+interactive visualizations. We can query data in Hive by using Tableau connector for Spark SQL. The Spark ODBC connector 
+can be downloaded from <a href="https://databricks.com/spark/odbc-driver-download" , target="_blank">Databricks</a>. 
+Integrating Spark and business inteligence tools such as Tableau, enables us to process massive amounts of data by 
+taking advantage of the in-memeory faster processing speed of Sparkand we have the ability to scale up or downl 
+based on the size of our data.</p>
+<p>Data lake helps us to strore massive amount of data and data of different type and shape cheaply. We can store data 
+with well-defined data model, unstructured data such as social media posts and binary data such as imgages and videos.
+Therefore, we can use Spark to process unstructured data in our data lake and stage it for BI tools.</p>
+<p>In this tutorial, I am using <a href="http://hortonworks.com/downloads/"  , target="_blank">
+Hortonworks Data Platform (HDP), which is an open source Apache Hadoop distribution</a> 
+deployed on Amazon Web Services (AWS).
+ <a href="http://hortonworks.com/blog/deploying-hadoop-cluster-amazon-ec2-hortonworks/" , target="_blank">This link</a> and
+ <a href="https://www.youtube.com/watch?v=9dSJDJSTMlo" , target="_blank">this Youtube video</a> have the steps 
+ on how to deploy a Hadoop Cluster on Amazon EC2 with HDP.</p>
 
 </div>
 </div>
@@ -11864,60 +11859,32 @@ this website</a>.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>First, let's use the <a href="https://docs.python.org/2/library/os.html", target="_blank">os</a> module from Python to create a local directory.</p>
-
+<h6 id="In-this-blog-post,-we-will-see-do-the-following:">In this blog post, we will do the following:<a class="anchor-link" href="#In-this-blog-post,-we-will-see-do-the-following:">&#182;</a></h6>
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s">&quot;/home&quot;</span><span class="p">)</span>   <span class="c"># change to /home</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>        <span class="c"># checking that we have changed to home directory</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[2]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;/home&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We will create a local directory called bike_share to download our data to.</p>
+<ol>
+<li>Download and ingest data to Hadoop Distributed File System (HDFS)</li>
+<li>Process the data with Spark</li>
+<li>Stage data by persisting to Hive</li>
+<li>Connect Tableau with Spark cluster </li>
+<li>Analyze and visualize with Tableau</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First, let's use the <a href="https://docs.python.org/2/library/os.html" , target="_blank">os</a> module from Python to create a local directory.</p>
 
 </div>
 </div>
@@ -11927,34 +11894,10 @@ this website</a>.</p>
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">r&#39;/home/bike_share&#39;</span><span class="p">):</span> <span class="c">#  if the directory does not </span>
-    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s">r&#39;/home/bike_share&#39;</span><span class="p">)</span>        <span class="c">#  exist create it </span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s">r&#39;/home/bike_share&#39;</span><span class="p">)</span>     <span class="c"># changing to &quot;bike_share&quot; directory</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>      <span class="c"># Are we in the bike_share directory?</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>                            <span class="c1"># provides a portable way of using operating system dependent functionality</span>
+<span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&quot;/root/power_consumption&quot;</span><span class="p">)</span>  <span class="c1"># create directory to download data to</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;/root/power_consumption&quot;</span><span class="p">)</span>  <span class="c1"># change working directory</span>
+<span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>                         <span class="c1"># check we are in the directory we just created</span>
 </pre></div>
 
 </div>
@@ -11965,69 +11908,15 @@ this website</a>.</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;/home/bike_share&#39;</pre>
+<pre>&#39;/root/power_consumption&#39;</pre>
 </div>
 
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="o">!</span> helps us to run a shell <span class="nb">command</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="o">!</span> <span class="nb">pwd</span>        # checking the working directory is the bike_share directory
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>/home/bike_share
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="o">!</span> ls    # list files and folders in bike_share directory
-        <span class="c"># actually, the directory is empty at this time</span>
-</pre></div>
-
-</div>
 </div>
 </div>
 
@@ -12046,43 +11935,50 @@ this website</a>.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's download Bay Area Bike Share's trip data from <a href="http://www.bayareabikeshare.com/open-data">this website</a>.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here data from the UC Irvine Machine Learning Repository, a popular repository for machine learning datasets, will be used to show how to process data with Spark and stage it to Hive,
+and finally query it with Spark SQL using ODBC connector. In particular, I am using the “Individual household electric
+ power consumption Data Set” which can be downloaded from 
+ <a href="http://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption" , target="_blank">here</a>.</p>
 <p>Let's use the Shell Interpreter by adding <strong>!</strong> to download the data using <em>wget</em></p>
 
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span><span class="o">,</span> <span class="nn">zipfile</span><span class="o">,</span> <span class="nn">StringIO</span>
+
+<span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://archive.ics.uci.edu/ml/machine-learning-databases/00235/household_power_consumption.zip&quot;</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">StringIO</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+<span class="n">z</span><span class="o">.</span><span class="n">extractall</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As you can see from the <a href="http://www.bayareabikeshare.com/open-data">website</a>, there are two bike share data sets.</p>
-<ul>
-<li>(August 2013 - August 2014)</li>
-<li><p>(September 2014 - August 2015)</p>
-<p>Let's download the first one.</p>
-</li>
-</ul>
-
+<h4 id="Check-if-data-has-been-downloaded">Check if data has been downloaded<a class="anchor-link" href="#Check-if-data-has-been-downloaded">&#182;</a></h4>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="o">!</span> wget https://s3.amazonaws.com/babs-open-data/babs_open_data_year_1.zip
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">working_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">working_directory</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12093,58 +11989,13 @@ this website</a>.</p>
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>--2016-08-10 17:31:21--  https://s3.amazonaws.com/babs-open-data/babs_open_data_year_1.zip
-Resolving s3.amazonaws.com... 54.231.16.136
-Connecting to s3.amazonaws.com|54.231.16.136|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 84402747 (80M) [application/zip]
-Saving to: “babs_open_data_year_1.zip”
-
-100%[======================================&gt;] 84,402,747  4.34M/s   in 17s     
-
-2016-08-10 17:31:39 (4.73 MB/s) - “babs_open_data_year_1.zip” saved [84402747/84402747]
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, let's see if the data has been downloaded.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="o">!</span> ls
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
 
 
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>babs_open_data_year_1.zip
-</pre>
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;household_power_consumption.txt&#39;]</pre>
 </div>
+
 </div>
 
 </div>
@@ -12156,241 +12007,10 @@ Saving to: “babs_open_data_year_1.zip”
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Great! Now, let's unzip it.</p>
+<p>Cool. The data has been downloaded.</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="o">!</span> unzip babs_open_data_year_1.zip 
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Archive:  babs_open_data_year_1.zip
-   creating: 201402_babs_open_data/
-  inflating: 201402_babs_open_data/201402_station_data.csv  
-  inflating: 201402_babs_open_data/201402_status_data.csv  
-  inflating: 201402_babs_open_data/201402_trip_data.csv  
-  inflating: 201402_babs_open_data/201402_weather_data.csv  
-  inflating: 201402_babs_open_data/README.txt  
-   creating: 201408_babs_open_data/
-  inflating: 201408_babs_open_data/201408_station_data.csv  
-  inflating: 201408_babs_open_data/201408_status_data.csv  
-  inflating: 201408_babs_open_data/201408_trip_data.csv  
-  inflating: 201408_babs_open_data/201408_weather_data.csv  
-  inflating: 201408_babs_open_data/README.txt  
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, let's see the files and folders.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="o">!</span> ls
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>201402_babs_open_data  201408_babs_open_data  babs_open_data_year_1.zip
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's remove the zipped file since we do not want it anymore.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="o">!</span> rm -f *.zip
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="o">!</span> ls
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>201402_babs_open_data  201408_babs_open_data
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Size of downloaded data:</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="o">!</span> du -h
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>611M	./201402_babs_open_data
-643M	./201408_babs_open_data
-1.3G	.
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, let's see the contents of each folder.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="o">!</span> ls 201402_babs_open_data/
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>201402_station_data.csv  201402_trip_data.csv	  README.txt
-201402_status_data.csv	 201402_weather_data.csv
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="o">!</span> ls 201408_babs_open_data/
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>201408_station_data.csv  201408_trip_data.csv	  README.txt
-201408_status_data.csv	 201408_weather_data.csv
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -12412,10 +12032,10 @@ Saving to: “babs_open_data_year_1.zip”
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="o">!</span> hadoop fs -mkdir /bike_data
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span> hadoop fs -mkdir /tmp/power_consumption
 </pre></div>
 
 </div>
@@ -12428,19 +12048,20 @@ Saving to: “babs_open_data_year_1.zip”
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's list the HDFS directories and check if "bike_data" exists.</p>
+<p>Let's list the HDFS directories and check if "power_consumption" exists.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="o">!</span> hadoop fs -ls /
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span> hadoop fs -ls /tmp
 </pre></div>
-
+  
+ 
 </div>
 </div>
 </div>
@@ -12451,31 +12072,45 @@ Saving to: “babs_open_data_year_1.zip”
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Found 12 items
-drwxrwxrwx   - yarn   hadoop          0 2016-03-14 14:19 /app-logs
-drwxr-xr-x   - hdfs   hdfs            0 2016-03-14 14:25 /apps
-drwxr-xr-x   - yarn   hadoop          0 2016-03-14 14:19 /ats
-drwxr-xr-x   - root   hdfs            0 2016-08-10 18:27 /bike_data
-drwxr-xr-x   - hdfs   hdfs            0 2016-03-14 14:50 /demo
-drwxr-xr-x   - hdfs   hdfs            0 2016-03-14 14:19 /hdp
-drwxr-xr-x   - mapred hdfs            0 2016-03-14 14:19 /mapred
-drwxrwxrwx   - mapred hadoop          0 2016-03-14 14:19 /mr-history
-drwxr-xr-x   - hdfs   hdfs            0 2016-03-14 14:42 /ranger
-drwxrwxrwx   - spark  hadoop          0 2016-08-10 17:28 /spark-history
-drwxrwxrwx   - hdfs   hdfs            0 2016-03-14 14:31 /tmp
-drwxr-xr-x   - hdfs   hdfs            0 2016-03-14 14:33 /user
+<pre>Found 13 items
+drwxr-xr-x   - ec2-user  hdfs          0 2016-08-04 21:41 /tmp/FAERS
+drwx------   - ambari-qa hdfs          0 2016-07-24 03:11 /tmp/ambari-qa
+drwxrwxrwx   - admin     hdfs          0 2016-08-19 11:06 /tmp/bike
+drwxr-xr-x   - root      hdfs          0 2016-08-23 21:17 /tmp/bike_data
+-rw-r--r--   3 root      hdfs     760179 2016-08-16 10:53 /tmp/elasticsearch-hadoop-2.3.4.jar
+drwxr-xr-x   - hdfs      hdfs          0 2016-07-24 03:08 /tmp/entity-file-history
+drwx-wx-wx   - ambari-qa hdfs          0 2016-08-22 11:36 /tmp/hive
+-rwxr-xr-x   3 hdfs      hdfs       2161 2016-07-24 03:08 /tmp/id1fac5323_date082416
+-rwxr-xr-x   3 ambari-qa hdfs       2161 2016-07-24 03:14 /tmp/idtest.ambari-qa.1469344450.52.in
+-rwxr-xr-x   3 ambari-qa hdfs        957 2016-07-24 03:14 /tmp/idtest.ambari-qa.1469344450.52.pig
+drwxr-xr-x   - root      hdfs          0 2016-08-29 00:08 /tmp/power_consumption
+drwxr-xr-x   - ambari-qa hdfs          0 2016-07-24 03:12 /tmp/tezsmokeinput
+drwxr-xr-x   - ambari-qa hdfs          0 2016-07-24 03:12 /tmp/tezsmokeoutput
 </pre>
 </div>
 </div>
 
 </div>
-</div>
+
 
 </div>
+
+
+</div>
+
+<br/>
+<br/>
+
+ <p> We can also see the directory we just created using Apache Ambari.</p> 
+ <br/>
+ <img style="margin:0px auto;display:block" src="../figures/hdfs1.png", height="500" width="900"/>
+
+ 
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
+
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Put-data-to-the-directory">Put data to the directory<a class="anchor-link" href="#Put-data-to-the-directory">&#182;</a></h4>
 </div>
@@ -12483,10 +12118,10 @@ drwxr-xr-x   - hdfs   hdfs            0 2016-03-14 14:33 /user
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="o">!</span> hadoop fs -put * /bike_data
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span> hadoop fs -put household_power_consumption.txt /tmp/power_consumption
 </pre></div>
 
 </div>
@@ -12499,17 +12134,17 @@ drwxr-xr-x   - hdfs   hdfs            0 2016-03-14 14:33 /user
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Once we have ingested our data to HDFS, let's remove the bike data from the local directory.</p>
+<p>Once we have ingested our data to HDFS, let's remove the household_power_consumption.txt data from the local directory.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="o">!</span> rm -rf *
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span> rm -rf household_power_consumption.txt
 </pre></div>
 
 </div>
@@ -12528,167 +12163,61 @@ drwxr-xr-x   - hdfs   hdfs            0 2016-03-14 14:33 /user
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span> hadoop fs -ls  /tmp/power_consumption
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Found 1 items
+-rw-r--r--   3 root hdfs  132960755 2016-08-29 00:09 /tmp/power_consumption/household_power_consumption.txt
+</pre>
+</div>
+</div>
+
+<br/>
+<br/>
+
+
+</div>
+</div>
+
+</div>
+ <p> We can also see the ingested data using Apache Ambari.</p> 
+ <br/>
+ <img style="margin:0px auto;display:block" src="../figures/hdfs2.PNG", height="300" width="900"/>
+<br/>
+<br/>
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Process-data-using-Spark-to-create-a-dataframe">Process data using Spark to create a dataframe<a class="anchor-link" href="#Process-data-using-Spark-to-create-a-dataframe">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="o">!</span> hadoop fs -ls  /bike_data
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="k">import</span> <span class="n">SQLContext</span>
+<span class="n">sqlContext</span> <span class="o">=</span> <span class="n">SQLContext</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Found 2 items
-drwxr-xr-x   - root hdfs          0 2016-08-10 18:29 /bike_data/201402_babs_open_data
-drwxr-xr-x   - root hdfs          0 2016-08-10 18:29 /bike_data/201408_babs_open_data
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Great, our data has been ingested. Now, let's use Spark and explore the data.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's open 201408_status_data.csv which has approx. 18 million records.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SQLContext</span>
-<span class="n">sqlContext</span> <span class="o">=</span> <span class="n">HiveContext</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="n">status08</span> <span class="o">=</span> <span class="n">sqlContext</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&#39;com.databricks.spark.csv&#39;</span><span class="p">)</span><span class="o">.</span>\
-<span class="n">options</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="s">&#39;true&#39;</span><span class="p">,</span> <span class="n">inferSchema</span><span class="o">=</span><span class="s">&#39;true&#39;</span><span class="p">)</span><span class="o">.</span>\
-<span class="n">load</span><span class="p">(</span><span class="s">&quot;hdfs://sandbox.hortonworks.com/bike_data/201408_babs_open_data/201408_status_data.csv&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's see number of records in the data.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="k">print</span> <span class="n">status08</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>18342210
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>So, we can see that the data has more than 18 million observations.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>What about the schema?</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="n">status08</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>root
- |-- station_id: integer (nullable = true)
- |-- bikes_available: integer (nullable = true)
- |-- docks_available: integer (nullable = true)
- |-- time: string (nullable = true)
-
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -12698,7 +12227,33 @@ drwxr-xr-x   - root hdfs          0 2016-08-10 18:29 /bike_data/201408_babs_open
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="n">status08</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">truncate</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">power_cons</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="p">(</span><span class="s2">&quot;/tmp/power_consumption/household_power_consumption.txt&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">column_names</span><span class="o">=</span> <span class="n">power_cons</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">column_names</span>
 </pre></div>
 
 </div>
@@ -12709,36 +12264,21 @@ drwxr-xr-x   - root hdfs          0 2016-08-10 18:29 /bike_data/201408_babs_open
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>+----------+---------------+---------------+-------------------+
-|station_id|bikes_available|docks_available|time               |
-+----------+---------------+---------------+-------------------+
-|2         |12             |15             |2014-03-01 00:00:02|
-|2         |12             |15             |2014-03-01 00:01:03|
-|2         |12             |15             |2014-03-01 00:02:03|
-|2         |12             |15             |2014-03-01 00:03:02|
-|2         |12             |15             |2014-03-01 00:04:03|
-|2         |12             |15             |2014-03-01 00:05:02|
-|2         |12             |15             |2014-03-01 00:06:03|
-|2         |12             |15             |2014-03-01 00:07:02|
-|2         |13             |14             |2014-03-01 00:08:03|
-|2         |13             |14             |2014-03-01 00:09:02|
-|2         |13             |14             |2014-03-01 00:10:03|
-|2         |13             |14             |2014-03-01 00:11:03|
-|2         |13             |14             |2014-03-01 00:12:02|
-|2         |13             |14             |2014-03-01 00:13:02|
-|2         |13             |14             |2014-03-01 00:14:02|
-|2         |13             |14             |2014-03-01 00:15:02|
-|2         |13             |14             |2014-03-01 00:16:03|
-|2         |13             |14             |2014-03-01 00:17:03|
-|2         |13             |14             |2014-03-01 00:18:03|
-|2         |13             |14             |2014-03-01 00:19:02|
-+----------+---------------+---------------+-------------------+
-only showing top 20 rows
+<div class="output_area"><div class="prompt output_prompt">Out[7]:</div>
 
-</pre>
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[u&#39;Date&#39;,
+ u&#39;Time&#39;,
+ u&#39;Global_active_power&#39;,
+ u&#39;Global_reactive_power&#39;,
+ u&#39;Voltage&#39;,
+ u&#39;Global_intensity&#39;,
+ u&#39;Sub_metering_1&#39;,
+ u&#39;Sub_metering_2&#39;,
+ u&#39;Sub_metering_3&#39;]</pre>
 </div>
+
 </div>
 
 </div>
@@ -12750,55 +12290,29 @@ only showing top 20 rows
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's change the last column from string to time format so that we can do analysis on monthly basis.</p>
-
+<h5 id="Define-schema">Define schema<a class="anchor-link" href="#Define-schema">&#182;</a></h5>
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">col</span><span class="p">,</span><span class="n">udf</span><span class="p">,</span> <span class="n">unix_timestamp</span>
-<span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="n">DateType</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's create a user defined function that converts that last column from string to date and time.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="n">myfunc</span> <span class="o">=</span>  <span class="n">udf</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s">&#39;%Y-%m-</span><span class="si">%d</span><span class="s"> %H:%M:%S&#39;</span><span class="p">),</span> <span class="n">DateType</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="n">status_df</span> <span class="o">=</span> <span class="n">status08</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s">&#39;Date_and_Time&#39;</span><span class="p">,</span> <span class="n">myfunc</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s">&#39;time&#39;</span><span class="p">)))</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s">&#39;time&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="k">import</span> <span class="n">StructType</span>
+
+<span class="n">schema</span> <span class="o">=</span> <span class="n">StructType</span><span class="o">.</span><span class="n">fromJson</span><span class="p">({</span><span class="s1">&#39;fields&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="p">{},</span>
+   <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Date&#39;</span><span class="p">,</span><span class="s1">&#39;nullable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">},</span>
+  <span class="p">{</span><span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="s1">&#39;nullable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">},</span>
+  <span class="p">{</span><span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Global_active_power&#39;</span><span class="p">,</span> <span class="s1">&#39;nullable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">},</span>
+  <span class="p">{</span><span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Global_reactive_power&#39;</span><span class="p">,</span> <span class="s1">&#39;nullable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">},</span>
+  <span class="p">{</span><span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="p">{},</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Voltage&#39;</span><span class="p">,</span><span class="s1">&#39;nullable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">},</span>
+  <span class="p">{</span><span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Global_intensity&#39;</span><span class="p">,</span> <span class="s1">&#39;nullable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">},</span>
+  <span class="p">{</span><span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Sub_metering_1&#39;</span><span class="p">,</span> <span class="s1">&#39;nullable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">},</span>
+  <span class="p">{</span><span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Sub_metering_2&#39;</span><span class="p">,</span> <span class="s1">&#39;nullable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;integer&#39;</span><span class="p">},</span>
+  <span class="p">{</span><span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Sub_metering_3&#39;</span><span class="p">,</span> <span class="s1">&#39;nullable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">},</span>
+  <span class="p">],</span>
+ <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;struct&#39;</span><span class="p">})</span>
 </pre></div>
 
 </div>
@@ -12811,7 +12325,151 @@ only showing top 20 rows
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="n">status_df</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">power_cons</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[9]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[u&#39;Date;Time;Global_active_power;Global_reactive_power;Voltage;Global_intensity;Sub_metering_1;Sub_metering_2;Sub_metering_3&#39;,
+ u&#39;16/12/2006;17:24:00;4.216;0.418;234.840;18.400;0.000;1.000;17.000&#39;,
+ u&#39;16/12/2006;17:25:00;5.360;0.436;233.630;23.000;0.000;1.000;16.000&#39;,
+ u&#39;16/12/2006;17:26:00;5.374;0.498;233.290;23.000;0.000;2.000;17.000&#39;,
+ u&#39;16/12/2006;17:27:00;5.388;0.502;233.740;23.000;0.000;1.000;17.000&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">header</span><span class="o">=</span> <span class="n">power_cons</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>  <span class="c1"># this is the header</span>
+<span class="n">power_cons</span><span class="o">=</span><span class="n">power_cons</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span> <span class="o">!=</span><span class="n">header</span><span class="p">)</span>          <span class="c1"># filter out header</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">power_cons</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[11]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[u&#39;16/12/2006;17:24:00;4.216;0.418;234.840;18.400;0.000;1.000;17.000&#39;,
+ u&#39;16/12/2006;17:25:00;5.360;0.436;233.630;23.000;0.000;1.000;16.000&#39;,
+ u&#39;16/12/2006;17:26:00;5.374;0.498;233.290;23.000;0.000;2.000;17.000&#39;,
+ u&#39;16/12/2006;17:27:00;5.388;0.502;233.740;23.000;0.000;1.000;17.000&#39;,
+ u&#39;16/12/2006;17:28:00;3.666;0.528;235.680;15.800;0.000;1.000;17.000&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">power_cons</span><span class="o">=</span> <span class="n">power_cons</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Create-DataFrame">Create DataFrame<a class="anchor-link" href="#Create-DataFrame">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> <span class="n">power_cons</span><span class="o">=</span><span class="n">sqlContext</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">power_cons</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">power_cons</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="c1">#number of records</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[15]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>2075259</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">power_cons</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -12825,10 +12483,15 @@ only showing top 20 rows
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>root
- |-- station_id: integer (nullable = true)
- |-- bikes_available: integer (nullable = true)
- |-- docks_available: integer (nullable = true)
- |-- Date_and_Time: date (nullable = true)
+ |-- Date: string (nullable = true)
+ |-- Time: string (nullable = true)
+ |-- Global_active_power: integer (nullable = true)
+ |-- Global_reactive_power: string (nullable = true)
+ |-- Voltage: integer (nullable = true)
+ |-- Global_intensity: integer (nullable = true)
+ |-- Sub_metering_1: string (nullable = true)
+ |-- Sub_metering_2: integer (nullable = true)
+ |-- Sub_metering_3: string (nullable = true)
 
 </pre>
 </div>
@@ -12838,31 +12501,21 @@ only showing top 20 rows
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">dayofyear</span>
-</pre></div>
-
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="We-can-use-Spark-SQL-to-process-and-query-the-data">We can use Spark SQL to process and query the data<a class="anchor-link" href="#We-can-use-Spark-SQL-to-process-and-query-the-data">&#182;</a></h5>
 </div>
 </div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="n">day_to_bikes_available</span> <span class="o">=</span> <span class="n">status_df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">status_df</span><span class="p">[</span><span class="s">&#39;bikes_available&#39;</span><span class="p">],</span>\
-                                          <span class="n">dayofyear</span><span class="p">(</span><span class="n">status_df</span><span class="p">[</span><span class="s">&#39;Date_and_Time&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s">&#39;day&#39;</span><span class="p">))</span>
-
-<span class="n">day_to_bikes_available_df</span> <span class="o">=</span> <span class="n">day_to_bikes_available</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s">&#39;day&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="s">&#39;bikes_available&#39;</span><span class="p">)</span><span class="o">.</span>\
-                                  <span class="n">alias</span><span class="p">(</span><span class="s">&#39;Count&#39;</span><span class="p">)</span>
-
-<span class="n">day_to_bikes_available_df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">power_cons</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;Global_reactive_power&quot;</span><span class="p">,</span><span class="s2">&quot;Sub_metering_1&quot;</span><span class="p">,</span><span class="s2">&quot;Sub_metering_3&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12875,31 +12528,16 @@ only showing top 20 rows
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>+---+--------------------+
-|day|max(bikes_available)|
-+---+--------------------+
-|231|                  27|
-|232|                  23|
-|233|                  24|
-|234|                  26|
-|235|                  23|
-|236|                  23|
-|237|                  25|
-|238|                  23|
-|239|                  27|
-|240|                  27|
-|241|                  27|
-|242|                  23|
-|243|                  27|
-| 60|                  22|
-| 61|                  21|
-| 62|                  27|
-| 63|                  24|
-| 64|                  25|
-| 65|                  27|
-| 66|                  27|
-+---+--------------------+
-only showing top 20 rows
+<pre>+---------------------+--------------+--------------+
+|Global_reactive_power|Sub_metering_1|Sub_metering_3|
++---------------------+--------------+--------------+
+|0.418                |0.000         |17.000        |
+|0.436                |0.000         |16.000        |
+|0.498                |0.000         |17.000        |
+|0.502                |0.000         |17.000        |
+|0.528                |0.000         |17.000        |
++---------------------+--------------+--------------+
+only showing top 5 rows
 
 </pre>
 </div>
@@ -12909,14 +12547,22 @@ only showing top 20 rows
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's select some of the variables and the persist the data in Hive.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="n">days</span> <span class="o">=</span> <span class="n">day_to_bikes_available_df</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
-
-<span class="n">bikes_available</span> <span class="o">=</span> <span class="n">day_to_bikes_available_df</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">power_cons</span><span class="o">=</span> <span class="n">power_cons</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span><span class="s2">&quot;Time&quot;</span><span class="p">,</span><span class="s2">&quot;Global_reactive_power&quot;</span><span class="p">,</span><span class="s2">&quot;Sub_metering_1&quot;</span><span class="p">,</span><span class="s2">&quot;Sub_metering_3&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12924,31 +12570,23 @@ only showing top 20 rows
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-</pre></div>
-
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Staging-data-by-persisting-it-to-Hive">Staging data by persisting it to Hive<a class="anchor-link" href="#Staging-data-by-persisting-it-to-Hive">&#182;</a></h3>
 </div>
 </div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">days</span><span class="p">,</span><span class="n">bikes_available</span><span class="p">,</span> <span class="s">&#39;bo&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="nb">min</span><span class="p">(</span><span class="n">days</span><span class="p">)</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">days</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">bikes_available</span><span class="p">)</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">bikes_available</span><span class="p">)</span><span class="o">+</span><span class="mi">10</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Day&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Maximu Bikes Available&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;#999999&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;#999999&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">power_cons</span><span class="o">.</span><span class="n">registerTempTable</span><span class="p">(</span><span class="s2">&quot;mytempTable&quot;</span><span class="p">)</span>
+<span class="n">sqlContext</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;DROP TABLE IF EXISTS power_consumption&quot;</span><span class="p">)</span>
+<span class="n">sqlContext</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;CREATE TABLE power_consumption STORED AS ORC AS SELECT * FROM mytempTable&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12959,161 +12597,11 @@ only showing top 20 rows
 <div class="output">
 
 
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area"><div class="prompt output_prompt">Out[27]:</div>
 
 
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-",height="400" width="800"
->
+<div class="output_text output_subarea output_execute_result">
+<pre>DataFrame[]</pre>
 </div>
 
 </div>
@@ -13127,16 +12615,135 @@ iLSEJnwRkZbQhC8i0hKa8EVEWkITvohIS2jCFxFpif8PVnq4MQtnnHgAAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this post, we saw how to fetch data from the web, ingested it to Hadoop Distributed File System (HDFS) and did some data transformation using Spark and visualization using Matplot, Python's plotting library. We used Jupyter, a great data science notebook, to perform all the tasks.</p>
+<h3 id="Checking-that-the-table-persists-in-Hive">Checking that the table persists in Hive<a class="anchor-link" href="#Checking-that-the-table-persists-in-Hive">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sqlContext</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;SELECT Date, max(Sub_metering_1) as Maxmimum_Daily_Voltage FROM power_consumption group by Date order by Date&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
 
 </div>
 </div>
 </div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>+---------+----------------------+
+|     Date|Maxmimum_Daily_Voltage|
++---------+----------------------+
+| 1/1/2007|                 0.000|
+| 1/1/2008|                 6.000|
+| 1/1/2009|                 5.000|
+| 1/1/2010|                 9.000|
+|1/10/2007|                39.000|
+|1/10/2008|                 9.000|
+|1/10/2009|                 8.000|
+|1/10/2010|                 8.000|
+|1/11/2007|                 0.000|
+|1/11/2008|                 0.000|
+|1/11/2009|                38.000|
+|1/11/2010|                 0.000|
+|1/12/2007|                 9.000|
+|1/12/2008|                 6.000|
+|1/12/2009|                 0.000|
+| 1/2/2007|                38.000|
+| 1/2/2008|                 4.000|
+| 1/2/2009|                     ?|
+| 1/2/2010|                 4.000|
+| 1/3/2007|                 0.000|
++---------+----------------------+
+only showing top 20 rows
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+ <br/>
+<p> We can also see  the staged data in Hive using Apache Ambari.</p> 
+ <br/>
+ <img style="margin:0px auto;display:block" src="../figures/hive1.PNG", height="400" width="800"/>
+<br/>
+ 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Great! Our data is in Hive and we can now query it from Tableau using Spark SQL and Spark ODBC connector.</p>
+
+</div>
+</div>
+</div>
+
+
+
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Staging-data-by-persisting-it-to-Hive">Connecting with Tableau<a class="anchor-link" href="#Staging-data-by-persisting-it-to-Hive">&#182;</a></h3>
+</div>
+</div>
+</div>
+
+  <br/>
+  <p> Make sure that Spark Thrift Server is running in your cluster.</p>
+      
+    <br/>
+ <img style="margin:0px auto;display:block" src="../figures/ambari1.PNG", height="550" width="800"/>
+<br/>
+
+
+ <br/>
+   <h4> Next</h4>
+  <p> Open Tableau and go to the connection options Spark SQL. You have to download and install the Spark ODBC connector 
+  at this stage. You can find it from <a href="https://databricks.com/spark/odbc-driver-download" , target="_blank">Databricks</a></p>
+      
+    <br/>
+ <img style="margin:0px auto;display:block" src="../figures/tableau1.PNG", height="650" width="800"/>
+<br/>
+
+
+  <p> Next, provide the addess of your server, the port and other authentication credentials of Spark Thrift Server.</p>   
+    <br/>
+ <img style="margin:0px auto;display:block" src="../figures/tableau2.PNG", height="600" width="650"/>
+<br/>
+
+ <p> You can get the port of Spark Thrift Server in the Spark congiguration settings.</p>   
+    <br/>
+ <img style="margin:0px auto;display:block" src="../figures/ambari2.PNG", height="450" width="900"/>
+<br/>
+
+
+<br/>
+
+ <p> Once you have connected Tableau with the data stored in Hive though Spark ODBC, you can easily and quickly create amazing dashboards in Tableau..</p>   
+    <br/>
+ <img style="margin:0px auto;display:block" src="../figures/dashborad.PNG", height="450" width="900"/>
+<br/>
+<br/>
+<br/>
+
     </div>
   </div>
   
   
-  
+    
   <div id="disqus_thread"></div>
 <script type="text/javascript">
 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -13152,7 +12759,6 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
-  
   
 </body>
 </html>
