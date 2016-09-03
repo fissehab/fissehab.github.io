@@ -11815,7 +11815,7 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2  style="color:#996600; text-align:center", id="Integrating-Hadoop-and-BI-tools:-Analyzing-and-Visualizing-big-data-in-Tableau-with-Spark">Integrating Hadoop and BI tools: Analyzing and Visualizing big data in Tableau with Spark<a class="anchor-link" href="#Integrating-Hadoop-and-BI-tools:-Analyzing-and-Visualizing-big-data-in-Tableau-with-Spark">&#182;</a></h2>
+<h2  style="color:#996600; text-align:center", id="Integrating-Hadoop-and-BI-tools:-Analyzing-and-Visualizing-big-data-in-Tableau-with-Spark">Integrating Hadoop and BI tools: Analyzing and Visualizing Big Data in Tableau with Spark<a class="anchor-link" href="#Integrating-Hadoop-and-BI-tools:-Analyzing-and-Visualizing-big-data-in-Tableau-with-Spark">&#182;</a></h2>
      <br/>
 	 <br/>
 	 <img style="margin:0px auto;display:block" src="../figures/tableau_spark_hadoop.png", height="480" width="500"/>
@@ -11834,21 +11834,20 @@ div.prompt {display:none}
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In the last four plus months, I have been working on interesting projects with Hadoop ecosystem and I will blog on 
-some of my experiences. This blog post is on how to integrate Hadoop with business inteligence tools such as Tableau, 
-and leverage the capabilities of Spark for querying data. Then, using Tableau will be painless for generating amazing 
-interactive visualizations. We can query data in Hive by using Tableau connector for Spark SQL. The Spark ODBC connector 
+some of my experiences. This blog post is on how to integrate Hadoop with business intelligence tools such as Tableau, 
+and leverage the capabilities of Spark for querying data. We can query data in Hive by using Tableau connector for Spark SQL. The Spark ODBC connector 
 can be downloaded from <a href="https://databricks.com/spark/odbc-driver-download" , target="_blank">Databricks</a>. 
-Integrating Spark and business inteligence tools such as Tableau, enables us to process massive amounts of data by 
-taking advantage of the in-memeory faster processing speed of Sparkand we have the ability to scale up or downl 
+Integrating Spark and business intelligence tools, such as Tableau, enables us to process massive amounts of data by 
+taking advantage of the in-memeory faster processing speed of Spark and we have the ability to scale up or down 
 based on the size of our data.</p>
 <p>Data lake helps us to strore massive amount of data and data of different type and shape cheaply. We can store data 
 with well-defined data model, unstructured data such as social media posts and binary data such as imgages and videos.
-Therefore, we can use Spark to process unstructured data in our data lake and stage it for BI tools.</p>
+And, we can use Spark to process unstructured data in our data lake and stage it for BI tools.</p>
 <p>In this tutorial, I am using <a href="http://hortonworks.com/downloads/"  , target="_blank">
-Hortonworks Data Platform (HDP), which is an open source Apache Hadoop distribution</a> 
+Hortonworks Data Platform (HDP)</a>, which is an open source Apache Hadoop distribution 
 deployed on Amazon Web Services (AWS).
  <a href="http://hortonworks.com/blog/deploying-hadoop-cluster-amazon-ec2-hortonworks/" , target="_blank">This link</a> and
- <a href="https://www.youtube.com/watch?v=9dSJDJSTMlo" , target="_blank">this Youtube video</a> have the steps 
+ <a href="https://www.youtube.com/watch?v=9dSJDJSTMlo" , target="_blank">this Youtube video</a> show the steps 
  on how to deploy a Hadoop Cluster on Amazon EC2 with HDP.</p>
 
 </div>
@@ -11939,7 +11938,6 @@ deployed on Amazon Web Services (AWS).
 and finally query it with Spark SQL using ODBC connector. In particular, I am using the “Individual household electric
  power consumption Data Set” which can be downloaded from 
  <a href="http://archive.ics.uci.edu/ml/datasets/Individual+household+electric+power+consumption" , target="_blank">here</a>.</p>
-<p>Let's use the Shell Interpreter by adding <strong>!</strong> to download the data using <em>wget</em></p>
 
 </div>
 </div>
@@ -12027,6 +12025,8 @@ and finally query it with Spark SQL using ODBC connector. In particular, I am us
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Create-directory">Create directory<a class="anchor-link" href="#Create-directory">&#182;</a></h4>
+<p>I am using Jupyter Notebook and I can use the Shell Interpreter by adding <strong>!</strong> </p>
+
 </div>
 </div>
 </div>
@@ -12134,7 +12134,7 @@ drwxr-xr-x   - ambari-qa hdfs          0 2016-07-24 03:12 /tmp/tezsmokeoutput
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Once we have ingested our data to HDFS, let's remove the household_power_consumption.txt data from the local directory.</p>
+<p>Once we have ingested our data to HDFS, let's remove the "household_power_consumption.txt" data from the local directory.</p>
 
 </div>
 </div>
@@ -12552,7 +12552,7 @@ only showing top 5 rows
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's select some of the variables and the persist the data in Hive.</p>
+<p>Let's select some of the variables and then persist it to Hive.</p>
 
 </div>
 </div>
@@ -12711,15 +12711,16 @@ only showing top 20 rows
 
  <br/>
    <h4> Next</h4>
-  <p> Open Tableau and go to the connection options Spark SQL. You have to download and install the Spark ODBC connector 
-  at this stage. You can find it from <a href="https://databricks.com/spark/odbc-driver-download" , target="_blank">Databricks</a></p>
+  <p> Open Tableau and go to the connection options and choose Spark SQL.
+  Make sure you have downloaded and installed the Spark ODBC connector.
+  You can find it from <a href="https://databricks.com/spark/odbc-driver-download" , target="_blank">Databricks</a>.</p>
       
     <br/>
  <img style="margin:0px auto;display:block" src="../figures/tableau1.PNG", height="650" width="800"/>
 <br/>
 
 
-  <p> Next, provide the addess of your server, the port and other authentication credentials of Spark Thrift Server.</p>   
+  <p> Next, provide the addess of your server, the port and other authentication credentials.</p>   
     <br/>
  <img style="margin:0px auto;display:block" src="../figures/tableau2.PNG", height="600" width="650"/>
 <br/>
