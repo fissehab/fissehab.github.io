@@ -68,6 +68,41 @@ height: 1px;
 	line-height: 250%;
 }
 
+
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+	
+	background-color: #F0F5F5;
+    line-height: 250%;
+	 color: black;
+   font-size: 1.2em;
+  font-weight: bold;
+}
+
+.dropdown-content {
+	
+	background-color: #F0F5F5;
+    display: none;
+    position: absolute;
+    min-width: 100px;
+   color: red;
+   font-size: 1.0em;
+	
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+	 background-color: #ffffe6;
+	   color: black;
+   font-size: 0.8em;
+   font-weight: bold;
+}
+
+
+
 body {
   width: 95%;
   margin-left: auto;

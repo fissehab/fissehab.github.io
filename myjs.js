@@ -50,6 +50,17 @@ $(document).ready(function() {
     $(this).css("background-color","#F0F5F5");
   });
   
+  
+  
+    $(".mybanner2").mouseenter(function() {
+    $(this).css("background-color","#66A3FF");
+  });
+  $(".mybanner2").mouseleave(function() {
+    $(this).css("background-color","#ffffe6");
+  });
+  
+  
+  
         $(".myjhu").mouseenter(function() {
     $(this).css("background-color","white");
   });
