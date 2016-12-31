@@ -11895,16 +11895,7 @@ We would like to use this data to help us select which city to expand to next.</
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We would like to use this data to help us select which city to expand to next.</p>
 
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -13096,7 +13087,7 @@ $$h_\theta(x)=\theta^TX=\theta_0+\theta_1x1 + ...+\theta_nx_n$$ when we have n v
 <p>The parameters of our model are the $\theta_j$ values. These are
 the values we will adjust to minimize cost J($\theta$). One way to do this is to use the batch gradient descent algorithm. In batch gradient descent, each
 iteration performs the update</p>
-$$\theta_j:=\theta_j-\alpha\frac{1}{2m}\sum\limits_{i=1}^{m}( h_\theta(x^{(i)})-y^{(i)})^2x_j^i$$<p>(simultaneously update $\theta_j$ for all j)</p>
+$$\theta_j:=\theta_j-\alpha\frac{1}{2m}\sum\limits_{i=1}^{m}( h_\theta(x^{(i)})-y^{(i)})x_j^i$$<p>(simultaneously update $\theta_j$ for all j)</p>
 <p>With each step of gradient descent, our parameters $\theta_j$ come closer to the optimal values that will achieve the lowest cost J($\theta$).</p>
 
 </div>
