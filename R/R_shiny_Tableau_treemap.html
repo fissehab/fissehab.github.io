@@ -11976,7 +11976,6 @@ patterns that are difficult to observe from other types of visualizations. Furth
 <span class="kn">require</span><span class="p">(</span>dplyr<span class="p">)</span>
 <span class="kn">require</span><span class="p">(</span>shiny<span class="p">)</span>
 <span class="kn">require</span><span class="p">(</span>gridBase<span class="p">)</span>
-<span class="kn">require</span><span class="p">(</span>dplyr<span class="p">)</span>
 <span class="kn">require</span><span class="p">(</span>RColorBrewer<span class="p">)</span>
 <span class="kn">require</span><span class="p">(</span>plotly<span class="p">)</span>
 
@@ -12031,7 +12030,7 @@ shinyServer<span class="p">(</span><span class="kr">function</span><span class="
     for_condition<span class="o">=</span><span class="kc">NULL</span>
   <span class="p">)</span>
   
-  <span class="c1"># Handle clicks on treemap by region</span>
+  <span class="c1"># Handle clicks on treemap by country</span>
   observeEvent<span class="p">(</span>input<span class="o">$</span>click_treemap_country<span class="p">,</span> <span class="p">{</span>
     x <span class="o">&lt;-</span> input<span class="o">$</span>click_treemap_country<span class="o">$</span>x
     y <span class="o">&lt;-</span> input<span class="o">$</span>click_treemap_country<span class="o">$</span>y
@@ -12135,7 +12134,7 @@ refresh<span class="o">=</span>reactive<span class="p">({</span>
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="kn">library</span><span class="p">(</span>shiny<span class="p">)</span>
 <span class="kn">library</span><span class="p">(</span>shinydashboard<span class="p">)</span>
-<span class="kn">require</span><span class="p">(</span>plotly<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>plotly<span class="p">)</span>
 
 dashboardPage<span class="p">(</span>
   dashboardHeader<span class="p">(</span>title<span class="o">=</span><span class="s">&quot;World Population Drill Down&quot;</span><span class="p">,</span>titleWidth <span class="o">=</span><span class="m">400</span><span class="p">),</span>
