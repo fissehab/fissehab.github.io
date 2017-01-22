@@ -51,6 +51,15 @@ height: 1px;
 		 color: purple;
 
 	}
+	
+	
+.recent_post{
+		font-size:1.0em;
+		 color: #996600;
+
+	}
+	
+	
 .phd:hover {
     background-color: yellow;
 }
