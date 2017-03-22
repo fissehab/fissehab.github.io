@@ -39,6 +39,13 @@ height: 1px;
 }
 
 
+.mycert{
+	text-decoration:none;
+	font-size:1.5em;
+	
+	
+}
+
 
 .myheader  p	.myjhu{
 		text-decoration:none;
@@ -134,6 +141,7 @@ body {
   margin-right: auto;
   background-color:#FFFFFF ;
   font-family: Helvetica, Arial, sans-serif;
+  
 }
 
 
@@ -142,6 +150,7 @@ body {
 	background-color: #F0F5F5;
 	padding:0.5%;
 	line-height: 250%;
+
 }
 
 nav li {
