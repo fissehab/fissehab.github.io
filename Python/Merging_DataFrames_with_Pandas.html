@@ -11919,7 +11919,7 @@ popular data science tools. One of the reasons for Python's high popularity in d
 <p>When people take drugs, if they experience any adverse events, they can report it to the Food and Drug Administration (FDA). In this post, 
 we will download demography information of the patients, drug they used and for what indication they used it, reaction they experienced and 
 outcome of the drug adverse events. Then, we will merge the different data files. 
-In the next part of this series, we will put the data in a database and use pandas to clean, explore and visualize our data. I will organize the tutorials more clearly as I work on them.</p>
+In the next part of this series, we will put the data in a database and use Pandas to clean, explore and visualize our data. I will organize the tutorials more clearly as I work on them.</p>
 <p>We will download the datasets in csv format from the <a href="http://www.nber.org/data/fda-adverse-event-reporting-system-faers-data.html"  target="_blank">
 National Bureau of Economic Research</a>. The adverse events datasets are created in quarterly temporal resolution and each 
 quarter data includes demography information, drug/biologic information, adverse event, indication, 
@@ -11957,7 +11957,7 @@ outcome, etc. At the time of writing this post, the data covers from 2004 quarte
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, let's create a list of the ulrs for the various  datasets we are going to download. Remember for 2016, the data goes up to quarter 
+<p>Now, let's create a list of the urls for the various  datasets we are going to download. Remember for 2016, the data goes up to quarter 
 three at the time of this writing. To see the urls, click <a href="http://www.nber.org/data/fda-adverse-event-reporting-system-faers-data.html"  target="_blank">here</a> and you can see the link address of each csv file by right clicking on each data file.
 For example, let's see the urls for demography, drug, indication, reaction and outcome for 2015 quarter three.</p>
 <ul>
@@ -12275,7 +12275,7 @@ Number of drug files: 15
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Next, let's import pandas and concatenate the various data files.</p>
+<p>Next, let's import Pandas and concatenate the various data files.</p>
 
 </div>
 </div>
@@ -13186,7 +13186,7 @@ dtype: object</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>From the outcome data files, let's take the primaryid and outc_cod (outcome code) and concatenate all outcome quartelr data files.</p>
+<p>From the outcome data files, let's take the primaryid and outc_cod (outcome code) and concatenate all outcome quarterly data files.</p>
 
 </div>
 </div>
