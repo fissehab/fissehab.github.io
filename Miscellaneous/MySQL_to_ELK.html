@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>Using Elasticsearch and Kibana to Visualize New York City 311 Service Requests</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Importing Data from MySQL to Elasticsearch to Visualize it with Kibana</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11748,6 +11748,7 @@ div#notebook {
 div.prompt {display:none}
 </style>
 
+
 <!-- Custom stylesheet, it must be in the same directory as the html file -->
 <link rel="stylesheet" href="custom.css">
 
@@ -11773,7 +11774,6 @@ div.prompt {display:none}
     });
     </script>
     <!-- End of mathjax configuration -->
-	
 	
 	
 	
@@ -11826,7 +11826,6 @@ div.prompt {display:none}
 
 	 </ul>
     </nav>
-	
 	</head>
 <body>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
@@ -11837,7 +11836,7 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Using-Elasticsearch-and-Kibana-to-Visualize--New-York-City-311-Service-Requests-(&gt;-15-Million)">Using Elasticsearch and Kibana to Visualize  New York City 311 Service Requests (&gt; 15 Million)<a class="anchor-link" href="#Using-Elasticsearch-and-Kibana-to-Visualize--New-York-City-311-Service-Requests-(&gt;-15-Million)">&#182;</a></h3>
+<h3 id="Importing-Data-from-MySQL-to-Elasticsearch-to-Visualize-it-with-Kibana">Importing Data from MySQL to Elasticsearch to Visualize it with Kibana<a class="anchor-link" href="#Importing-Data-from-MySQL-to-Elasticsearch-to-Visualize-it-with-Kibana">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -11846,61 +11845,8 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Elasticsearch is an open source distributed full text search engine and it is the most popular enterprise search engine. 
-Kibana, on the other hand, helps us to visualize and analyze data that resides in Elasticsearch.
- Elasticsearch is used by many notable companies such as Facebook, GitHub, Quora, etc. 
- I am planning to make a couple of video tutorials on using the Elastic Stack and this is the first one.
- The Elastic Stack consists of Elasticsearch, Kibana and Logstash. We can analyze, visualize and search both structured and unstructured data in real time by using the Elastic Stack. All of them are free. Logstash is used for data collection and log parsing. We can import data to Elasticsearch from various sources using Logstash.</p>
-<p>In this part of the blog post series, we will analyze and visualize New York City 311 service requests. 
-You can download the data from <a href="https://nycopendata.socrata.com/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9"  target="_blank">NYC Opendata</a>. The data has more than 15 million records and it is about 10 GB. It is from 2010 to present. The Logstash configuration code is shown below. It is also availble on <a href="https://github.com/fissehab/Visualize_NYC311calls_with_Kibana"   target="_blank">Github</a>.</p>
-<p> In this tutorial, we will:
-<ui>
-	<li>
-	Download Data
-	</li>
-	<li>
-	Install Elasticsearch, Kibana and Logstash
-	</li>
-	<li>
-	Import Data  to Elasticsearch using Logstash
-
-	</li>
-
-<li>
-Create Kibana Dashboard
-
-</li>
-</ui>
-</p>
-<section>
-
-<p>Using Kibana to Visualize New York City 311 Service Requests - A </p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/CEKmWmIuBkM" frameborder="0" allowfullscreen></iframe>
-</section>
-<br/>
-<br/>
-<section>
-<p>Using Kibana to Visualize New York City 311 Service Requests - B </p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/lwxDqkyQJnA" frameborder="0" allowfullscreen></iframe>
-
-</section>
-<br/>
-<br/>
-<section>
-<p>Using Kibana to Visualize New York City 311 Service Requests - C </p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/HIEc30CCMzY" frameborder="0" allowfullscreen></iframe>
-
-</section>
-
-<br/>
-<br/>
-
-<section>
-<p>Using Kibana to Visualize New York City 311 Service Requests - D </p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/mPHvJBJcC5M" frameborder="0" allowfullscreen></iframe>
-
-</section>
-
+<p>Elasticsearch is an open source distributed full text search engine and it is the most popular enterprise search engine. Kibana, on the other hand, helps us to visualize and analyze data that resides on Elasticsearch. Elasticsearch is used by many notable companies such as Facebook, Github, Quora, etc. We can analyze, visualize and search both structured and unstructured data in real time by using the Elastic Stack (Elasticsearch, Logstash and Kibana). All of them are free. Logstash is used for data collection and log parsing. We can import data to Elasticsearch from various sources using Logstash.</p>
+<p>In this blog post, I show how to transfer data from MySQL to Elasticsearch and visualize it with Kibana. The Logstash configuration and R code are shown below. They are also  availble on <a href="https://github.com/fissehab/MySQL_ELK_Hurricanes">Github</a>.</p>
 
 </div>
 </div>
@@ -11908,10 +11854,35 @@ Create Kibana Dashboard
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="In-this-tutorial,-we-will:">In this tutorial, we will:<a class="anchor-link" href="#In-this-tutorial,-we-will:">&#182;</a></h5><ul>
+<li><p>Insert storms data into MySQL</p>
+</li>
+<li><p>Import Data to Elasticsearch using Logstash</p>
+</li>
+<li><p>Create Kibana Dashboard</p>
+</li>
+</ul>
+<h4 id="Tools-Used">Tools Used<a class="anchor-link" href="#Tools-Used">&#182;</a></h4><ul>
+<li><p>R</p>
+</li>
+<li><p>MySQL</p>
+</li>
+<li><p>Logstash</p>
+</li>
+<li><p>Elasticsearch</p>
+</li>
+<li><p>Kibana</p>
+</li>
+</ul>
 
-
-
-
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Logstash-configuration">Logstash configuration<a class="anchor-link" href="#Logstash-configuration">&#182;</a></h4>
@@ -11923,50 +11894,46 @@ Create Kibana Dashboard
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">input</span><span class="p">{</span>
-    <span class="n">file</span><span class="p">{</span>
-    <span class="n">path</span> <span class="o">=&gt;</span> <span class="s2">&quot;C:/fish/elasticSearch_Kibana/tutorials/NYC311calls/NYC_311_Service_Requests_from_2010_to_Present.csv&quot;</span>
-    <span class="n">start_position</span> <span class="o">=&gt;</span> <span class="s2">&quot;beginning&quot;</span>
-    <span class="s2">&quot;sincedb_path&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;/dev/null&quot;</span>
-<span class="p">}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">input</span> <span class="p">{</span>
+  <span class="n">jdbc</span> <span class="p">{</span>
+    <span class="n">jdbc_driver_library</span> <span class="o">=&gt;</span> <span class="s2">&quot;mysql-connector-java-5.1.42-bin.jar&quot;</span>
+    <span class="n">jdbc_driver_class</span> <span class="o">=&gt;</span> <span class="s2">&quot;com.mysql.jdbc.Driver&quot;</span>
+    <span class="n">jdbc_connection_string</span> <span class="o">=&gt;</span> <span class="s2">&quot;jdbc:mysql://localhost:3306/storms&quot;</span>
+    <span class="n">jdbc_user</span> <span class="o">=&gt;</span> <span class="s2">&quot;root&quot;</span>
+    <span class="n">jdbc_password</span> <span class="o">=&gt;</span> <span class="s2">&quot;mypassword&quot;</span>
+    <span class="n">statement</span> <span class="o">=&gt;</span> <span class="s2">&quot;SELECT * from storms&quot;</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="nb">filter</span><span class="p">{</span>
-    <span class="n">csv</span><span class="p">{</span>
-        <span class="n">separator</span> <span class="o">=&gt;</span> <span class="s2">&quot;,&quot;</span>
-        <span class="n">columns</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s2">&quot;Unique Key&quot;</span><span class="p">,</span> <span class="s2">&quot;Created Date&quot;</span><span class="p">,</span> <span class="s2">&quot;Closed Date&quot;</span><span class="p">,</span> <span class="s2">&quot;Agency&quot;</span><span class="p">,</span> <span class="s2">&quot;Agency Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Complaint Type&quot;</span><span class="p">,</span> <span class="s2">&quot;Descriptor&quot;</span><span class="p">,</span> <span class="s2">&quot;Location Type&quot;</span><span class="p">,</span> <span class="s2">&quot;Incident Zip&quot;</span><span class="p">,</span> 
-                    <span class="s2">&quot;Incident Address&quot;</span><span class="p">,</span> <span class="s2">&quot;Street Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Cross Street 1&quot;</span><span class="p">,</span> <span class="s2">&quot;Cross Street 2&quot;</span><span class="p">,</span>  <span class="s2">&quot;Intersection Street 1&quot;</span><span class="p">,</span> <span class="s2">&quot;Intersection Street 2&quot;</span><span class="p">,</span> <span class="s2">&quot;Address Type&quot;</span><span class="p">,</span> 
-                    <span class="s2">&quot;City&quot;</span><span class="p">,</span> <span class="s2">&quot;Landmark&quot;</span><span class="p">,</span> <span class="s2">&quot;Facility Type&quot;</span><span class="p">,</span> <span class="s2">&quot;Status&quot;</span> <span class="p">,</span> <span class="s2">&quot;Due Date&quot;</span><span class="p">,</span> <span class="s2">&quot;Resolution Description&quot;</span><span class="p">,</span> <span class="s2">&quot;Resolution Action Updated Date&quot;</span><span class="p">,</span> <span class="s2">&quot;Community Board&quot;</span><span class="p">,</span> 
-                    <span class="s2">&quot;Borough&quot;</span><span class="p">,</span> <span class="s2">&quot;X Coordinate (State Plane)&quot;</span><span class="p">,</span> <span class="s2">&quot;Y Coordinate (State Plane)&quot;</span><span class="p">,</span> <span class="s2">&quot;Park Facility Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Park Borough&quot;</span><span class="p">,</span><span class="s2">&quot;School Name&quot;</span><span class="p">,</span> <span class="s2">&quot;School Number&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;School Region&quot;</span><span class="p">,</span> <span class="s2">&quot;School Code&quot;</span><span class="p">,</span> <span class="s2">&quot;School Phone Number&quot;</span><span class="p">,</span> <span class="s2">&quot;School Address&quot;</span><span class="p">,</span><span class="s2">&quot;School City&quot;</span><span class="p">,</span> <span class="s2">&quot;School State&quot;</span><span class="p">,</span><span class="s2">&quot;School Zip&quot;</span><span class="p">,</span> <span class="s2">&quot;School Not Found&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;School or Citywide Complaint&quot;</span><span class="p">,</span> <span class="s2">&quot;Vehicle Type&quot;</span><span class="p">,</span> <span class="s2">&quot;Taxi Company Borough&quot;</span><span class="p">,</span> <span class="s2">&quot;Taxi Pick Up Location&quot;</span><span class="p">,</span> <span class="s2">&quot;Bridge Highway Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Bridge Highway Direction&quot;</span><span class="p">,</span> 
-                    <span class="s2">&quot;Road Ramp&quot;</span><span class="p">,</span> <span class="s2">&quot;Bridge Highway Segment&quot;</span><span class="p">,</span> <span class="s2">&quot;Garage Lot Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Ferry Direction&quot;</span> <span class="p">,</span> <span class="s2">&quot;Ferry Terminal Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Latitude&quot;</span><span class="p">,</span> <span class="s2">&quot;Longitude&quot;</span><span class="p">,</span><span class="s2">&quot;Location&quot;</span> <span class="p">]</span>
-    <span class="p">}</span>
 
-     <span class="n">date</span> <span class="p">{</span>
+
+<span class="nb">filter</span> <span class="p">{</span>
+
+    <span class="n">mutate</span> <span class="p">{</span> <span class="n">convert</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="s2">&quot;lat&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;float&quot;</span><span class="p">}</span> <span class="p">}</span>
+    <span class="n">mutate</span> <span class="p">{</span> <span class="n">convert</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="s2">&quot;long&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;float&quot;</span><span class="p">}</span> <span class="p">}</span>
+    <span class="n">mutate</span> <span class="p">{</span> <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="s2">&quot;lat&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;[location][lat]&quot;</span><span class="p">}</span> <span class="p">}</span>
+    <span class="n">mutate</span> <span class="p">{</span> <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="s2">&quot;long&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;[location][lon]&quot;</span><span class="p">}</span> <span class="p">}</span>
+
+
+    <span class="n">date</span> <span class="p">{</span>
         <span class="n">locale</span> <span class="o">=&gt;</span> <span class="s2">&quot;eng&quot;</span>
-        <span class="n">match</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s2">&quot;Created Date&quot;</span><span class="p">,</span> <span class="s2">&quot;MM/dd/yyyy HH:mm:ss aa&quot;</span><span class="p">,</span> <span class="s2">&quot;ISO8601&quot;</span><span class="p">]</span>
-        <span class="n">target</span> <span class="o">=&gt;</span> <span class="s2">&quot;Date&quot;</span>
-        <span class="n">remove_field</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s2">&quot;Created Date&quot;</span><span class="p">]</span>
-           <span class="p">}</span>
-  
-    <span class="n">mutate</span> <span class="p">{</span> <span class="n">convert</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="s2">&quot;Latitude&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;float&quot;</span><span class="p">}</span> <span class="p">}</span>
-    <span class="n">mutate</span> <span class="p">{</span> <span class="n">convert</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="s2">&quot;Longitude&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;float&quot;</span><span class="p">}</span> <span class="p">}</span>
-    <span class="n">mutate</span> <span class="p">{</span> <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="s2">&quot;Latitude&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;[location][lat]&quot;</span><span class="p">}</span> <span class="p">}</span>
-    <span class="n">mutate</span> <span class="p">{</span> <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="s2">&quot;Longitude&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;[location][lon]&quot;</span><span class="p">}</span> <span class="p">}</span>
+        <span class="n">match</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s2">&quot;datetime&quot;</span><span class="p">,</span> <span class="s2">&quot;yyyy-MM-dd HH:mm:ss&quot;</span><span class="p">,</span> <span class="s2">&quot;ISO8601&quot;</span><span class="p">]</span>
+        <span class="n">target</span> <span class="o">=&gt;</span> <span class="s2">&quot;datetime&quot;</span>
+           <span class="p">}</span> 
+   
 <span class="p">}</span>
-
 
 <span class="n">output</span><span class="p">{</span>
+   <span class="n">elasticsearch</span> <span class="p">{</span>
+   <span class="n">hosts</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s2">&quot;localhost:9200&quot;</span><span class="p">]</span> 
+   <span class="n">index</span> <span class="o">=&gt;</span> <span class="s2">&quot;storms&quot;</span>
+   <span class="n">user</span> <span class="o">=&gt;</span> <span class="s2">&quot;elastic&quot;</span>
+   <span class="n">password</span> <span class="o">=&gt;</span> <span class="s2">&quot;changeme&quot;</span>
+    
 
-  <span class="n">elasticsearch</span> <span class="p">{</span> 
-    <span class="n">hosts</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s2">&quot;localhost:9200&quot;</span><span class="p">]</span> 
-    <span class="n">index</span> <span class="o">=&gt;</span> <span class="s2">&quot;nyc311calls&quot;</span>
-    <span class="n">document_type</span> <span class="o">=&gt;</span> <span class="s2">&quot;calls&quot;</span>
-    <span class="n">user</span> <span class="o">=&gt;</span> <span class="s2">&quot;elastic&quot;</span>
-    <span class="n">password</span> <span class="o">=&gt;</span><span class="s2">&quot;changeme&quot;</span><span class="p">}</span>
-  <span class="c1"># stdout { codec =&gt; rubydebug { metadata =&gt; true } }</span>
-    <span class="n">stdout</span> <span class="p">{</span> <span class="n">codec</span> <span class="o">=&gt;</span> <span class="n">dots</span> <span class="p">}</span>
+<span class="p">}</span>
+  <span class="n">stdout</span> <span class="p">{</span> <span class="n">codec</span> <span class="o">=&gt;</span> <span class="n">rubydebug</span> <span class="p">{</span> <span class="n">metadata</span> <span class="o">=&gt;</span> <span class="n">true</span> <span class="p">}</span> <span class="p">}</span>
+   <span class="c1"># stdout { codec =&gt; dots }</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -11989,10 +11956,10 @@ Create Kibana Dashboard
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">PUT</span> <span class="o">/</span><span class="n">_template</span><span class="o">/</span><span class="n">nyc311calls</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">PUT</span> <span class="o">/</span><span class="n">_template</span><span class="o">/</span><span class="n">storms</span>
 <span class="p">{</span>
   <span class="s2">&quot;order&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">&quot;template&quot;</span><span class="p">:</span> <span class="s2">&quot;nyc311calls*&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;template&quot;</span><span class="p">:</span> <span class="s2">&quot;storms*&quot;</span><span class="p">,</span>
   <span class="s2">&quot;mappings&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;_default_&quot;</span><span class="p">:</span> <span class="p">{</span>
       <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -12003,6 +11970,49 @@ Create Kibana Dashboard
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Transfer-data-from-R-to-MySQL">Transfer data from R to MySQL<a class="anchor-link" href="#Transfer-data-from-R-to-MySQL">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+
+<span class="n">library</span><span class="p">(</span><span class="n">RMySQL</span><span class="p">)</span>
+
+
+
+<span class="n">my_storms</span> <span class="o">=</span> <span class="n">storms</span>
+<span class="n">my_storms</span><span class="err">$</span><span class="n">DateTime</span> <span class="o">=</span> <span class="n">paste0</span><span class="p">(</span><span class="n">storms</span><span class="err">$</span><span class="n">year</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="n">storms</span><span class="err">$</span><span class="n">month</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="n">storms</span><span class="err">$</span><span class="n">day</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">storms</span><span class="err">$</span><span class="n">hour</span><span class="p">,</span><span class="s2">&quot;:00:00&quot;</span><span class="p">)</span>
+<span class="n">my_storms</span> <span class="o">=</span> <span class="n">my_storms</span> <span class="o">%&gt;%</span> <span class="n">select</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">DateTime</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">long</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">wind</span><span class="p">,</span> <span class="n">pressure</span><span class="p">)</span>
+
+<span class="n">mydb</span> <span class="o">=</span> <span class="n">dbConnect</span><span class="p">(</span><span class="n">MySQL</span><span class="p">(),</span> 
+                 <span class="n">dbname</span> <span class="o">=</span> <span class="s2">&quot;storms&quot;</span><span class="p">,</span>
+                 <span class="n">host</span> <span class="o">=</span> <span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+                 <span class="n">port</span> <span class="o">=</span> <span class="mi">3306</span><span class="p">,</span>
+                 <span class="n">user</span> <span class="o">=</span> <span class="s2">&quot;root&quot;</span><span class="p">,</span>
+                 <span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;mypassword&quot;</span><span class="p">)</span>
+
+
+<span class="n">dbWriteTable</span><span class="p">(</span><span class="n">mydb</span><span class="p">,</span><span class="s1">&#39;storms&#39;</span><span class="p">,</span> 
+             <span class="n">my_storms</span><span class="p">,</span> 
+             <span class="n">row</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">,</span>
+             <span class="n">overwrite</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12032,6 +12042,7 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
 
 </body>
 
