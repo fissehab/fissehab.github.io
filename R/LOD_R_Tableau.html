@@ -313,7 +313,7 @@ message(paste0(round(temp, 2), &quot;% of customers ordering items in 2013 also 
                   group_by(`Customer ID`) %&gt;% summarise(Total = n()) %&gt;% 
                   filter(Total &gt; 10) %&gt;% nrow()
 
-message(paste0(round(temp, 2), &quot; customers made more than 10 orders&quot;))</code></pre>
+message(paste0(temp, &quot; customers made more than 10 orders&quot;))</code></pre>
 <pre><code>## 49 customers made more than 10 orders</code></pre>
 <p><br /> <br /></p>
 </div>
