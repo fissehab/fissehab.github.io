@@ -125,9 +125,11 @@ $(document).ready(function () {
 <div class="fluid-row" id="header">
 
 
+<h2> <a style="text-decoration:none;color:#006600" href ="http://datascience-enthusiast.com/"  target="_blank">Home</a></h2>
 
 <h1 class="title toc-ignore"><center>
-<h3>
+<h3 style="text-decoration:none;color:blue">
+
 Interactive Chord Diagrams in R
 </center>
 </h3></h1>
@@ -136,9 +138,12 @@ Interactive Chord Diagrams in R
 
 
 <p><br /></p>
-<p>A chord diagram is a graphical method of displaying the inter-relationships between data in a matrix. The data are arranged radially around a circle with the relationships between the data points typically drawn as arcs connecting the data (<a href="https://en.wikipedia.org/wiki/Chord_diagram">Wikipedia</a>).</p>
-<p>The chorddiag package allows to create interactive chord diagrams using the JavaScript visualization library D3 from within R using the htmlwidgets interfacing framework.</p>
-<p>In this blog post, we will see how to create interactive chord diagrams. You can hover over the arcs for each of the courses/sections below and see how many students from each section are taking each course.</p>
+<p>A chord diagram is a graphical method of displaying the inter-relationships between data in a matrix.
+ The data are arranged radially around a circle with the relationships between the data points typically drawn as 
+ arcs connecting the data (<a href="https://en.wikipedia.org/wiki/Chord_diagram">Wikipedia</a>).</p>
+<p>The <strong>chorddiag</strong> package in <strong>R</strong> allows to create interactive chord diagrams using 
+the JavaScript visualization library <strong>D3</strong> from within <strong>R</strong> using the <strong>htmlwidgets</strong> interfacing framework.</p>
+<p>In this blog post, we will see how to create interactive chord diagrams. You can <strong>hover over</strong> the arcs for each of the courses/sections below and see how many students from each section are taking each course.</p>
 <pre class="r"><code>library(chorddiag)
 
 students = data.frame(Math = c(50, 25, 5, 12),
@@ -187,7 +192,17 @@ Company G      7000</code></pre>
 <div id="htmlwidget-7715df75f3bdcdffb0ba" style="width:768px;height:768px;" class="chorddiag html-widget"></div>
 <script type="application/json" data-for="htmlwidget-7715df75f3bdcdffb0ba">{"x":{"matrix":[[800,100,200,500,600,500,300],[200,2000,500,200,300,400,50],[100,300,4000,300,150,100,0],[50,400,80,5000,600,300,150],[140,50,120,250,6000,250,600],[200,0,320,140,30,4500,250],[140,290,600,450,0,140,7000]],"options":{"type":"directional","width":null,"height":null,"margin":90,"showGroupnames":true,"groupNames":["Company A","Company B","Company C","Company D","Company E","Company F","Company G"],"groupColors":["#1B9E77","#D95F02","#7570B3","#E7298A","#66A61E","#E6AB02","#A6761D"],"groupThickness":0.1,"groupPadding":0.0349065850398866,"groupnamePadding":[10,10,10,10,10,10,10],"groupnameFontsize":14,"groupedgeColor":null,"chordedgeColor":"#808080","categoryNames":null,"categorynamePadding":100,"categorynameFontsize":28,"showTicks":false,"tickInterval":100,"ticklabelFontsize":10,"fadeLevel":0.1,"showTooltips":true,"showZeroTooltips":true,"tooltipNames":["Company A","Company B","Company C","Company D","Company E","Company F","Company G"],"tooltipFontsize":12,"tooltipUnit":"","tooltipGroupConnector":" &#x25B6; ","precision":"null","clickAction":null,"clickGroupAction":null}},"evals":[],"jsHooks":[]}</script>
 <p><br /> <br /></p>
-<p>we can also embede shiny chord diagrams for more interactivity. The shiny app below is similar to the one shown above, but now we are looking over different markets.</p>
+
+<h3>Chord Diagrams in Shiny </h3>
+<br />
+<p>we can also embede <strong>shiny</strong> chord diagrams for more interactivity. 
+The shiny app below is similar to the one shown above, but now we are looking over different markets.</p>
+
+<br/>
+
+<iframe style="margin:0px auto;display:block; border:2px solid #ebebe0"  
+ width="100%" height="800" src="https://risfun.shinyapps.io/ChordShiny/"></iframe>
+ 
 <p><br /> <br /></p>
 <p>The code for the above shiny app is below.</p>
 <div id="ui" class="section level3">
