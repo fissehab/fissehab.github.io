@@ -8013,7 +8013,7 @@ button.close {
 .fa-moon-o:before {
   content: "\f186";
 }
-.fa-archive:before {
+.fa-arcHive:before {
   content: "\f187";
 }
 .fa-bug:before {
@@ -8200,7 +8200,7 @@ button.close {
   content: "\f1c5";
 }
 .fa-file-zip-o:before,
-.fa-file-archive-o:before {
+.fa-file-arcHive-o:before {
   content: "\f1c6";
 }
 .fa-file-sound-o:before,
@@ -11866,9 +11866,9 @@ div.prompt {display:none}
 <p>In this blog post, we will see how to use Spark with Hive, particularly:</p>
 
 <pre><code>- how to create and use Hive databases
-- how to create and use Hive tables
+- how to create Hive tables
 - how to load data to Hive tables
-- how to insert data to Hive tables
+- how to insert data into Hive tables
 - how to read data from Hive tables
 - we will also see how to save dataframes to any Hadoop supported file system</code></pre>
 
@@ -11880,7 +11880,7 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>To work with hive, we have to instantiate SparkSession with Hive support, including connectivity to a persistent Hive metastore, support for Hive serdes, and Hive user-defined functions if we are using Spark 2.0.0 and later. If we are using earleir Spark versions, we have to use <strong>HiveContext</strong>  which is variant of Spark SQL that integrates with data stored in Hive. Even when we do not have an existing Hive deployment, we can still enable Hive support.</p>
+<p>To work with Hive, we have to instantiate SparkSession with Hive support, including connectivity to a persistent Hive metastore, support for Hive serdes, and Hive user-defined functions if we are using Spark 2.0.0 and later. If we are using earleir Spark versions, we have to use <strong>HiveContext</strong>  which is variant of Spark SQL that integrates with data stored in Hive. Even when we do not have an existing Hive deployment, we can still enable Hive support.</p>
 
 </div>
 </div>
@@ -11889,7 +11889,7 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this tutorial, I am using stand alone Spark. When not configured by the hive-site.xml, the context automatically creates metastore_db in the current directory. As shown below, initially, we do not have metastore_db but after we instantiate SparkSession with Hive support, we see that metastore_db has been created. Further, when we excute create database command, <strong>spark-warehouse</strong> is created.</p>
+<p>In this tutorial, I am using stand alone Spark. When not configured by the Hive-site.xml, the context automatically creates metastore_db in the current directory. As shown below, initially, we do not have metastore_db but after we instantiate SparkSession with Hive support, we see that metastore_db has been created. Further, when we excute create database command, <strong>spark-warehouse</strong> is created.</p>
 
 </div>
 </div>
@@ -12641,12 +12641,12 @@ ml-latest.zip       100%[===================&gt;] 236.92M  1.02MB/s    in 2m 40s
 |Created                     |Thu Jan 11 20:28:31 EST 2018                                       |       |
 |Last Access                 |Wed Dec 31 19:00:00 EST 1969                                       |       |
 |Type                        |MANAGED                                                            |       |
-|Provider                    |hive                                                               |       |
+|Provider                    |Hive                                                               |       |
 |Table Properties            |[transient_lastDdlTime=1515720511]                                 |       |
 |Location                    |file:/home/fish/MySpark/HiveSpark/spark-warehouse/movies.db/ratings|       |
-|Serde Library               |org.apache.hadoop.hive.ql.io.orc.OrcSerde                          |       |
-|InputFormat                 |org.apache.hadoop.hive.ql.io.orc.OrcInputFormat                    |       |
-|OutputFormat                |org.apache.hadoop.hive.ql.io.orc.OrcOutputFormat                   |       |
+|Serde Library               |org.apache.hadoop.Hive.ql.io.orc.OrcSerde                          |       |
+|InputFormat                 |org.apache.hadoop.Hive.ql.io.orc.OrcInputFormat                    |       |
+|OutputFormat                |org.apache.hadoop.Hive.ql.io.orc.OrcOutputFormat                   |       |
 |Storage Properties          |[serialization.format=1]                                           |       |
 |Partition Provider          |Catalog                                                            |       |
 +----------------------------+-------------------------------------------------------------------+-------+
@@ -12663,7 +12663,7 @@ ml-latest.zip       100%[===================&gt;] 236.92M  1.02MB/s    in 2m 40s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now let's load data to the movies table. We can load data from a local file system or from any hadoop supported file system. If we are using a hadoop directory, we have to remove <strong>local</strong> from the command below. Please refer the <a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DML#LanguageManualDML-Loadingfilesintotables">hive manual</a> for details. If we are loading it just one time, we do not need to include <strong>overwrite</strong>. However, if there is possiblity that we could run the code more than one time, including <strong>overwrite</strong> is important not to append the same dataset to the table again and again. Hive does not do any transformation while loading data into tables. Load operations are currently pure copy/move operations that move datafiles into locations corresponding to Hive tables. Hive does some minimal checks to make sure that the files being loaded match the target table. So, pay careful attention to your code.</p>
+<p>Now let's load data to the movies table. We can load data from a local file system or from any hadoop supported file system. If we are using a hadoop directory, we have to remove <strong>local</strong> from the command below. Please refer the <a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DML#LanguageManualDML-Loadingfilesintotables">Hive manual</a> for details. If we are loading it just one time, we do not need to include <strong>overwrite</strong>. However, if there is possiblity that we could run the code more than one time, including <strong>overwrite</strong> is important not to append the same dataset to the table again and again. Hive does not do any transformation while loading data into tables. Load operations are currently pure copy/move operations that move datafiles into locations corresponding to Hive tables. Hive does some minimal checks to make sure that the files being loaded match the target table. So, pay careful attention to your code.</p>
 
 </div>
 </div>
@@ -13082,7 +13082,7 @@ only showing top 5 rows
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Next, let's check if the movies and ratings hive tables have the data.</p>
+<p>Next, let's check if the movies and ratings Hive tables have the data.</p>
 
 </div>
 </div>
@@ -13181,7 +13181,7 @@ only showing top 5 rows
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We see that we can put our data in hive tables by either directly loading data in a local or hadoop file system or by creating a dataframe and registering the dataframe as a temporary table.</p>
+<p>We see that we can put our data in Hive tables by either directly loading data in a local or hadoop file system or by creating a dataframe and registering the dataframe as a temporary table.</p>
 
 </div>
 </div>
@@ -13190,7 +13190,7 @@ only showing top 5 rows
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can also query data in hive table and save it another hive table. Let's calculate number of movies by genres and insert those genres which occur more than   500 times to genres_by_count AVRO hive table we created above.</p>
+<p>We can also query data in Hive table and save it another Hive table. Let's calculate number of movies by genres and insert those genres which occur more than   500 times to genres_by_count AVRO Hive table we created above.</p>
 
 </div>
 </div>
@@ -13287,7 +13287,7 @@ only showing top 5 rows
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, we can check if the data has been inserted to the hive table appropriately:</p>
+<p>Now, we can check if the data has been inserted to the Hive table appropriately:</p>
 
 </div>
 </div>
@@ -13334,8 +13334,8 @@ only showing top 5 rows
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can also use data in hive tables with other dataframes by first registering the dataframes as temporary tables.</p>
-<p>Now, let's create a temporary table from the tags dataset and then we will join it with movies and ratings tables which are in hive.</p>
+<p>We can also use data in Hive tables with other dataframes by first registering the dataframes as temporary tables.</p>
+<p>Now, let's create a temporary table from the tags dataset and then we will join it with movies and ratings tables which are in Hive.</p>
 
 </div>
 </div>
@@ -13410,7 +13410,7 @@ only showing top 5 rows
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>From the <strong>show tables</strong> hive command below, we see that three of them are permanent but two of them are temporary tables.</p>
+<p>From the <strong>show tables</strong> Hive command below, we see that three of them are permanent but two of them are temporary tables.</p>
 
 </div>
 </div>
@@ -13882,7 +13882,7 @@ joined2.json  joined2_parquet  joined.json  joined_parquet
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can also write a dataframe into a hive table by using <strong>insertInto</strong>. This requires that the schema of the DataFrame is the same as the schema of the table.</p>
+<p>We can also write a dataframe into a Hive table by using <strong>insertInto</strong>. This requires that the schema of the DataFrame is the same as the schema of the table.</p>
 
 </div>
 </div>
@@ -13891,7 +13891,7 @@ joined2.json  joined2_parquet  joined.json  joined_parquet
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's see the schema of the <strong>joined</strong> dataframe and create two hive tables: one in ORC and one in PARQUET formats to insert the dataframe into.</p>
+<p>Let's see the schema of the <strong>joined</strong> dataframe and create two Hive tables: one in ORC and one in PARQUET formats to insert the dataframe into.</p>
 
 </div>
 </div>
@@ -14116,7 +14116,7 @@ joined2.json  joined2_parquet  joined.json  joined_parquet
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Finally, let's check if the data has been inserted into the hive tbales.</p>
+<p>Finally, let's check if the data has been inserted into the Hive tbales.</p>
 
 </div>
 </div>
