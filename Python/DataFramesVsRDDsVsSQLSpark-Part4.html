@@ -11856,7 +11856,7 @@ div.prompt {display:none}
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>RDD</strong></p>
 <ul>
-<li><p>union</p>
+<li><p>union: This is equivalent to UNION ALL in SQL. To do a SQL-style set union (that does deduplication of elements), use this function followed by a distinct.</p>
 </li>
 <li><p>intersection</p>
 </li>
@@ -11865,7 +11865,8 @@ div.prompt {display:none}
 </ul>
 <p><strong>DataFrame</strong></p>
 <ul>
-<li><p>unionAll</p>
+<li><p>unionAll/union: This is equivalent to UNION ALL in SQL. To do a SQL-style set union (that does deduplication of elements),
+ use this function followed by a distinct. unionAll deprecated in Spark 2.0 use union instead.</p>
 </li>
 <li><p>intersect</p>
 </li>
