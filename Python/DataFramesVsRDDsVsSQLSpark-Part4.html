@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>Spark RDDs Vs DataFrames vs SparkSQL - Part 4</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Spark RDDs Vs DataFrames vs SparkSQL - Part 4 Set Operators</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11768,9 +11768,7 @@ div#notebook {
     </script>
     <!-- End of mathjax configuration -->
 	
-	</script>
-    <!-- End of mathjax configuration -->
-			<style>
+				<style>
 div.prompt {display:none}
 </style>
 
@@ -11827,8 +11825,6 @@ div.prompt {display:none}
 		
       </ul>
     </nav>
-	
-	
 	</head>
 <body>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
@@ -11838,7 +11834,7 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2  style="color:blue;text-align:center"   id="Spark-RDDs-Vs-DataFrames-vs-SparkSQL---Part-4-:-Set-Operators">Spark RDDs Vs DataFrames vs SparkSQL - Part 4 : Set Operators<a class="anchor-link" href="#Spark-RDDs-Vs-DataFrames-vs-SparkSQL---Part-4-:-Set-Operators">&#182;</a></h2>
+<h2 style="color:blue;text-align:center"  id="Spark-RDDs-Vs-DataFrames-vs-SparkSQL---Part-4-:-Set-Operators">Spark RDDs Vs DataFrames vs SparkSQL - Part 4 : Set Operators<a class="anchor-link" href="#Spark-RDDs-Vs-DataFrames-vs-SparkSQL---Part-4-:-Set-Operators">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -11846,9 +11842,10 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This is the fourth tutorial on the Spark RDDs Vs DataFrames vs SparkSQL blog post series. The first one is available <a href="http://datascience-enthusiast.com/Python/DataFramesVsRDDsSpark-Part1.html" target ="_blank">here</a>. In the first part, we saw how to retrieve, sort and filter data using Spark RDDs, DataFrames and SparkSQL. In the second part <a href="http://datascience-enthusiast.com/Python/DataFramesVsRDDsVsSQLSpark-Part2.html"  target ="_blank">(here)</a>, we saw how to work with multiple tables in Spark the RDD way, the DataFrame way and with SparkSQL. In the third part <a href="http://datascience-enthusiast.com/Python/DataFramesVsRDDsVsSQLSpark-Part3.html"  target ="_blank">(available here)</a> of the blog post series, we performed web server log analysis using real-world text-based production logs. In this fourth part, we will see set operators in Spark the RDD way, the DataFrame way and the SparkSQL way.</p>
-<p>Also, check out my other recent blog posts on Spark on <a href="http://datascience-enthusiast.com/Python/analyzing_bible_quran_with_spark.html"  target ="_blank">Analyzing the Bible and the Quran using Spark</a> and <a href="http://datascience-enthusiast.com/Python/SparkDataFrames-ExploringChicagoCrimes.html"  target ="_blank">Spark DataFrames: Exploring Chicago Crimes</a>.</p>
-<p>The data and the notebooks can be downloaded from my <a href="https://github.com/fissehab/Spark_certification"  target ="_blank">GitHub repository</a>.</p>
+<p>This is the fourth tutorial on the Spark RDDs Vs DataFrames vs SparkSQL blog post series. The first one is available <a href="http://datascience-enthusiast.com/Python/DataFramesVsRDDsSpark-Part1.html">here</a>. In the first part, we saw how to retrieve, sort and filter data using Spark RDDs, DataFrames and SparkSQL. In the second part <a href="http://datascience-enthusiast.com/Python/DataFramesVsRDDsVsSQLSpark-Part2.html">(here)</a>, we saw how to work with multiple tables in Spark the RDD way, the DataFrame way and with SparkSQL. In the third part <a href="http://datascience-enthusiast.com/Python/DataFramesVsRDDsVsSQLSpark-Part3.html">(available here)</a> of the blog post series, we performed web server log analysis using real-world text-based production logs. In this fourth part, we will see set operators in Spark the RDD way, the DataFrame way and the SparkSQL way.</p>
+<p>Also, check out my other recent blog posts on Spark on <a href="http://datascience-enthusiast.com/Python/analyzing_bible_quran_with_spark.html">Analyzing the Bible and the Quran using Spark</a> and <a href="http://datascience-enthusiast.com/Python/SparkDataFrames-ExploringChicagoCrimes.html">Spark DataFrames: Exploring Chicago Crimes</a>.</p>
+<p>The data and the notebooks can be downloaded from my <a href="https://github.com/fissehab/Spark_certification">GitHub repository</a>.</p>
+<p>The three types of set operators in RDD, DataFrame and SQL approach are shown below.</p>
 
 </div>
 </div>
@@ -11857,7 +11854,6 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The three types of set operators in RDD, DataFrame and SQL approach are shown below.</p>
 <p><strong>RDD</strong></p>
 <ul>
 <li><p>union</p>
@@ -11885,6 +11881,14 @@ div.prompt {display:none}
 <li><p>except</p>
 </li>
 </ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>The inputs set operations expect have to have the same variables (columns).</p>
 
 </div>
@@ -11894,8 +11898,7 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For this tutorial, we will work with the  <strong>SalesLTCustomer.txt</strong>, and <strong>SalesLTCustomerAddress.txt</strong> datasets. Let's answer a couple of questions using Spark Resilient Distiributed (RDD) way, DataFrame way and SparkSQL by employing set operators.</p>
-
+<p>For this tutorial, we will work with the <strong>SalesLTCustomer.txt</strong>, and <strong>SalesLTCustomerAddress.txt</strong> datasets. Let's answer a couple of questions using Spark Resilient Distiributed (RDD) way, DataFrame way and SparkSQL by employing set operators.</p>
 <img src="../figures/customer_address_sales.PNG", height="500" width="800"/>
 
 </div>
@@ -11903,7 +11906,7 @@ div.prompt {display:none}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark</span> <span class="k">import</span> <span class="n">SparkContext</span><span class="p">,</span> <span class="n">SparkConf</span>
@@ -11925,13 +11928,14 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Create-RDD">Create RDD<a class="anchor-link" href="#Create-RDD">&#182;</a></h3>
+<p><strong>Create RDD</strong></p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">customer</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="p">(</span><span class="s2">&quot;SalesLTCustomer.txt&quot;</span><span class="p">)</span>
@@ -11947,13 +11951,14 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Understand-the-data">Understand the data<a class="anchor-link" href="#Understand-the-data">&#182;</a></h4>
+<p><strong>Understand the data</strong></p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[97]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">customer</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
@@ -11969,7 +11974,7 @@ div.prompt {display:none}
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[97]:</div>
+<div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -11986,7 +11991,7 @@ div.prompt {display:none}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">customer_address</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
@@ -12002,7 +12007,7 @@ div.prompt {display:none}
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[15]:</div>
+<div class="prompt output_prompt">Out[6]:</div>
 
 
 
@@ -12030,20 +12035,21 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Remove-the-header-from-the-RDD">Remove the header from the RDD<a class="anchor-link" href="#Remove-the-header-from-the-RDD">&#182;</a></h4>
+<p><strong>Remove the header from the RDD</strong></p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">customer_header</span> <span class="o">=</span> <span class="n">customer</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
 <span class="n">customer_rdd</span> <span class="o">=</span> <span class="n">customer</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span> <span class="o">!=</span> <span class="n">customer_header</span><span class="p">)</span>
 
 <span class="n">customer_address_header</span> <span class="o">=</span> <span class="n">customer_address</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
-<span class="n">customer_address_rdd</span> <span class="o">=</span> <span class="p">(</span><span class="n">customer_address</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span> <span class="o">!=</span> <span class="n">customer_address_header</span><span class="p">))</span>                     
+<span class="n">customer_address_rdd</span> <span class="o">=</span> <span class="p">(</span><span class="n">customer_address</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span> <span class="o">!=</span> <span class="n">customer_address_header</span><span class="p">))</span>     
 </pre></div>
 
 </div>
@@ -12055,13 +12061,14 @@ div.prompt {display:none}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Create-DataFrames,--understand-the-schema-and-show-sample-data">Create DataFrames,  understand the schema and show sample data<a class="anchor-link" href="#Create-DataFrames,--understand-the-schema-and-show-sample-data">&#182;</a></h4>
+<p><strong>Create DataFrames, understand the schema and show sample data</strong></p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[257]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">customer_df</span> <span class="o">=</span> <span class="n">sqlcontext</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">customer_rdd</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)),</span>
@@ -12075,7 +12082,7 @@ div.prompt {display:none}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[310]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">customer_df</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
@@ -12168,7 +12175,7 @@ only showing top 10 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[260]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">customer_address_df</span> <span class="o">=</span> <span class="n">sqlcontext</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">customer_address_rdd</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)),</span> 
@@ -12182,7 +12189,7 @@ only showing top 10 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[261]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">customer_address_df</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
@@ -12267,18 +12274,18 @@ only showing top 10 rows
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Register-the-DataFrames-as-Tables-so-as-to-excute-SQL-over-the-tables">Register the DataFrames as Tables so as to excute SQL over the tables<a class="anchor-link" href="#Register-the-DataFrames-as-Tables-so-as-to-excute-SQL-over-the-tables">&#182;</a></h4>
+<p><strong>Register the DataFrames as Tables so as to excute SQL over the tables</strong></p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[266]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">customer_df</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s2">&quot;customer_table&quot;</span><span class="p">)</span>
 <span class="n">customer_address_df</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s2">&quot;customer_address_table&quot;</span><span class="p">)</span>
-<span class="n">sales_address_df</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s2">&quot;sales_address_table&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12290,8 +12297,8 @@ only showing top 10 rows
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.-Retrieve-customers-with-only-a-main-office-address">1. Retrieve customers with only a main office address<a class="anchor-link" href="#1.-Retrieve-customers-with-only-a-main-office-address">&#182;</a></h3>
-<pre><code>Write a query that returns the company name of each company that appears in a table of customers with a ‘Main Office’ address, but not in a table of customers with a ‘Shipping’ address.</code></pre>
+<p><strong>1. Retrieve customers with only a main office address</strong>
+Write a query that returns the company name of each company that appears in a table of customers with a ‘Main Office’ address, but not in a table of customers with a ‘Shipping’ address.</p>
 
 </div>
 </div>
@@ -12307,20 +12314,19 @@ only showing top 10 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[278]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sql1</span> <span class="o">=</span> <span class="n">sqlcontext</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;SELECT c.CompanyName </span><span class="se">\</span>
 <span class="s2">                FROM customer_table AS c INNER JOIN customer_address_table AS ca </span><span class="se">\</span>
-<span class="s2">                ON c.CustomerID = ca.CustomerID INNER JOIN sales_address_table AS sa </span><span class="se">\</span>
-<span class="s2">                ON ca.AddressID = sa.AddressID</span><span class="se">\</span>
+<span class="s2">                ON c.CustomerID = ca.CustomerID </span><span class="se">\</span>
 <span class="s2">                WHERE ca.AddressType = &#39;Main Office&#39;</span><span class="se">\</span>
 <span class="s2">                EXCEPT</span><span class="se">\</span>
 <span class="s2">                SELECT c.CompanyName </span><span class="se">\</span>
 <span class="s2">                FROM customer_table AS c INNER JOIN customer_address_table AS ca </span><span class="se">\</span>
-<span class="s2">                ON c.CustomerID = ca.CustomerID INNER JOIN sales_address_table AS sa </span><span class="se">\</span>
-<span class="s2">                ON ca.AddressID = sa.AddressID</span><span class="se">\</span>
+<span class="s2">                ON c.CustomerID = ca.CustomerID </span><span class="se">\</span>
 <span class="s2">                WHERE ca.AddressType = &#39;Shipping&#39; ORDER BY CompanyName&quot;</span><span class="p">)</span>
+
 <span class="n">sql1</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">truncate</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
@@ -12361,28 +12367,26 @@ only showing top 5 rows
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong> DataFrame way</strong></p>
+<p><strong>DataFrame way</strong></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[279]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="p">(</span> <span class="p">(</span>
          <span class="n">customer_df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">customer_address_df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">customer_address_df</span><span class="o">.</span><span class="n">AddressType</span> <span class="o">==</span> <span class="s1">&#39;Main Office&#39;</span><span class="p">),</span>
-                          <span class="s1">&#39;CustomerID&#39;</span><span class="p">,</span> <span class="s1">&#39;inner&#39;</span><span class="p">)</span>
-         <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sales_address_df</span><span class="p">,</span> <span class="s2">&quot;AddressID&quot;</span><span class="p">,</span> <span class="s1">&#39;inner&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;CompanyName&quot;</span><span class="p">)</span>
+                          <span class="s1">&#39;CustomerID&#39;</span><span class="p">,</span> <span class="s1">&#39;inner&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;CompanyName&quot;</span><span class="p">)</span>
         <span class="p">)</span>
 
         <span class="o">.</span><span class="n">subtract</span>
 
         <span class="p">(</span>
             <span class="p">(</span><span class="n">customer_df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">customer_address_df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">customer_address_df</span><span class="o">.</span><span class="n">AddressType</span> <span class="o">==</span> <span class="s1">&#39;Shipping&#39;</span><span class="p">),</span>
-                              <span class="s1">&#39;CustomerID&#39;</span><span class="p">,</span> <span class="s1">&#39;inner&#39;</span><span class="p">)</span>
-             <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sales_address_df</span><span class="p">,</span> <span class="s2">&quot;AddressID&quot;</span><span class="p">,</span> <span class="s1">&#39;inner&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;CompanyName&quot;</span><span class="p">)</span>
+                              <span class="s1">&#39;CustomerID&#39;</span><span class="p">,</span> <span class="s1">&#39;inner&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;CompanyName&quot;</span><span class="p">)</span>
             <span class="p">)</span>
         <span class="p">)</span>
     <span class="p">)</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s1">&#39;CompanyName&#39;</span><span class="p">)</span>
@@ -12434,7 +12438,28 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[299]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">customer_rdd</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">7</span><span class="p">]))</span>
+
+           <span class="o">.</span><span class="n">join</span><span class="p">(</span>
+             <span class="n">customer_address_rdd</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span><span class="s1">&#39;Main Office&#39;</span><span class="p">)</span>
+             <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])))</span>
+               <span class="p">)</span>
+            <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
+
+              <span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rdd1</span> <span class="o">=</span> <span class="p">(</span>
@@ -12442,8 +12467,7 @@ only showing top 5 rows
 
            <span class="o">.</span><span class="n">join</span><span class="p">(</span>
              <span class="n">customer_address_rdd</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span><span class="s1">&#39;Main Office&#39;</span><span class="p">)</span>
-             <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> 
-                                                             <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">])))</span>
+             <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])))</span>
                <span class="p">)</span>
             <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
 
@@ -12453,8 +12477,7 @@ only showing top 5 rows
 
             <span class="o">.</span><span class="n">join</span><span class="p">(</span>
                  <span class="n">customer_address_rdd</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span><span class="s1">&#39;Shipping&#39;</span><span class="p">)</span>
-                 <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> 
-                                                                 <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">])))</span>
+                 <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])))</span>
                  <span class="p">)</span>
              <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
 
@@ -12470,7 +12493,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[301]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">rdd1</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
@@ -12486,7 +12509,7 @@ only showing top 5 rows
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[301]:</div>
+<div class="prompt output_prompt">Out[43]:</div>
 
 
 
@@ -12518,14 +12541,14 @@ only showing top 5 rows
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The results from the SQL and DataFrame are of type <strong>pyspark.sql.types.Row</strong>. So, let's make them orginary Python lists.</p>
+<p>The results from the SQL and DataFrame are of type pyspark.sql.types.Row. So, let's make them orginary Python lists.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[314]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df1</span><span class="o">.</span><span class="n">collect</span><span class="p">()[:</span><span class="mi">5</span><span class="p">]</span>
@@ -12541,7 +12564,7 @@ only showing top 5 rows
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[314]:</div>
+<div class="prompt output_prompt">Out[44]:</div>
 
 
 
@@ -12562,7 +12585,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[281]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span>  <span class="n">df1</span><span class="o">.</span><span class="n">collect</span><span class="p">()]</span>
@@ -12579,7 +12602,7 @@ only showing top 5 rows
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[281]:</div>
+<div class="prompt output_prompt">Out[45]:</div>
 
 
 
@@ -12600,7 +12623,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[317]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sql1</span><span class="o">.</span><span class="n">collect</span><span class="p">()[:</span><span class="mi">5</span><span class="p">]</span>
@@ -12616,7 +12639,7 @@ only showing top 5 rows
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[317]:</div>
+<div class="prompt output_prompt">Out[46]:</div>
 
 
 
@@ -12637,7 +12660,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[304]:</div>
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sql</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span>  <span class="n">sql1</span><span class="o">.</span><span class="n">collect</span><span class="p">()]</span>
@@ -12654,7 +12677,7 @@ only showing top 5 rows
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[304]:</div>
+<div class="prompt output_prompt">Out[47]:</div>
 
 
 
@@ -12684,7 +12707,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[305]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">sql</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">rdd1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)]</span>
@@ -12700,7 +12723,7 @@ only showing top 5 rows
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[305]:</div>
+<div class="prompt output_prompt">Out[48]:</div>
 
 
 
@@ -12726,7 +12749,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[318]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span> <span class="o">==</span><span class="nb">sorted</span><span class="p">(</span><span class="n">rdd1</span><span class="p">)</span>
@@ -12742,7 +12765,7 @@ only showing top 5 rows
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[318]:</div>
+<div class="prompt output_prompt">Out[49]:</div>
 
 
 
@@ -12759,7 +12782,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[319]:</div>
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span> <span class="o">==</span><span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
@@ -12775,7 +12798,7 @@ only showing top 5 rows
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[319]:</div>
+<div class="prompt output_prompt">Out[50]:</div>
 
 
 
@@ -12792,7 +12815,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[320]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">==</span><span class="nb">sorted</span><span class="p">(</span><span class="n">rdd1</span><span class="p">)</span>
@@ -12808,7 +12831,7 @@ only showing top 5 rows
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[320]:</div>
+<div class="prompt output_prompt">Out[51]:</div>
 
 
 
@@ -12853,7 +12876,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[247]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sqlcontext</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;SELECT c.CompanyName </span><span class="se">\</span>
@@ -12864,7 +12887,7 @@ only showing top 5 rows
 <span class="s2">                SELECT c.CompanyName </span><span class="se">\</span>
 <span class="s2">                FROM customer_table AS c INNER JOIN customer_address_table AS ca </span><span class="se">\</span>
 <span class="s2">                ON c.CustomerID = ca.CustomerID </span><span class="se">\</span>
-<span class="s2">                WHERE ca.AddressType = &#39;Shipping&#39;ORDER BY CompanyName&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">truncate</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="s2">                WHERE ca.AddressType = &#39;Shipping&#39; ORDER BY CompanyName&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">truncate</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12924,7 +12947,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[250]:</div>
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span>  <span class="p">(</span><span class="n">customer_df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">customer_address_df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">customer_address_df</span><span class="o">.</span><span class="n">AddressType</span> <span class="o">==</span> <span class="s1">&#39;Main Office&#39;</span><span class="p">),</span>
@@ -13002,7 +13025,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[251]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="p">(</span>
@@ -13045,7 +13068,7 @@ only showing top 5 rows
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[251]:</div>
+<div class="prompt output_prompt">Out[54]:</div>
 
 
 
@@ -13082,47 +13105,13 @@ only showing top 5 rows
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="This-is-enough-for-today.-In-the-next-part-of-the-Spark-RDDs-Vs-DataFrames-vs-SparkSQL-tutorial-series,-I-will-come-with-a-different-topic.-If-you-have-any-questions,-or-suggestions,-feel-free-to-drop-them-below.">This is enough for today. In the next part of the Spark RDDs Vs DataFrames vs SparkSQL tutorial series, I will come with a different topic. If you have any questions, or suggestions, feel free to drop them below.<a class="anchor-link" href="#This-is-enough-for-today.-In-the-next-part-of-the-Spark-RDDs-Vs-DataFrames-vs-SparkSQL-tutorial-series,-I-will-come-with-a-different-topic.-If-you-have-any-questions,-or-suggestions,-feel-free-to-drop-them-below.">&#182;</a></h4>
+<p>This is enough for today. In the next part of the Spark RDDs Vs DataFrames vs SparkSQL tutorial series, I will come with a different topic. If you have any questions, or suggestions, feel free to drop them below.</p>
+
 </div>
 </div>
 </div>
     </div>
   </div>
-  
-      	 <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
- <script type="text/javascript" src="../myjs.js"></script>
-	
-
-  </div>
-  
-  
-  <div id="disqus_thread"></div>
-<script type="text/javascript">
-/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-var disqus_shortname = 'httpdatascienceenthusiastcom'; // required: replace example with your forum shortname
-
-/* * * DON'T EDIT BELOW THIS LINE * * */
-(function() {
-var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-101876181-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-
 </body>
 
  
