@@ -11831,11 +11831,11 @@ div.prompt {display:none}
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">bucket_name</span> <span class="o">=</span> <span class="s1">&#39;fish-dsci&#39;</span>
-<span class="n">training_file_key</span> <span class="o">=</span> <span class="s1">&#39;sagemaker/course/biketrain/bike_train.csv&#39;</span>
-<span class="n">validation_file_key</span> <span class="o">=</span> <span class="s1">&#39;sagemaker/course/biketrain/bike_validation.csv&#39;</span>
-<span class="n">test_file_key</span> <span class="o">=</span> <span class="s1">&#39;sagemaker/course/biketrain/bike_test.csv&#39;</span>
+<span class="n">training_file_key</span> <span class="o">=</span> <span class="s1">&#39;sagemaker/biketrain/bike_train.csv&#39;</span>
+<span class="n">validation_file_key</span> <span class="o">=</span> <span class="s1">&#39;sagemaker/biketrain/bike_validation.csv&#39;</span>
+<span class="n">test_file_key</span> <span class="o">=</span> <span class="s1">&#39;sagemaker/biketrain/bike_test.csv&#39;</span>
 
-<span class="n">s3_model_output_location</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;s3://</span><span class="si">{0}</span><span class="s1">/sagemaker/course/biketrain/model&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">)</span>
+<span class="n">s3_model_output_location</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;s3://</span><span class="si">{0}</span><span class="s1">/sagemaker/biketrain/model&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">)</span>
 <span class="n">s3_training_file_location</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;s3://</span><span class="si">{0}</span><span class="s1">/</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">,</span><span class="n">training_file_key</span><span class="p">)</span>
 <span class="n">s3_validation_file_location</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;s3://</span><span class="si">{0}</span><span class="s1">/</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">,</span><span class="n">validation_file_key</span><span class="p">)</span>
 <span class="n">s3_test_file_location</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;s3://</span><span class="si">{0}</span><span class="s1">/</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">,</span><span class="n">test_file_key</span><span class="p">)</span>
@@ -11871,10 +11871,10 @@ div.prompt {display:none}
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>s3://fish-dsci/sagemaker/course/biketrain/model
-s3://fish-dsci/sagemaker/course/biketrain/bike_train.csv
-s3://fish-dsci/sagemaker/course/biketrain/bike_validation.csv
-s3://fish-dsci/sagemaker/course/biketrain/bike_test.csv
+<pre>s3://fish-dsci/sagemaker/biketrain/model
+s3://fish-dsci/sagemaker/biketrain/bike_train.csv
+s3://fish-dsci/sagemaker/biketrain/bike_validation.csv
+s3://fish-dsci/sagemaker/biketrain/bike_test.csv
 </pre>
 </div>
 </div>
@@ -12137,8 +12137,8 @@ s3://fish-dsci/sagemaker/course/biketrain/bike_test.csv
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>{&#39;DataSource&#39;: {&#39;S3DataSource&#39;: {&#39;S3DataDistributionType&#39;: &#39;FullyReplicated&#39;, &#39;S3DataType&#39;: &#39;S3Prefix&#39;, &#39;S3Uri&#39;: &#39;s3://fish-dsci/sagemaker/course/biketrain/bike_train.csv&#39;}}, &#39;ContentType&#39;: &#39;csv&#39;}
-{&#39;DataSource&#39;: {&#39;S3DataSource&#39;: {&#39;S3DataDistributionType&#39;: &#39;FullyReplicated&#39;, &#39;S3DataType&#39;: &#39;S3Prefix&#39;, &#39;S3Uri&#39;: &#39;s3://fish-dsci/sagemaker/course/biketrain/bike_validation.csv&#39;}}, &#39;ContentType&#39;: &#39;csv&#39;}
+<pre>{&#39;DataSource&#39;: {&#39;S3DataSource&#39;: {&#39;S3DataDistributionType&#39;: &#39;FullyReplicated&#39;, &#39;S3DataType&#39;: &#39;S3Prefix&#39;, &#39;S3Uri&#39;: &#39;s3://fish-dsci/sagemaker/biketrain/bike_train.csv&#39;}}, &#39;ContentType&#39;: &#39;csv&#39;}
+{&#39;DataSource&#39;: {&#39;S3DataSource&#39;: {&#39;S3DataDistributionType&#39;: &#39;FullyReplicated&#39;, &#39;S3DataType&#39;: &#39;S3Prefix&#39;, &#39;S3Uri&#39;: &#39;s3://fish-dsci/sagemaker/biketrain/bike_validation.csv&#39;}}, &#39;ContentType&#39;: &#39;csv&#39;}
 </pre>
 </div>
 </div>
