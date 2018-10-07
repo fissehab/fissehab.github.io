@@ -13110,19 +13110,15 @@ div#notebook {
     </script>
     <!-- End of mathjax configuration -->
     
-    
-    
-    		<style>
+    		
+<style>
 div.prompt {display:none}
 </style>
-	
     
-    <link rel="stylesheet" type="text/css" href="../style5_new.css">
+<link rel="stylesheet" type="text/css" href="../style5_new.css">	
     
     
-	<body>
-  
- <nav id="nav01"></nav>
+    <nav id="nav01"></nav>
  
     <header class="myheader">
        
@@ -13162,8 +13158,8 @@ div.prompt {display:none}
 		
       </ul>
     </nav>
-    
-    
+	
+
     
     </head>
 <body>
@@ -13221,7 +13217,19 @@ div.prompt {display:none}
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">options</span><span class="p">(</span><span class="nb">repr</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">width</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="nb">repr</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">height</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
 
+    </div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -16147,7 +16155,8 @@ AggggAACkQIEwJEmrEEAAQQQQAABBBBAAAEEEAigAAFwAG8qVUIAAQQQQAABBBBAAAEEEIgU
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-
+<pre>Using dimension as id variables
+</pre>
 </div>
 </div>
 
@@ -18788,7 +18797,9 @@ GgEEEEAAAQQQQAABBBBAoLkC/z+wB5P7v8EqPQAAAABJRU5ErkJggg=="
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-
+<pre>Warning message in all(my_svd$v, pcp$rotation):
+“coercing argument of type &#39;double&#39; to logical”Warning message in all(my_svd$v, pcp$rotation):
+“coercing argument of type &#39;double&#39; to logical”</pre>
 </div>
 </div>
 
@@ -18837,7 +18848,9 @@ TRUE
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-
+<pre>Warning message in all(scaled_data %*% my_svd$v, pcp$x):
+“coercing argument of type &#39;double&#39; to logical”Warning message in all(scaled_data %*% my_svd$v, pcp$x):
+“coercing argument of type &#39;double&#39; to logical”</pre>
 </div>
 </div>
 
@@ -18886,7 +18899,9 @@ TRUE
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-
+<pre>Warning message in all(my_svd$d^2, pcp$x^2 * (nrow(scaled_data) - 1)):
+“coercing argument of type &#39;double&#39; to logical”Warning message in all(my_svd$d^2, pcp$x^2 * (nrow(scaled_data) - 1)):
+“coercing argument of type &#39;double&#39; to logical”</pre>
 </div>
 </div>
 
@@ -18923,7 +18938,7 @@ TRUE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[117]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <span class="n">PCA</span>
@@ -18943,7 +18958,7 @@ TRUE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/venky14/Machine-Learning-with-Iris-Dataset/master/Iris.csv&quot;</span><span class="p">)</span>
@@ -18960,7 +18975,7 @@ TRUE
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[2]:</div>
+    <div class="prompt output_prompt">Out[43]:</div>
 
 
 
@@ -19050,7 +19065,7 @@ TRUE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Id&#39;</span><span class="p">,</span><span class="s1">&#39;Species&#39;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
@@ -19071,7 +19086,7 @@ TRUE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">corr</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
@@ -19129,7 +19144,7 @@ TRUE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">scaled</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">with_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_std</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -19150,7 +19165,7 @@ TRUE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">scaled</span><span class="p">[:</span><span class="mi">10</span><span class="p">,:]</span>
@@ -19166,7 +19181,7 @@ TRUE
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[6]:</div>
+    <div class="prompt output_prompt">Out[47]:</div>
 
 
 
@@ -19207,7 +19222,7 @@ TRUE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">()</span>
@@ -19237,7 +19252,7 @@ TRUE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">explained_variance_ratio_</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
@@ -19253,7 +19268,7 @@ TRUE
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[8]:</div>
+    <div class="prompt output_prompt">Out[49]:</div>
 
 
 
@@ -19270,7 +19285,7 @@ TRUE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">var</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="p">({</span><span class="s1">&#39;variance&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">explained_variance_ratio_</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> 
@@ -19330,7 +19345,7 @@ TRUE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[127]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">loadings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">components_</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
@@ -19347,7 +19362,7 @@ TRUE
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[127]:</div>
+    <div class="prompt output_prompt">Out[51]:</div>
 
 
 
@@ -19375,7 +19390,7 @@ TRUE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">loadings</span><span class="p">[</span><span class="mi">0</span><span class="p">,]</span>
@@ -19391,7 +19406,7 @@ TRUE
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[10]:</div>
+    <div class="prompt output_prompt">Out[52]:</div>
 
 
 
@@ -19423,7 +19438,7 @@ TRUE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[129]:</div>
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -19441,7 +19456,7 @@ TRUE
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[129]:</div>
+    <div class="prompt output_prompt">Out[53]:</div>
 
 
 
@@ -19467,7 +19482,7 @@ TRUE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[135]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">transformed</span><span class="p">,</span> <span class="n">rowvar</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># If `rowvar` is True (default), then each row represents a</span>
@@ -19486,7 +19501,7 @@ TRUE
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[135]:</div>
+    <div class="prompt output_prompt">Out[54]:</div>
 
 
 
@@ -19513,7 +19528,7 @@ TRUE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">findspark</span>
@@ -19528,14 +19543,14 @@ TRUE
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In Spark, the input data format is different from that of R and Python. We have to create vector column data using VectorAssembler. Consult the <a href="http://spark.apache.org/docs/2.2.0/mllib-data-types.html">Spark documentation</a> for details.</p>
+<p>In Spark, the input data format for PCA is different from that of R and Python. We have to create vector column data using <a href="https://spark.apache.org/docs/latest/ml-features.html#vectorassembler">VectorAssembler</a>.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark</span> <span class="k">import</span> <span class="n">SparkContext</span>
@@ -19562,7 +19577,7 @@ TRUE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/venky14/Machine-Learning-with-Iris-Dataset/master/Iris.csv&quot;</span><span class="p">)</span>
@@ -19577,7 +19592,7 @@ TRUE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">spark_df</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -19621,46 +19636,6 @@ only showing top 10 rows
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)],</span> <span class="n">schema</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">])</span>
-<span class="n">x</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>+---+---+---+---+---+
-| id|  a|  b|  c|  d|
-+---+---+---+---+---+
-|  1|  1|  0|  0|  1|
-|  2|  0|  1|  0|  0|
-|  3|  0|  0|  0|  0|
-|  4|  0|  0|  0|  1|
-+---+---+---+---+---+
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -19678,7 +19653,7 @@ only showing top 10 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="n">spark_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
@@ -19695,7 +19670,7 @@ only showing top 10 rows
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[14]:</div>
+    <div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -19712,7 +19687,7 @@ only showing top 10 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">assembler</span> <span class="o">=</span> <span class="n">VectorAssembler</span><span class="p">(</span><span class="n">inputCols</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span> <span class="n">outputCol</span> <span class="o">=</span> <span class="s1">&#39;features&#39;</span><span class="p">)</span>
@@ -19771,7 +19746,7 @@ Now, let's center our data. We do not need to scale it (withStd=False).</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">(</span><span class="n">inputCol</span><span class="o">=</span><span class="s2">&quot;features&quot;</span><span class="p">,</span> <span class="n">outputCol</span><span class="o">=</span><span class="s2">&quot;scaledFeatures&quot;</span><span class="p">,</span> <span class="n">withStd</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">withMean</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -19798,15 +19773,15 @@ Now, let's center our data. We do not need to scale it (withStd=False).</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>+---+-----------------------------------------------------------------------------------+
-|Id |scaledFeatures                                                                     |
-+---+-----------------------------------------------------------------------------------+
-|1  |[-0.7433333333333341,0.4460000000000002,-2.3586666666666667,-0.9986666666666666]   |
-|2  |[-0.9433333333333334,-0.053999999999999826,-2.3586666666666667,-0.9986666666666666]|
-|3  |[-1.1433333333333335,0.14600000000000035,-2.458666666666667,-0.9986666666666666]   |
-|4  |[-1.243333333333334,0.04600000000000026,-2.2586666666666666,-0.9986666666666666]   |
-|5  |[-0.8433333333333337,0.5460000000000003,-2.3586666666666667,-0.9986666666666666]   |
-+---+-----------------------------------------------------------------------------------+
+<pre>+---+----------------------------------------------------------------------------------+
+|Id |scaledFeatures                                                                    |
++---+----------------------------------------------------------------------------------+
+|1  |[-0.7433333333333341,0.44599999999999973,-2.3586666666666667,-0.9986666666666666] |
+|2  |[-0.9433333333333334,-0.05400000000000027,-2.3586666666666667,-0.9986666666666666]|
+|3  |[-1.1433333333333335,0.1459999999999999,-2.458666666666667,-0.9986666666666666]   |
+|4  |[-1.243333333333334,0.04599999999999982,-2.2586666666666666,-0.9986666666666666]  |
+|5  |[-0.8433333333333337,0.5459999999999998,-2.3586666666666667,-0.9986666666666666]  |
++---+----------------------------------------------------------------------------------+
 only showing top 5 rows
 
 </pre>
@@ -19826,7 +19801,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">inputCol</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">getOutputCol</span><span class="p">(),</span> <span class="n">outputCol</span><span class="o">=</span><span class="s2">&quot;pcaFeatures&quot;</span><span class="p">)</span>
@@ -19849,7 +19824,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mf">100.00</span><span class="o">*</span><span class="n">model</span><span class="o">.</span><span class="n">explainedVariance</span><span class="o">.</span><span class="n">toArray</span><span class="p">(),</span><span class="mi">4</span><span class="p">)</span>
@@ -19865,7 +19840,7 @@ only showing top 5 rows
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[30]:</div>
+    <div class="prompt output_prompt">Out[9]:</div>
 
 
 
@@ -19889,7 +19864,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pcs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">pc</span><span class="o">.</span><span class="n">toArray</span><span class="p">(),</span><span class="mi">4</span><span class="p">)</span>
@@ -19906,7 +19881,7 @@ only showing top 5 rows
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[48]:</div>
+    <div class="prompt output_prompt">Out[10]:</div>
 
 
 
@@ -19934,7 +19909,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pcs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">pc</span><span class="o">.</span><span class="n">toArray</span><span class="p">(),</span><span class="mi">4</span><span class="p">)</span>
@@ -19952,7 +19927,7 @@ only showing top 5 rows
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[49]:</div>
+    <div class="prompt output_prompt">Out[11]:</div>
 
 
 
@@ -20023,7 +19998,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_pc</span><span class="p">[</span><span class="s1">&#39;PC1&#39;</span><span class="p">]</span>
@@ -20039,7 +20014,7 @@ only showing top 5 rows
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[50]:</div>
+    <div class="prompt output_prompt">Out[12]:</div>
 
 
 
@@ -20068,7 +20043,7 @@ Name: PC1, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">transformed_feature</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;pcaFeatures&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">truncate</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
@@ -20088,20 +20063,20 @@ Name: PC1, dtype: float64</pre>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>+-----------------------------------------------------------------------------------+
-|pcaFeatures                                                                        |
-+-----------------------------------------------------------------------------------+
-|[2.6842071251039497,-0.32660731476439053,0.021511837001962464,0.001006157241543404]|
-|[2.7153906156341323,0.16955684755602402,0.2035214250054902,0.09960242401681907]    |
-|[2.8898195396179176,0.1373456096050253,-0.024709240998957438,0.019304542832510374] |
-|[2.746437197308736,0.31112431575198923,-0.03767197528530131,-0.0759552741085352]   |
-|[2.728592981831316,-0.3339245635684575,-0.09622969977460905,-0.06312873271710762]  |
-|[2.2798973610095987,-0.7477827132251362,-0.17432561901640237,-0.02714680369789879] |
-|[2.820890682180632,0.08210451102467807,-0.2642510851906963,-0.05009962506284937]   |
-|[2.62648199332382,-0.17040534896029247,0.0158015102643152,-0.046281760966508156]   |
-|[2.887958565335636,0.5707980263315893,-0.0273354061145078,-0.02661541432565573]    |
-|[2.6738446867191223,0.10669170375273611,0.1915332997356448,-0.05589096599605381]   |
-+-----------------------------------------------------------------------------------+
+<pre>+------------------------------------------------------------------------------------+
+|pcaFeatures                                                                         |
++------------------------------------------------------------------------------------+
+|[2.6842071251039488,-0.3266073147643876,0.021511837001962353,0.0010061572415422937] |
+|[2.7153906156341314,0.16955684755602618,0.20352142500549064,0.09960242401681807]    |
+|[2.8898195396179167,0.13734560960502784,-0.024709240998957105,0.019304542832510263] |
+|[2.746437197308735,0.3111243157519917,-0.03767197528530131,-0.0759552741085352]     |
+|[2.728592981831315,-0.33392456356845435,-0.09622969977460949,-0.0631287327171085]   |
+|[2.2798973610095974,-0.7477827132251329,-0.1743256190164031,-0.027146803697900124]  |
+|[2.82089068218063,0.08210451102468094,-0.2642510851906963,-0.05009962506284926]     |
+|[2.6264819933238193,-0.17040534896028958,0.015801510264314866,-0.046281760966508934]|
+|[2.887958565335635,0.5707980263315916,-0.027335406114507355,-0.026615414325655617]  |
+|[2.673844686719121,0.10669170375273862,0.19153329973564448,-0.05589096599605492]    |
++------------------------------------------------------------------------------------+
 only showing top 10 rows
 
 </pre>
@@ -20122,7 +20097,7 @@ only showing top 10 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">transformed_feature</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;pcaFeatures&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">Row</span><span class="p">(</span><span class="n">pcaFeatures</span> <span class="o">=</span> <span class="nb">str</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span>\
@@ -24812,7 +24787,7 @@ RU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[168]:</div>
+<div class="prompt input_prompt">In&nbsp;[112]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://courses.edx.org/asset-v1:MITx+15.071x_2a+2T2015+type@asset+block/climate_change.csv&#39;</span><span class="p">)</span>
@@ -24825,7 +24800,7 @@ RU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[169]:</div>
+<div class="prompt input_prompt">In&nbsp;[113]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -24841,7 +24816,7 @@ RU5ErkJggg=="
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[169]:</div>
+    <div class="prompt output_prompt">Out[113]:</div>
 
 
 
@@ -24961,7 +24936,7 @@ RU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[170]:</div>
+<div class="prompt input_prompt">In&nbsp;[114]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Temp&#39;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
@@ -24989,7 +24964,7 @@ RU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[171]:</div>
+<div class="prompt input_prompt">In&nbsp;[115]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">scaled</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">with_mean</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_std</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -25006,7 +24981,7 @@ RU5ErkJggg=="
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[171]:</div>
+    <div class="prompt output_prompt">Out[115]:</div>
 
 
 
@@ -25049,7 +25024,7 @@ RU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[174]:</div>
+<div class="prompt input_prompt">In&nbsp;[119]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">()</span>
@@ -25079,7 +25054,7 @@ RU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[175]:</div>
+<div class="prompt input_prompt">In&nbsp;[120]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">explained_variance_ratio_</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
@@ -25095,7 +25070,7 @@ RU5ErkJggg=="
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[175]:</div>
+    <div class="prompt output_prompt">Out[120]:</div>
 
 
 
@@ -25128,7 +25103,7 @@ RU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[176]:</div>
+<div class="prompt input_prompt">In&nbsp;[121]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">components_</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
@@ -25144,7 +25119,7 @@ RU5ErkJggg=="
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[176]:</div>
+    <div class="prompt output_prompt">Out[121]:</div>
 
 
 
@@ -25187,7 +25162,7 @@ RU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[177]:</div>
+<div class="prompt input_prompt">In&nbsp;[122]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">transformed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">transformed</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
@@ -25204,7 +25179,7 @@ RU5ErkJggg=="
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[177]:</div>
+    <div class="prompt output_prompt">Out[122]:</div>
 
 
 
@@ -25238,7 +25213,7 @@ RU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[179]:</div>
+<div class="prompt input_prompt">In&nbsp;[123]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">transformed</span><span class="p">,</span> <span class="n">rowvar</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
@@ -25254,7 +25229,7 @@ RU5ErkJggg=="
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[179]:</div>
+    <div class="prompt output_prompt">Out[123]:</div>
 
 
 
@@ -25287,7 +25262,7 @@ RU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://courses.edx.org/asset-v1:MITx+15.071x_2a+2T2015+type@asset+block/climate_change.csv&#39;</span><span class="p">)</span>
@@ -25332,7 +25307,7 @@ RU5ErkJggg=="
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">spark_df</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
@@ -25381,7 +25356,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="n">spark_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Temp&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span>
@@ -25398,7 +25373,7 @@ only showing top 5 rows
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[34]:</div>
+    <div class="prompt output_prompt">Out[17]:</div>
 
 
 
@@ -25431,7 +25406,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">assembler</span> <span class="o">=</span> <span class="n">VectorAssembler</span><span class="p">(</span><span class="n">inputCols</span><span class="o">=</span><span class="n">cols</span><span class="p">,</span> <span class="n">outputCol</span> <span class="o">=</span> <span class="s1">&#39;features&#39;</span><span class="p">)</span>
@@ -25482,7 +25457,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">(</span><span class="n">inputCol</span><span class="o">=</span><span class="s2">&quot;features&quot;</span><span class="p">,</span> <span class="n">outputCol</span><span class="o">=</span><span class="s2">&quot;scaledFeatures&quot;</span><span class="p">,</span> <span class="n">withStd</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">withMean</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -25509,15 +25484,15 @@ only showing top 5 rows
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>+-------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|Temp               |scaledFeatures                                                                                                                                                                                       |
-+-------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|0.109              |[-1.705779551699234,-0.4502035379206733,2.4313891926587416,-1.365271034736594,-2.415427998374144,-1.6678691628022868,-2.9977124436890463,-2.5491905227480887,0.07917956200444615,2.397379982283792]  |
-|0.11800000000000001|[-1.705779551699234,-0.16011422896760338,2.0166409848574762,-1.400061550747301,-2.521395906315106,-1.6546637515752538,-2.96148232034013,-2.5191871845960523,0.12522450770100554,2.1598549501929054]  |
-|0.13699999999999998|[-1.705779551699234,0.1299750799854665,1.562443718730641,-1.5083865665079126,-2.53203612657967,-1.6452859957763342,-2.923868235935596,-2.486728241822926,0.536125599190784,1.9429842687186178]       |
-|0.17600000000000002|[-1.705779551699234,0.42006438893853637,0.9110011609759548,-1.6586183401905101,-2.5726426814668866,-1.6368651538344565,-2.885117326378228,-2.4537332163508294,0.8744558523536221,1.7433255460914958] |
-|0.149              |[-1.705779551699234,0.7101536978916063,0.16253524355567714,-1.8230825976956702,-2.202406445730521,-1.6249994220072583,-2.8460698537375144,-2.4220524581407252,0.40724980009385425,1.5574363905421065]|
-+-------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+<pre>+-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|Temp               |scaledFeatures                                                                                                                                                                                        |
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|0.109              |[-1.7057795516992311,-0.4502035379206733,2.4313891926587416,-1.3652710347365942,-2.4154279983741436,-1.6678691628022873,-2.9977124436890463,-2.5491905227480887,0.07917956200444579,2.397379982283792]|
+|0.11800000000000001|[-1.7057795516992311,-0.16011422896760338,2.0166409848574762,-1.4000615507473013,-2.5213959063151057,-1.6546637515752542,-2.96148232034013,-2.5191871845960523,0.125224507701005,2.1598549501929054]  |
+|0.13699999999999998|[-1.7057795516992311,0.1299750799854665,1.562443718730641,-1.5083865665079128,-2.53203612657967,-1.6452859957763346,-2.923868235935596,-2.486728241822926,0.5361255991907815,1.9429842687186178]      |
+|0.17600000000000002|[-1.7057795516992311,0.42006438893853637,0.9110011609759548,-1.6586183401905104,-2.572642681466886,-1.636865153834457,-2.885117326378228,-2.4537332163508294,0.8744558523536182,1.7433255460914958]   |
+|0.149              |[-1.7057795516992311,0.7101536978916063,0.16253524355567714,-1.8230825976956706,-2.2024064457305204,-1.624999422007259,-2.8460698537375144,-2.4220524581407252,0.4072498000938525,1.5574363905421065] |
++-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 only showing top 5 rows
 
 </pre>
@@ -25537,7 +25512,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">inputCol</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">getOutputCol</span><span class="p">(),</span> <span class="n">outputCol</span><span class="o">=</span><span class="s2">&quot;pcaFeatures&quot;</span><span class="p">)</span>
@@ -25560,7 +25535,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mf">100.00</span><span class="o">*</span><span class="n">model</span><span class="o">.</span><span class="n">explainedVariance</span><span class="o">.</span><span class="n">toArray</span><span class="p">(),</span><span class="mi">4</span><span class="p">)</span>
@@ -25576,14 +25551,14 @@ only showing top 5 rows
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[41]:</div>
+    <div class="prompt output_prompt">Out[21]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([51.9871, 14.6612, 10.8331, 10.1167,  6.2387,  5.4798,  0.4623,
-        0.1489,  0.0639,  0.0084])</pre>
+<pre>array([5.19871e+01, 1.46612e+01, 1.08331e+01, 1.01167e+01, 6.23870e+00,
+       5.47980e+00, 4.62300e-01, 1.48900e-01, 6.39000e-02, 8.40000e-03])</pre>
 </div>
 
 </div>
@@ -25601,7 +25576,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[207]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pcs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">pc</span><span class="o">.</span><span class="n">toArray</span><span class="p">(),</span><span class="mi">4</span><span class="p">)</span>
@@ -25618,32 +25593,32 @@ only showing top 5 rows
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[207]:</div>
+    <div class="prompt output_prompt">Out[22]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>array([[-0.4237,  0.1014, -0.127 , -0.0212,  0.2036,  0.0916,  0.1556,
-        -0.3187, -0.0458,  0.7848],
-       [ 0.011 ,  0.0091, -0.0696,  0.9886,  0.0319,  0.0906,  0.054 ,
-         0.07  , -0.0181,  0.018 ],
-       [ 0.0697, -0.5125, -0.5834, -0.0822, -0.21  ,  0.5833, -0.0286,
-         0.001 ,  0.0099,  0.0003],
-       [-0.4128,  0.1341, -0.1264, -0.0971,  0.2475,  0.1322,  0.3007,
-         0.7632, -0.1558, -0.1017],
-       [-0.4262, -0.092 , -0.0107,  0.0492, -0.0282, -0.087 , -0.8778,
-         0.1638, -0.0077,  0.0389],
-       [-0.417 ,  0.1201, -0.1153,  0.014 ,  0.2715,  0.1342,  0.0796,
-        -0.3456,  0.603 , -0.466 ],
-       [-0.2862, -0.4596,  0.138 ,  0.0466, -0.4918, -0.3956,  0.2781,
-         0.1735,  0.4   ,  0.1409],
-       [-0.4192, -0.1951,  0.0093,  0.0357, -0.1428, -0.1381,  0.1653,
-        -0.3669, -0.6702, -0.3664],
-       [-0.0591, -0.3811,  0.748 ,  0.0033,  0.2102,  0.4968,  0.0059,
-         0.0053, -0.0046,  0.0266],
-       [ 0.1687, -0.54  , -0.1751,  0.0065,  0.6865, -0.4215, -0.0015,
-         0.0063, -0.0166,  0.0057]])</pre>
+<pre>array([[-4.237e-01,  1.014e-01, -1.270e-01, -2.120e-02,  2.036e-01,
+         9.160e-02,  1.556e-01, -3.187e-01, -4.580e-02,  7.848e-01],
+       [ 1.100e-02,  9.100e-03, -6.960e-02,  9.886e-01,  3.190e-02,
+         9.060e-02,  5.400e-02,  7.000e-02, -1.810e-02,  1.800e-02],
+       [ 6.970e-02, -5.125e-01, -5.834e-01, -8.220e-02, -2.100e-01,
+         5.833e-01, -2.860e-02,  1.000e-03,  9.900e-03,  3.000e-04],
+       [-4.128e-01,  1.341e-01, -1.264e-01, -9.710e-02,  2.475e-01,
+         1.322e-01,  3.007e-01,  7.632e-01, -1.558e-01, -1.017e-01],
+       [-4.262e-01, -9.200e-02, -1.070e-02,  4.920e-02, -2.820e-02,
+        -8.700e-02, -8.778e-01,  1.638e-01, -7.700e-03,  3.890e-02],
+       [-4.170e-01,  1.201e-01, -1.153e-01,  1.400e-02,  2.715e-01,
+         1.342e-01,  7.960e-02, -3.456e-01,  6.030e-01, -4.660e-01],
+       [-2.862e-01, -4.596e-01,  1.380e-01,  4.660e-02, -4.918e-01,
+        -3.956e-01,  2.781e-01,  1.735e-01,  4.000e-01,  1.409e-01],
+       [-4.192e-01, -1.951e-01,  9.300e-03,  3.570e-02, -1.428e-01,
+        -1.381e-01,  1.653e-01, -3.669e-01, -6.702e-01, -3.664e-01],
+       [-5.910e-02, -3.811e-01,  7.480e-01,  3.300e-03,  2.102e-01,
+         4.968e-01,  5.900e-03,  5.300e-03, -4.600e-03,  2.660e-02],
+       [ 1.687e-01, -5.400e-01, -1.751e-01,  6.500e-03,  6.865e-01,
+        -4.215e-01, -1.500e-03,  6.300e-03, -1.660e-02,  5.700e-03]])</pre>
 </div>
 
 </div>
@@ -25654,11 +25629,44 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[209]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cols</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[26]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;Year&#39;, &#39;Month&#39;, &#39;MEI&#39;, &#39;CO2&#39;, &#39;CH4&#39;, &#39;N2O&#39;, &#39;CFC-11&#39;, &#39;CFC-12&#39;, &#39;TSI&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pcs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">pc</span><span class="o">.</span><span class="n">toArray</span><span class="p">(),</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">df_pc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PC&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)],</span> <span class="n">index</span> <span class="o">=</span> <span class="n">cols</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">df_pc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PC&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)],</span> <span class="n">index</span> <span class="o">=</span> <span class="n">cols</span><span class="p">)</span>
 <span class="n">df_pc</span>
 </pre></div>
 
@@ -25672,7 +25680,7 @@ only showing top 5 rows
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[209]:</div>
+    <div class="prompt output_prompt">Out[28]:</div>
 
 
 
@@ -25851,7 +25859,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[210]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_pc</span><span class="p">[</span><span class="s1">&#39;PC1&#39;</span><span class="p">]</span>
@@ -25867,7 +25875,7 @@ only showing top 5 rows
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[210]:</div>
+    <div class="prompt output_prompt">Out[29]:</div>
 
 
 
@@ -25901,7 +25909,7 @@ Name: PC1, dtype: float64</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">transformed_feature</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;pcaFeatures&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">truncate</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
@@ -25921,20 +25929,20 @@ Name: PC1, dtype: float64</pre>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>+-----------------------------------------------------------------------------------+
-|pcaFeatures                                                                        |
-+-----------------------------------------------------------------------------------+
-|[2.6842071251039497,-0.32660731476439053,0.021511837001962464,0.001006157241543404]|
-|[2.7153906156341323,0.16955684755602402,0.2035214250054902,0.09960242401681907]    |
-|[2.8898195396179176,0.1373456096050253,-0.024709240998957438,0.019304542832510374] |
-|[2.746437197308736,0.31112431575198923,-0.03767197528530131,-0.0759552741085352]   |
-|[2.728592981831316,-0.3339245635684575,-0.09622969977460905,-0.06312873271710762]  |
-|[2.2798973610095987,-0.7477827132251362,-0.17432561901640237,-0.02714680369789879] |
-|[2.820890682180632,0.08210451102467807,-0.2642510851906963,-0.05009962506284937]   |
-|[2.62648199332382,-0.17040534896029247,0.0158015102643152,-0.046281760966508156]   |
-|[2.887958565335636,0.5707980263315893,-0.0273354061145078,-0.02661541432565573]    |
-|[2.6738446867191223,0.10669170375273611,0.1915332997356448,-0.05589096599605381]   |
-+-----------------------------------------------------------------------------------+
+<pre>+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|pcaFeatures                                                                                                                                                                                              |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|[5.501970988036319,-1.0339413052599669,-1.5779950804219005,-0.8329916610554952,1.905559430787071,1.5937319453831604,-0.040311068906294024,0.08401643092962642,-0.1947381261185601,0.0031577752934403604] |
+|[5.464533785859468,-0.7238344699646873,-1.2708952200903347,-0.512421049941966,1.8243821396706783,1.488995386392944,0.08645636889783163,0.04947770224364972,-0.19178963291899198,-0.004471712810394072]   |
+|[5.396150685687981,-0.5639043994189652,-0.6625638583859077,-0.1753528376049104,1.8194226212666482,1.5143865821023716,0.11118147154420345,-0.022888284271145986,-0.18393576320208865,0.009963323270281058]|
+|[5.351135069459403,-0.2881193423385541,0.009440106330036224,0.18045830754316122,1.8420194443860776,1.3778204953122357,0.1551172099415107,-0.13228010320613748,-0.17171022589408977,0.026021776908695674] |
+|[5.179123011662285,0.2977379967589393,0.13014630947227213,0.5633040196980976,1.7109629237749036,0.7415552810012943,-0.16777099711697904,-0.1901727034830199,-0.15485632439349653,0.03708572636050115]    |
+|[4.971866889441485,0.741367269937696,0.07745291896203116,0.9033250401845025,1.5791244883311593,0.31312042974478416,-0.41511567976033914,-0.11985150942562203,-0.16038098430098524,0.03001537597365217]   |
+|[4.912813603109937,0.8820696614468595,0.27851118414255716,1.1925654904710319,1.5558407452053475,0.3605594579773356,-0.2420883932092398,-0.053332415261254124,-0.17609710166217932,0.012599491535068664]  |
+|[4.862838501906219,1.0045987886639711,0.18351805990818507,1.4646811534080195,1.4657299929747274,0.39213973382144796,-0.10133160373094202,0.03813627815698469,-0.19399925557866216,-0.010334236110436011] |
+|[4.735988057456969,1.7327241635070392,-0.6842913749719202,-1.6846181355507792,1.0124751106517054,-0.7364241943974421,-0.31006936274220503,-0.1672067904110762,-0.14370037531244229,-0.016593883394504322]|
+|[4.647266766730869,1.6978402250148208,-0.10583023289915289,-1.3831074493047872,1.117119141311163,-0.505777637388481,-0.20800689941704525,-0.11576523213982652,-0.1533068683874168,-0.012226960768979049] |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 only showing top 10 rows
 
 </pre>
@@ -25955,7 +25963,7 @@ only showing top 10 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">transformed_feature</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;pcaFeatures&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">Row</span><span class="p">(</span><span class="n">pcaFeatures</span> <span class="o">=</span> <span class="nb">str</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span>\
@@ -25976,30 +25984,30 @@ only showing top 10 rows
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>+-----------------------------------+
-|pcaFeatures                        |
-+-----------------------------------+
-|[2.6842, -0.3266, 0.0215, 0.001]   |
-|[2.7154, 0.1696, 0.2035, 0.0996]   |
-|[2.8898, 0.1373, -0.0247, 0.0193]  |
-|[2.7464, 0.3111, -0.0377, -0.076]  |
-|[2.7286, -0.3339, -0.0962, -0.0631]|
-|[2.2799, -0.7478, -0.1743, -0.0271]|
-|[2.8209, 0.0821, -0.2643, -0.0501] |
-|[2.6265, -0.1704, 0.0158, -0.0463] |
-|[2.888, 0.5708, -0.0273, -0.0266]  |
-|[2.6738, 0.1067, 0.1915, -0.0559]  |
-|[2.5065, -0.6519, 0.0693, -0.0166] |
-|[2.6131, -0.0215, -0.1077, -0.1577]|
-|[2.7874, 0.2277, 0.2003, -0.0072]  |
-|[3.2252, 0.5033, -0.0684, -0.0219] |
-|[2.6435, -1.1862, 0.1445, 0.157]   |
-|[2.3839, -1.3448, -0.2837, 0.0019] |
-|[2.6225, -0.8181, -0.1453, 0.1647] |
-|[2.6483, -0.3191, -0.0334, 0.0761] |
-|[2.1991, -0.8792, 0.1145, 0.0253]  |
-|[2.5873, -0.5205, -0.2196, -0.0691]|
-+-----------------------------------+
+<pre>+--------------------------------------------------------------------------------------+
+|pcaFeatures                                                                           |
++--------------------------------------------------------------------------------------+
+|[5.502, -1.0339, -1.578, -0.833, 1.9056, 1.5937, -0.0403, 0.084, -0.1947, 0.0032]     |
+|[5.4645, -0.7238, -1.2709, -0.5124, 1.8244, 1.489, 0.0865, 0.0495, -0.1918, -0.0045]  |
+|[5.3962, -0.5639, -0.6626, -0.1754, 1.8194, 1.5144, 0.1112, -0.0229, -0.1839, 0.01]   |
+|[5.3511, -0.2881, 0.0094, 0.1805, 1.842, 1.3778, 0.1551, -0.1323, -0.1717, 0.026]     |
+|[5.1791, 0.2977, 0.1301, 0.5633, 1.711, 0.7416, -0.1678, -0.1902, -0.1549, 0.0371]    |
+|[4.9719, 0.7414, 0.0775, 0.9033, 1.5791, 0.3131, -0.4151, -0.1199, -0.1604, 0.03]     |
+|[4.9128, 0.8821, 0.2785, 1.1926, 1.5558, 0.3606, -0.2421, -0.0533, -0.1761, 0.0126]   |
+|[4.8628, 1.0046, 0.1835, 1.4647, 1.4657, 0.3921, -0.1013, 0.0381, -0.194, -0.0103]    |
+|[4.736, 1.7327, -0.6843, -1.6846, 1.0125, -0.7364, -0.3101, -0.1672, -0.1437, -0.0166]|
+|[4.6473, 1.6978, -0.1058, -1.3831, 1.1171, -0.5058, -0.208, -0.1158, -0.1533, -0.0122]|
+|[4.5723, 0.8943, 0.4063, -1.1581, 1.1647, 0.6322, -0.1656, -0.0562, -0.152, 0.0107]   |
+|[4.5815, 1.4205, -0.8621, -0.9008, 0.755, 0.0793, -0.1602, 0.0346, -0.1491, -0.0437]  |
+|[4.5535, 1.4011, -0.3419, -0.6076, 0.8684, 0.2946, 0.0532, 0.0681, -0.1512, -0.0476]  |
+|[4.6144, 1.2959, 0.42, -0.3054, 1.0381, 0.5952, 0.3701, -0.0027, -0.136, -0.0395]     |
+|[4.6613, 1.2904, 0.4629, -0.01, 0.9685, 0.6549, 0.4484, -0.091, -0.101, -0.0368]      |
+|[4.5846, 1.4106, 0.2504, 0.3149, 0.7889, 0.4487, 0.1641, -0.1728, -0.0505, -0.0226]   |
+|[4.4384, 1.4174, -0.0063, 0.6311, 0.5947, 0.3475, -0.2262, -0.2002, -0.0016, -0.0041] |
+|[4.2983, 1.4267, -0.2247, 0.9218, 0.4645, 0.3185, -0.3928, -0.125, 0.023, -0.0063]    |
+|[4.1753, 1.7402, -0.2119, 1.2358, 0.4497, -0.0089, -0.3565, -0.0154, 0.0288, -0.0229] |
+|[4.1057, 1.8247, 0.0857, 1.533, 0.5248, -0.0264, -0.1793, 0.08, 0.0262, -0.0292]      |
++--------------------------------------------------------------------------------------+
 only showing top 20 rows
 
 </pre>
@@ -26033,7 +26041,8 @@ only showing top 20 rows
   </div>
     
     
-     <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
+        
+    	 <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
  <script type="text/javascript" src="../myjs.js"></script>
 	
 
@@ -26065,7 +26074,6 @@ dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
   ga('send', 'pageview');
 
 </script>
-
 
 </body>
 
