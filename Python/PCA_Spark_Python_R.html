@@ -23398,6 +23398,56 @@ IECAQGYCXwHbh6oPFF/3RQAAAABJRU5ErkJggg=="
 </div>
 
 </div>
+        
+  
+ <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>
+scaled <span class="o">=</span> <span class="kp">scale</span><span class="p">(</span>df <span class="o">%&gt;%</span> select<span class="p">(</span><span class="o">-</span>Temp<span class="p">),</span> center <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> scale <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+my_svd  <span class="o">=</span> <span class="kp">svd</span><span class="p">(</span>scaled<span class="p">)</span>
+<span class="kp">all</span><span class="p">(</span>pca1<span class="o">$</span>x<span class="p">,</span> my_svd<span class="o">$</span>v<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+TRUE
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>       
+        
+        
+        
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
