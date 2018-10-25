@@ -13216,7 +13216,7 @@ div.prompt {display:none}
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>When we apply a hash to the IDs of the website visitors and truncate the first few characters of the hash, the decimal value of the truncated hash is uniformly distributed. Therefore, we can sample from the truncated hash and use those samples to get sample data anytime in the future. Note here that we have to change the truncated hash from hexadecimal to decimal (base 10) to generate the density and cumulative distribution plots. In the code below, we will use the first three characters of the hash of the users. In doing so, we get 4096 unique truncated hash values which can be used as buckets for our sampling.</p>
+<p>When we apply a hash to the IDs of the website visitors and truncate the first few characters of the hash, the decimal value of the truncated hash is uniformly distributed. Therefore, we can sample from the truncated hash and use those samples to get sample data anytime in the future. Note here that we have to change the truncated hash from hexadecimal to decimal (base 10) to generate the density and cumulative distribution plots. In the code below, we will use the first three characters of the hash of the users. In doing so, we get 4096 (16*16*16) unique truncated hash values which can be used as buckets for our sampling.</p>
 
 </div>
 </div>
